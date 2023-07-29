@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////3. DERS///////////////////////////////////////
+////////////////////////////////////////////////////3. DERS///////////////////////////////////////
 
 
 Global isimleri:
@@ -160,10 +160,40 @@ int main(void){
 
 }
 
+=====================================
 
+-data type
+basic types : bu türleri var kabul ederiz
 
+integer types:
+-char types  1 byte
+  char type
+  signed char type -128 127
+  unsigned char 0 255
+-short integer types
+  signed short
+  unsigned short
+-int types
+   signed int
+   unsigned int
+-long integer types
+    signed long
+    unsigned long
+-long long integer types (C99 standartı ile eklendi)
+    signed long long
+    unsigned long long
+-_Bool type 1 byte
 
+short <= int <= long <= long long 
 
+user defined types : kullanıcı tarafından oluşturulmuş
+
+örnek:
+gün ay yıl
+11 şubat 2022
+
+Date mydate{12,2,2022}  = //user defined
+int gün,ay,yil = //böyle kullanılması tercih edilmez yukarıdaki tercih edilir
 
 
 
