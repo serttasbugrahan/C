@@ -1,1 +1,82 @@
-dneeme
+//////////////////////////////////////////////////////////////3. DERS///////////////////////////////////////
+Global isimleri
+1)
+İdentifier = isim demektir
+Declaration(bildirim) = ismin ne anlama geldiğini söyler
+2)
+Statement (deyim) = bir işlem yaptırır
+X = y + z;
+
+Tokenizing = derleme işlemi başında derleyici kaynak kodu en küçük birimlerine ayrırmasına nedir
+Token = en küçük birim(atom)
+Keyword(anahtar sözcük)= c de başka anlamalarda kullanılamayanlara denir(do, while, for, signed, unsigned, union)
+Reserved word
+İdentifier(isim) = varlıkların adları anlamına gelen tokenlara identifier denir.
+-değişkenler
+-fonksiyonlar
+-sabitler
+-türler
+-etiketler
+Case-sensitive : dilde yazılanların büyük veya küçük yazılması önem taşımaz
+COUNTER
+Counter
+Constants(sabitler)
+-------------------------
+Tam sayı sabitler (integer constants)
+Gerçek sayı sabitleri(floating constants)
+
+
+
+10’luk sayı sistemi (decimal) 41
+16’lık sayı sistemi(hexadecimal) 0x41
+8’lik sayı sistemi(octal) 041
+! c dlinde 2’li sistem kullanılmaz c++’da kullanılır
+
+As if(sanki – adeta) kuralı: derleyeicinin uygun şekilde düzenlemeler yapması
+
+scope(kapsam)
+name lookup(isim arama):ismin, neyin ismi olduğunu anlama sürecidir
+
+data type:
+nesnelerin değerlerinin derleyicinin koda bakması sırasaında anlaşılıyor ise bu static türdür(static typeing). C static typing’dir---phyton dynamic typingdir.
+
+Tür, nesne için bellekte kaç byte’lık bir yere ihtiyaç duyduğunu söyler(storage)
+
+Type system
+Data type
+Value
+Nesnelerinin strorage, type, adresleri var
+
+Lifespan(ömür)
+Expression (ifade)
+
+
+
+
+////////////////////////////////////////////////////4. DERS/////////////////////////////////////////
+
+expression (ifade)
+statement (deyim)
+value category: c de bir ifade ya R value ya da L value olabilir
+-L value (expression)
+-R value (expression)
+
+=======================================
+ 
+L value expression : nesne gösteren – nesne anlamına gelen ifade
+x
+a[1][2].ptr ->x
+
+
+R value expression :bellekte nesneyi temsil etmeyen ifadeye denir 
+ x + y
+
+Dikkat!
+c ve c++ dillerinde değer kategorisi farklı olabilir
+
+eğer başına operatör koyulduğu zaman hata vermiyorsa L value denir
+&x --> L value
+&x++ --> R value
+ 
+ 
+
