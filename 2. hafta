@@ -84,12 +84,11 @@ value category: c de bir ifade ya R value ya da L value olabilir
 
 =======================================
  
-L value expression : nesne gösteren – nesne anlamına gelen ifade
+-L value expression : nesne gösteren – nesne anlamına gelen ifade
 x
 a[1][2].ptr ->x
 
-
-R value expression :bellekte nesneyi temsil etmeyen ifadeye denir 
+-R value expression :bellekte nesneyi temsil etmeyen ifadeye denir 
  x + y
 
 Dikkat!
@@ -97,7 +96,28 @@ c ve c++ dillerinde değer kategorisi farklı olabilir
 
 eğer başına operatör koyulduğu zaman hata vermiyorsa L value denir
 &x --> L value
-&x++ --> R value
- 
+&x++ --> R value 
+
+====================================
+
+constant expression (sabit ifadesi): sabitin değerini önceden bilir
+
+int x = 10;
+int a[x] = {0};
+
+x burada constant expression olmadığı için hata meydana gelir
+
+========================================
+
+sayı sistemi(numbering system)
+
+decimal system
+hexadecimal system
+octal
+binary system
+
+digit (basamak)
+
+
  
 
