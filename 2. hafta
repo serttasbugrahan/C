@@ -119,5 +119,21 @@ binary system
 digit (basamak)
 
 
- 
+binary system:
+-tam sayilar                        
+a)unsigned binary system(işaretsiz):
+negatif sayilar ele alınmadan sadece pozitif ve sıfır
+3,5,0
+b)signed binary system(işaretli):
+hem negatif hem pozitif sayilar olabilir
 
+=================================================
+
+[] = 
+() =
+{} = brace
+* = asteriks
+& = ampersant
+: = colon 
+; = semi colon
+# = number sign
