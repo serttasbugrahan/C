@@ -143,9 +143,22 @@ hem negatif hem pozitif sayilar olabilir
                          C
 translation unit <= preproccer (ön işlemci komutu) <= source file
 
+function:
+standat C funtion : printf,scanf bunlar stadandart c fonksi
 
+to define a function (function definitian)
+to call a function ( function call)
+to declare a function (function declaration):fonksiyonu bildirmek(ne olduğunu)
 
+function implementation (fonksiyon tanımlamak)
 
+#include <stdio.h>
+
+int main(void){
+
+ printf("hello world");
+
+}
 
 
 
