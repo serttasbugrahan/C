@@ -137,3 +137,20 @@ hem negatif hem pozitif sayilar olabilir
 : = colon 
 ; = semi colon
 # = number sign
+
+=================================================
+
+                         C
+translation unit <= preproccer (ön işlemci komutu) <= source file
+
+
+
+
+
+
+
+
+
+
+
+
