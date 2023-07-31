@@ -233,12 +233,12 @@ double x = 3.2; //bu kodda syntax hatası olur çünkü scope içinde 1 isim 2 f
 static vs gloabal değişken:
 
 !!eğer değişken static ömürlü olması gerekmiyor ise otomatik ömürlü yerel değişken yapın
-!!eğer değişken static ömürlü olması gerekiyorsa global olarak değil sttaic olarak yap gloabldan uzak dur
+!!eğer değişken static ömürlü olması gerekiyorsa global olarak değil static olarak yap global uzak dur
 !!global değişkenler birtakım dezavantajları olan değişkenlerdir
 
+!!bir isim (özellikle değişken isimlerinin) kapsamı mümkğn olduğu kadar daraltılmalı (scope leakage)
 
-
-
+!!storage duration ve scope farklı kavramlardır birisi ömürünü söyler birisi o değişkenin kapsamını söyler
 
 
 
