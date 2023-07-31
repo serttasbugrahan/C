@@ -222,6 +222,12 @@ void func(int x)
 
 void : geri dönüş değeri iletilmiyecek ise void functions kullanılır
 
+-örnek-
+void func(int x){ 
+           
+double x = 3.2; //bu kodda syntax hatası olur çünkü scope içinde 1 isim 2 farklı varlığa verilemez 
+
+}
 
 
 
