@@ -141,7 +141,8 @@ int z;//otomatik
 
 dynamic storage
 
-----------------------------
+=========================================================
+
 garbage value (çöp değer):
 int main(void){
 int X;
@@ -152,10 +153,74 @@ A = X + Y;
 !!eğer otomatik ömürlü bir değişkene ilk değer vermez isek (onu initialize etmezsek) o değişken çöp değişkne ile başlar
 !!bir değişjkeni çöp değeri ile kullnamak tanımsız davranıştır
 
+int main(void){
+int x;
+x = 5; //statement(assignment) //isim bildirilmediği için bu declaration olmayan bir statetment, ifadenin sonuna ';' koyulması ilen olan statemnet'a expression statemanet denir
+int x = 5; //ilk değer verme  burada '=' bir operatör değildir dilin bir parçasıdır
+}
+
+!! c dlinde statik ömürlü değişkenlere ilk değer veren ifadelerin (initializing expression) constant expression olmalı
+!! otomatik ömürlü değişkenlere değer veirirken constant expression olmasına gerek yoktur
 
 
+=================================================================
+
+scope (kapsam)
+
+bir ismin (idetifier) scope'u (kapsamı) o ismin legal olarak kullanılabilecği kod alanı / alanları
+
+name lookup: derleyici kodu çözümlerken kodda kullanılan isimlerin hangi valığa eşit olduğunu anlamasına denir
+
+!! name lookup başarısız olursa undeclared identifier hatası alınır
+
+!! bir blok içinde bildirilen isimlerin scope'u bildirildiği noktadan ilgili bloğun kapanan küme parantezine kadar olan kod alanıdır
+
+int main(){
+if(1){
+int x = 10;
+}
+x = 20; // burada hata olur parantez dışında kullanılmıştır.
+
+!! eğer yerel düzeyde iki farklın varlığa aynı isim verilirse kapsamları farklı ise geçerlidir, aynı ise geçerisiz sayılır
 
 
+//////////////////////////////////////////////////////////////////////////2. Ders//////////////////////////////////////////////////////////////////////////
+
+fonskiyonlar (functions):
+
+a) fonksiyonu tanımlamak (to define a function) (function defibition)
+b) fonksiyonu çağırmak (to call a function) (function call)
+c) fonksiyonu bildirmek (to declare a function) (function declaration)
+
+
+bir fonksiyonun kendisini çağıran fonksiyona (koda) bir değer iletmesini sağlayan (en az) 3 mekanizma var
+-return value
+-int g
+-ali ==> veli
+
+-------------------------
+
+//double = fonksiyonun geri dönüş değeri türü
+// func fonskiyonun ismi
+//( ) parametre parantezi
+//( ) içine yazılan : parametre değişkeni veya paraemtere
+// main block a function
+
+double func(int x )
+{
+  //declarations
+  //statements
+}
+
+!!geri dönüş yeri boş bırakılır ise c dili orayı int olarak kabul eder
+-----------------------------------
+
+void func(int x)
+{
+
+}
+
+void : geri dönüş değeri iletilmiyecek ise void functions kullanılır
 
 
 
