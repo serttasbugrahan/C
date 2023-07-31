@@ -120,6 +120,47 @@ comma separated list : öğelerin birbiriyle ayrılmasını sağlar
 int x,y,z  // burada virgül öğereli birbiirnden ayrımak için kullanılmıştır
 
 
+=======================================================
+
+
+static storage duration ( static storage class) : prgramın çalışması sırasında main çağrılmadan önce bellekte yeri belli olur, programın sonunana kadar hep aynı yerde olur yeri değişmez, 0 değeri ile başlar
+a) global değişkenler
+b) static anahtar sözcüğü ile tanımlanan yerel değişkneler
+c)string literal
+
+------------------------
+
+automatic storage duration (automatic storage class) : programın akışı bir koda geldiğinde hayatları başlayan programın akışı o koddan çıktığında hayatları biten nesneler
+void func(int x)
+{
+static int y; //static local variable
+int z;//otomatik
+}
+
+----------------------------
+
+dynamic storage
+
+----------------------------
+garbage value (çöp değer):
+int main(void){
+int X;
+İNT Y = 10;
+A = X + Y;
+}
+
+!!eğer otomatik ömürlü bir değişkene ilk değer vermez isek (onu initialize etmezsek) o değişken çöp değişkne ile başlar
+!!bir değişjkeni çöp değeri ile kullnamak tanımsız davranıştır
+
+
+
+
+
+
+
+
+
+
 
 
 
