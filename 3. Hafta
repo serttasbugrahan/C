@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////1. hafta/////////////////////////////////////////////////////////
+s///////////////////////////////////////////////////////////////////////////////1. ders/////////////////////////////////////////////////////////
 
 flag : 2 değerden birini tutan şeylere denir (true/false)
 
@@ -121,7 +121,7 @@ int x,y,z  // burada virgül öğereli birbiirnden ayrımak için kullanılmış
 
 
 =======================================================
-
+storage duration (ömür)
 
 static storage duration ( static storage class) : prgramın çalışması sırasında main çağrılmadan önce bellekte yeri belli olur, programın sonunana kadar hep aynı yerde olur yeri değişmez, 0 değeri ile başlar
 a) global değişkenler
@@ -228,6 +228,13 @@ void func(int x){
 double x = 3.2; //bu kodda syntax hatası olur çünkü scope içinde 1 isim 2 farklı varlığa verilemez 
 
 }
+
+------------------------------
+static vs gloabal değişken:
+
+!!eğer değişken static ömürlü olması gerekmiyor ise otomatik ömürlü yerel değişken yapın
+!!eğer değişken static ömürlü olması gerekiyorsa global olarak değil sttaic olarak yap gloabldan uzak dur
+!!global değişkenler birtakım dezavantajları olan değişkenlerdir
 
 
 
