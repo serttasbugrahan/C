@@ -1,3 +1,126 @@
 ///////////////////////////////////////////////////////////////////////////////1. hafta/////////////////////////////////////////////////////////
 
 flag : 2 değerden birini tutan şeylere denir (true/false)
+
+======================================================
+
+T x;
+int ival;
+
+T x = expr;
+int x = 10;
+
+bir değişkeni initialize yapmak denir
+
+=================================================
+                            keywords
+_Bool
+signed
+unsigned
+char
+short
+int
+long
+float
+double
+-------------------------------------------------
+char
+signed char : işaretli char
+unsigned char : işaretsiz char 
+-------------------------------------------------
+signed short int : işaretli kısa tamsayı
+short int : default olarak signed kabul edilir
+signed short
+short
+-----------------------------------------------------
+
+signed int
+int 
+signed
+
+---------------------------------------------
+
+unsigned int
+unsigned
+
+--------------------------------------------------
+unsigned short int
+unsigned short
+----------------------------------------------------
+
+signed long int : işaretli kısa tamsayı
+long int : default olarak signed kabul edilir
+signed long
+long
+---------------------------------------------------
+
+unsigned long int
+unsigned long
+
+---------------------------------------------------
+
+signed long long int : işaretli kısa tamsayı
+long long int : default olarak signed kabul edilir
+signed long long
+long long
+---------------------------------------------------
+
+unsigned long long int
+unsigned long long
+
+--------------------------------------------------------
+
+float
+-----------------------------
+double
+----------------------------
+long double
+
+=============================================================
+                              Yazım kuralları
+
+snake case : sözcüklerin arasına underscore karakterinin konulmasına denir  (figter_power)
+camel case : sözcüklerin ilk harfini büyük yazmaya denir (figterPower)
+
+!! türkçe isim asla verme
+!! değişken isimlerini küçük harf ağırlıklı seç
+
+===============================================================
+
+kapsam(scope) : bir ismin kullanılacağı kod aralığına denir
+
+file scope : bütün dosyada kullanılabilir
+block scope : o blokta kullanılan scope'a denir
+
+
+int main(){
+int a                  //local variable
+}
+----------------------------------------
+int a
+int main(){          //global variable
+}
+---------------------------------------
+int main(int a){    //formal paramtre
+}
+
+
+===================================================
+
+, : comma
+
+virgül 2 anlamda kullanılır
+
+1-comma operator
+while (x = func(), x > 10){ // buradavirgül operator olarak kullanılmıştır
+}
+
+2-comma separated
+comma separated list : öğelerin birbiriyle ayrılmasını sağlar
+int x,y,z  // burada virgül öğereli birbiirnden ayrımak için kullanılmıştır
+
+
+
+
+
+
