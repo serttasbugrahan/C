@@ -94,5 +94,121 @@ foo(19);
 !! geri dönüş değeri olan bir fonksiyona çağrı yapıldığı zaman çağrıdan elde edilen geri dönüş değerinin kullanılmıyor (discard ediliyor)
 olması durumunda lojik bir hata var mı diye kontrol et
 
+int remove_chars(char *p, int c);
+int cnt = remove_chars(str, 5); //eğer bunu cnt değerine eşitlemessek lojik hata olur hesaplama yaptırıcaksak onu kullanmamamız gerekiyor
+
+=======================================================
+
+en sık kullanılan tema fonk. geri dönüş değerinin bir değişkende saklanması
+
+-fonksiyon çağrısından elde edilen değeri neden bir değişkende saklıyoruz?
+1- birden fazla yerde kullanılabilir
+
+!!eğer aynı değeri elde edicek isek aynı değeri elde etmek için fonksiyonu tekrar takrar çaüırmak kötü bir çözümdür
+
+2-parametre içinde kullanılabilir
+=======================================================
+
+ndigit(x) + ndigit(y) + ndigit(z)
+sqrt(x) + sqrt(y)
+
+if (sqrt(x) > sin(y)){
+
+}
+
+=======================================================
+
+fonksiyon çağrı ifadesi yine bir fonksiyona argüman olarak gönderilen ifade olabilir
+
+int ndigit(int);
+int sum_square(int a, int b)
+{
+return a * b  + b * b;
+}
 
 
+int main(void)
+{
+int x = 2345;
+int y = 3864654;
+ndigit(max2(x, y)) // bu şekilde iç içe kullanılabilir
+}
+
+özet 
+----
+fonksiyonar özet olarak bu şekillerde olabilir
+
+-foo(x);
+
+-int y = foo(x);
+
+-a = foo(10);
+
+-foo(x) > 19; 
+
+-func(foo(20))
+
+-return ifadesinde olabilir:
+
+ int ndigit(int x);
+ int foo(int a, int b)
+ {
+ return ndigit(a) + ndigit(b)
+ }
+
+===================================================
+
+int main(void){
+int x = 20;
+int y = 25;
+
+printf("argüaman:") // burada printf fonksiyonunda 1 argüman bulunur
+printf("argüaman:",x) // burada printf fonksiyonunda 2 argüman bulunur
+printf("argüaman:",x,y,z) // burada printf fonksiyonunda 3 argüman bulunur
+}
+
+variadic fonksiyonlar çağrı yapan kodun değişken sayıda argüman ile çağırabileceği fonskiyonlardır printf ve scanf de bunlardandır
+
+===============================================
+
+-call by value (pass by value)
+-call by reference (pass by referance)
+
+int x = 10;
+foo(x); // eğer x değişkeninin değerini fonksiyona gönderiyor isek call by value değişknein kendisini yolluyor isek call by referance
+
+!! c de tüm fonskiyon çağrıları call by value'dur 
+!! call by referance olan değişkenler adres ile çağırılırlar
+
+void func(int x)
+{
+x = 7777;
+}
+
+int main(void)
+{
+int ival = 10;
+func(ival);
+printf(ival);  //ival değeri 10 çıkar call by value örneği
+}
+
+void swap(int a, int b) // bu kod sayıların yerini değiştiren koddur
+{
+int temp = a;
+a = b;
+b = temp;
+}
+
+int main(void)
+{
+int x = 10;
+int y = 20;
+swap(10,20); // burada değerler değişmez çünkü call by value'dur
+}
+
+int main(void)
+{
+int x = 10;
+foo(x); // bu foo fonksiyonun hiçbir şekilde x'i değiştirme imkanı yok çünkü call by value'dur değiştirmeme nedeni x'in kendisini almaz onun değerini alır
+foo(&x( //x'in değerinin değişmesi için onun adresinin fonksiyona gitmesi lazım buna da call by referance denir
+}
