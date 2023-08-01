@@ -6,4 +6,93 @@ b) kodun kolay olması
 c) kodun kolay okunması
 
 !!kodu yazarken optimize etmeye çalışmayın
-!!mikro düzeudyde optimize etmeye çalışmayın
+!!mikro düzeyde optimize etmeye çalışmayın
+
+okunabilirlik için yapılan işlemler
+-----------------------------------
+1. fonsksiyonun kodunun büyük olmaması lazım (200 satırdan büyük olmasın)
+2. parametre değişkenini çok fazla tutma // void func(intx ,int y)
+
+================================================
+
+int ndigit(int x{
+int dgit_count = 0;
+ if (x == 0)
+ return 1;
+ while (x !=10){
+  ++digit_count;
+  x /=10 ;
+}
+return digit_count;
+}
+
+
+!! bir fonksiyonun doğrudan 2 ayrı değeri g.d.m ile eletmesi mümkün değildir.
+!! fonksiyon içinde birden fazla return değeri olabilir
+
+=====================================================
+
+fonskisyonların geri dönüş değerleri ne ifade ediyor?
+
+
+1. Varlık nedir
+varlık nedeni bir değer hesaplamak
+
+2. bir soruya cevap aramak için
+evet / hayır
+gecerli / gecersiz
+dogru / yanlıs
+
+!! fonskiyon 0 dışında hangi değeri döndürürse döndürsün true değerini döndürür
+
+3. başarı bilgisi
+
+standart c kütüphanesi 0 = başarılı diğer değerler başarısız olarak döndürür
+
+!!bazı fonksşyonların dönüş değeri varlık nedeni değil tamamlayıcı bir bilgi (printf)
+
+
+=======================================
+
+a function call
+
+fonksiyon çağrıları operatör seviysinde işlemler
+
+function call expression
+
+func(x + 13)  //içine yazılana argüman denir
+
+1. önce, fonksiyona argüman olarak gönderilen ifadelerin değerleri hesaplanır
+2. hesaplanan argüman değerleri çağrılan fonksiyonun parametere değişkenlereine kopyalanır
+3. fonksiyon çağrı ifadesinin değeri çağrılan fonskiyonun geri dönüş değeridir
+
+int max3(int a, int b, int c){
+int max = a;
+if(b > max)
+max = b;
+else(c > max)
+max = c
+return max;
+}
+
+int main(void)
+{
+int x = 100, y = 20, z = 50;
+max3(x,y,z);
+max3(x*x, y*3, z*2+200); // bu şekilde de olabilir
+}
+
+bir fonksiyon çağrı ifadesi ile neler yapılabilir
+
+void foo(int x);
+
+int main(void)
+{
+foo(19);
+}
+
+!! geri dönüş değeri olan bir fonksiyona çağrı yapıldığı zaman çağrıdan elde edilen geri dönüş değerinin kullanılmıyor (discard ediliyor)
+olması durumunda lojik bir hata var mı diye kontrol et
+
+
+
