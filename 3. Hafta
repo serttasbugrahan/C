@@ -240,6 +240,101 @@ static vs gloabal değişken:
 
 !!storage duration ve scope farklı kavramlardır birisi ömürünü söyler birisi o değişkenin kapsamını söyler
 
+=============================================================
+
+return statement
+
+statemnet : c dilinin cümleleri
+
+expression statement (ifade deyimi)
+-----------------------------------
+x =5;
+void funv(void)
+{
+++a;
+x = a; //bunların hepsi expression statement
+y = x * 10;
+foo(a, x);
+}
+
+compound statement (bileşik deyim) : bloklanmış deyime denir
+----------------------------------
+int main(void){
+int x = 10;
+if(x>10){
+//statement     if bloğu içinde birden fazla statement olduğu için compound statement
+//statement
+//statement
+//statement
+
+}
+}
+
+null statement (boş statement)
+---------------------------------
+while(expr){
+; // hiçbir şey yapılmaması istendiği zaman  ';' koyulur
+}
+
+control statement : 
+-----------------
+-akışı değiştirilebilen ifadelere denir
+-önceden belirlenmeiş sentaksa sahiptir,
+-en az bir keyword kullanılır
+
+if statement
+while statement
+for statement
+do while statement
+
+switch statement
+goto statement
+
+break statement
+continue statement
+return statement : kodun çalışmasını durduran , geri dnüş mekanizması ile geri dönüş sağlayan deyime denir. iki farklı şekilde olur
+
+-return;
+sadece void function'da kullanılır
+kodun belli bölümleri kullanılmak istendiği zaman kullanılmalı
+
+void func(int x){
+//statemnet
+//statemnet
+if ( x > 10){  //x >10 doluğu zaman diğer statement çalışmasın fonksiyonu sonlandır
+return;
+}
+//statement;
+}
+
+-return ifade;
+ifade yine sonlanıcak ancak ifadenin geri dönüş türü olarak iletilecek
+
+return x * y *z; 
+return 2;
+return x;
+
+void sum(int a, int b)
+{
+  int sum = a + b;
+  return sum;
+}
+//iki şekilde de olabilir farkı yok
+void sum(int a, int b)
+{
+  return a + b; // buna one liner(tek satır) kod denir
+}
+
+!! fonksiyon içinde fonksiyon tanımlanamaz ancak çağırabilinir
+!! fonksiyon dışında fonksiyon tanımlanabilir ancak çağıralamaz
+
+
+
+
+
+
+
+
 
 
 
