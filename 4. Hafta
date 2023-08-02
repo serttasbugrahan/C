@@ -223,6 +223,66 @@ c'de olmayan c++ olan araçlar:
 ===============================================================
 
 constants
+-integer constanst
+-floating constants
+
+bir sabitin türü nasıl anlaşılıyor?
+belirli bir türden sabiti nasıl ifade ediyorum?
+
+
+int main(void)
+{
+int x = 0623
+int x = 623;
+}
+
+sabitler şu şekilde olabilir:
+int 
+unsigned int
+
+long
+unsigned long
+
+long long
+unsigned long long
+
+------------------------------
+
+!!o sabit o türe sığmıyor ise o türden sayılmaz
+
+-eğer sabit 10'luk sayı sisteminde yazılmış ise
+
+int türüne sığmıyor ise -> long -> long long
+
+--
+
+10L = long türü
+10Lu = unsigned long
+10LL = long long
+10uLL= unsigned long long
+10u = unsigned int
+
+3.4 double
+3.4f float
+0.5 ya da .5 : aynı anlama gelir
+5. double
+5.f float
+5.L long double
+
+//scientific notation
+//ustel notasyon
+
+4.5e12
+4.5e-12
+4e12
+
+-------------
+
+//////////////////////////////////////////////////////////////2. Ders//////////////////////////////////////////
+
+charecters constants
+
+
 
 
 
