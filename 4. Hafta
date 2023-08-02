@@ -212,3 +212,21 @@ int x = 10;
 foo(x); // bu foo fonksiyonun hiçbir şekilde x'i değiştirme imkanı yok çünkü call by value'dur değiştirmeme nedeni x'in kendisini almaz onun değerini alır
 foo(&x( //x'in değerinin değişmesi için onun adresinin fonksiyona gitmesi lazım buna da call by referance denir
 }
+
+=============================================================
+
+c'de olmayan c++ olan araçlar:
+
+-funciton overloid:aynı isimde birden fazla fonksiyonun bulunabilmesi
+-default argument yoktur
+
+===============================================================
+
+constants
+
+
+
+
+
+
+
