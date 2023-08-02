@@ -282,11 +282,99 @@ int türüne sığmıyor ise -> long -> long long
 
 charecters constants
 
+C dilinde karakter sabitlerinin türü int
+
+C++ dilinde karakter sabitlerinin türü char
 
 
+single quote
+
+'k'
+'A'
+'+'
+' '
+
+Character encodeing 
+
+ASCII : 128 karakter
+
+ASCII karakter kodlamasında her karakter 0-128 arasında bir değere sahiptir
+
+0
+1
+2
+...
+...
+49
+65 A
+...
+90 Z
+---
+---
+---
+---
+---
+---
+97 a
+
+------------------------
+
+rakam karakterleri
+0  1  2
+48 49 50 
+
+---------------------
+
+int main(void)
+{
+'A'// int türden değeri 65
+}
 
 
+escape (kaçma -kaçış)
+escape sequennce (kaçış sekansı)
+
+'\???' : escape sequence anlamına gelir
+
+'\n' : bir sonrakri satıra geçiş (newline)
+'\t' : (horizaontal tab)
+'\v' : (veriantial tab)
+'\b' : backspace tab
+'\a' : alert characeter(çan sesis)
+'\r' : carriafe return
+'\0' : null character
+'\f' : form feed
 
 
+ ===============================================
+
+C dilinin standard library:
+
+standard c functions
+   macro
+      object-like macro (symbloic constants)
+      function-like macro
+   user defined types
+   type alias (tür eş ismi)
+
+header file 
+
+<stdio.h> // giriş çıkış kütüphanesi standart input-output
+<string.h>
+<ctype.h>
+
+---------------------------------
+
+neden standard library var?
+
+-ortak arayüz oluşturmak için vardır
+-yazma zahmetinden kurtulduk
+
+!!main fonskiyonunuint yapmaya çalış
+
+int main(void)
+{
+//main geri dönüş türü int olursa main içinde return statemant yazmasakta c dili onu koyar
+}
 
 
