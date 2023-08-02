@@ -392,14 +392,70 @@ return 1; //EXIT_FAILURE
 return 0; //EXIT_SUCCESS
 }
 
+====================================================
+
+input output operations (giriş çıkış işlemleri)
+
+standard output stream 
+ standart output (monitor) (direction)
+
+standard error stream
+
+standard input stream
+standard input (keyword)
+
+formatted output
+formatted input
+
+unformatted output
+unformatted input
+
+Tam sayılar için formatlama tercihleri:
+
+hangi sayı sistemi kullanılaca?
+pozitif tam sayıların yazımında + karakateri kullanılsın mı?
+hex ya d aoctal sayı sistemi tabanı (ön eki) gösterilsin mi?
+x büyük mü küçük mü?
+A...F  a...f
+Yazm alanı genişliği
+sağa dayalı - sola dayalı
+------------------
+gerçek sayılar:
+
+nokta gösterilsinmi gösterilmesin mi? (showpoint)
+4.32233 //nıktadan sonra kaç basamak gösterilsin (precision)
+scientific notation
 
 
+bunların hepsi hangi formatlama tercihinin kullanılması ile cevaplanıcak sorularıdr
 
 
+===========================================
+ printf:
+
+!!printf (formatlı bir çıkış fonksiyonudur)
+
+int printf(const char* pfm, ...); //son parametre değeri yerine eliptis(...) depişkeni kullnaılırsa variadic fonksiyon olur
+
+//pointer
+//1. parametre char dizi adresi istiyor onu değiştirmiycek sadece yazıcak
+
+!!en az 1 argüman yollanması gerekir
+
+!!standard output'a formatlı çıkış sağlar 
+
+!!eğer standard output değilde dosya ise fprintf kullanılır
+
+!!eğer bellekte yazı isteniyorsa sprintf kullanılır
 
 
+int main(void)
+{
+//NTBS
+char str[100]
+}
 
 
-
-
-
+!!array'ler call by value olarak fonksiyonlara gönderilemez
+!!yazılarda bir array olduğu için printf const char* argümanını alır
+!! printf ile herhangi bir ifadeinin değerini standart output'a diledğimiz formatta yazdırabilirz
