@@ -374,7 +374,32 @@ neden standard library var?
 
 int main(void)
 {
-//main geri dönüş türü int olursa main içinde return statemant yazmasakta c dili onu koyar
+//main geri dönüş türü int olursa main içinde return statemant yazmasakta derleyici onu eklee
 }
+
+!! eğer main 0 değerini return ediyor ise başarılı bir şekilde işini gerçekleştirdi anlamına gelir
+!! başarısısz ise 0 olmayan değer koyulur tipik olarak 1 koyulur
+
+int main(void)
+{
+FILE* f = fopen("necati.dat", "r");
+if(!f) {
+fprintf(stderr, "cannot open file.");
+return 1; //EXIT_FAILURE
+}
+///
+///
+return 0; //EXIT_SUCCESS
+}
+
+
+
+
+
+
+
+
+
+
 
 
