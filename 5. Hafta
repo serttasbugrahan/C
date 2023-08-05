@@ -59,8 +59,58 @@ long long ==> %llf
 ========================================
 
 operatörler
------------
-operatörlerin neler olduğu, kaç
+-
+terminoloji
+(terimler)
+
+operator
+
+operand : operatörün işleme soktuğuna operatörün operandı denir
+
+binary operator : 2 operand alır
+--------------
+a + b
+a > b
+
+unary operator: 1 operand alır
+----- 
+!x
+++x
+
+(the) ternary operator
+---------------------
+:
+?
+
+
+unary prefix
+----------
+!x
+
+unary postfix
+------------
+x++
+
+binary infix
+----------
+a % b 
+
+
+constraint : operatörün kullanılması için başka kurallara da bakılması gerekir
+
+L value
+-------
+x =
+++
+--
+
+operandların belirli türlerden olması zorunluluğu
+
+
+
+
+
+
 
 
 
