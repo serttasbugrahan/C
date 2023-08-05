@@ -1,1 +1,69 @@
+/////////////////////////1. ders///////////////////////////////
+
+standart scanf işlevi
+
+printf ==> print format
+scanf ==> print format
+
+int scanf(const char *pfm, ...);
+variadic'tir
+call by reference
+scanf nesneleirn adresleri ile çağrılmalı
+
+propmt : programı kullanan kişilerin şunu yap anlamındaki ifadelere denir
+buffer : bellek alanı
+
+int main(void){
+
+printf("bir giriş yapınız: "); //23.98ali
+int x;
+
+scanf("%d, &x); 
+printf("x = %d\n" ,x);
+
+double dval;
+
+scanf("lf",&dval);
+printf("dval = %f\n, dval); //0.98
+//ali
+
+char str[20]
+scanf("%s", str);
+
+printf("isim = %s\n", str);
+
+}
+
+!!scanf kulladığı karakterleri bufferda bekletiyor kullanmadığı karakterleri bufferde tutuyor
+
+!! line-buffered : new line karakteri gelene kadar bekleyecek
+!! scanf skip whitspace karakterleri geçer (boşık, enter)
+
+dikkat! 
+
+scanf işlevinin geri dönüş değeri 
+
+a) buffer'da en az bir karakter var ise
+    set ettiği alan sayısını alır
+b) buffer boş ise 
+    -1 değerini alır
+
+
+int ==> %d
+unsigned ==> %u
+float ==> %d
+double ==> %lf
+long ==> %ld
+long long ==> %llf
+
+========================================
+
+operatörler
+-----------
+operatörlerin neler olduğu, kaç
+
+
+
+
+
 
