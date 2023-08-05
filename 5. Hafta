@@ -112,11 +112,51 @@ double d = 4.5;
 d % 2 // bu işlem syntax hatası verir
 
 
+operators generate values
+operators yield values /işlemden elde edilen değer
+
+side effect (yan etki) : operatörün opreandı olan nesnenin değerinin değiştirilmesi
+
+x + y //side effect yok
+!x //side effect yok
+
+int ival = 10;
+++ival //side effect var
+ 
+assignment operators//side effect vardır
+increment/decrement operatörleri //side effect vardır
+
+operatör önceliği
+----------------
+priority of operator
+predence of operator
+
+!!operatör önceliği hangi işlemin fiizksel olarak daha önce yapılacığı değildir
+
+order pf evaluaiton (hangi işlem daha önce yapılacak)
+
+operatör öncelikleri
+--------------------
+1) () [] . ->
+2) + - ! ~ & * ++ -- sizeof (type) //sağdan sola öncelik
+3)* / %
+4)+ - 
+5)>> <<
+x6)> < >= 
+7) == !=
+8) &
+9) bitwise exor(^)
+10)|
+11)&&
+12)||
+13)? : //sağdan sola
+14) = += -= *= /= %= //sağdan sola öncelik
+15),
 
 
-
-
-
+associativity (öncelik yönü)
+left associativity
+right associativity
 
 
 
