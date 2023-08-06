@@ -399,6 +399,7 @@ a++;
 if(x >10 && y< 20)//yukarıdaki ile aynı anlamdadır
 a++;
 
+!! expr1 && expr2 eğer sol operand yanlış olarak değerlendirilirse diğer ifadeye bakılmaz
 
 
 
