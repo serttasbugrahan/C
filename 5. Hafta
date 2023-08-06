@@ -220,13 +220,184 @@ int main(void)
 int x = 25;
 int y = 67;
 
-printf("%d\n", ++x);
-printf("%d\n", y++);
+printf("%d\n", ++x); //26
+printf("%d\n", y++); //67 !operatörün ürettiği değeri kullanıyorsak ön ek ve son ek kullanımı önemliidr 
 
-printf("%d\n", x);
-printf("%d\n", y);
+printf("%d\n", x); //26
+printf("%d\n", y); //68
 }
 
+
+int main(void)
+{
+int x = 40;
+
+
+printf("%d\n", x++);//40
+printf("%d\n", ++x); //42 
+printf("%d\n", x); //42
+
+}
+
+!!!             C        C++
+x++             R         R 
+++X             R         L  
+y--             R         R 
+--y             R         L
+
+
+!!int z = x++++y //burada hata olmaz maximal munch : 
+
+int main(vodi)
+{
+int x = 5;
+int y = 9;
+
+int z = x+++y;
+//int z = x++ + y;
+
+printf("x = %d\n", x); //6
+printf("x = %d\n", y); //9
+printf("x = %d\n", z); //14 (5 + 9)
+
+}
+ 
+!!maximal munc (en büyük lokma) 
+
+------------------
+
+relational operators (karşılaştırma operatörleri)
+
+!! karşılatırma operatörleri ile yapılan işlemler int değer alır
+
+
+int main(void)
+{
+int x,y,x;
+printf("iki tamsayi girin: ");
+scanf("%d%d",&x,&y);
+
+z = x == y; //aynı anlama gelir
+if (x == y)
+    z = 1;
+else
+ z = 0;
+}
+
+if(10 < x < 20) // bu ifade her zaman true değerini alır
+if (x > 10 && x < 20 ) // bu şekilde yazılmalı
+
+
+x == y //karşılaştırma ifadesi , doğru ise 1 yanlış ise 0
+x = y // atama ifadesi , nesneye atanan değer (y'nin değeri)
+
+!!bazı c programcıları sol taarf == sağ taraf değeri yerine sağ taraf değeri == sol taraf değeri şeklinde yazarlar
+if (5 = x){
+}
+
+!!gerçek sayıların eşitlik karşılaştırması problem doğurabilir
+d1 == d2
+|d1- d2| < 0.00001 //gerçek sayıları bu şekilde yap
+
+
+---------------------
+
+lojik operatörler (logical operators)
+
+-lojik değil (logical not)
+-lojik ve (logical and)
+-lojik veya (logical or)
+-lojik özel veya (logical exclusive or ==> exor)
+
+! (logical not)
+&& (logical and)
+|| (logical or)
+
+lojik yorumlama
+
+!! c dlinde lojik ifade beklenen yerlerde herhangi bir türden ifade kullanılabilir
+bu durumda ifade lojik yorumlamaya tabi tutulur
+
+-eğer ifadenin değeri 0'dan farklı ise non-zero ==> doğru
+-eğer ifadenin değeri 0 ise zero ==> yanlış
+
+int main(void)
+{
+int x ;
+if(x){ //aşağıdaki ile aynı anlama gelir
+
+}
+if(x != 0){
+
+}
+}
+
+nerelerde lojik yorumlama yapılır
+
+-!exp
+-exp && exp2
+-exp || exp2
+-expr1 ? op2 : op3
+-if (expr)
+-while (expr)
+-do ..while(expr)
+-for (;expr;)
+
+
+karşılaştırma op. olduğu gibi C dilinin lojik operatörleri int türden 1 veya 0 değerini alır
+
+!!x // 1 veya 0'dır
+
+//mülakatlarda sık sorulan bir soru
+int main(void)
+{
+int x,y;
+printf("iki tam sayı girin: ");
+scanf("%d%d",&x,&y);
+
+printf("%d ozel veya %d = %d\n", x, y, !!x != !!y)//XOR(özel veya) böyle yazılablir
+
+}
+
+if (x >= y)
+
+if (!(x >= y))
+
+!!!C programcılarının çok sık yaptığı tehlikeli hatalardan biri && (lojik ve) yerine & (bitsel ve) kullamaları
+
+
+!!lojik operatörlerin operandları void türden ifadeler olamaz
+
+!!tüm lojik operatörler int ürden 1 veya 0 değeri üretirler
+
+
+if(bu doğru ise){
+bunu yap
+}
+if(!(bu doğru değil ise){ // bu şekildede kullanılabilir
+bunu yap
+}
+
+int main(void){
+int x = 0;
+int y = 7;
+int z;
+
+z = x && y++;
+printf("z = %d\n",z); //0
+printf("y = %d\n",y); //7 (y++ işleme girmez)
+
+}
+
+short circuit behavior (kısa devre davranışı) :
+
+if (x > 10) {
+if (y < 20)
+a++; 
+}
+
+if(x >10 && y< 20)//yukarıdaki ile aynı anlamdadır
+a++;
 
 
 
