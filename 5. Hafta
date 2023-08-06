@@ -158,5 +158,79 @@ associativity (öncelik yönü)
 left associativity
 right associativity
 
+aritmetic operators
+------------------
++ - (sign operator)
+* / % (multiple operators)
++ - (additive operators)
+++
+--
+
+relational operaotrs-comparasion operators
+--------------------
+> >= < <=
+== !=
+
+logical operators
+--------------------
+!
+&&
+||
+
+assignment operators
+-------------------
+= += -= /= %= >>= <<= &= ^= != 
+
+bitwise operators
+-----------------
+~ 
+<< >>
+&
+|
+>>= <<= &= ^= !=
+
+
+!!!işaretli tam sayı türlerinde taşma tanımsız davranıştır
+!!!işaretsiz tam sayı türlerinde taşma olmaz
+
+!!işaretin R value veya L value olduğunu anlamak için başına adres operatörü koy syntax hatası veririse yanlıştır
+(a+b)& //r value
+
+int main(void)
+{
+char c = 5;
+//+c ifadesinin value category R value
+//+c ifadesinin data type int
+}
+
+-------------------
+
+++ increment
+-- decrement
+
+++x
+y++
+--x
+x--
+
+!!amaç arttırmak veya azaltmak ise ön ek veya son ek olması önemli değil
+
+int main(void)
+{
+int x = 25;
+int y = 67;
+
+printf("%d\n", ++x);
+printf("%d\n", y++);
+
+printf("%d\n", x);
+printf("%d\n", y);
+}
+
+
+
+
+
+
 
 
