@@ -7,9 +7,154 @@ assignmnet operators :
 -c ve c++ 'da atama operatörleri değer üretir 
 -bu değer nesneye atanan değerdir
 
--bir ok idiyom atama değerini kullanır
+x == y //karşılaştırma operatörü, 1 veya 0 olur
+x = y //atama operatörü 
+
+x = y = z = t = expr; //zincirleme idiomu, birden fazla değer atanıcak ise bötle kullanılabilir
+
+if (lval == rval)
+if (x == 5) //aynı sonuçtur burada hata yapma olasılığı daha fazladır
+if (5 == x)//bu tercih edilir
+
+!!c dlinde atama op. oluşturulan ifadelerin değer kategorisi R value
+!!c++ dilinde atama op. ile oluşturulan ifadelerin değer kategorisi L value
+
+x = x + 6; 
+    x += 6; //bu operatörleri tercih et
+
+x = x - 6;
+    x -= 6;
+
+x = x * 6;
+    x *= 6;
+
+x = x / 6;
+    x /= 6;
 
 
+int main(void){
+x = y == z;
+if (y == z)
+x = 1;
+else x = 0;
+}
+
+------------------------------
+
+tanımsız davranış
+
+undefined behavior : kod hata vermez ama ilerde sıkıntı yaratabilir
+
+x /= y;
+if (y == 0)
+printf("hello world");
+
+sequence point (yan etki noktası):
+
+code ==> side effect
+
+----------secuence point
+
+burada üstteki kodun oluşturduğu yan etkinin gerçekleşmiş olduğuna güvenerek kod yazabilirim
 
 
+!!eğer bir ifade bir nesne üstünde yan etki oluşturuyor ise fakat bu nesneyi bir sequence point olmadan tekrar kullnıyorsa tanımsız davranış olur
 
+y = x++ + x;
+
+C dilinde sequence point oluşturan yerler : 
+
+int x = 30, y = x + 5, z = x + y; //burada problem yok
+printf("z = %d\n",z);
+
+int main(void)
+{
+int x = 10;
+
+if(++x > 10){
+printf("%d\n",x); // sequnece point var
+}
+}
+
+- ilk değer veröe listesi
+-if parantezi içindeli ifade
+-while parantezi içindeki iafde
+- do while içindeki ifade
+-for(exp;exp2;exp3)
+
+
+!! aşağıda 4 operator sequence point oluşturur
+exp1 && exp2
+exp1 || exp2
+exp1 ? exp2 : exp3
+comma operator
+
+int main(void)
+{
+int x = 10;
+int y = 20;
+
+y = (x = 8) + x; //sequnece point olmadan x (yan etkisi var)'in değeri tekrar kullanılır
+}
+
+----------------------------------------
+
+comma operator (virgül operatörü)
+
+!!her virgül operatör değildir
+!!virgül  bir ifade içinde kullanılıyorsa operatördür
+
+int main(void)
+{
+int x = 5, y = 10, z = 899;
+x++, y = x + 1, z = x + y 
+//virgül operatör sequence point oluşturur solundaki ifade gerçekleştikten sonra diğer ifade yapılacak
+
+}
+
+int main(void)
+{
+int x = 5, y = 10, z = 899;
+temp = x;
+x = y;
+y = temp;
+}
+
+!!virgül operatörü de değer üretir ürettiği değer sağ operandını değeridir
+
+int main(void)
+{
+int z;
+z = (1,2,3,4,5);
+printf("%d",z);//5 değeri çıkar
+}
+
+int main(void)
+{
+int x = 6, y = 10, z = 899;
+if ( x > 5)
+++y; //burada sadece y değerini arttırır (block)
+++z;
+
+if ( x > 5){
+++y; //burada y ve z değerini arttırır 
+++z;
+}
+
+if ( x > 5)
+++y, ++z;; //her ikiside artar
+
+}
+
+int main(void)
+{
+double dval = 3.4;
+
+if (dval > 2,0)
+printf("doğru\n"); //yanlış kısmına girer
+else
+printf("yanli\n");
+}
+
+3.4 // dval
+3,4 // int ve değeri 4
