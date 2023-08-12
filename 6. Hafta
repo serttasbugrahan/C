@@ -165,7 +165,66 @@ printf("yanli\n");
 öncelik paarntezi
 (x + 5)
 
-
-
 //obfuscate :kodun okumasını zorlaştırma amacıyla yapılır. anlam değişmez
+
+        C      C++
+(x,y)   R       L
+++x     R       L
+--x     R       L
+a = 5   R       L
+
+int getchar(void); : standart input buffer'dan tek bir karakter alır kod numarasını döndürür
+
+int main(void)
+{
+printf("bir giris yapin: ");
+int ch = getchar(); //BA345\n
+printf("ch = %d\n", ch); //65
+}
+
+
+int main(void)
+{
+int x;
+printf("bir tamsayi girin: "); //56492
+while ((ch = getchar()) != '\n'){
+sum += ch - '0';
+}
+if(sum % 3 == 0)
+printf("evet 3'e tam bölünür\n");
+}else
+printf("hayır 3'e tam bolunmez\n");
+}
+
+int main(void)
+{
+int x;
+printf("negatif olmayan tam sayı girin: ");
+x = 0;
+while((c = getchar() != '\n'){ //bu algoritma scanf ile aynı işlemi yapar
+x = x * 10 + c -'0';
+}
+printf("girdğiniz tam sayi = %d\n");
+}
+
+ !!scanf ve getchar işlemleri aynı buffer'ı paylaşır
+
+1. getchar() line-buffered bir giris fonksiyonu
+2. getchar() echo veren bir fonksiyon
+
+int main(void)
+{
+printf("evet ise (e) hayir mi (h) ");
+int c = getchar()
+if(c == 'e')
+printf("evet dediniz\n");
+else if(c == 'h')
+printf("hayır dediniz\n");
+}
+}
+
+
+////////////////////////////////////////////////////////2. Ders///////////////////////////////////////////
+
+
 
