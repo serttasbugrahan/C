@@ -223,8 +223,185 @@ printf("hayır dediniz\n");
 }
 }
 
+int getchar(void); //newline istiyor echo
+int _getch(void); //newline istemiyor echo vermiyor
+int _getche(void); //newline istemiyor echo veriyor
 
 ////////////////////////////////////////////////////////2. Ders///////////////////////////////////////////
+
+control statement (kontrol deyimleri)
+-------------------------------------
+
+-önceden belirlemmiş bir sentaksa sahipler
+-en az bir anahtar sözcük içeriyolar
+-programın akış yönü söz sahibi olan deyimler
+
+control statement :
+
+if statement
+
+while statement %24 //for ve while aynı amaçla kullanılır özel kullanım alanaları bulunmaz. Birini seçip kod yazılabilir 
+do while statement %1
+for  statement %75
+
+ break statement
+ continue statement
+ return statement
+
+switch statement
+goto statement
+
+
+if statement  
+-------------
+expr içi zero'mu noon-zero'mu ona bakılır
+
+if (expr)
+    statement;
+
+!!lojik ifade beklenen yerlerde void türden bir ifade kullanılamaz
+
+int main(void)
+{
+if(1)
+printf("bugrahan serttas");
+
+}
+
+conditional expression : if ifadesi içindeki deyim
+!!if içi dolu olmalı
+!!if içinde statement olamaz (x++)
+!!if içinde void olamaz
+
+if (x != 0)
+ a++;
+
+if(x) //yukarıdaki ile aynı anlama gelir (non zero)
+ a++;
+
+if(isprime == 0) //aynı anlama gelir
+if(!isprime)
+
+
+int foo(void)
+int main(void)
+{
+int x;
+if (x = foo(), x > 10) //virgül operatörü solundaki ifadeyi sağına eşitler
+}
+
+
+int foo(void)
+{
+printf("foo is called!\n");
+return 0;
+}
+
+int main(void)
+{
+if (foo){
+printf("true\n"); //ekranda sadece true yazar
+}
+if (foo()){
+printf("true\n"); //ekranda foo is called yazar
+}
+}
+
+if(foo()) //foo fonksiyonu çağrılır, doğru veya yanlış foo() ya göre yapılır
+if(foo) //foo fonksiyonu çağrılmaz //bu ifade always true 
+
+if (x > 20)
+++a; ++b; //sadece a artar if değimi içindeki ilk ifade ele alınır
+if (x > 20){
+++a; ++b; //a ve b artar bloklamadan doyalı
+}
+
+null statement : eğer bir ifade olmadan sadece ';' olursa denir, hiçbir şey yapılmasın demektir
+
+if(expr){
+; //bir şey yapılmak istenmiyorsa boş bırakılamaz ';' koyulur
+}
+
+! ; {} //null statement yerine içi boş blok koyyulabilir
+
+yanlış kısmı olan if deyimi :
+----------------------
+int main(void)
+{
+printf("bir tamsayi girin: ");
+scanf("%d", &x);
+
+if (x > 10)
+foo();
+else
+bar();
+}
+
+
+dangling else : 
+if (x > 10)
+    if (y > 20)
+        ++a;
+
+if (x > 10 && y > 20)
+    ++a;
+
+
+if (exp_1)
+state_a
+else if (exp_2)
+state_b
+else if (exp_3)
+state_c
+else
+state_d
+
+
+--------------------------
+
+test fonksiyonları (test function, query function, predicate) :
+
+int isprrime(int ival);
+
+fonksiyonun geri dönüş değeri non-zero ise ==> true
+fonksiyonun geri dönüş değeri zero ise ==> false
+
+-------------------------------------------
+
+<ctype.h>
+
+int isupper(int c); //buyuk harf mi
+int islower(int c); //kucuk harf mi
+int isalpha(int c); //harf mi
+int isdigit(int c); //rakam karakteri mi
+int isalnum(int c); //rakam ya da harf karakterimi
+int isxdigit(int c); //hex karakter mi 0123456..ABCD..
+int ispunct(int c); //kontrol karakteri olmayan alfanumerik olmayan karakteri
+int isspace(int c); //whitespace karakteri mi
+int isblank(int c); //yatay tab ya da space
+int iscontrol(int c); //kontrol karakter mi
+int isprint(int c); //printable karakter mi
+int isgraph(int c); //printable karakter mi
+
+
+int main(void)
+{
+int ch;
+printf("bir karakter girin: ");
+ch = getchar();
+
+if(isdigit(ch))
+printf("evet rakam karakteri\n");
+else
+printf("hayir buyuk harf karaketi degil\n");
+
+
+
+}
+
+
+
+
 
 
 
