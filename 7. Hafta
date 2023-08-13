@@ -82,6 +82,19 @@ break;
 5. program sonlanabilir, exit(1)
 --------------
 
-continio : döngü içinde diğer kodları bay pass ederek diğer kodlara geçer
+continue : döngü içinde  kodları bay pass ederek diğer kodlara geçer
+
+int x = 1;
+while (x > 0){
+++x
+}
+!!işaretli türlerde taşma tanımısz davranıştır
+
+!!if'de olduğu gibi null statemnet burada da kullanılır, ; {} continue
+
+
+
+
+
 
 
