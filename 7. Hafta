@@ -115,8 +115,24 @@ return digit_count;
 }
 
 
+int sum_digit(int val)
+{
+while(vall != 0){
+while (val != 0){
+sum += val % 10;
+val /= 10;
+}
+return sum;
+}
 
+int main(void)
+{
+int x;
+printf("bir tamsayi girin: ")
+scanf("%d", &x);
+printf("%sayisinin basamakları toplamı %d\n", x, sum_digit);
 
+}
 
 
 
