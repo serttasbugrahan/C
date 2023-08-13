@@ -130,10 +130,49 @@ int main(void)
 int x;
 printf("bir tamsayi girin: ")
 scanf("%d", &x);
-printf("%sayisinin basamakları toplamı %d\n", x, sum_digit);
-
+printf("%sayisinin basamakları toplamı %d\n", x, sum_digit(x));
 }
 
 
+int dreverse(int val)
+{
+int result = 0;
+while(val){
+result = result * 10 + val % 10;
+val /= 10;
+}
+return result;
+}
+
+int main(void)
+{
+int x;
+printf("bir tamsayı girin: ");
+scanf("%d", &x);
+
+printf("%d sayisinin tersi %d\n", x, dreverse(x));
+}
+//denklem köklerini bulan program
+int main(void)
+{
+int a,b,c;
+
+printf("denklemin katsayilarini giriniz: ");
+scanf("%d%d%d", &a,&b,&c;
+
+double delta = b* b -4 * a * c;
+
+if (delta < 0){
+printf("denklemin gercek koku yok!");
+}
+else if (delta == 0){
+printf("tek gercek kok var = %f\n" -b / (2. * a));
+}
+else{
+delta = sqrt(delta); //değişkeni anlamı dışında kullanma burada hatalı kullanım vardır
+double root_1 = (-b - delta) / (2. * a);
+double root_2 = (-b + delta) / (2. * a);
+}
+}
 
 
