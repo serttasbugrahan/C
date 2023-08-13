@@ -1,1 +1,87 @@
+///////////////////////////////////////////////////1. Ders//////////////////////////////////////////////////////
+
+int toupper(int ch); //karakteri büyük harf yapar
+int tolower(int ch); //karakteri küçük harf yapar
+
+int main(void)
+{
+int c1, c2;
+printf("iki karakter girin: "); //a A
+c1 = getchar();
+c2 = getchar();
+
+if (toupper(c1) == toupper(c2))
+printf("aynı) //aynı çıkar
+else
+printf("farklı)
+}
+
+--------------------
+
+int putchar(int) : ascci'yi karaktere çevirir
+
+int main(void)
+{
+for (int i = 'A'; i <= 'Z'; ++i){
+putchar(i); //ilk büüyk harfleri sonra küçük harfleri yazar
+}
+}
+
+------------------------------------
+
+döngü deyimleri (loop statements) : kod parçasını koşula bağlı olarak tekrararlamaya denir
+
+while
+------
+
+while (expr) : expr true olduğu sürece devam eder
+
+-while parantezi içinde void tür olamaz 
+-parantex içi boş olamaz
+-parantex içinde statement olamaz
+
+while(expr) //if gibi true ya da false elde edilir
+statement;
+
+while (i < 100 && k > 200) //bu şart sağlandığı sürece bu şart sağlanır
+statement;
+
+int main(void)
+{
+int x = 0;
+
+while (x++ < 10);
+printf("%d", x); // çıktı sonucu 11
+}
+
+while(1){ //always
+}
+
+bir dögüden hangi yollarla çıkılır :
+
+1. kontrol ifadesini yanlış olması ile :
+2. return statement ile :
+
+while (expr)
+{
+if(ce){
+return;
+}
+}
+
+3. break statement ile :
+
+while (expr)
+{
+if(ce){
+break;
+}
+}
+
+4. goto 
+5. program sonlanabilir, exit(1)
+--------------
+
+continio : döngü içinde diğer kodları bay pass ederek diğer kodlara geçer
+
 
