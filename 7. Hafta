@@ -90,7 +90,30 @@ while (x > 0){
 }
 !!işaretli türlerde taşma tanımısz davranıştır
 
-!!if'de olduğu gibi null statemnet burada da kullanılır, ; {} continue
+!!if'de olduğu gibi null statemnet burada da kullanılır. ; - {} - continue
+
+////////////////////////////////////////////////////2. Ders///////////////////////////
+
+n kez dönen dögü idiyomu
+
+int n = 3;
+while (n-- > 0){ //maximal munch kuralından dolayı --> bu şekildede yazılabilir
+printf("necati\n");
+}
+
+
+int ndgit(int val)
+{
+int digit_count = 0;
+if (val == 0)
+return 0;
+while (val != 0){
+++digit_count
+val /= 10;
+}
+return digit_count;
+}
+
 
 
 
