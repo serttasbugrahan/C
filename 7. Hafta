@@ -175,4 +175,64 @@ double root_2 = (-b + delta) / (2. * a);
 }
 }
 
+yardımcı kontrol deyimleri
+------------------------
+
+sonsuz döngü idiyomu : 
+
+while (1){ //always true 18,2,4,-18 vb. değerlerde yazılabilir
+
+}
+
+break statement : programın akışınıın döngüden çıkıp döngüden sonraki ilk deyimin yürütülmesini sağlar (döngü kırmak)
+break;
+
+!!döngü deyimleri içinde olmalı
+
+!!return fonksiyondan çıkmayı break döngüden çıkmayı sağlar
+
+while (expr){
+
+statement;
+statement;
+if (c_exp)
+break;
+
+statement;
+statement;
+}
+
+
+while(1){
+statement;
+statement;
+if(!expr) //expr ifadesi yanlış ise dömgüden çık değil ise sonsuz devam et
+break;
+}
+
+int main(void)
+{
+int ch;
+int ival;
+while (1){
+printf("tam sayi giricek misiniz? (e) (h)");
+while(1){  //kötü bir yazım şeklidir                     
+ch  = _getch();
+if (ch == 'e' || ch == 'h')
+break;
+}
+
+while(ch  = _getch() != ch == 'e' && ch == 'h'))  //bu şekilde daha okunaklı                     
+; //null statement
+printf("%c\n", ch);
+
+if (ch == 'h')
+break;
+
+printf("tam sayi gir: ");
+
+
+}
+
+}
 
