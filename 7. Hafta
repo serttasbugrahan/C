@@ -214,6 +214,7 @@ int main(void)
 {
 int ch;
 int ival;
+int count  = 0;
 while (1){
 printf("tam sayi giricek misiniz? (e) (h)");
 while(1){  //kötü bir yazım şeklidir                     
@@ -228,11 +229,80 @@ printf("%c\n", ch);
 
 if (ch == 'h')
 break;
-
+ 
 printf("tam sayi gir: ");
-
-
+ival = (rand() % 2 ? 1 : -1) * rand();
+printf("%d\n", ival);
+++count;
+}
+if (count == 0){
+printf("giris yapmadınnız");
+else
+printf("%d kere giris yapildi", count);
+}
 }
 
+while (expr){
+while( (expr2){
+if (c_exp)
+break; //break sadece if döngüsünden çıkar hepsinden çıkm ak istenirse flag değişken kullanılır (kötü yol, kullanma) goto statment kullan
+}
 }
 
+while (expr){
+while( (expr2){
+if (c_exp)
+goto out
+}
+}
+out:
+
+//bütün döngülerden çıkılmak istenirse goto statemnet kullan
+
+continue statment
+------------------
+
+continue; 
+-sadece döngülerde kullanılır
+-döngüden çıkarmaz
+-kendinden sonrakileri yapma
+
+while (exp)
+{
+statement
+statement
+statement
+continue; //continue altında kalan statement'lar kullanılmaz döngünğn başına döner
+statement
+statement
+}
+
+while (exp)
+{
+statement
+statement
+statement
+if (exp){
+continue;
+}
+statement
+statement
+}
+
+-------------------------
+
+redudancy = fuzili, olmasada olur
+
+redundant else : 
+
+int max2(int a, int b)
+{
+if (a > b)
+return a;
+else //bu ifade redundant else  yazmaya gerek yok return a çıkarsa zaten return a dönücek
+return b;
+}
+
+------------------
+
+ternary operator
