@@ -1,9 +1,100 @@
 ///////////////////////////////////////////////////////1. Ders////////////////////////////////////////////////
 
+do while statements :
+--------------------
+
+while (1){
+statements;
+statements;
+statements;
+statements;
+if (!expr)
+break;
+}
+
+do {
+statements;
+statements;
+statements;
+statements;
+}while (expr);
+
+int main(void)
+{
+int x;
+do {
+printf("bir tam sayi girin: ");
+scanf("%d", &x);
+}while( x < 0 || x > 100);
+
+printf("girdiğiniz tam sayi %d\n", x);
+
+========================================
+
+for statement :
+-------------
+
+for (exp1; exp2; exp3) //2 tane ';' olmalı
+statement;
+
+-exp1 sadece 1 kere kullanılır
+-exp2 döngüyü kontrol eden ifade
+-exp3 ifadeyi yeniden sınanmasından sorumlu
+
+for (int i = 0; i < 100; ++i) //i  sadece döngü içinde tanımlı
+statement;
 
 
+for (int i = 0; i < 100; i += 2{
+printf("%d", i);
+}
 
 
+!! c ve c++ dilleri arasında for dögngü deyiminde 1. kısımda tanımlanan ismin scopu konusunda kural farkı vardır
+
+int main(void)
+{
+for (int i = 0; i < 10; ++i){
+int i = 5; //syntax hatası (c++)
+}
+}
+------
+int main(void)
+{
+for (int i = 0; i < 10; ++i){
+int i = 777; //c dilinde legal olur
+printf("%d", i) //10 kez 777 yazar
+}
+}
+-------
+
+int main(void)
+{
+int i, k;
+int x = 10;
+
+for (i = x, k = i + 2; i < 10000; ++i, k += i){
+printf("%d %d\n" ,i ,k);
+}
+}
+}
+
+-------
+
+int main(void)
+{
+int i;
+
+for (;;){ //exp1 dolu olmak zorunda değil, exp2 olmaması lojik 1 olduğu anlamında gelir
+//sonsuz döngü idiomu
+}
+}
+
+
+=======================================
+
+!!derleme zamanında belli olan bilinen değerleri run time'da çalıştırmak 
+iyi fikir değil onun yerine tablo ile belleğe yazmak daha iyidir. eğer bellekte yer kaplaması sıkıntı değil ise 
 
 
 
