@@ -328,11 +328,38 @@ x > y ? x : y // max(x, y)
   int x = a > b ? 10 : 45;
   ndays = isseap(y) ? 29 : 28;
 
+örnekler:
+
   if (x > 0)
     return a;
   else 
     return b;
 
-return x > 0 ? a : b;
+-return x > 0 ? a : b;
+
+-int ival = isprime(x) ? x : x + 1;
+
+-func(x > 0 ? y : z)
+
+- if (x == 5)
+a = 7;
+else if ( x == 9)
+a = 13;
+else if (x == 23)
+a = 19;
+else
+a = 78;
+
+x == 5 :
+x == 9 ? 13 :
+x == 23 ? 19 : 78
+
+  
+
+
+
+
+
+
 
 
