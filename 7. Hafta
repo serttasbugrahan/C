@@ -303,6 +303,36 @@ else //bu ifade redundant else  yazmaya gerek yok return a çıkarsa zaten retur
 return b;
 }
 
-------------------
+-----------------
 
-ternary operator
+ternary operator, contional operator, koşul operatörü :
+
+- 3 operand alan tek operatör
+- ? ve : operandları birbirinden ayırıyor
+- operatördür kontrol deyimi değildir
+
+op1 ? op2 : op3 // op1 doğru ise cevap op2 yanlış ise op3
+
+x > y ? a : b // x > y doğru ise a değerini üretir yanlış ise b değerini üretir
+
+x > y ? x : y // max(x, y)
+
+- eğer ternory operatörünün ürettiği değer kullanılmıyor ise kullanmayın
+  a > b ? ++x : ++y;
+  if (a > b)
+  ++x;
+  else
+  ++y;
+
+- öyle bağlamlar var ki koşula bağlı olarak ya o değeri ya bu değeri işler bu durumda ternary kullanılır
+  int x = a > b ? 10 : 45;
+  ndays = isseap(y) ? 29 : 28;
+
+  if (x > 0)
+    return a;
+  else 
+    return b;
+
+return x > 0 ? a : b;
+
+
