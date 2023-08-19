@@ -97,6 +97,7 @@ for (;;){ //exp1 dolu olmak zorunda değil, exp2 olmaması lojik 1 olduğu anlam
 iyi fikir değil onun yerine tablo ile belleğe yazmak daha iyidir. eğer bellekte yer kaplaması sıkıntı değil ise 
 
 
+nested loops (iç içe döngüler)
 
 
 
