@@ -100,6 +100,76 @@ iyi fikir değil onun yerine tablo ile belleğe yazmak daha iyidir. eğer bellek
 nested loops (iç içe döngüler)
 
 
+//////////////////////////////////////////////////////////2. Ders////////////////////////////////////////////////////////
+
+Function declarations (fonksiyon bildirimleri) :
+---------------------------------------------
+
+to define a function
+to call a function
+to function delarations
+
+int main(void)
+{
+  foo(12, 13);
+}
+
+
+derleyi fonksiyon ile karşılaştığında fonksiyon giriş kodları ve fonksiyon çıkış kodlarını bilebilir içeriğini bilmez
+
+!!linker : derleme sonrası objeleri birleştirir (main.c, functions, librarys)
+
+derleyicinin function declaration sırasında yaptıkları :
+------------------------------------------------------
+
+-fonksiyon çağrı ifadesi karşılığında fonksiyona gönderilen argüman sayısı aynı mı
+
+-her bir parametre türü
+
+-gönderilen argüman olan ifadeleri ilgili parametreye kopyalamak için tür dönüşümü yapar
+
+void func(int);
+int main(void)
+{
+func(23.233);
+}
+
+double func(int, int, int);
+
+!! nerede bir isim kullanılmış veya bildirilmiş ise orada scope vardır
+
+file scope (global alanda)
+block scope (blok içinde)
+function protoype scope (fonksiyon parametre kısmında tanımlıdır sadece)
+function scope
+
+!! c dilinde parametre içinin boş kalması parametreler hakkında bilgi vermiyorum demektir.
+
+------------------------------
+
+implement
+implementation file
+code file
+dot c file
+source file
+
+function redeclaration
+
+bugrahan.h : 
+  -bildirimler koyulur
+  -fonksiyonları kullanmamızı sağlar 
+
+bugrahan.c
+  -önişlemci komutu ile bugrahan.h include edilir
+
+
+
+
+
+
+
+
+
 
 
 
