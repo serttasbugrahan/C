@@ -163,13 +163,67 @@ bugrahan.c
   -önişlemci komutu ile bugrahan.h include edilir
 
 
+C dilinde başlık dosyalarında  (header file) neler bulunur?
+-----------------------------
+
+-fonksiyon bildirimleri
+
+-global değişken bildirimleri
+
+-ön işlemci komutları
+
+-user defined types
+
+-type alias declarations (tür eş isim bildirimleri)
+
+======================================================================
+
+preprocessor (ön işlemci program):
+-----------------------------------
+source file : ön işlemci programın girdisi
+translation unit : derleyicinin çeviri amaçlı kullandığı dosya
 
 
+preprocesser directives (önişlemci komutları) :
 
+#
+#include
+#define
+#if
+#else
+#elif
+#endif
+#ifdef
+#line
+#error
+#pragma
 
+macro
+conditional compiling
+multiple inclusion guard
 
+!! komut sonuna ';' koyulmaz
 
+#include
+--------
+#include <stdio.h>
+-başlık dosyalarını include eder
+-kopyala yapıştır mantığında çalışır.
 
+< > : bu dosyayı derleyici sağladığı zaman kullanılır
+" " : bu dosyayı kullanıcı sağladığı zaman kullanılır
 
+#define
+------
+define ile tanımlanan isimlere macro denir
+
+#define SIZE 100 //SIZE görünen her yere 100 yapıştır
+
+#define EOF //EOF görünen yere -1 yazar
+
+#define BYTE unsigned char 
+
+#define SIZE 100
+#define LARGE_SIZE (SIZE * 5)
 
 
