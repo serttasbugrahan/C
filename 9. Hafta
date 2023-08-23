@@ -1,1 +1,12 @@
+/////////////////////////////////////////////////////1. Ders//////////////////////////////////
+
+#define LOW 100
+#define HIGH 500
+#define MID ((LOW + HIGH) / 2) //bu şekilde kullanılabilir
+
+///dk 20
+
+
+
+
 
