@@ -4,7 +4,33 @@
 #define HIGH 500
 #define MID ((LOW + HIGH) / 2) //bu şekilde kullanılabilir
 
-///dk 20
+!!tamamı büyük harf ile yazılmış ise ön işlemci makrosudur
+
+#define NO_OF_STUDENTS 2340
+int main(void)
+{
+int cnt = NO_OF_STUDENTS
+}
+
+sabit isimlendirme yöntemleri
+-----------------------------
+
+#define SIZE 100
+
+enum {SIZE = 100};
+
+constant variable
+
+int main(void)
+{
+const int size = 1000;
+}
+
+
+
+
+
+
 
 
 
