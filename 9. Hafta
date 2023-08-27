@@ -141,6 +141,8 @@ int j = (square)(i); //buradamacro devre dışı kalır çünkü macrodan sonra 
 statement expression : macro'nun birden fazla kullanılması durumunda güvenlik amacıyla kullanılır, 
 ({     //içine yazılır   })
 
+////////////////////////////////////////////////////////////////2. DERS////////////////////////////////////
+
 
 
 
