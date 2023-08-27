@@ -54,16 +54,92 @@ int main(void)
 {
 int x;
 x = 3.14
-x = PI //böyle yazmak daha anlaşışı yapar 3.14 pi olduğu bilinmeyebilir
+x = PI //böyle yazmak (macro kullanmak) daha anlaşışı yapar 3.14 pi olduğu bilinmeyebilir
 }
 
+!!macrolar : 
+-taşınabilirlik sağlar
+-sabitleri isimlendirmiş oluruz 
+-okunabilirliği arttırır
+-kodda değişebilecek değerlerde macrolar kullanılablilir
 
-//1 saat 22 dakika
+-------------
+
+#define ANAKOD   main
+#define yok   void
+#define TAMSAYI   int
+#define BAS {
+#define SON }
+
+TAMSAYI ANAKOD(yok(
+BAS
+printf("hello world");
+return 0;
+SON
+
+===============================================
+
+optimization 
+------------
+
+functional-like - functional macro: 
+fonksiyon çağrısı gibi görünen ama aslında fonksiyon çağırmayanlara denir
 
 
+-compiler optimization
 
+-derleyicinin kod zamanında yaptığı optimization
 
+-link time optimization (LTO)
 
+functional macro :
+-----------------
+
+#define MAX2() //fonskiyonal macro bu şekilde olmalı pazartez de boşuk olmamlı
+
+#define  MAX2(a, b) a > b ? a : b
+int main(void)
+{
+int x = 45;
+int x = 60;
+
+int z = MAX2(x, y); //maaliyeti azalatır
+}
+
+---------------
+#define square(a)   ((a) * (a)) //bu şekilde kullanılabilir, macro param. parantez içine yazılmalı, dıştakide parantez içine alınmalı
+int square(int a)
+{
+return a * a; 
+}
+
+int main(void)
+{
+int x = 4;
+int y;
+
+y = square(x) //bunun yerine macro kullanılabilir
+}
+
+-------------
+
+int square(int a)
+{
+printf("square\n");
+return a * a;
+}
+
+#define  square(x) ((x) * (x))
+
+int main(void)
+{
+int i = 46;
+int j = (square)(i); //buradamacro devre dışı kalır çünkü macrodan sonra açılan parantez token'ı olmalı
+//isim çakışmasını önler
+}
+
+statement expression : macro'nun birden fazla kullanılması durumunda güvenlik amacıyla kullanılır, 
+({     //içine yazılır   })
 
 
 
