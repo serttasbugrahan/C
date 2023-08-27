@@ -26,7 +26,39 @@ int main(void)
 const int size = 1000;
 }
 
+------------------------
 
+sembolik sabitler veya makrolar 
+a)  magic numberin karşılığı olarak kullanılabilir
+b) inimatör olarak kullanılmış olabilir
+
+
+#define hold 1
+int main(void)
+{
+//on
+//off
+//stand_by
+//hold
+}
+
+-------------
+
+#define BYTE unsigned char
+int main(void)
+{
+BYTE x = 45;
+}
+
+int main(void)
+{
+int x;
+x = 3.14
+x = PI //böyle yazmak daha anlaşışı yapar 3.14 pi olduğu bilinmeyebilir
+}
+
+
+//1 saat 22 dakika
 
 
 
