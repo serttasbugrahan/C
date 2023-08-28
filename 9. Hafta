@@ -176,6 +176,8 @@ c) hata riski fazladır fonksiyonlar daha güvenlidir
 ##    token-pasting
 defined 
 
+#
+---
 
 #define  nec(a)  #a //çift tırnak almaya yarar
 int main(void)
@@ -208,7 +210,55 @@ iprint(a + b + b * b + c * c + d * d);
 
 }
 
-//1.17 45
+-------------------------
+
+##
+---
+
+x##y //sağ operatörşe sol operatörü bileştirir xy
+
+
+#define nec(a, b)   a##b
+int main(void)
+{
+int prime_counter = 0;
+nec(prime_,counter)
+}
+
+----
+
+#define nec(a, b)   a##b
+int main(void)
+{
+int prime_counter = 0;
+nec(prime_,counter)
+}
+
+=========================================
+
+koşullara bağlı olarak a veya b kodunu verip vermemesini ayarlar
+
+#if 1 
+
+//code
+//code
+
+#endif
+
+
+kod seçimi neden kullanılır :
+- donanıma bağlı farklılıklar
+- işletim sistemi farklılıklar
+- dil farklılığı 
+- version'a göre farklılıklar
+- locale' e göre farklılıklar
+
+
+1.56 56
+
+
+
+
 
 
 
