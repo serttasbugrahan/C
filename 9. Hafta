@@ -143,6 +143,31 @@ statement expression : macro'nun birden fazla kullanılması durumunda güvenlik
 
 ////////////////////////////////////////////////////////////////2. DERS////////////////////////////////////
 
+#define asize(x)   (sizeof(x) / sizeof(x[0]))
+#define r_elem(x)  (x[rand() % asize(x)]) //macrolar macro içiçnde kullanılabilir
 
+int main(void)
+{
+int a[] = {2, 5, 6, 5, 6}
+relem(a)
+}
+
+
+fonskiyonel macrolar ile fonksiyonların karşılaştırılması :
+---------------------------------------------------------
+
+!! macrolar türden bağımsızdır
+
+#define max2(a, b)    ((a) > (b) ? (a) : (b))
+
+fonksiyonel macro dezavantaj :
+
+a) code size : duruma göre artabilir
+
+b) fonksiyonlar kadar debuggerden destek almaz
+
+c) hata riski fazladır fonksiyonlar daha güvenlidir
+
+//42.19
 
 
