@@ -168,6 +168,56 @@ b) fonksiyonlar kadar debuggerden destek almaz
 
 c) hata riski fazladır fonksiyonlar daha güvenlidir
 
-//42.19
+----------------------------------------
+
+önişlemci operatörleri (preprocessor operators) :
+
+#     stringification / stringizing
+##    token-pasting
+defined 
+
+
+#define  nec(a)  #a //çift tırnak almaya yarar
+int main(void)
+{
+printf(nec(ali)) //ali 
+}
+----
+int main(void)
+{
+printf(
+"ali" //derleyici alivelihasanmetin olarak yazar
+"veli"
+"hasan"
+"metin"
+}
+----
+#define iprint(x) printf("%d\n", x)
+
+int main(void)
+{
+int a = 15;
+int b = 15;
+int c = 15;
+int d = 15;
+
+iprint(a);
+iprint(a + b);
+iprint(a + b * c - d);
+iprint(a + b + b * b + c * c + d * d);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
