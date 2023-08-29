@@ -254,18 +254,103 @@ kod seçimi neden kullanılır :
 - locale' e göre farklılıklar
 
 
-1.56 56
+programming errors
+------------------
+bug : kedni kodlarımızdan meydana gelir
+
+run time error : bizim kodumuz ile alakalı değildir. çapırdığı bir yapı hatalı olabilir
 
 
+kodlama hatalarını bulmak için yapılan 
+---------------------------------------
+assortions
+
+//0 9
+int set_xyx(int x)
+{
+  if (x < 0 || z > 9)
+  printf("bu koşul sağlanmadığı için kod hatalı olabilir");
+  abort(); 
+}
+
+!!bu işleri otomatik yapan fonksiyon 'assert(x != 0);' kullanılır
+
+!!bu kodları müşteriye vermemiz gerekir bunun için koşullu derleme kullanılır
 
 
+============================================================================
 
+#if pp_exp //lojik sınama olur (doğru/yanlış)
+#elif pp_exp2
+#elif pp_exp3
+#else
+#endif
 
+!!değişken kullanılmaz, sabitler kullanılır
 
+#define MAX  100
+#if MAX > 20  //preprocecor'da sadece tam sayı kullanılır (24.5 olmaz)
+void foo(int);
+void bar(int);
+#endif
 
+!!sizeof operatörü kullanılmaz
 
+#if NEC > -1 //tanımlı değil ise 0'dır
+void foo(int);
+#endid
 
+--------------------------
+#ifdef  -  #ifndef
 
+bir macronun tanımlı ya da tanımısz olmasına bağlı bir şey oluşturulabilir
+
+#define NEC 0
+
+#ifdef NEC //NEC tanımlı ise içine girer
+int a[210]
+void foo(int);
+void bar(int);
+#endif
+
+#ifndef NEC //NEC tanımlı değil ise içine girer
+int a[210]
+void foo(int);
+void bar(int);
+#endif
+
+-----------------------
+
+#defined NEC //tanımlı ise true değil ise false üretir
+
+#ifdef NEC
+void f1(void)
+void f2(void)
+void f3(void)
+#endif
+                 //ikiside aynı anlama gelir
+#if defined NEC
+void f1(void)
+void f2(void)
+void f3(void)
+#endif
+
+#if defined BILGIN && defined ALI
+  void foo(int);
+#endif
+
+------------------------------------
+
+multiple inclusion guard (çoklu dahil etmeye karşı koruma)
+
+!!birden fazla include edilirse sıkıntı oluşur bunun önüne geçmek için aşağıdaki kod kullanılabilir
+
+#ifndef CARD_H
+#define CARD_H
+struct Card {
+int x, y;
+};
+#endif
 
 
 
