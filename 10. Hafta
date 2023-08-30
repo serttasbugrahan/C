@@ -86,17 +86,110 @@ nutility.h
 #define _NUTILITY_H
 
 int isprime(int x); //fonksiyonlar bu aralığa eklenir ve nutility.c dosyasında kodu yazılır
+int sumdigit(int x)
 
 #endif
 
-1:54:12
+====================================================
 
+switch statement :
+------------------
 
+!! switch kullanılan her yerde if deyimi kullanılabilinir 
+!! swicth deyimi bazı durumlarda daha iyi optimizasyon sağlayabilir
+!! daha iyi okunabilir hale getirmek için kullanılır
 
+switch //kullanımı mecburi olan tek anahtar sözcük switch diğerleri zorunlu değil
+ case
+ default
+ break
 
+if (int_expr == 1){
+}
+else if (int_expr == 2){
+}
+else if (int_expr == 3){
+}
+else
 
+-----
 
+switch (x){ //switch parantezi içine sadece tam sayı türlerinden değerler yazılabilir
+case 10:
+case 2:
+case x:
+  statement;
+case 3:
+case 18:
 
+}
+
+---------
+
+int main(void)
+{
+int weekday;
+
+printf("haftanin kacıncı gunu: ");
+scanf("%d", &weekday); //4
+
+switch (weekday){
+case 1: printf("pazaresi\n"); 
+case 2: printf("sali\n");
+case 3: printf("carsamba\n");
+case 4: printf("persembe\n");
+case 5: printf("cuma\n");
+case 6: printf("cumartesi\n");
+case 7: printf("pazar\n");
+}
+}
+çıktı sonucu : persembe, cuma, cumartesi, pazar
+ 
+---------------
+
+int main(void)
+{
+int weekday;
+
+printf("haftanin kacıncı gunu: ");
+scanf("%d", &weekday); //4
+
+switch (weekday){
+case 1: printf("pazaresi\n"); break;
+case 2: printf("sali\n"); break;
+case 3: printf("carsamba\n"); break;
+case 4: printf("persembe\n"); break;
+case 5: printf("cuma\n"); break;
+case 6: printf("cumartesi\n"); break;
+case 7: printf("pazar\n"); break;
+}
+}
+çıktı sonucu : persembe
+
+---------------------
+#define ADD_RECORD 11
+int main(void)
+{
+int weekday;
+
+printf("haftanin kacıncı gunu: ");
+scanf("%d", &weekday); //3
+
+switch (weekday){
+case 3: 
+case ADD_RECORD:
+case 29: printf("3 11 ya da 29\n"); break;
+case 1 + 4: 
+case 7: 
+case 16: printf("5 7 ya da 16\n"); break;
+case 39: printf("39\n"); break;
+}
+}
+çıktı sonucu : 3 11 ya da 29
+
+!! her labeldan sonra statement olmalı
+
+2:24:22
 
 
 
