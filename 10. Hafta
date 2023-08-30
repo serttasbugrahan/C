@@ -1,1 +1,102 @@
 /////////////////////////////////////////////////////////////////////////1. Ders//////////////////////////////////////////////////////////////////
+
+game.h
+------
+#include "card.h"
+
+animation.h
+-----------
+#include "card.h"
+
+bugra.c
+-------
+#include "game.h"  //card.h 2 kez include edilir
+#include "animation.h"
+
+#ifndef CARD_H
+#define CARD_H
+#endif  //bu yapı kullanılır
+
+#pragma once //bunu da kullanabilirsin ama yukarıdakini tercih et
+
+--------
+
+#define kullanımları :
+
+#define  SIZE  100
+
+#define  SQUARE(a)  ((a) * (a))
+
+#define  POKER
+
+#define  public
+
+==============================================
+
+#undef //tanımını kaldırmaya yarar
+
+#undef MAX
+#define MAX 100 //senden önce basşka tanımlamalar var ise bunları kaldırmaya yarar
+
+================================================
+
+#line 
+//herhangi bir başlık dosyası inlude edilmediği zaman kullanılır
+//hangi satırda kullanıldıysa o satırın kaynak numarası ile yer değiştirir
+
+
+standart macrolar :
+-null
+-bool
+-true
+-RAND_MAX
+
+predefined macro :
+ __LINE__
+ __DATE__
+ __TIME__
+ __FILE__
+ __STDC__
+__func__ //fonksiyonun ismini yazdırırı
+
+x =  __LINE__;  //x = 60
+
+int main(void)
+{
+printf("%s dosyasının %d. satiri\n", __FILE__ ,  __TIME__)
+printf("compilation date %s\n", __DATE__)
+printf("compilation time %s\n", __TIME__)
+}
+
+=============================================
+
+#error //programı bitirir
+
+#ifndef _cplusplus
+#error THIS FİLE SHOULD BE ...
+#ENDİF
+
+
+============================================
+
+başlık dosyaları :
+nutility.h
+
+#ifndef _NUTILITY_H
+#define _NUTILITY_H
+
+int isprime(int x); //fonksiyonlar bu aralığa eklenir ve nutility.c dosyasında kodu yazılır
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
