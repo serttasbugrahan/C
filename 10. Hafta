@@ -36,12 +36,12 @@ bugra.c
 #undef //tanımını kaldırmaya yarar
 
 #undef MAX
-#define MAX 100 //senden önce basşka tanımlamalar var ise bunları kaldırmaya yarar
+#define MAX 100 //senden önce başka tanımlamalar var ise bunları kaldırmaya yarar
 
 ================================================
 
 #line 
-//herhangi bir başlık dosyası inlude edilmediği zaman kullanılır
+//herhangi bir başlık dosyası include edilmediği zaman kullanılır
 //hangi satırda kullanıldıysa o satırın kaynak numarası ile yer değiştirir
 
 
@@ -57,7 +57,7 @@ predefined macro :
  __TIME__
  __FILE__
  __STDC__
-__func__ //fonksiyonun ismini yazdırırı
+__func__ //fonksiyonun ismini yazdırırır
 
 x =  __LINE__;  //x = 60
 
