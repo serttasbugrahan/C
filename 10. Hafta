@@ -212,13 +212,59 @@ default: printf("gecersiz gun");break;
 }
 }
 
-//////////////////////////////////////////2.Ders/////////////////////////////
+//////////////////////////////////////////2.Ders///////////////////////////////////////////////////////
+
+!! Uzun fonksiyonlardan kaçın ve bir fonksiyona birden fazla görev yüklemeyin.
+!! gereksiz printf kullanma
+
+!! karşılaştırma operatörünün ürettiği değer 1 veya 0 
+
+örnek iyi bir kod 
+-----------------
+
+int is_perfect(int x)
+{
+int divsum = 0;
+
+for (int i = 1; i <= x / 2; ++i){
+if (x % i == 0)
+divsum += i;
+}
+return divsum == x;
+}
+
+====================================================
+
+switch (x){
+
+case 1: dothis(); //fallthrouh (bunu böyle switchlerde alışkanlık hale getir)
+case 2: dothat(); break;
+}
 
 
+==================================================
 
+goto : bir nooktadan başka bir noktaya yönlendiren statment
 
+jump statement
 
+long jump // bunu yapmamız için standart kütüphane çağırmamız gerekir (setjmp(), longjmp())
 
+f1 => f2 => f3 => f4
+
+void f4()
+{
+if (?????)
+}
+
+near jump / local jump //c de aynı fonskiyonda goto kullanılır
+
+rigidity flexibility
+rigit code
+
+!! clean code için 'SOLID' kavramına bak
+
+//1:15:09
 
 
 
