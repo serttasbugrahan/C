@@ -50,7 +50,7 @@ printf("%d", i);
 }
 
 
-!! c ve c++ dilleri arasında for dögngü deyiminde 1. kısımda tanımlanan ismin scopu konusunda kural farkı vardır
+!! c ve c++ dilleri arasında for döngü deyiminde 1. kısımda tanımlanan ismin scopu konusunda kural farkı vardır
 
 int main(void)
 {
@@ -84,7 +84,6 @@ printf("%d %d\n" ,i ,k);
 int main(void)
 {
 int i;
-
 for (;;){ //exp1 dolu olmak zorunda değil, exp2 olmaması lojik 1 olduğu anlamında gelir
 //sonsuz döngü idiomu
 }
@@ -194,6 +193,7 @@ preprocesser directives (önişlemci komutları) :
 #elif
 #endif
 #ifdef
+#ifndef
 #line
 #error
 #pragma
