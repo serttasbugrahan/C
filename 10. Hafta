@@ -193,7 +193,34 @@ case 39: printf("39\n"); break;
 
 default : else if merdivenindeki
 
+int main(void)
+{
+int weekday;
 
-2:52:40
-47c1bd35-f
-https://vimeo.com/manage/videos/767827482
+printf("haftanin kacıncı gunu: ");
+scanf("%d", &weekday); //4
+
+switch (weekday){
+case 1: printf("pazaresi\n"); break;
+case 2: printf("sali\n"); break;
+case 3: printf("carsamba\n"); break;
+case 4: printf("persembe\n"); break;
+case 5: printf("cuma\n"); break;
+case 6: printf("cumartesi\n"); break;
+case 7: printf("pazar\n"); break;
+default: printf("gecersiz gun");break;
+}
+}
+
+//////////////////////////////////////////2.Ders/////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
