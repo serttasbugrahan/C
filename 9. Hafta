@@ -29,7 +29,7 @@ const int size = 1000;
 ------------------------
 
 sembolik sabitler veya makrolar 
-a)  magic numberin karşılığı olarak kullanılabilir
+a) magic numberin karşılığı olarak kullanılabilir
 b) inimatör olarak kullanılmış olabilir
 
 
@@ -95,13 +95,13 @@ fonksiyon çağrısı gibi görünen ama aslında fonksiyon çağırmayanlara de
 functional macro :
 -----------------
 
-#define MAX2() //fonskiyonal macro bu şekilde olmalı pazartez de boşuk olmamlı
+#define MAX2() //fonskiyonal macro bu şekilde olmalı parantez ve  boşuk olmamamlı
 
 #define  MAX2(a, b) a > b ? a : b
 int main(void)
 {
 int x = 45;
-int x = 60;
+int y = 60;
 
 int z = MAX2(x, y); //maaliyeti azalatır
 }
@@ -134,7 +134,7 @@ return a * a;
 int main(void)
 {
 int i = 46;
-int j = (square)(i); //buradamacro devre dışı kalır çünkü macrodan sonra açılan parantez token'ı olmalı
+int j = (square)(i); //burada macro devre dışı kalır çünkü macrodan sonra açılan parantez token'ı olmalı
 //isim çakışmasını önler
 }
 
@@ -144,7 +144,7 @@ statement expression : macro'nun birden fazla kullanılması durumunda güvenlik
 ////////////////////////////////////////////////////////////////2. DERS////////////////////////////////////
 
 #define asize(x)   (sizeof(x) / sizeof(x[0]))
-#define r_elem(x)  (x[rand() % asize(x)]) //macrolar macro içiçnde kullanılabilir
+#define r_elem(x)  (x[rand() % asize(x)]) //macrolar macro içinde kullanılabilir
 
 int main(void)
 {
@@ -215,7 +215,7 @@ iprint(a + b + b * b + c * c + d * d);
 ##
 ---
 
-x##y //sağ operatörşe sol operatörü bileştirir xy
+x##y //sağ operatörle sol operatörü bileştirir xy
 
 
 #define nec(a, b)   a##b
@@ -256,9 +256,9 @@ kod seçimi neden kullanılır :
 
 programming errors
 ------------------
-bug : kedni kodlarımızdan meydana gelir
+bug : kendi kodlarımızdan meydana gelir
 
-run time error : bizim kodumuz ile alakalı değildir. çapırdığı bir yapı hatalı olabilir
+run time error : bizim kodumuz ile alakalı değildir. çağırdığı bir yapı hatalı olabilir
 
 
 kodlama hatalarını bulmak için yapılan 
@@ -275,7 +275,7 @@ int set_xyx(int x)
 
 !!bu işleri otomatik yapan fonksiyon 'assert(x != 0);' kullanılır
 
-!!bu kodları müşteriye vermemiz gerekir bunun için koşullu derleme kullanılır
+!!bu kodları müşteriye vermememiz gerekir bunun için koşullu derleme kullanılır
 
 
 ============================================================================
