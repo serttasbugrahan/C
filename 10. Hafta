@@ -264,7 +264,60 @@ rigit code
 
 !! clean code için 'SOLID' kavramına bak
 
-//1:15:09
+label : 
+
+int main()
+{
+out:
+}
+
+goto out;
+//code
+//code
+//code
+
+out:
+ 
+=============================================================================0
+
+type conversions :
+
+implicit type conversitons : talimat vermeden kendisi otomatik dönüşüm yapar
+ aritmatik dönüşümler
+ atama/kopyalama dönüşümleri
+
+explicit type conversion : böyle bir dönüşüm yap diye biz talimat veriririz
+ type-cast (tür dönüştürme operatörü)
+
+!! en büyük kod hataları tür dönüşümlerinden gerçekleşir
+!! derleyici assembly kodunda yeni bir nesne oluşturarak tür dönüşümü işlemini yapar. değişkenin türü değişmez kendi oluşturğu nesneyi yerine koyar
+!! tür dönüşümleri kalıcı değildir
+
+----------------------------
+
+!! hangi türe dönüşüm yapılacağı rank değerine göre belirlenir, her türün rank'i vardır buna göre belirlenir
+
+long double --> double --> float
+
+long long --> long --> int
+
+short --> char --> _Bool
+
+int main(void)
+{
+float f = 3.4;
+int ival = 5;
+
+auto x = f + ival; //işlem float türünde yapılır
+}
+
+
+
+
+
+
+
+
 
 
 
