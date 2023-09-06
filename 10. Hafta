@@ -297,7 +297,7 @@ explicit type conversion : böyle bir dönüşüm yap diye biz talimat veriririz
 
 !! hangi türe dönüşüm yapılacağı rank değerine göre belirlenir, her türün rank'i vardır buna göre belirlenir
 
-long double --> double --> float
+long double --> double --> float //bu kısım var ise burası ile yapılır
 
 long long --> long --> int
 
@@ -311,11 +311,35 @@ int ival = 5;
 auto x = f + ival; //işlem float türünde yapılır
 }
 
+!! integral promotion : int türünden düşük operandları (short, char, _Boll) int türüne yükseltmeye denir
 
-//2:25:00
+- eğer rank'ler farklı ise fakat büyük olan rank işaretsiz ama küçük olan işaretli ise rank'i büyük unsigned ile yapılır
 
+- eğer rank'ler aynı ise işaretler farklı ise rank'i küçük olan unsigned yapılır
 
+-------------------------
 
+- rank'ler farklı fakat büyük olan rank işaretli küçük olan işaretsiz ise işaretli türde bu karşılanamıyor ise işlem 2 türde de yapılmaz büyük olan türün unsigned türünde yapılır
+
+int main(void)
+{
+long lval = 34L
+unsigned int uval = 45;
+
+auto x = lval + uval;
+}
+
+int main(void)
+{
+char c1 = 23;
+char c2 = 35;
+
+c1 + c2 //bunun türü int olur (integral promotion)
+}
+
+double d = (ival > 5 ? x : dval) / 3 //ternory operatörü ifadenin türünü berliyleyen 2. ve 3. opratörü ile bellirler
+
+2:25:24
 
 
 
