@@ -339,11 +339,30 @@ c1 + c2 //bunun türü int olur (integral promotion)
 
 double d = (ival > 5 ? x : dval) / 3 //ternory operatörü ifadenin türünü berliyleyen 2. ve 3. opratörü ile bellirler
 
-2:25:24
+---------------------------
 
+dikkat edilmesi gerekenler :
+- işaretli ile işaretsizi işleme sokma
+- int altı türlerin int türüne yükseltileceğini unutma
+- rankler aynı ise tür dönüşümü olmaz
 
+!! işaretsiz türlerde taşma diye bir şey yoktur
 
+===================================================
 
+atama kopyalama tür dönüşümleri :
 
+1- int x = expr //atanan değer ile eşleştirilen değer türü farklı
 
+2- x = y; // y = int,  x= double ise y double yapılır daaha sonra işleme geçer
+
+3- void func(int a);
+func(x)
+
+4-int func(void)
+{
+return expr;
+}
+
+!!her zmaan kendine kopylanan değere dönüştürülür
 
