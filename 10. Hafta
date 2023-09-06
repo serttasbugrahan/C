@@ -364,5 +364,7 @@ func(x)
 return expr;
 }
 
+int x = 43.4 //43.4 int türüne dönüşür
+
 !!her zmaan kendine kopylanan değere dönüştürülür
 
