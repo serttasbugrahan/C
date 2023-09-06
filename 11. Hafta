@@ -1,16 +1,40 @@
 ///////////////////////////////////////////////////////////////1. Ders///////////////////////////////////////////////
+typecast : tür dönüştürme operandı
+
+(int) //operand olan türü int'e dönüştürür
+
+(int)x //x inte dönüşür
+
+(int)(x + y) //x + y inte dönüşür
+
+!! değişkenin türü void olamaz //void x
+!! void türden bir ifade olabilir
+
+int main(void)
+{
+int x = 19;
+(void)(x + 5)
+
+}
+
+!! c dilinde lojik ifade beklenen yerlerde void kullanılamaz
+
+void foo(int);
+int main(void)
+{
+int x = 19;
+if (foo(x)) //hata verir
+}
+
+int main(void)
+{
+(void)isprime(x) //bir fonksiyonun geri dönüş değerini kullanmak istemediğimiz zaman bunu yaparız
+(void)scanf("%d", &x);
+(void)getchar(); //bu ifadeyi kullanmıycağımız anlamına gelir
+}
 
 
-
-
-
-
-
-
-
-
-
-
+1:19:10
 
 
 
