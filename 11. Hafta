@@ -81,9 +81,19 @@ printf("%d ", rand()); //2. çalıştırlmasında aynı tohum değerinde dolayı
 }
 }
 
-!!program her çalıştırıldığı zaman farklı bir sayı dizisi oluşturma yolu
+!! program her çalıştırıldığı zaman farklı bir sayı dizisi oluşturmanın 2 yolu var
 
-2:12:03
+-srand'e farklı bir tohum değeri verirsek
+
+-srand'e program her çalıştığındaki zamanı verebiliriz
+
+#deifne randomize() (srand((unsigned)time(0)))
+
+int main(void)
+{
+randomize();
+}
+
 
 
 
