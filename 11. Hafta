@@ -128,6 +128,22 @@ printf("olasilik = %f\n", (double)heads_count / N);
 
 ///////////////////////////////2. DERS///////////////////////////////////Ü
 
+arrays (diziler) : 
+-------------------
+
+data structure (veri yapısı) : veriler bellekte nasıl bir düzende tutulduğunu gösteririr
+
+!! veriler bellekte aralarında boşluk olmadan art arda tutulur (complexity of algorithm)
+
+(computationa) complexity of algorithm
+
+//39:16
+
+
+
+
+
+
 
 
 
