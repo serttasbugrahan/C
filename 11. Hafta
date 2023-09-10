@@ -94,7 +94,52 @@ int main(void)
 randomize();
 }
 
-2:26:40
+----
+ 
+void put_randım_letter(void) //rastgele harf üretir
+{
+putchar('a' + rand() % 26);
+}
+int main(void)
+{
+for (int i = 0; i < 1000; ++i){
+put_random_letter();
+}
+}
+
+-----
+
+#define  N  100000
+#define  HEADS  1
+
+
+int main(void) //yazı tura olasılığı
+{
+int heads_count = 0 ;
+for (int i = 0; i< N; ++i){
+if (rand() % 2 == HEADS)
+++heads_count;
+}
+printf("olasilik = %f\n", (double)heads_count / N);
+}
+-------
+
+!! üretimde en çok kullanılan rastgele sayı üretme algoritması mercenne twister
+
+///////////////////////////////2. DERS///////////////////////////////////Ü
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
