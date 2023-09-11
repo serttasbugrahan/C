@@ -208,10 +208,9 @@ int a[10];
 }
 
 !! k.p opeartörünün operandı olan ifadenin geçerli bir indek olmasından biz sorumluyuz
-
 !! 0'dan küçük ise ya da dizinin boyutundan >= ise o ifade tanımsız davranış (runtime'a yönelik hata) olur 
 
-
+//2:15
 
 
 
