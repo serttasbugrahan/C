@@ -180,7 +180,7 @@ int a[100];
 }
 
 !! ayrılan bellek için boyutu negatif veya 0 olamaz
-!! dizi tanımlalamalrında dizi boyutu belirten ifadeler (normal olarak) constant expression olmalı
+!! dizi tanımlamalarında dizi boyutu belirten ifadeler (normal olarak) constant expression olmalı
 eğer boyut belirten ifade constant expression değil ise syntax hatası
 !! boyut belirten ifadelerin tam sayı olması gerekir gerçek sayı olmaz
 !! dizi boyutu ifadesi 0 veya negatif bir ifade olamaz
@@ -197,12 +197,19 @@ a = b; //böyle yazılamaz, array decay kuralı ile igilidir
 array decay : bir dizinin ismin bir ifade (expression) içinde kullandığızda derleyici
 dizi ismini dizinn ilk elemanının adresine dönüştürme işlemine denir
 
+!! fonksiyonların parametre değişkenleri dizi türlerinden olamaz
+void func (int a[10])
 
+!! fonksiyonların geri dönüş değeri türü dizi türü olamaz
 
+int main(void)
+{
+int a[10];
+}
 
+!! k.p opeartörünün operandı olan ifadenin geçerli bir indek olmasından biz sorumluyuz
 
-
-
+!! 0'dan küçük ise ya da dizinin boyutundan >= ise o ifade tanımsız davranış (runtime'a yönelik hata) olur 
 
 
 
