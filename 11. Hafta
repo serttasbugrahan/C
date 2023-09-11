@@ -137,7 +137,67 @@ data structure (veri yapısı) : veriler bellekte nasıl bir düzende tutulduğu
 
 (computationa) complexity of algorithm
 
-//39:16
+================================
+
+benchmarking : birden fazla algoritmanın karşılaştırılması ve en hızlının seçilmesine denir
+bencmarker : bu işleme yapana denir
+
+veri yapısındaki öğe sayısı ile yapılcak işlemlerin artış ilişkisi :
+
+constant time algorithm : öğe sayısı arttıkça işlem sayısı artmaz
+linear complexity : veri sayısı arttıkça işlemde artıcaktır
+
+big O notation : algoritmanın karmaşıklığını anlatmak için söylenir
+Big O(1) : constant(sabit) time
+Big O(n) : linear complexity
+Big O(n log n) : linearitmic 
+Big O(n2) : quadretic complexity
+Big O(n3) : cubic complexity
+
+örnek : liste içinde aradığımızın bulunması : Big O(n) algoritması
+örnek : binary search : Big O(n log n)
+
+!! karmaşıklığı en büyük olan stepin karmaşıklığı ne ise algortimanın karmaşıklığı 
+
+!! int, double vs. = data type
+!! link list, dynamic array vs. = data structure
+
+===========================================
+
+Dinamik dizi veri yapısında 
+ indeks ile erişim O(1)
+ sondan ekleme
+ sondan silme
+
+ değerle erişim O(n)
+ sondan olmayan ekleme ve silme O(n)
+
+C dilinde dizilerin tanımlanması :
+
+int main(void)
+{
+int a[100]; 
+}
+
+!! ayrılan bellek için boyutu negatif veya 0 olamaz
+!! dizi tanımlalamalrında dizi boyutu belirten ifadeler (normal olarak) constant expression olmalı
+eğer boyut belirten ifade constant expression değil ise syntax hatası
+!! boyut belirten ifadelerin tam sayı olması gerekir gerçek sayı olmaz
+!! dizi boyutu ifadesi 0 veya negatif bir ifade olamaz
+!! dizilerde scope, ömür, gibi kavramlar gerçekleşir
+!! C dilinde diziler assignable(atanabilir) varlıklar değildir
+
+int main(void)
+{
+int a[10];
+int b[10];
+a = b; //böyle yazılamaz, array decay kuralı ile igilidir
+}
+
+array decay : bir dizinin ismin bir ifade (expression) içinde kullandığızda derleyici
+dizi ismini dizinn ilk elemanının adresine dönüştürme işlemine denir
+
+
 
 
 
