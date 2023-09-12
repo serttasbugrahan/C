@@ -294,10 +294,11 @@ int a[sizeof x]; //sabit ifadesi olduğu için synatx hatası olmaz
 int main(void)
 {
 int x = 5;
-printf("%zu\n", sizeof x); //x'in türü int int türünün sizeof'u 4
+printf("%zu\n", sizeof x); //x'in türü int int türünün sizeof'u 4 ,compile time'da belli olur
+printf("%zu\n", sizeof (x * 2.3)); //türü double sizeof cevap = 8 ,compile time'da belli olur
 }
 
-
+ 
 
 
 
