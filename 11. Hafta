@@ -208,20 +208,94 @@ int a[10];
 }
 
 !! k.p opeartörünün operandı olan ifadenin geçerli bir indek olmasından biz sorumluyuz
-!! 0'dan küçük ise ya da dizinin boyutundan >= ise o ifade tanımsız davranış (runtime'a yönelik hata) olur 
+!! 0 dan küçük ise ya da dizinin boyutundan >= ise o ifade tanımsız davranış (runtime'a yönelik hata) olur 
 
-//2:15
+int main(void){
+int a[10];
+
+for (int i = 0; i < 10; ++i){
+scanf("%d", &a[i])
+}
+
+-----------------
+
+dizilere ilk değer verme :
+
+eğer ilk değer verilmez ise static ömürlü ise zero ile hayata başlar
+
+int main(void)
+{
+int a[10] = {2, 5, 7, 23, 90, 6, 4, 13, 22, 80}; //ilk değer verme
+int a[10] = {2, 5, 7}; //geri kalan değerler 0 ile hayata başlar
+int a[10] = {0}; //0 değerleri hepsine atanır
+int a[] = {0,1,2,3,4}; //dizinin boyutunu ilk değer verince kendisi anlar
+}
+
+designated initializer: dizinin istediğimiz elemanlarına ilk değer vermemizi sağlar
+int main(void)
+{
+int x = 56;
+int a[20] = {
+[5] = 113,
+[9] = 222,
+-7, //dizinin 10. elemanı -7 olur
+[12] = 50,
+[15] = 14,
+};
+
+!! designated initializer kullandıysak ve diznin boyutu söylenmedi ise en yüksek elemanın 1 fazlası olur
+
+int main(void){
+int a[3] = {1, 4, 5, }; //trailing command, syntax hatası değildir
+int a[0] = {1, 4, 5, }; //trailing comman, syntax hatası değildir
+}
 
 
+=======================================
 
+sizeof operatörü :
 
+sizeof ==> keyword
+sizeof ==> compile-time opearatörü
 
+size_t 
+time_t
+clock_t
+ptrdiff_t
+fpos_t
+int32_t
+uint8_t
 
+type alias (tür eş ismi)
 
+int main(void)
+{
+size_t x = 5; //size_t dilin seçtiği herhangi bir tür olur
+}
 
+int main(void)
+{
+s x = 5; //size_t dilin seçtiği herhangi bir tür olur
+}
 
+!! operatörleri kullanabilmek için herhangi bir kütüphane eklememize gerek yoktur
+fonksiyonları eklerken kütüphane eklememiz gerekir
 
+int main(void)
+{
+int x = 10;
+int a[sizeof x]; //sabit ifadesi olduğu için synatx hatası olmaz
+}
 
+!! sizeof(int) //buradaki parantez öncelik parantezi değildir koyulması zorunludur
+
+!! sizeof operatörün opearandı void olmayan bir türden ifade olabilir
+
+int main(void)
+{
+int x = 5;
+printf("%zu\n", sizeof x); //x'in türü int int türünün sizeof'u 4
+}
 
 
 
