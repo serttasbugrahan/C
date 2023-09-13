@@ -1,0 +1,38 @@
+///////////////////////////////1. Ders//////////////////////
+
+int main(void)
+{
+int a[100];
+char s[200];
+double dar[500];
+
+printf("sizeof(a) = %zu\n", sizeof(a)); //400
+printf("sizeof(a) = %zu\n", sizeof(s)); //200
+printf("sizeof(a) = %zu\n", sizeof(dar)); //4000
+printf("sizeof(a) = %zu\n", sizeof(a) /sizeof(a[0])); //100
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
