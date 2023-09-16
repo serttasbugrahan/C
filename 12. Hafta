@@ -229,9 +229,60 @@ else{
 printf("bulunamadı");
 }
 
+-----------------------------
+
+12) ÖDEV : maximum sub_sequence 
+// diznin max sub_sequence toplamını bul
+
+-----------------------------
+
+13) dizinin indis değerlerinin '*' ile alt alta yazılması // 2; **
+
+for (int i = 0; i < SIZE; ++i){
+for (int k = 0; k < a[i]; ++k){
+putchar('*');
+}
+}
+
+--------------------------------
+
+14) 13. sorunun cevabının 90 derece ters çevrilmiş halini yazdır
+
+-------------------------------
+
+!! sıralama algortiması ile sıralama kriterleri farklı şeylerdir aynı sıralama algoritması ile farklı işlemler yapılabilir.
+
+sıralama algoritmaları:
+
+-bubble sort
+-quick sort
+-merge sort
+-heap sort
+-bucket sort
+-tim sort
+-inserttion sort
+-selection sort
+-radix sort
+-shell sort
+-bogo sort
+-partial sort( kismi sıralama)
+-nth element 
 
 
+worst-case scenario : en kötü durumda karmaşıklık ne olabilir
+best-case scenario :  en iyi durumda karmaşıklık ne olabilir
 
+partition : sırlamada bir koşulu sağlayan ve sağlamayan olarak ikiye ayrılmasına denir
+
+stable : sıralama algoritmasının kararlı olup olmadığını söyler
+
+!!!! en çok kullanılan algoritmaları ezberle, 10-15 kere yaz
+
+bubble sort: 
+
+38 673 711 922 370 540 546 588 // yana yana kontrol edilir yanlış yerde ise yer değiştirir
+
+//////////////////////////////////////////////////////2. DERS///////////////////////////////////////
 
 
 
