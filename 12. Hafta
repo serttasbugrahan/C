@@ -284,9 +284,23 @@ bubble sort:
 
 //////////////////////////////////////////////////////2. DERS///////////////////////////////////////
 
+bubble sort:
 
+int main(void)
+{
+for (int i = 0; i < SIZE - 1; ++i){
+for (int k = 0; k < SIZE - 1 - i; ++k){
+if (a[k] > a[k + 1]){ //büyükten küçüğe sıralamak istesek burayı değiştiririz
+int temp = a[k];
+a[k] = a[k + 1];
+a[k + 1] = temp;
+}
+}
+}
+print_array(a, SIZE);
+}
 
-
+//11:15
 
 
 
