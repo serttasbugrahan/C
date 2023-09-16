@@ -24,10 +24,86 @@ printf("%d", x[i]);
 
 =======================================================
 
-algoritmalar
+                            ALGORİTMA SORULARI
 
-//40:00
+1) a dizisinin elemanlarının toplamını yazan program
 
+int main(void)
+{
+int sum = 0 //değer vermessek çöp değer ile hayata başlar
+
+for(int i = 0; i < SIZE; ++i){
+sum += a[i];
+}
+printf("ival = &d\", ival);
+}
+----------------------------
+2) a dizisinin aritmetik ortalamasını (mean) hesaplayın
+
+int main(void)
+{
+int sum = 0 
+
+for(int i = 0; i < SIZE; ++i){
+sum += a[i];
+}
+printf("ival = &d\", (double)sum / SIZE);
+}
+------------------------
+3) a dizisinin edğeri tek(odd) olan aritmetik ortalamasını hesaplayın 
+
+int main(void)
+{
+int sum_odd = 0;
+int sum_cnt = 0;
+
+for(int i = 0; i < SIZE; ++i){
+if (a[i] % 2 != 0){
+sum_odd += a[i];
+++sum_cnt;
+}
+}
+
+if(sum_cnt)
+printf("mean of odd values is %f\n", (double)sum_odd / sum_cnt);
+else
+printf("dzde hiç tek sayı yok");
+}
+
+----------------------
+
+4) dizideki en büyük tam sayıyı bulan algoritma
+
+int main(void)
+{
+int max = a[0];
+int max_idx = 0;
+
+for (int i = i; i < SIZE; ++i){
+if (a[i] > max)
+max = a[i];
+max_idx = i;
+}
+printf("max = %d dizinin %d indisli elemanı\n", max, max_idx);
+}
+
+----------------------------
+
+5)dizinin en büyük ve ne küçük elemanının bulan algoritma
+
+int main(void)
+{
+int max = a[0];
+int min = a[0];
+
+for (int i = i; i < SIZE; ++i){
+if (a[i] > max)
+max = a[i];
+}
+else if (a[i] < min)
+min = a[i]
+printf("max = %d dizinin min =  %d \n", max, min);
+}
 
 
 
