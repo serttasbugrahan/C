@@ -25,6 +25,7 @@ printf("%d", x[i]);
 =======================================================
 
                             ALGORİTMA SORULARI
+//bu algoritmaları el alışkanlığı olması için 5-10 yaz el otomatik olarak yazsın artık
 
 1) a dizisinin elemanlarının toplamını yazan program
 
@@ -38,6 +39,7 @@ sum += a[i];
 printf("ival = &d\", ival);
 }
 ----------------------------
+
 2) a dizisinin aritmetik ortalamasını (mean) hesaplayın
 
 int main(void)
@@ -49,7 +51,9 @@ sum += a[i];
 }
 printf("ival = &d\", (double)sum / SIZE);
 }
+
 ------------------------
+
 3) a dizisinin edğeri tek(odd) olan aritmetik ortalamasını hesaplayın 
 
 int main(void)
@@ -63,7 +67,6 @@ sum_odd += a[i];
 ++sum_cnt;
 }
 }
-
 if(sum_cnt)
 printf("mean of odd values is %f\n", (double)sum_odd / sum_cnt);
 else
@@ -104,6 +107,114 @@ else if (a[i] < min)
 min = a[i]
 printf("max = %d dizinin min =  %d \n", max, min);
 }
+
+------------------------
+
+6) dizinin runner-up (2. değeri) değerinin hesaplanması
+
+int main(void)
+{
+int max = a[0];
+int runner_up = a[1  ];
+
+if (runner_up > max){
+max = a[1];
+runner_up = a[0];
+}
+
+for (int i = 2; i < SIZE; ++i){
+if(a[i] > max){
+runner_up = max;
+max = a[i];
+}
+else if (a[i] > runner_up){
+runner_up = a[i];
+}
+}
+printf("runner up = %d", runner_up);
+}
+
+--------------------------------
+
+7) reverse algoritması
+//2 8 1 9 4 3 ==> 3 4 9 1 8 2
+
+int main(void)
+{
+for (int i = 0; i < SIZE / 2; ++i){
+int temp = a[i]
+a[i] = a[SIZE - 1 - i];
+a[SIZE - 1 - i] = temp;
+}
+print_array(a, SIZE);
+}
+
+--------------------------------
+
+8) linear search (doğrusal arama)
+
+int main(void)
+{
+int key;
+
+printf("aranan degeri girin: ");
+void(scanf("%d", &key);
+
+int flag = 0;
+
+for(int i = 0; i < SIZE; ++i){
+if (a[i] == key)
+flag = 1; //tam doğru sonuç için flag kullan
+break;
+}
+}
+
+if (flag)
+printf("evet dizide var\n");
+else 
+printf("hayir dizidee yok \");
+
+---------------------------
+
+9) 
+boyutu N olan bir dizi var
+her karşılaştırma 1 işlem, arttırma 1 işlem
+eğer arama işleminde aranan değer dizide yok ise kaç işlem yapılır
+bir anahtarın bu dizide olup olmadığını sogulmamız gerekiyor
+
+------------------------
+ 
+10) ÖDEV dizinin elemanlarından unique olanları ekrana yazdır indis numarası ile beraber
+
+int main(void)
+{
+int a[SIZE];
+randomize();
+
+for (int i = 0; i < SIZE; ++i){
+a[i] = rand() % 20;
+printf("%d" , a[i]
+}
+}
+
+
+11) binary search (sıralı dizi) 
+
+int main(void)
+{
+int idx_first = 0;
+int idx_last = SIZE - 1;
+
+}
+
+//2:08:04
+
+
+
+
+
+
+
 
 
 
