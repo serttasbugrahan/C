@@ -202,12 +202,43 @@ printf("%d" , a[i]
 
 int main(void)
 {
+printf("aranan degeri giriniz: ");
+scanf("%d", &key);
+
 int idx_first = 0;
 int idx_last = SIZE - 1;
+int idx_mid;
 
+while (idx_first <= idx_last){
+idx_mid = (idx_first + idx_last) / 2;
+if (a[idx_mid] == key)
+break;
+
+if (a[idx_mid] > key){
+idx_last = idx_mid -1;
+}
+else{
+idx_first = idx_mid + 1;
+}
 }
 
-//2:08:04
+if (idx_first <= idx_last){
+printf("bulundu",idx_mid);
+}
+else{
+printf("bulunamadı");
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
