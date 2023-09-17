@@ -356,7 +356,7 @@ print_array(a, SIZE);
 
 ====================================
 
-C dilinde yazı işlemleri
+C dilinde yazı işlemleri :
 
 C dilinde (tipik olarak) bir yazı elemanlarının türü 'char' olan bir dizide tutulur
 
@@ -447,29 +447,79 @@ printf("%c", str[i]);
 
 int main(void)
 {
-char str[SIZE] = "bugra";
+char str[SIZE] = "bugrahan serttas";
 int ival = 38745;
-for (int i = 0; i < str[i] != '\0'; ++i){
-printf("%c", str[i]);
+puts(str); //bu fonksiyon bugrahan serttas yazısını ekrana yazdırır
+puts(&str[0]); //0. elemanını verir 
 printf("%d", ival);
 
+------
+
+int main(void)
+{
+char s1[SIZE] = "bugra; 
+char s2[SIZE] = "serttas;
+printf("%s  %s\n",s1, s2);
 }
 }
 
+------
 
+int main(void)
+{
+char s1[SIZE]; 
+printf("isminizi girin: ");
+scanf("%s", str);
 
+printf("demek isminiz %s, hos geldiniz %s\n, str, str);
+}
+}
 
+-----
 
+int main(void)
+{
+char name[SIZE];
+char surname[SIZE];
+int age;
 
+printf("isim soy isim ve yas lutfen: ");
+scanf("%s%s%d", name, surname, &age);
+}
 
+-----------------
 
+-scanf("%s",str) : boşlıklar ile yazılmış yazıyı boşuğu skip ederek almasını istiyorsam
+-scanf("%[^\n]s",str) : newline görene kadar boşluklar ile almak istiyorsam
 
+==============================
 
+                              yazı tipi örnekler 
 
+int main(void)
+{
+char str[SIZE];
+printf("bir isim girin: ");
+scanf("%s",str);
 
+int len = 0;
+for (int i = 0; str[i] != '\n'; ++i) // bu şekilde yazılabilir, while (str[len] != '\0')
+++len;
+printf("uzunluk:",len);
+}
 
+----------
 
+int main(void)
+{
+char str[SIZE];
+int ch;
 
+printf("bir yazi girin: ");
+sgets(str);
+printf("sayilacak karekter
+
+}
 
 
 
