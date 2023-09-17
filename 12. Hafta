@@ -367,6 +367,101 @@ char str[40] //yazı bilgisi tutma amacıyla bulunur
 
 !! Null turmanated bite stream : bir yazıyı tutmak için yazının karakterlerinin kodları tutulur yazı son karekterinden sonra '\0' kullanılır, '\0' = 0
 !! yazının uzunluğu dizideki null karekterşn bulunması ile bulunur
+!! null karakter ('\0') böylede yazılabilir '0'
+
+printf("%d %d n", '0', '\n');
+
+int main(void)
+{
+char str[100]
+//BABA
+//0100 0010
+//0100 0001
+//0100 0010
+//0100 0001
+//0000 0000
+}
+
+-----
+
+int main(void)
+{
+for (int i = 0; i < str[i] != '\0'; ++i){
+printf("%c", str[i]);
+}
+}
+
+!! static ile hayata başlayanalar 0 değeri ile hayata başlar
+
+----
+
+int main(void)
+{
+char str[100] = {'b', 'u', 'g', 'r', 'a'}; //burada tanımsız davranış yok çünkü diğer 34 eleman 0 değeri ile hayata başlar
+for (int i = 0; i < str[i] != '\0'; ++i){
+printf("%c", str[i]);
+}
+}
+
+----
+
+int main(void)
+{
+char str[5] = {'b', 'u', 'g', 'r', 'a'}; //burada tanımsız davranış var 
+for (int i = 0; i < str[i] != '\0'; ++i){
+printf("%c", str[i]);
+}
+}
+
+----
+
+int main(void)
+{
+char str[40] = "muharrem; //tanımısz davranış yok
+for (int i = 0; i < str[i] != '\0'; ++i){
+printf("%c", str[i]);
+}
+}
+
+-----
+
+int main(void)
+{
+char str[40] = "muharrem; //tanımısz davranış yok
+for (int i = 0; i < str[i] != '\0'; ++i){
+printf("%c", str[i]);
+}
+}
+
+-----
+
+int main(void)
+{
+char str[5] = "bugra; //tanımısz davranış var
+for (int i = 0; i < str[i] != '\0'; ++i){
+printf("%c", str[i]);
+}
+}
+
+-----
+
+int main(void)
+{
+char str[SIZE] = "bugra";
+int ival = 38745;
+for (int i = 0; i < str[i] != '\0'; ++i){
+printf("%c", str[i]);
+printf("%d", ival);
+
+}
+}
+
+
+
+
+
+
+
 
 
 
