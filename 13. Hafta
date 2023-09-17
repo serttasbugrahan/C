@@ -140,8 +140,21 @@ str[len -1 - i] = c;
 printf("[%s]\n", str);
 }
 
+------
 
+// ODEV : 
+Ana Naci Dede ne dedi Canan'a
+en iyi mese bese mi yine?
+Kalas yok kütük koy, Salak!
+Para hazır, ama Rıza harap!!
+At sahibi gibi hasta!
+Traş neden şart?
 
+Madam, I'm Adam!
+A man, a plan, a canaL: Panama! //panama palindromu
 
+yazı girin palindrom olup olmadığını kontrol et
+
+//1:01:12
 
 
