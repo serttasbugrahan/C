@@ -184,19 +184,49 @@ bir anahtarın bu dizide olup olmadığını sogulmamız gerekiyor
 
 ------------------------
  
-10) ÖDEV dizinin elemanlarından unique olanları ekrana yazdır indis numarası ile beraber
+10) dizinin elemanlarından unique olanları ekrana yazdır indis numarası ile beraber
 
 int main(void)
 {
 int a[SIZE];
-randomize();
 
+randomize();
 for (int i = 0; i < SIZE; ++i){
+
 a[i] = rand() % 20;
 printf("%d" , a[i]
 }
+print_array(a, SIZE);
+for (int i = 0; i < SIZE; ++i){
+int is_unique = 1;
+for(int k = 0; k < SIZE; ++k){
+if (i != k && a[i] == a[k])){
+is_unique = 0;
+break;
+}
+}
+if (is_unique)
+printf("%3d", a[i]);
 }
 
+-------------------------
+
+10.5)
+
+int main(void){
+int counts[20] = {0}
+
+for (int i = 0; i < SIZE; ++i){
+++counts[a[i]]
+}
+for (int i = 0; i < 20; ++i){
+if(counts[i] == 1){
+printf("%3d ", i);
+}
+}
+}
+
+-----------------------------
 
 11) binary search (sıralı dizi) 
 
@@ -246,10 +276,18 @@ putchar('*');
 
 --------------------------------
 
-14) 13. sorunun cevabının 90 derece ters çevrilmiş halini yazdır
+14) ÖDEV 13. sorunun cevabının 90 derece ters çevrilmiş halini yazdır
 
 -------------------------------
 
+15) ÖDEV  triangular number hesapla //1, 3, 6, 10, 15, 21
+
+------------------------------
+
+16) ÖDEV 1000'den fazla böeni olan en küçük triangular number nedir
+
+-------------------------------
+  
 !! sıralama algortiması ile sıralama kriterleri farklı şeylerdir aynı sıralama algoritması ile farklı işlemler yapılabilir.
 
 sıralama algoritmaları:
@@ -300,18 +338,35 @@ a[k + 1] = temp;
 print_array(a, SIZE);
 }
 
-//11:15
+--------------------------
 
+int main(void)
+{
+for (int i = 0; i < SIZE - 1; ++i){
+for (int k = 0; k < SIZE - 1 - i; ++k)  {
+if (a[k] % 2 == 0 && a[k + 1] % 2 != 0 || a[k] % 2 == a[k + 1] % 2 && a[k] > a[k + 1])){ //tekler kendi içinde sıralı çiftler kendi arasında sıralı
+int temp = a[k];
+a[k] = a[k + 1];
+a[k + 1] = temp;
+}
+}
+}
+print_array(a, SIZE);
+}
 
+====================================
 
+C dilinde yazı işlemleri
 
+C dilinde (tipik olarak) bir yazı elemanlarının türü 'char' olan bir dizide tutulur
 
+int main(void)
+{
+char str[40] //yazı bilgisi tutma amacıyla bulunur
+}
 
-
-
-
-
-
+!! Null turmanated bite stream : bir yazıyı tutmak için yazının karakterlerinin kodları tutulur yazı son karekterinden sonra '\0' kullanılır, '\0' = 0
+!! yazının uzunluğu dizideki null karekterşn bulunması ile bulunur
 
 
 
