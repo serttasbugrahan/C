@@ -155,6 +155,163 @@ A man, a plan, a canaL: Panama! //panama palindromu
 
 yazı girin palindrom olup olmadığını kontrol et
 
-//1:01:12
+--------
+
+ODEV // Buğrahan Serttaş yazısını bu şekilde yaz Serttas Bugra, 2. bir dizi kullanma
+
+-----
+
+//emlak kalem,kelam,  iki dizinin anagram olup olmadığını bul
+//ilave bir ya da birden fazla dizi kullabilirsiniz
+
+int main(void)
+{
+char s1[SIZE];
+char s2[SIZE];
+
+printf("iki kelime girin: ");
+scanf("%s%s", s1, s2);
+
+int cnt[26] = {0};
+
+for (int i = 0; s2[i] != '\0'; ++i){
+++cnt[toupper(s1[i]) - 'A'];
+}
+
+for (int i = 0; s2[i] != '\0'; ++i){
+--cnt[toupper(s1[i]) - 'A'];
+}
+
+int k;
+for (k = 0; k < 26; ++k){
+if (cnt[k])
+break;
+}
+
+if (k == 26)
+printf("anagram\n";
+else
+printf("anagram degil\n";
+}
+
+----------
+
+ODEV : yazıdaki kelimelerin sayısını hesaplayan program //ali     veli mehmet can = 4
+#define SIZE 1000
+#define SIZE 1
+#define SIZE 0
+
+int main(void)
+{
+char str[SIZE]
+
+printf("bir yazi girin: ");
+sgets(str);
+printf("[%s]\n", str);
+
+int word_count = 0; //bayrak değişken önemli kullanmaya çalış
+int word_flag = OUTWORD;
+for (int i = 0; str[i] != '\0'; ++i){
+if (isspace(str[i])){
+word_flag = OUTWORD;
+}
+else if (word_flag == OUTWORD){
+++word_count;
+word_flag = INWORD;
+}
+}
+
+printf("toplam %d kelime",word_count)
+}
+
+===============================================
+
+!! kod tekrarından kaçın, kod tekrarı felakettir
+
+!! 15-20 satırı bir fonksiyondan geçme
+
+!! refactoring
+    ortak kodu bir yere toplamak
+    niyeti iyi anlatan hale 
+    verimli
+
+!! eğer bir kodu update ediyorsak açıklama satırı var mı diye kontrol et (onu da değiştir)
+
+!! kodun bir kısmını (debug sürecinde) (tekrar esli yerine koyabilmek için)
+
+!! kodun en üstünde
+***********************************************
+-bugra.c  
+-author : buğrahan serttaş
+-implementation file for
+-haklar
+-version
+**********************************************
+
+!! fonksiyonlar böyle tanımlanabilir
+*******************************
+function isprime
+tests if an integer is prime
+returns non-zero if x is prime
+returns zero otherwise
+*******************************
+
+  
+========================================================
+
+kodlarda yapılan hatalar :
+
+- isimlendirme özenli olsun
+- türkçe isim kullılmamalı
+
+----
+
+- int isxyz(int x)
+{
+if (x == sum)
+return 1;
+else
+return 0;
+
+return x == sum ? 1 : 0; //böyle yaz
+return x == sum; 
+}
+
+----
+
+- uyarı hatalarına dikkat et
+
+----
+
+-double dval = 0 //böyle yazma
+-double dval = 0.; //böyle yaz 
+
+==================================
+
+uyarı mesajları :
+
+---
+
+int x, y;
+y = 5;
+foo(y); //değişkenin kullanılmama uyarısı
+
+---
+
+int main(void) {
+int x;
+foo(x) //çöp değerin kullanılması
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
