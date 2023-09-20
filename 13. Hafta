@@ -304,6 +304,92 @@ foo(x) //çöp değerin kullanılması
 
 }
 
+//////////////////////////////////////////////////////////2. Ders////////////////////////////////////////
+
+pointers ==> adress
+
+-object pointer : nesne bellekte nerede
+
+Eğer x türü T olan bir değişken ise
+x değişkenin adresi anlamına gelen bir ifadenin türü
+T *
+türüdür.
+
+int*
+double*
+char*
+unsigned int*
+
+acaba ben değeri adres olan değişkenler oluşturulabilinir mi?
+
+int main(void)
+{
+int* ptr;
+// ptr öyle bir değişken ki ptr değişkeninin değeri bir int türden değişkenin adresi olacak
+}
+
+int main(void)
+{
+int* iptr; //iptr is a pointer to int, int türden nesnenin adresini tutuyor
+}
+
+int main(void)
+{
+int x = 10;
+int y = 30;
+
+int* p = &x; //ilk değer verebilirim ya da adres operatörü ile değer verilir
+}
+
+int main(void)
+{
+int* ptr; //declarator
+int a[10]; //declarator
+
+ptr = a; //operator
+*ptr = 10; //operator, deferencing indirection
+a[3] = 45; //operator
+}
+
+// pointer türleri bellekte aynı miktar yer kaplar
+
+int main(void){
+
+int* p1, p2, p3;
+int* p1;
+int p2;
+int p3;
+}
+
+int main(void){
+
+int x, *p, a[5};
+int x;
+int* p;
+int a[5];
+}
+
+--------------------
+
+pointer operators :
+
+& address of
+* dereferencing
+[] index-subscript
+-> member selection
+
+-------------------
+
+adress of operator :
+
+adres operatörünün operandı L value expression
+
+//1:20
+
+
+
+
+
 
 
 
