@@ -382,14 +382,21 @@ pointer operators :
 
 adress of operator :
 
-adres operatörünün operandı L value expression
+!! adres operatörünün operandı L value expression olmak zorunda
 
-//1:20
+// &123 geçerli olmaz
+// int x = 214; &x geçerli
+// &a[4] geçerli
+// &(a[4]) geçerli
+
+int main(void)
+{
 
 
+}
 
-
-
+!! adres operatörünün operandı olan ifade L value olmak zorunda, 
+!! adres operatörü ile oluşturulan bir ifadenin value category R value olmalı
 
 
 
