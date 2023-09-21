@@ -380,7 +380,7 @@ pointer operators :
 
 -------------------
 
-adress of operator :
+adress of operator (&) :
 
 !! adres operatörünün operandı L value expression olmak zorunda
 
@@ -389,17 +389,163 @@ adress of operator :
 // &a[4] geçerli
 // &(a[4]) geçerli
 
-int main(void)
-{
-
-
-}
 
 !! adres operatörünün operandı olan ifade L value olmak zorunda, 
 !! adres operatörü ile oluşturulan bir ifadenin value category R value olmalı
 
+---------------------------
 
-//1:32
+int main(void)
+{
+
+int x = 10;
+int y = 354;
+int* ptr = &x;
+ptr = &y;
+
+}
+//ptr değişkeninin değeri x'in adresi
+//ptr x'i gösteriyor
+//to point
+//ptr points to x
+//pointer to int
+
+int main(void)
+{
+int a[5] = {1,2,3,4,5};
+int b[20] = {0};
+
+int * p = &a[0];
+int* p = a; //aynı anlama gelir(array decay)
+p = a;
+}
+
+poiner değişkene atama yapılan 3 yol :
+--------------------------------------
+
+1)
+int ival = 46;
+int *ptr;
+ptr = &ival
+
+2)
+int *ptr;
+int *q;
+p = ptr;
+
+3)
+int a[100] = {};
+ptr = a; - ptr = &a[0]; aynı anlamda
+
+-------------------------------------
+
+int main(void)
+{
+int x = 23;
+int *p1 = x; 
+!! asla pointer değişkene adres olmayan atama yapma
+}
+
+int main(void)
+{
+int x = 346;
+double * p;
+p = &x;
+!! asla bu şekildede kod yazma, tür dönüştürme kullan
+}
+
+int main(void)
+{
+int x = 245;
+int * ptr = &x;
+printf("&x = %p\n",&x); //aynı adres değeri yazar
+printf("ptr = %p\n",ptr); //aynı adres değeri yazar
+printf("ptr = %p\n",&ptr); //farklı adres değeri yazar
+
+ptr : ptr'nin değeri hangi adres
+&ptr : ptr bellekte nerede
+}
+
+int main(void)
+{
+int a[10] = {0};
+int * ptr = a;
+
+printf("&a[0] = %p\n", &a[0]); //aynı adresleri yazar
+printf("a     = %p\", a); //array decay
+printf("ptr   = %p\n", ptr);
+}
+
+!! pointer değişkeninin adresini hiçbir şekilde değiştiremessin
+
+--------------------------------
+
+derefencing (*) / indirection :
+
+!! operandı adres olmak zorunda
+
+//*324 geçersiz
+//int x = 3547; *x; geçersiz
+//*&x; geçerli 
+//int * ptr = {0}; *ptr geçerli
+//int a[5] = {0}; *a geçerli(array decay *&a[0])
+
+*ptr
+*&x
+*a
+bu ifadeler geçerlidir
+
+!! içerik operatörünün operandını hangi nesnenin adresi yaparsak o nesneye erişmiş oluruz
+
+int main(void)
+{
+int x = 4547;
+*&x = 987; //x = 987 aynı anlamda
+}
+
+int main(void)
+{
+int a[4] = {20 ,56 , 90 ,12};
+*a = 777; //dizinin ilk elemanının değeri 777 olur
+
+}
+
+int main(void)
+{
+int x = 22;
+int * ptr = &x;
+*ptr = 9999; //ptr'nin gösterdiği nesneye atama olur 
+printf("x = %d\n", x); //x değeri 9999 olur
+}
+
+pointer : gösteren 
+pointee : gösterilen
+
+ptr = &x; //ptr x'İ göstersin
+*ptr = 455 //ptr'nin gösterdiği nesnenin değeri 455 olsun 
+
+-----
+
+int main(void)
+{
+int x = 5;
+int y = 10;
+int z = 40;
+int* ptr = &x; 
+    *ptr = 65; // x = 65
+ptr = &y;
+    *ptr = 90; // y = 90;
+ptr = &z;
+    *ptr = 777; //z = 777;
+}
+
+
+
+
+
+
+
+
 
 
 
