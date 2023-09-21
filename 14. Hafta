@@ -18,9 +18,46 @@ swap(&x, &y);
 printf("x = %d  y = %d\n", x, y);
 }
 
-//25:36
+--------------------------------
 
+neden call by reference yaparız ?
 
+maaliyet :
+-size of değeri 20 byte'dan daha büyük ise call by reference kullanılmalı
+
+birden fazla geri dönüş değeri istenebilir :
+return ile sadece 1 değer alabilirken pointer ile birden fazla değerin geri dönüşünü yapabiliriz.
+
+out param : 
+in param :
+
+arraylar :
+!! c dilinde diziler bir fonksiyondan bir fonksiyona sadece call by referance olarak gönderilebilinir
+
+===================================================
+
+const(ant) : değeri değişmiycek değişken
+ 
+!! const variable oluşturursak değeri değişmiycek bir değişken oluştururuz
+
+int main(void)
+{
+const int a = 10;
+
+}
+
+değişkenler 2'ye ayrılır
+-muatble (değiştirilebilir)
+-immutable (değiştirilemeyen)
+
+!! const int x = 10; - int const x = 10; aynı anlamdadır
+
+neden bir değişken const yapılır ?
+
+- muatble mı immutable mı olduğunu anlarız
+- değerlerinin değişmemesi gereken elemanlar olabilir
+
+1:52:35
 
 
 
