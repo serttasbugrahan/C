@@ -57,7 +57,109 @@ neden bir değişken const yapılır ?
 - muatble mı immutable mı olduğunu anlarız
 - değerlerinin değişmemesi gereken elemanlar olabilir
 
-1:52:35
+!! const değeri değiştirme işlemi undefined behavier'dır
+
+int main(void)
+{
+const int x = 10;
+int * ptr = (int*)&x;
+}
+
+!! const bir değişkene sabit bir değer verilse bile sabit ifadesi kullılan yerde kullanılamıyor
+
+int main(void) {
+const int x = 5;
+const int y = 7;
+const int z = 10;
+//hata verir değişkenlerde (cpp'da vermez)
+switch(foo()){
+case x:;
+case y:;
+case z:;
+}
+}
+
+const anahtar sözcüğü ve pointerlar :
+-------------------------------------
+
+int main(void)
+{
+int x = 10;
+
+-int * const p1 = &x; 
+//hep x'i gösterir başka bir adres atanamaz
+//const pointer to int (bu terim daha çok kullanılır)
+// top-level const (cpp'de bu terim kullanılır)
+//right-cost (bu terim pek sevilmez)
+
+-const int* p2 = &x; 
+//*ptr sadece okuma amaçlı erişilir değiştirilemez
+//*ptr = 29 (error)
+//ptr = &y(geçerli)
+//x = 4099(geçerli)
+//pointer to const int
+//low-level const
+//left const
+
+-const int* const p = &x;
+//*p = 56;
+//p = 56;
+-int const*  p3 = &x;
+//p2 ile p3 aynı anlamdadır
+}
+
+void func(T *ptr); //out-param 
+void foo(const T *ptr); //sadece değerinde faydalınılır get function, accessor, getter
+
+=================================================
+
+pointer aritmetiği :
+
++
+-
+++
+--
++=
+-=
+
+- C ve c++ dillerinde bir adres ile bir tam sayı toplanabilir, ptr + 10 = ptr
+- Ram sayı ile adres toplanabilir, n + ptr = ptr
+- Bir adresten br tam sayı çıkartılabilir. ptr - 5 = ptr
+-tam sayıdan adres çıkartılamaz 5 - ptr
+-iki adres toplanamaz p1 + p2
+
+-bu işlemlerden elde edilen adrestir
+ 
+!! c dilinde bir adrese 1 değerini toplardak bir sonraki nesnenin adresini elde ederiz
+
+int count = 0; count++ (1 olur)
+int * ptr = a; ptr++ (a 4 artar)
+
+int main(void)
+{
+int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9,};
+
+for (int i = 0; i < 10; ++i){
+printf("%d %d %d\n", *(a + i), *(i + a), a[i], i[a]); //hepsi aynı anlamdadır diziyi yazıdırı
+}
+}
+
+/////////////////////////////////////////////////2. Ders//////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
