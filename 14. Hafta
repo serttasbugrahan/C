@@ -184,14 +184,160 @@ printf("\n");
 
 !! bir dizi ile ile igili fonksiyon yazarken parametresi pointer olmalı, call by value olarak aktarılamaz
 
+void display_array_1(const int* p, int size)
+{
+for (int i = 0; i < size; i++){
+printf("%d", p[i]);
+}
+printf("\n---------------------\n");
+}
 
-//40:00
+void display_array_1(const int* p, int size)
+{
+while (size--){ //bu yapı daha çok kullanılır
+printf("%d", *p);
+++p;
+}
+printf("\n---------------------\n");
+}
 
 
+int main(void)
+{
+int a[10] = {0 ,1,2,3,4,5,6,7,8,9};
+display_array(a, 10);
+display_array(a, 10);
+}
+
+---------------------------------
+!! &a[i] = a // aynı anlama gelir
+ 
+!! &a[i] = a + i //aynı anlama gelir -
+
+!! a[i] = *(a + i) //aynı anlama gelir 
+
+!! *p = p[0]; //aynı anlama gelir
+
+---------------------------------------
+
+!! okuma amaçlı kullıcak isek const kullanılır
+!! yazma amaçlı ise kullanılmaz
+
+-------------------------------------
+min ve max değerlerini veren algoritma:
+
+void get_minmax(const int * pa, int size, int * pmin, int *pmax)
+{
+*pmin = *pmax = *pa;
+
+for (int i = 1; i < size; ++i){
+if (pa[i] > *pmax)
+*pmax = pa[i];
+else if (pa[i] < *pmin)
+*pmin = pa[i];
+}
+}
+
+int main(void)
+{
+int a[SIZE]
+get_minmax(a, SIZE, &min, &max);
+}
 
 
+-------------------------------------
+
+!! 
+
+void func(int p[]) //dizi gibi gözüksede bu bir pointerdır *p ile aynı anlama gelir
+{
+//bunu kullanma int * p kullan, böyle  kullanıldığı zaman dizi olucağı belli olur
+}
 
 
+=========================================================
+
+adresler ve karşılaştırma işlemleri
+pointer değişkenin değerinin kullanılması bu yollarala olur :
+
+a ) hayataı devam eden bir nesneyi göstermesi
+
+int main(void)
+{
+int x = 25;
+int * p = &x;
+
+}
+
+b) bir dizinin bittiği yerin adresini tutmasu
+ karşılaştırma işlemleri
+ çıkartma işlemleri
+
+--------------------------
+
+adres + n geçerli adres
+n + adres geçerli adres
+adres - n geçersiz
+n - adres geçersiz 
+adres - adres geçerli tam sayı
+
+---------------------------
+
+!! dizinin bittiği yerden dizinin başlangıcını çıkarırsam dizinin boyutunu bulurum
+
+int main(void)
+{
+int a[SIZE] = {0};
+int * ptr = a + 13;
+printf("%d\n", ptr - a)
+}
+
+-----------------------------
+
+!! C ve C++ dillerinde bir dizinin bir elemanının adresini bilememiz ile
+indeksini bilmememiz arasında hiçbir fark yoktur
+indeksten adrese adresten indekse geçebiliriz
+
+idx ==> adresine
+a + idx
+
+adres ==> idx
+adres - a
+
+-------------------------------
+geçerli pointer durumları:
+
+int * ptr = &x;
+int *p = a + SIZE; //*p tanımsız
+int *ps = NULL; //*ps tanımsız
+
+---------------------------------
+
+pointer karşılaştırma :
+
+p1 == p2
+p1 != p2
+
+p1* == p2* //adreslerini karşılaştırır
+
+
+int main(void)
+{
+int x = 23;
+int y = 458;
+
+int * p1 = &x;
+int * p2 = &y;
+
+if (*p1 == *p2) //if (x == y)
+
+int main(void)
+{
+int a[] = {1, 2, 3, 4};
+int a[] = {1, 2, 3, 4};
+if (a == b) //always false, dizi adresleri farklı
+
+}
 
 
 
