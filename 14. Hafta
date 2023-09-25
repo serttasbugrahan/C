@@ -123,7 +123,7 @@ pointer aritmetiği :
 -=
 
 - C ve c++ dillerinde bir adres ile bir tam sayı toplanabilir, ptr + 10 = ptr
-- Ram sayı ile adres toplanabilir, n + ptr = ptr
+- Tam sayı ile adres toplanabilir, n + ptr = ptr
 - Bir adresten br tam sayı çıkartılabilir. ptr - 5 = ptr
 -tam sayıdan adres çıkartılamaz 5 - ptr
 -iki adres toplanamaz p1 + p2
@@ -343,8 +343,7 @@ if (a == b) //always false, dizi adresleri farklı
 
 !! diziler pointer ile gösterilme zorunda
 a[] = {1,2,3,4,5} dizisi a ile gösterilir 
-*a ile çağrılır a[i] ve *a++ ile aynı anlamadadır ancak fonskiyon parametresinde *a ile göster
-
+*a ile çağrılır a[i] - i[a] - *a++ - *(i + a) - *(a + i) ile aynı anlamadadır ancak fonskiyon parametresinde *a ile göster
 örnek
 -----
 
