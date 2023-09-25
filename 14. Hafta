@@ -339,7 +339,23 @@ if (a == b) //always false, dizi adresleri farklı
 
 }
 
+============================================
 
+!! diziler pointer ile gösterilme zorunda
+a[] = {1,2,3,4,5} dizisi a ile gösterilir 
+*a ile çağrılır a[] ile aynı anlamadadır ancak fonskiyon parametresinde *a ile göster
+
+örnek
+-----
+
+int ptr(int * p){
+p[i]
+}
+
+int main(void){
+a[] = {1,2,3,4,5};
+ptr(a);
+}
 
 
 
