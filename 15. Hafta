@@ -123,19 +123,126 @@ int * p = a;
 }
 
 
+int main(void)
+{
+int a[5] = {10 ,20 ,30 ,40 ,50};
+int * p = a + 4
+*++p = 90; //hata verir dizi eleman sayısı taşar
+
+}
 
 
+int main(void)
+{
+int a[5] = {10 ,20 ,30 ,40 ,50};
+int * p = a;
+++*p; //a dizisinin ilk elemanını 1 arttırır 
+(*p)++ //a dizisinin ilk elemanını 1 arttırır 
+!! son ek olarak arttırak istiyorsan parantez zorunlu
+!! ön ek olarak arttırmak istiyorsan parantez zorunlu deği
+}
 
 
+------------------------
+
+void reverse_copy(int * pdest, const int * psource, int n);
+{
+const int * pe = psource + n;
+while (n--)
+*pdest++ = *--psource;
+}
+
+int main(void)
+{
+int a[SIZE];
+int a[SIZE];
+
+randomize();
+set_array_random(a ,SIZE);
+print_array(a, SIZE);
+reverse_copy(b, a, SIZE);
+}
+
+======================================================
 
 
+typdef bildirimleri (tür eş bildirimleri / type alias declarations) : 
+
+takma isim anlamına gelir
+
+buğrahan ==> buğra
 
 
+double x = 3.45;
+
+meter distance = 3.45; //bu daha anlaşılır
+
+!! var olan bir türe onu temsil edicek eş isim verilir
+
+-----
+typedef int (*FPTR)(const char *, const char *)
+
+int(*func(int (*fp1)(const char *, const char *), int (*fp2)(const char*, const char*)))const char *, const char *);
+
+FPTR func(FPTR, FPTR); //187. satır ile aynı anlama gelir
+-----
+
+neden kullanılırz:
+
+1- Tam sayi ve gerççek sayı türlerinin "çok genel" olma özelliği yerine bunları daha daraltılmış
+bir bağlamda kullandığımız göstermeye yönelik
+
+2- Karmaşık türlerin (yani bildiriminde fazla sayıda token kullanılan) kullanımı kolaylaştırmak için
+
+3- kodun taşınmasını kolaylaştırmak için
 
 
+typedef int Word; //int türüne Word eş ismini verdik
 
+int main(void)
+{
+Word x;
+Word * p;
+Word a[10] = {0};
+}
 
+-------
 
+typedef int * IPTR;
+
+int main(void)
+{
+IPTR p; //int * p;
+}
+
+-----
+typedef const int * CIPTR
+int main(void)
+{
+CIPTR p1, p2;
+}
+
+------------
+!! özellikle karmaşık bildiirmlerde işimizi kolaylaştırmak için typedef bildirimi yapmanın pratik yolu :
+
+1- hangi türe eş isim vermek istiyorsanız o türden bir değişken tanımla
+2- tanımalama başına typedef anahtar sözcüğü koy
+3- değişkene verdiğimiz ismi silin onun yerine seçtiğimiz türe eş ismini koyun
+
+int x;
+typedef int x;
+typedef int
+typedef int word;
+
+----------------
+int [20] ==> INTA20
+
+int a[20];
+typedef int a[20];
+typedef int [20]
+typedef int INTA20[20]
+
+INTA20
 
 
 
