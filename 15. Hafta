@@ -229,7 +229,7 @@ CIPTR p1, p2;
 2- tanımalama başına typedef anahtar sözcüğü koy
 3- değişkene verdiğimiz ismi silin onun yerine seçtiğimiz türe eş ismini koyun
 
-int x;
+int x;e
 typedef int x;
 typedef int
 typedef int word;
@@ -242,9 +242,36 @@ typedef int a[20];
 typedef int [20]
 typedef int INTA20[20]
 
-INTA20
+INTA20 x,y,x;
+int x[20], y[20], z[20];
 
+!!define makrosundan farkı
 
+#define MYPTR int *
+typedef int * IPTR;
+
+int main(void)
+{
+IPTR p1, p2; //p1 ve p2 pointer
+MYPTR p3, p4; //yalnızca p3 pointer
+}
+
+----------------
+
+typedef int * IPTR;
+
+int main(void)
+{
+int x = 10;
+const IPTR p = &x;
+
+//int *const p = &x; // cevap bu olmalı alttaki olmaz
+//const int *p = &x; // 
+
+p = &y; legal değil
+*p = 34; legal
+
+}
 
 
 
