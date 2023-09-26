@@ -68,8 +68,77 @@ technic (alışılmış konuyu ele alma biçimi)
 &++x   illegal
 ++&x   illegal
 
+---------------------------------
 
-//2. video 13
+expression ile statement farkı
+
+x + 5  //expression
+x + 5; //expression statement
+x; //expression statement
+5; //expression statement
+; //null statement
+if (x > 10) ++y; //if statement
+
+expression çeşitleri:
+
+statement
+expression statement
+control statement
+null statement
+compound statement
+  loop stateemnt
+  jump statement
+
+----------------------------------------
+
+int main(void)
+{
+int a[5] = {10, 20, 30, 40, 50);
+int * p = a;
+*p++ = 33; //33 değeri dizinin ilk elemanına atannır
+*p = 77; //side effecten dolayı dizinin 2. elemanı 77 olur
+
+*p++ //p'nin gösterdiği nesneye eriş p'yi 1 arttır
+}
+
+
+int main(void)
+{
+while(size--){        
+*p++ = rand() % 1000;
+}
+}
+
+while(size--){
+*p = rand() % 1000;
+p = p + 1; //aynı anlama gelir yukarıdaki ile
+}
+}
+
+int main(void)
+{
+int a[5] = {10 ,20 ,30 ,40 ,50};
+int * p = a;
+*++p = 99; //dizinin 2. elemanına atama olur
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
