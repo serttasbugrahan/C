@@ -416,10 +416,122 @@ char * p = get_name();
 printf("isminiz %s\n", p);
 }
 
+-------
 
-// 1:20:
+int * foo(int * p)
+{
+++* p;
+return p;
+}
+//tanımsız davranış yoktur
+int main(void)
+{
+int x = 99;
+int * ptr = foo(&x);
+printf("*ptr = %d\n", *ptr); //cevap = 100
+}
+
+---------
+
+int * foo(int * p)
+{
+++p;
+++p;
+return p;
+}
+
+int main(void) // tanımsız davranış yok
+{
+int a[5] = {10, 20 ,30, 40, 50};
+int * p = foo(a);
+*p = 999;
+print_array(a,5); //dizinin 3. elemanının değeri 999 olur
+}
 
 
+adres döndüren bir fonksiyon :
+
+a) statik bir ömürlü nesnenin adresini döndürebilir
+  -global bir değişkenin adresi
+  -static yerel bir değişkenin adresi
+  -string literalleri
+
+b) dinamik ömürlü bir nesne adresi 
+
+c) fonksiyon çağıran koddan aldığı adresi çağıran koda geri döndürebilir
+
+-----
+
+int * get_array_max(const int * p, int size);
+
+int main(void)
+{
+int a[SIZE];
+
+randomiize();
+int * pmax = get_array_max(a, SIZE);
+
+printf("max = %d ve dizinin % indisli elemani\n", *pmax, pmax - a);
+
+}
+
+int * get_array_max(const int * p,int size)
+{
+int * pmax = (int *)p; //
+
+for (int i  = 1;i <size; ++i){
+if (p[i] > *pmax){
+pmax = &(int *)p[i];
+}
+}
+return pmax;
+}
+
+--------
+
+!! const nesne  adresi türünden örneğin T bir tür olmak üzere
+const T * türünden const olmayan nesne türüne yani örneğin T* türüne 
+
+a) c++ dilinde örtülü dönüşüm yoktur
+b) c dilinde böyle bir dönüşüm örtülü olarak yapılır ancak bir önlem alınmaz ise kodun okuyucusu bu dönüşüm yanlışıkla yapıldığını dönüşür
+C derleyicilerinde böyle bir örtülü dönüşüm yapılması durumunu şüpheyle karşılayarak uyarı mesajı verirler
+
+C dilinde böyle dönüşümleri bilerek istiyerek yapıyor isek mutlaka ve mutlaka tür dönüştürme operatörünü (type - cast) kullanmalıyız
+
+
+------------
+
+int * foo(void);
+void bar(int*);
+
+int main(void)
+{
+bar(foo());
+}
+
+----------
+
+int main(void)
+{
+int a[SIZE];
+
+printf_array(a, SIZE);
+int * pmax = get_array_max(a, SIZE);
+
+printf_array(a, pmax - a + 1); //dizinin max elemanına kadar(max ile beraber) ekrana yazdırır
+}
+
+--------------
+
+void selection_sort(int * p,int size)
+{
+for (int i = 0; i < size - 1; ++i){
+swap(p + 1, get_array_min(p + i, size - i));
+}
+}
+
+
+//2:40
 
 
 
