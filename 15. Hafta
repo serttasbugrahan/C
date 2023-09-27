@@ -274,6 +274,162 @@ p = &y; legal değil
 }
 
 
+/////////////////////////////////////////////////////////////2. Ders///////////////////////////////////////////////
+
+standart tür eş isimleri (standard type aliases)
+
+size_t
+ptrdiff_t
+clock_t
+time_t
+fpos_t
+int32_t
+int64_t
+
+------------------------
+
+size_t : sizeof operatörünün ürettiği değerin türü, türe verilen eş isim (int unsigned int vb. //derleyiciye bağlı)
+
+standart kütüphane size_t eş ismini hangi durumlarda kullanır :
+
+1- yazı uzunluğu türü
+  strlen strspn strspsc
+
+2- dizi boyutu türü (array size)
+  qsort, bsearch
+
+3- sizof değeri bekleyen parametlerin türü
+
+4- tane - adet 
+
+int main(void)
+{
+  size_t x = 10; //isim değildir identifier'dır yer aldığı başlık dosyasını include etmemiz gerekir
+}
+
+int main(void)
+{
+ptrdiff_t //pointer difference type, 2 pointerın çıkarırken bunu kullan
+}
+
+int main(void)
+{
+printf("%zu", sizeof(int)); //sizeof kullanıldığı zaman %zu kullanılabilinir. 
+// size_t hangi türün eş ismi ise %zu sayesinde ona uyum sağlar
+}
+
+!! bir byte her zmaan 8 bit değildir
+
+#include <stdint.h> //c99 ile gelen bu kütüphaneyi include ederek kullanılır
+
+int16_t, int32_t ve int64_t standart typdef isimleridir c99 ile eklenmiştir. opsiyoneldir (derleyici vermeyebilir)
+
+uint16_t //16 bitlik unsigned int türü (optiona)
+
+int_least16_t x; en az 16 bitlik tam sayı bitini tutabilir
+
+int_fast16_t x; 16 bitlik tam sayılarla işlemin en hızlı yapıldığı türün ismi
+
+
+!! asla standart kütüphanenin bir başlık dosyasında değişiklik yapmayın
+
+================================================
+
+adres döndüren fonksiyonlar (functions returning pointers) :
+
+int * foo(void) //foo öyle bir fonksiyonki türü  int nesnenin adresini döndürüyor
+
+int main(void)
+{
+  int * ptr = foo(); //foo neyin adresini döndürürse ptr onu göstericek
+}
+
+int bugra(void) // geri dönüş değeri int
+int * bugra(void) // geri dönüş değeri adres
+
+-----
+
+int g = 567;
+
+int * foo(void)
+{
+return &g;
+}
+
+
+int main(void)
+{
+int * p = foo() //*p g'nin değerini tutar
+++*foo(); // g'nin değeri 1 artar
+int * p1 = foo(); //g'nin değeri gözükür
+int * p2 = foo(); //g'nin değeri gözükür
+int * p3 = foo(); //g'nin değeri gözükür
+}
+
+------
+
+int a[5] = {10 ,20, 30, 40 ,50};
+
+int * foo(void)
+{
+return a;
+}
+
+int main(void)
+{
+++foo()[3]; //3 indili elemanın dğerini 1 arttırır
+}
+-----------
+
+!!!!!!
+int * get_value(void)
+{
+int x;
+printf("bir tam sayi girin: ");
+scanf("%d", &x);
+
+return &x;
+}
+
+int main(void)
+{
+int * ptr = get_value();
+printf("%d ", *ptr); //tanımsız davranış dangling pointer olur x değişkenin ömrü biter
+}
+
+!! ÇOK DİKKAT ET !!
+adres döndüren bir fonksiyon otomatik ömürlü bir yerel değişkenin
+adresini döndürmemeli.
+
+----------
+
+char * get_name(void){
+char str[100]; //otomatik ömürlüdür tanımsız davranıştır
+
+printf("isminizi giriniz: ");
+scanf("%s", str);
+}
+
+int main(void)
+{
+char * p = get_name();
+printf("isminiz %s\n", p);
+}
+
+
+// 1:20:
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
