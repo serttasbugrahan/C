@@ -604,6 +604,8 @@ bu dönüşüme NULL pointer conversion denir
 inr * p = 0; //hata vermez derleyici NULL olarak algılar
 int * p = NULL;
 
+9) bir dizinin boş indisleri NULL karakter ile başlar
+
 
 
 
