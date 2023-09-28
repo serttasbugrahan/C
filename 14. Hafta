@@ -344,7 +344,7 @@ if (a == b) //always false, dizi adresleri farklı
 
 !! diziler pointer ile gösterilme zorunda
 a[] = {1,2,3,4,5} dizisi a ile gösterilir 
-*a ile çağrılır a[i] - i[a] - *a++ - *(i + a) - *(a + i) ile aynı anlamadadır ancak fonskiyon parametresinde *a ile göster
+*a ile çağrılır a[i] , i[a] , *a++ , *(i + a) , *(a + i) ile aynı anlamadadır ancak fonskiyon parametresinde *a ile göster
 örnek
 -----
 
