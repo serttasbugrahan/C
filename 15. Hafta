@@ -526,12 +526,85 @@ printf_array(a, pmax - a + 1); //dizinin max elemanına kadar(max ile beraber) e
 void selection_sort(int * p,int size)
 {
 for (int i = 0; i < size - 1; ++i){
-swap(p + 1, get_array_min(p + i, size - i));
+swap(p + 1, get_array_min(p + i, size - i)); //selection sort algoritmasını yapar
 }
 }
 
+  
+-------------------------------------------------------
 
-//2:40
+NULL pointer :
+
+-Büyük harfle yazılmıi NULL keyword değildir. Bir makrodur
+yani önişlemci programa tanıtılan bir isimdir yani bir sebolik sabittir.
+
+-Bu makro C dilinin standart kütüphanesinin bazı başık dosyalarında define edilmiştir
+
+<stdef.h>
+<stdio.h>
+<sting.h>
+<stdlib.h>
+<time.h>
+
+özellikleri :
+
+1) bu makroya NULL pointer olarak söyle
+
+2) Büyük harf ile yazılan NULL bir addrestir bu adres sadece pointer değişkenkere atanmalıdır /
+ilk değer olarak asla (legal olsa da) pointer olmayan değişkene  NULL ataması yapma
+
+ancak BULL pointer herhangi türden bir pointer değişkene atanabilir:
+
+int * ip = NULL;
+
+3) NULL pointer hiçbir nesnenin adresi değildir ama geçerli bir adrestir
+örneğin bir pointer değişkenin değeri NULL olabilir
+Hiçbir nesneyi göstermeyen ancak geçerli pointer.
+
+4) NULL pointer hiçbir nesnenin adresi olmadığı için dereference edilmemelidir
+yani * operatorünün ya da [] operatörünün yapılmamalıdır (UB)
+
+int main(void)
+{
+int * p = NULL;
+
+//*p (UB)undefined behavier
+//p[3] (UB)
+}
+
+Benzer şekilde NULL poiner adresinin toplama, çıkarma gibi işlemlerde kullanılmamalıdır
+
+5) statik ömürlü bir değişekene ilk değer vermediğizde hayata 0 ile başlar
+static ömürlü pointer değişkene hayata NULL pointer değeri ile hayata başlar
+
+int * ptr //ptr has NULL value
+
+6) iki adres eşitlik kaşılaştırılmasına sokulduğunda eğer iki adres de NULL pointer
+değerine sahipse doğru sonuç verir
+
+7) C ve c++ dillerinde lojik ifade beklenen yerlerde bir adres ifadesi kullanılabilinir
+
+adres NULL pointer ==> false
+adres NULL pointer değil ise ==> true
+
+if (ptr != NULL)
+if(ptr) //üstteki ile aynı anlamda
+
+if (ptr == NULL)
+if(!ptr) //üstteki ile aynı anlamda
+
+8) Normal olarak bir pointer değişkene bir adres atanmalıdır
+bir pointer değişkene adres olmayan bir verinin atanması örneğin bir tam sayı değerinin atanması yanlıştır
+Böyle bir atama c++ dilinde (zaten) sentaks hatasıdır. C derleyicileri uyarı verir
+
+ancak bu durumun bir istisnası vardır eğer bir pointer değişkene tam sayı sabiti olarak 0 atanır ise bu durumda
+derleyici 0 tam sayı sabitini NULL pointer'a dönüştürür
+bu dönüşüme NULL pointer conversion denir
+
+inr * p = 0; //hata vermez derleyici NULL olarak algılar
+int * p = NULL;
+
+
 
 
 
