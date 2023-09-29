@@ -1,8 +1,101 @@
 ///////////////////////////////////////////////////////1. ders/////////////////////////////////////////
 
+NULL pointer ne işe yarıyor ?
+
+adres döndüren fonksiyonlar
+---------------------------
+
+başarılı veya başarıs olma durumuna göre NULL pointer döndüren fonksiyonlar :
+-FILE * fopen(...)
+-void * malloc
+-char * setlocal
+
+int main(void) //NULL pointer en çok kullanıldığı yer
+{
+FILE * fopen("bilgin.txt", "r");
+if (f == NULL) //!f yazılabilinir{ 
+fprintf(stderr, "cannot open file!\n");
+return 1;
+}
+printf("file opened!\n");
+}
+
+------
+
+arama fonksiyonları :
+
+search fonksiyonu genelde adres döndürür eğer yok ise o değer NULL pointer döndürür
+
+NULL döndüren arama fonksiyonları :
+
+strchr
+strrchr
+strstr
+strpbrk
+memchr
+bsearch
+
+int main(void)
+{
+char size [SIZE]
+
+printf("BİR YAZİ GİRİN : ");
+sgets(str);
+
+char * p = strchr(str, 'a');
+if (!p) {
+printf("yazida a karakteri yok\n");
+}
+else {
+printf("bulundu %d indisli karakter\n", p - str);
+}
+}
+
+---------
+
+aşağıda belirtilen fonksiyonu tanımlayınız 
+
+eğer aranan değer dizide var ise onun adresini döndürücek
+eğer aranan değer dizide yok ise NULL pointer döndürücek
+
+int * search_in_array(const int * p, int size, int key){
+for (int i = 0; i < size; ++i){
+if (p[i] == key)
+return (int*)p + i//&p[i]
+}
+return NULL;
+}
 
 
+int main(void)
+{
+int a[SIZE];
 
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+
+int ival;
+printf("aranacak degeri giriniz: ");
+(void)scanf("%d", &ival);
+
+int * p = search_in_array(a, SIZE, ival);
+if (p != NULL){
+printf("bulundu... %d dizisinin % indisli elemani\n", *p, p - a);
+*p = -1;
+print_array(a , SIZE);
+}
+else{
+printf("aranan deger bulunamadi\n");
+}
+}
+
+!! bir değişkenin tipi void olamaz void x
+!! bir diznin elemanlarının türü void türü olamaz
+!! bir ifadenin türü void olabilir
+türü void olan ifadeler :
+
+//57:
 
 
 
