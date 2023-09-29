@@ -218,7 +218,7 @@ printf("%d\n", str_count(str, 'u'));
 #include <string.h>
 
 strlen : yazının uzunluğunu döndürür
-strchr :  yazının uzunluğunu döndürür
+strchr :  karakter arama
 strstr :  yazının uzunluğunu döndürür
 strpbrk : arama fonksiyonu
 strcpy : yazı kopyalaama
@@ -281,7 +281,7 @@ size_t strlen_3(const char * p) //bu şekilde yazılabilinir
 {
 const char * ptemp = p;
 
-while (*)
+while (*p)
 ++p;
 return (size_t)(p - ptemp);
 }
@@ -293,11 +293,74 @@ size_t len = strlen(str);
 printf("uzunluk = %zu\n",len);
 }
 
+------
+strchr : karakteri bulur
 
+char * strchr(const char * str, int ch);
 
+char str[SIZE];
 
+printf("bir yazi girin: ");
+sgets(str);
+printf("girilne yazi :%s\n", str);
+int ch;
+printf("aranan karakteri girin: ");
+ch = getchar();
 
+char * p = strchr(str, ch);
+if (p != NULL){
+printf("bulundu" %s\n", p);
+printf("yazinin %d indisli karakteri\n", p - str);
+*p = '!';
+printf("girilen yazi: %s\n",str);
+}
+else{
+printf("bulunamadı\n");
+}
+}
 
+--------
+
+strchr fonksiyonun yazılması
+
+char * strchr(const char * p, int c)
+{
+for (int i = 0; p[i] != '\0'; ++i){
+if (p[i] == c)
+return (char *)(p + i);
+}
+
+if (c == '\0')
+return (char *)(p + i);
+
+return NULL;
+}
+
+--------
+strrchr : aranan karakteri yazıda sondan bulur
+
+char * strrchr(const char * p, int ch)
+
+int main(void)
+{
+char str[];
+
+printf("bir yazi girin : ");
+sgets(str);
+printf("girilen yazi: |%s|\n", str);
+
+char * p1 = strchr(str, 'a');
+char * p2 = strrchr(str, 'a');
+
+if (!p1) {
+printf("aranan karakter bulunamadi\n");
+return 0;
+printf("strrchr idx = %d\n", p2 -str);
+}
+
+}
+
+3:0 devam et
 
 
 
