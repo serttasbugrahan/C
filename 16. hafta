@@ -95,7 +95,210 @@ printf("aranan deger bulunamadi\n");
 !! bir ifadenin türü void olabilir
 türü void olan ifadeler :
 
-//57:
+void baz(int);
+
+int main(void)
+{
+if (baz(12)) //geri dönüş türü void olan ifade kontrolde kullanılamaz
+}
+
+
+!! bir ifadenin türünü void türüne çevirebilirz
+
+int main(void)
+{
+(void)foo(12); //bilerek discard edilirse kullanılır
+}
+
+
+------------------
+
+int main(void)
+{
+
+}
+
+!! öyle fonksiyonlar var ki pointer paramtere değişkenşne çağıran kodun NULL pointer geçmesi
+opsiyon olarak sunuyor
+
+-fonksiyon konuşuyor :
+bana nesne adresi geçersen bu işi yaparım
+bana NULL pointer geçersen şu işi yaparım
+
+!! pointer paramtereye gelen NULL pointerı belgele 
+
+
+a) bir fonksiyonun geri dönüş değeri adres ise NULL pointer döndürme ihtimali var mı diye bak
+
+b) eğer NULL pointer geçersem hata verir mi diye konrol et
+
+
+------------------------------
+
+NULL dangling pointerda kullanılır:
+
+Pointer dangling hale geldiğinde NULL pointer yapılır
+
+-------------------------------
+
+int main(void)
+{
+int * ptr = NULL;
+
+if (expr) {
+ptr = nesne adresi
+}
+if (ptr)
+}
+
+======================================================
+
+sum_array(const int * p, size_t size); //int yerine size_t kullan
+ 
+get_mean(const int * p, size_t size); //int yerine size_t kullan
+
+======================================================
+
+C dilinde yazılar üzerinde işlem yapan fonksiyonlar :
+
+!! aldığı adresteki yazıyı değiştirmek istemiyorsa aşağıdaki şekilde olmalı dizi boyu
+int is_palindrom(const char * p)
+
+//aldığı adresteki yazıyı std. çıkış akımına yazdıran 
+sputs isimli bir fonksiyon tanımlayınız
+
+----------
+
+void sputs(const char * p)
+{
+for (int i = 0; p[i] != '\0'; ++i)
+putchar(p[i]);
+}
+putchar('\n');
+}
+
+//2 şekilde yazılabilinir
+
+void sputs(const char * p)
+{
+while (*p)
+putchar(*p++);
+putchar('\n');
+}
+
+int main(void)
+{
+char str[SIZE] = "bugun gunlerden pazar"
+sputs(str);
+}
+
+--------
+
+int str_count(const char * p, int x)
+{
+int cnt = 0;
+
+while (*p){
+if (*p == x)
+++cnt;
+
+++p;
+}
+return cnt
+}
+
+int main(void)
+{
+char str[SIZE] = "deneme bugra dene";
+printf("%d\n", str_count(str, 'u'));
+}
+
+----------------------------------------
+
+#include <string.h>
+
+strlen : yazının uzunluğunu döndürür
+strchr :  yazının uzunluğunu döndürür
+strstr :  yazının uzunluğunu döndürür
+strpbrk : arama fonksiyonu
+strcpy : yazı kopyalaama
+strcat : yazı sona başka yazı ekleme  
+strcmp : yazı karşılaştırma
+strncpy : kopyalama
+strncat : yakalama
+strncpm : ko
+strtok : yazıyı tokenız eden
+strerror :  hata ile ilgili
+strspn : ilk kaç karakter belilir karekterlerden oluşur
+strcspn : ilk kaç karakter belilir karekterlerden oluşur
+
+--------
+
+strlen :
+
+int main(void)
+{
+char str[SIZE];
+
+printf("bir yazi girin: ");
+sgets(str);
+
+size_t len = strlen(str);
+printf("uzunluk = %zu\n", len);
+}
+
+---------
+
+int main(void)
+{
+char str[SIZE];
+
+printf("bir yazi girin: ");
+sgets(str);
+
+size_t len = strlen(str);
+for (size_t i = 0; i < len; ++i){
+puts(str + i);
+}
+}
+
+-------
+
+strlen fonksiyonuun yazılması :
+
+size_t strlen_1(const char * p)
+{
+size_t len = 0;
+
+while (*p != '\0'){
+++len;
+++p;
+}
+return len;
+}
+
+size_t strlen_3(const char * p) //bu şekilde yazılabilinir
+{
+const char * ptemp = p;
+
+while (*)
+++p;
+return (size_t)(p - ptemp);
+}
+
+int main(void){
+printf("bir yazi girin: ");
+sgets(str);
+size_t len = strlen(str);
+printf("uzunluk = %zu\n",len);
+}
+
+
+
+
+
+
+
 
 
 
