@@ -357,10 +357,75 @@ printf("aranan karakter bulunamadi\n");
 return 0;
 printf("strrchr idx = %d\n", p2 -str);
 }
+}
+
+----
+
+int main(void)
+{
+char str[SIZE];
+
+printf("bir yazi girin: ");
+sgets(str);
+printf("girilen yazi: |%s|\n", str);
+
+char * p = strchr(str, '\0');
+*p++ = '!';
+*p = '\0';
+
+printf("|%s|\n", str);
 
 }
 
-3:0 devam et
+------
+
+char * strrchr(const char * p,int c)
+{
+const char * pfound = NULL;
+while (*p != '\0'){
+if (*p == c){
+++p
+}
+
+if (c == '\0')
+return (char*)p;
+
+return (char*)pfound;
+}
+
+}
+
+
+---------
+strstr :
+
+char *strstr(const char *p1, const char *p2);
+
+int main(void)
+{
+char str[SIZE];
+char key[SIZE];
+
+printf("içinde arama yapılcak yaziyı giin: ");
+sgets(str);
+printf("[%s]\n", str);
+printf("aranacak yaziyi girin: ");
+sgets(key);
+printf("%s\n", key);
+char * p = strstr(str,key);
+if (p == NULL){
+printf("bulunamadi);
+return 0;
+}
+
+printf("bulundu index = %d\n",p - ptr);
+size_t len = strlen(key);
+
+while (len--)
+*p++ = '!';
+printf("[%s]\n", str);
+}
+
 
 
 
