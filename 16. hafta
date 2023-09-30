@@ -397,7 +397,7 @@ return (char*)pfound;
 
 
 ---------
-strstr :
+strstr : yazi içinde yazi arama
 
 char *strstr(const char *p1, const char *p2);
 
