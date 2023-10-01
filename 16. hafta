@@ -217,20 +217,18 @@ printf("%d\n", str_count(str, 'u'));
 
 #include <string.h>
 
-strlen : yazının uzunluğunu döndürür
-strchr :  karakter arama
-strstr :  yazının uzunluğunu döndürür
-strpbrk : arama fonksiyonu
-strcpy : yazı kopyalaama
-strcat : yazı sona başka yazı ekleme  
-strcmp : yazı karşılaştırma
-strncpy : kopyalama
-strncat : yakalama
-strncpm : ko
-strtok : yazıyı tokenız eden
-strerror :  hata ile ilgili
-strspn : ilk kaç karakter belilir karekterlerden oluşur
-strcspn : ilk kaç karakter belilir karekterlerden oluşur
+strlen: Verilen bir karakter dizisinin uzunluğunu (karakter sayısını) hesaplar.
+strchr: Bir karakter dizisinde belirtilen karakteri bulur ve ilk bulunan konumun adresini döndürür.
+strstr: Bir karakter dizisinde belirtilen alt dizesini bulur ve ilk bulunan konumun adresini döndürür.
+strcat: İki karakter dizisini birleştirerek, birinci karakter dizisinin sonuna ikinci karakter dizisini ekler.
+strcmp: İki karakter dizisini karşılaştırır ve eşitlik durumunu kontrol eder.
+strncpy: Bir karakter dizisini belirtilen uzunlukta kopyalar.
+strncat: İki karakter dizisini belirtilen uzunlukta birleştirir.
+strncmp: İki karakter dizisini belirtilen uzunlukta karşılaştırır.
+strtok: Bir karakter dizisini belirli bir ayraç (delimiter) kullanarak parçalarına böler.
+strerror: Bir hata numarasını açıklayıcı bir hata mesajına çevirir.
+strspn: Bir karakter dizisinin başlangıcındaki karakterlerin belirtilen karakter kümesine kaç karakter uyduğunu bulur.
+strcspn: Bir karakter dizisinin başlangıcındaki karakterlerin belirtilen karakter kümesine kaç karakter uymadığını bulur.
 
 --------
 
@@ -294,7 +292,8 @@ printf("uzunluk = %zu\n",len);
 }
 
 ------
-strchr : karakteri bulur
+
+strchr :
 
 char * strchr(const char * str, int ch);
 
@@ -321,7 +320,7 @@ printf("bulunamadı\n");
 
 --------
 
-strchr fonksiyonun yazılması
+strchr fonksiyonun yazılması :
 
 char * strchr(const char * p, int c)
 {
@@ -337,7 +336,7 @@ return NULL;
 }
 
 --------
-strrchr : aranan karakteri yazıda sondan bulur
+strrchr : 
 
 char * strrchr(const char * p, int ch)
 
@@ -369,7 +368,7 @@ printf("bir yazi girin: ");
 sgets(str);
 printf("girilen yazi: |%s|\n", str);
 
-char * p = strchr(str, '\0');
+char * p = strrchr(str, '\0');
 *p++ = '!';
 *p = '\0';
 
@@ -425,6 +424,18 @@ while (len--)
 *p++ = '!';
 printf("[%s]\n", str);
 }
+
+///////////////////////////////////////////2. Ders/////////////////////////////////////////////////7
+
+
+
+
+
+
+
+
+
+
 
 
 
