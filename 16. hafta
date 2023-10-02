@@ -597,6 +597,7 @@ return p1;
 //3 kodda aynı işlemi yapar
 
 --------------
+
 strcmp :
 
 yazılan eşitlik, eşitsizlik, relational
@@ -644,9 +645,141 @@ if (strcmp(s1, s2) < 0){ // s2, s1'den büyük ise
 
 if (strcmp(s1, s2) > 0){ // s1, s2'den büyük ise
 }
-
-
 }
+
+int main(void)
+{
+char s1[SIZE];
+char s2[SIZE];
+
+printf("iki yazi girin: ");
+scanf("%s%s", s1,s2);
+int cmp_result = strcmp(s1,s2)
+
+if (cmp_result > 0){
+printf("%s > %s\n", s1,s2);
+}
+else  if (cmp_result < 0){
+printf("%s < %s\n", s1,s2);
+}
+else 
+printf("%s == %s\n", s1,s2);
+}
+
+printf("cmp_result = %d\n",
+
+------
+strcmp kodunun yazılması :
+
+int mystrcmp(const char* p1, const char * p2)
+{
+while(*p1 == *p2){
+if (*p1 == '\0'){
+return 0;
+}
+++p1;
+++p2;
+}
+return *p1 - *p2 //p1 - p2 yazsa idik adresleri birbirinden çıkarırdık hata olurdu 
+}
+
+----------
+
+strpbrk : yazının içind birden fazla kelime aramayı sağlar
+char * strpbrk(const char * p,const char *pchars);
+ 
+
+int main(void)
+{
+char s1[SIZE];
+char s2[SIZE];
+
+printf("bir yazi girin: ");
+sgets(str);
+
+printf("aranacak karakterler: ");
+scanf("%s", s);
+printf("[%s]  yazisindaki [%s] \n karakterlerinden birini arıyorsunuz\n, str, s);
+
+char * p = strpbrk(str, s);
+
+if (p != NULL){
+printf("bulundu yazinin %d indisli karakteri\n" p -str);
+}else
+printf("buunamadi");
+}
+
+=================================================
+
+bir yazının sonunda baika bir yazı var mı sorusunun ceavabını almak
+
+int ends_with(const char* p1, const char * p2);
+{
+size_t  len1 = strlen(p1);
+size_t  len2 = strlen(p2);
+
+if (len2 > len1){
+return 0;
+}
+return !strcmp(p1 + len1 - len2, p2);
+}
+
+ 
+int main(void)
+{
+char s1[SIZE];
+char s2[SIZE];
+
+printf/"birinci yaziyi girin: ");
+sgets(s1);
+printf("ikinci yaziyi girin: ");
+sgets(s2);
+
+if (ends_with(s1, s2)){
+printf("evet var\n");
+}
+else{
+printf("hayir yok\n");
+}
+}
+
+================================================================
+
+bu konular biraz zor daha dikkatli bak:
+
+-string literals 
+-pointer arrays
+-pointer to pointer
+-void pointers
+-function pointers
+-multi-dimensional arrays
+-dynamic memmory management
+
+2: 18
+
+------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
