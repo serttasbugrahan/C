@@ -377,6 +377,7 @@ printf("|%s|\n", str);
 }
 
 ------
+strrchr fonksiyonunun yazılması :
 
 char * strrchr(const char * p,int c)
 {
@@ -420,21 +421,232 @@ return 0;
 printf("bulundu index = %d\n",p - ptr);
 size_t len = strlen(key);
 
+strstr fonksiyonunun yazılmasi :
+
+ödev
+-----
 while (len--)
 *p++ = '!';
 printf("[%s]\n", str);
 }
 
 ///////////////////////////////////////////2. Ders/////////////////////////////////////////////////7
+idioms:
+
+char * p 
+
+a) p bir yazıyı gösteriyor. Yani p'nin değeri bir yazının adresi
+b) p NULL pointer
 
 
+char * p
+//eğer p bir yazıyı gösteriyor ise ve p'nin gösterdiği yazı boş değil ise
+
+if (p != NULL && *p != '\0') //p'nin değeri yanlış ise 2. ifade sınanmıycak
+if (p && *p); //yukarıdaki ile aynı anlama gelir 
+
+//eğer p bir yazıyı göstermiyor ise ve p'nin gösterdiği yazı boş ise
+
+if (p == NULL && *p == '\0') 
+if (!p && !*p);
+
+-------
+
+// p yazının son ('\0') karakterinin adresini tutsun 
+
+int main(void)
+{
+char str[SIZE] = "YUNUS";
+char * p = str;
+//amacım p'nin degerini null karakterin bulunduğu yerin adresi olsun
+//bu yapıyı gösteren farklı idiom yapıları aşağıdadır
+
+while(*p != '\0')
+++p;
+
+while(*p++ != '\0')
+;
+--p;
+
+while(*++p != '\0') //tanımsız davranış
+;
+
+p = strchr(p, '\0); //bu şekilde de olur
+
+p += strlen(p);
+
+printf("%d\n", *p == '\0');
+}
+
+==================================================
+
+strcpy :
+
+char * strcpy(char * pdest, const char *psource); //önce hedef(yazma) sonra kaynak(okuma)
+
+bazı c fonksiyonları aldıkları adrese 
+a) bir yazı yerleştiriyollar
+b) yazıyı değiştiriyolar 
 
 
+int main(void)
+{
+char source[SIZE];
+char dest[SIZE];
+
+printf("bir yazi girin: ");
+sgets(source);
+
+//source adresindeki (dizisindeki) yazıyı dest adresine (dizisine) kopyalayın
+
+strcpy(dest, source);
+printf("[%s] [%s]\n", source, dest);
+
+}
+
+----------
+
+strcpy fonksiyonun yazılması :
+
+char * mystrcpy(char * pdest, const char * psource)
+{
+char * pret = pdest;
+while(*psource != '\0'){
+*pdest = *psource;
+++pdest;
+++psource;
+}
+*pdest = '\0';
+return pret
+}
+
+----------
+
+char * mystrcpy(char * pdest, const char * psource) //aynı anlama gelir
+{
+char * pret = pdest;
+while(*psource){
+*pdest++ = *psource++;
+}
+
+while(*pdest++ = *psource++;) //aynı anlama gelir
+;,{},continue //hepsi aynı anlama gelir
+
+*pdest = '\0';
+return pret
+}
+
+----
+
+int main(void)
+{
+char str[SIZE] = "gulcan"
+strcpy(str + 3, str);
+//memmove(str + 3, str, strlen(str) + 1); ile mümkün
+printf("%s\n", str); //tanımsız davranıştır, gulculgul
+}
+
+!! böyle durumlarda overlapped blocks denir 
+kesişen - çakışan - arakesit olan bellek bloklar
+
+-----------
+
+strcat :
+char * strcat(char* pdest, const char *psource);
+
+int main(void)
+{
+char s1[SIZE] = "bugra"
+char s2[SIZE] = "serttas"
+
+strcat(s1,s2);
+printf("%s\n", s1); //
+}
+
+----------
+
+strcat yazılması :
+
+char * mystrcat(char * p1, const char* p2)
+{
+char * pret = p1;
+while(*p1)
+++p1;
+
+while(*p1++ = *p2++)
+;
+
+return pret;
+}
+
+--------
+
+char * mystrcat(char * p1, const char* p2)
+{
+strcpy(strchr(p1, '\0'), p2);
+return p1;
+}
+
+----
+
+char * mystrcat(char * p1, const char* p2)
+{
+strcpy(p1 + strlen(p1), p2);
+return p1;
+}
+//3 kodda aynı işlemi yapar
+
+--------------
+strcmp :
+
+yazılan eşitlik, eşitsizlik, relational
+
+a    b
+a  > b
+a  < b
+a == b
+
+//1. yazı büyükse pozitif ikinci yazı büyükse negatif eşit iki sayı eşit ise 0 döndürür
+
+int cmp_xyz(T x, T y)
+retval > 0
+x > y
+retval < 0
+x < y
+retval = 0
+x == y
+
+lexicongraphical compare algoritması:
+
+7
+2 3 4 7 9
+// yukarıdaki daha büyük eleman sayısının az olmasına rağmen (7 > 2)
+
+su //
+cumhuriyet //bu daha önce gelir sözlükte (lexicongraphical compare)
+
+int main(void)
+{
+char s1[SIZE];
+char s2[SIZE];
+
+if (strcmp(s1, s2) == 0){
+}
+
+if (!strcmp(s1, s2)){ // 2 yazı birbirine eşit ise
+}
+
+if (strcmp(s1, s2) != 0){ // 2 yazı birbirine farklı ise
+}
+
+if (strcmp(s1, s2) < 0){ // s2, s1'den büyük ise
+}
+
+if (strcmp(s1, s2) > 0){ // s1, s2'den büyük ise
+}
 
 
-
-
-
+}
 
 
 
