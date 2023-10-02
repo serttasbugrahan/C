@@ -755,27 +755,92 @@ bu konular biraz zor daha dikkatli bak:
 -multi-dimensional arrays
 -dynamic memmory management
 
-2: 18
 
 ------------------------------------------
 
+string literals :
+-----------------
 
+int main(void){
+char * p = "murat";
+//yukarıdaki kodda derleyicinin oluşturduğu char dizinin
+adresini p pointer değişkenine ilk değer vermiş oluyoruz
+}
 
+int main(void){
+printf("%c\n", *"YUNUS"); //Y
+printf("%c\n",  "FURKAN[3]); //K
+printf("%c\n",  "FURKAN" + 3); //K
+printf("%c\n",  "erenkaan"); //adresini yazar
 
+for (int i = 0; i < 10; ++i){
+printf("%p\n", "necatiergin"); //hep aynı adresi yazar
+}
+}
 
+!! string literali olan diziler "statik ömürlüdür"
 
+!! string literali olan diziler salt okuma amaçlı kullanılmalıdır
+Bu yazıların değiştirilme girişimi tanımsız davranış
 
+------
 
+char * get_weekday_name(int dayno)
+{
+switch(dayno){
+case 1: return "pazar";
+case 2: return "pazartesi";
+case 3: return "sali";
+case 4: return "çarşamba";
+case 5: return "perşembe";
+case 6: return "cuma";
+case 7: return "cumartesi";
+}
+return "";
+}
 
+int main(void)
+{
+for (int i = 1; i <= 7; ++i){
+puts(get_weekday_name(i);
+}
+}
 
+---------------------
 
+int get_hex_char(int val);
+{
+return "0123456789ABCDEF";
+}
 
+int main(void)
+{
+for (int i = 0; i < 16; ++i){
+putchar(get_hex_char(i));
+}
+}
 
+-----------
 
+int main(void)
+{
+char * p = "mert";
+*p = 's'; //tanımsız davranıştır string literalleri asla değiştiri
+puts(p);
+}
 
+!! asla paramteresi char * olan bir fonksiyonun paramteresine argüman olarak 
+bir string literali göndermeyin
 
+!! ancak paramteresi iconst char *  olan bir fonksiyona string literai göndermenizde sakınca yoktur
 
-
+int main(void)
+{
+char str[] = "bugra"; //1 tane değişken oluşturuldu
+str[0] = 'y'; hata olmaz
+char * p = "bugra"; //2 tane değişken oluşturuldu
+p[0] = 's'; //hata olur
+}
 
 
 
