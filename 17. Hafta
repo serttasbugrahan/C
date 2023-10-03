@@ -1,5 +1,137 @@
 ///////////////////////////////////////////////////////1. Ders///////////////////////////////////////////////
 
+int main(void)
+{
+char * p = "mustafa; //const char olarak göster
+*p = 'M' //tanımsız davranıştır
+
+}
+
+---------
+
+#define SIZE 200
+
+int main(void)
+{
+char old_file_name[SIZE];
+char new_file_name[SIZE];
+
+printf("dosya ismini girin: ");
+scanf("%s", old_file_name);
+
+strcpy(new_file_name, old_file_name);
+//printf("[%s] ==> [%s]\n", old_file_name, new_file_name);
+
+//eger dosya isminin uzantısı yok ise uzantısını txt yapan kodu yazınız
+//ali ==> ali.txt
+char * p = strrchr(new_file_name, '.');
+if (p == NULL){
+strcat(new_file_name, ".txt");
+printf("[%s] ==> [%s]\n", old_file_name, new_file_name);
+
+}
+//eger dosyanın uzantısı gif ise dosyanın uzantısını jpg yapınız
+else if(!strcmp(p, "gif")){
+strcpy(p, ".jpg");
+printf("[%s] ==> [%s]\n", old_file_name, new_file_name);
+}
+//eger dosyanın uzantısı .dat ise dosyaın uzantısını kaldırın
+else if(!strcmp(p, ".dat")){
+*p = '\0';
+printf("[%s] ==> [%s]\n", old_file_name, new_file_name);
+}
+}
+
+----------------------------------------
+
+int main(void)
+{
+char * p = "murat";
+printf("[1] %zu\n", sizeof(p)); //4 cevabı çıkar
+printf("[2] %zu\n", sizeof(*p)); //1
+printf("[3] %zu\n", sizeof("murat")); //6 (murat\0)
+printf("[3] %zu\n", sizeof(p++)); //4
+printf("[3] %zu\n", strlen(p)); //5 
+
+}
+
+int main(void)
+{
+char str[100] = "seyfullah";
+printf("%zu %zu\n", sizeof(str), strlen(str)); //100 9
+printf("%zu %zu\n", sizeof str, strlen(str)); //100 9(aynı anlama gelir)
+printf("%zu %zu\n", sizeof "mert", strlen("mert")); //5(dizinin boyutu) 4(yazının uzunluğu)
+
+const char * p = "zeliha";
+size_t x = strlen(p++);
+
+printf("%zu\n", x);
+x = strlen(p);
+printf("%zu\n", x); //eliha
+}
+
+
+int main(void)
+{
+printf("%zu\n", sizeof(""); //1
+printf("%zu\n", strlen(""); //0
+printf("%zu\n", *""; //0
+printf("%zu\n", ""[0]; //0
+
+}
+
+---------------------------------------------
+
+int main(void)
+{
+char str[100] = "murat";
+str = '\0'; //boş yazı yapar
+str[0] = '\0'; //boş yazı yapar
+}
+
+int main(void)
+{
+printf("\10123\06223"); //A23223
+}
+
+---------
+string literallerini birden fazla satıra yayma :
+
+int main(void)
+{
+const char * p = "su an icin istediginizi yerine getiremiyoruz lutfen devam etmek\
+icin bir tusa basin";
+puts(p);
+\ : alt satıra geçmemizi sağlar 
+}
+
+
+=======================================================================
+
+Pointer Arrays:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
