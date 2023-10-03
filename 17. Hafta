@@ -110,33 +110,174 @@ puts(p);
 
 Pointer Arrays:
 
+int *
+double *
+char *
+
+int main(void)
+{
+int a1[50] 
+int * a2[50]; 
+}
+
+-----
+int * foo(void);
+
+int main(void)
+{
+int x = 10;
+int y = 45;
+int * ptr = &y;
+int * p[10];
+
+p[0] = &x;
+p[1] = ptr;
+p[2] = foo();
+}
+
+!! bir pointer dizisi ile mantıksal ilişki içindeli aynı türden
+nesnelerin adrslerini bir arada tutabiliriz
+
+----
+
+int a = 10;
+int b = 20;
+int b = 40;
+int d = 78;
+
+int main(void)
+{
+int * p[] = {&a, &b, &c, &d};
+}
+
+-----
+
+int main(void)
+{
+int * p[] = {&a, &b, &c, &d};
+
+*p[1] = 99; //b 99 olur
+++*p[2]; //c'nin değeri 1 artar
+++**p //a'nın değeri 1 artar
 
 
+}
 
+---------
 
+int a[] = {1,2, 3}
+int b[] = {10 ,20, 30}
+int c[] = {100,200, 300}
 
+int main(void)
+{
+int * p[] = {a, b, c};
 
+++p[1]; //b dizisinin 2. elemanıın adresini tutar
+++*p[1]; //b dizisinin 2. elemanını 1 arttırır 21
+}
 
+--------
 
+int main(void)
+{
+int a[] = {1,2, 3}
+int b[] = {10 ,20, 30}
+int c[] = {100,200, 300}
 
+int * p[] = {a, b, c};
 
+p[1][2]++; //b dizisnin 2 indisli değerini 1 arttırır
 
+}
 
+---------
 
+- *p[1] pointer dizisinin 1 indisli elemanının gösterdiği nesne
+- p[1][2] pointer dizisinin 1 indisli elemanının gösterdiği dizinin 2 indisli elemanı
 
+---------
 
+int main(void)
+{
+char * p[] = {"ahmet", "hakki", "deniz", "erdem", "tan"};
+for (int i = 0; i < 5; ++i){
+printf("%s\n", p[i]);
+}
+}
 
+------
 
+int main(void)
+{
+const char * pmnos[] = {
+"ocak",
+"subat",
+"mart",
+"nisan"
+};
 
+for (size_t i = 0; i < asize(pmons); ++i){
+printf("%s\n", pmons[i]);
+printf("%zu\n", strlen(pmons[i])); //ayların uzunluğu yazılır
 
+printf("yilin kacinci ayi: ");
+scanf("%d", &n);
 
+printf("yilin %d. ayi %s\n", n, pmons[n - 1]);
+}
+}
 
+---------
 
+int main(void)
+{
+const char * pmnos[] = {"ocak","subat","mart","nisan"};
 
+char entry[4];
 
+printf("bir ay girin: ");
+scanf("%s", entry);
+int i;
 
+for (i = 0; i < 12; ++i){
+if (!strcmp(entry, pmons[i]))
+break;
+}
 
+if (i < 12){
+printf("%s yilin %d. ayidir\n", entry, i + 1);
+}
+else{
+printf("%s gecerli bir ay  degıl\n", entry);
+}
+}
 
+-----------
+
+int a = 1, b = 2, c = 4;
+
+int main(void)
+{
+int * const p[3] = {&a, &b, &c};
+p[2] = &ival; //syntax hatası
+*p[2] = 456; //
+}
+
+-----------
+
+int main(void)
+{
+const char  * p[] ={ /*string dizi elemanları var*/}
+
+printf("p dizisinin %zu elemani var \n", asize(p));
+
+for (size_t i = 0;i< asize(p); ++i){
+printf("%c", *p[i]); //p[i][0] //aynı anlama gelir- //iismlerin ilk harfini yazar
+printf("%c", *p[i][strlen(p[i] - 1); //dizinin son elemanını verir
+}
+
+////////////////////////////////////////////////////2. Ders////////////////////////////////////////7
 
 
 
