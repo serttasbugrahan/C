@@ -462,6 +462,134 @@ int ** ptr = foo();
 
 -------------
 
-//2.16:18
+en kafa karıştıran örnek :
+
+//bir int dizinin en büyük elemanının adresini döndürücek bir fonksiyon bildirin
+
+int * get_array_min_max(const int * pa, size_t size, int ** pmin, int **pmax);
+{
+*pmin = *pmax =(int*)pa;
+for (size_t i = 1; i < size; ++i){
+if (pa[i] > **pmax){
+*pmax = (int *)&pa[i]
+}else if (pa[i] < **pmin){
+*pmin = (int *)&pa[i];
+}
+}
+
+}
+int main(void)
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+int * pmin 
+int * pmax
+
+get_array_min_max(a, SIZE, &ptr_min, &ptr_max);
+
+printf("min = %d ve min index = \n", *ptr_min, ptr_min - a);
+printf("max = %d ve max index = \n", *ptr_max, ptr_max - a);
+
+swap(ptr_min, ptr_max);
+print_array(a, SIZE);
+}
+
+---------------
+
+void printf_names(char ** ptr, size_t size)
+{
+for (size_t i = 0; i < size; ++i){
+printf("%s ", ptr[i]);
+}
+printf("\n\n");
+
+}
+
+int main(void)
+{
+const char* p[] = {}
+
+print_names(p, asize(p));
+
+}
+
+------------
+
+int main(void)
+{
+char * p[] = {}
+
+//alfabetik sıraya göre sıralaayan algoritma
+for(size_t i = 0; i < size - 1; ++i){
+for (size_t k = 0; k < size(p) - 1 - i; ++k){
+if (strcmp(p[i], p[i + 1]) > 0){
+char * ptemp = p[k];
+p[k] = p[k + 1];
+p[k + 1] = ptemp;
+}
+}
+
+for (int i = 0; i < size; i++)
+{
+printf("%s ",p[i]);
+}
+}
+
+------------------
+
+// yazıları yazının uzunluğuna göre eğer aynı uzunlukta ise alfabeye göre sırala
+
+int main(void)
+{
+char * p[] = {}
+
+//alfabetik sıraya göre sıralaayan algoritma
+for(size_t i = 0; i < size - 1; ++i){
+for (size_t k = 0; k < size(p) - 1 - i; ++k){
+size_t len1 = strlen(p[k];
+size_t len2 = strlen(p[k + 1];
+
+if (len1 > len2 || (len1 == len2 && strcmp(p[i], p[i + 1]) > 0){
+char * ptemp = p[k];
+p[k] = p[k + 1];
+p[k + 1] = ptemp;
+}
+}
+
+for (int i = 0; i < size; i++)
+{
+printf("%s ",p[i]);
+}
+}
+
+-----------
+
+fonksiyon ile yazma :
+
+void sort_names(char ** p, int size){
+
+//alfabetik sıraya göre sıralaayan algoritma
+for(size_t i = 0; i < size - 1; ++i){
+for (size_t k = 0; k < size(p) - 1 - i; ++k){
+size_t len1 = strlen(p[k];
+size_t len2 = strlen(p[k + 1];
+
+if (len1 > len2 || (len1 == len2 && strcmp(p[i], p[i + 1]) > 0){
+char * ptemp = p[k];
+p[k] = p[k + 1];
+p[k + 1] = ptemp;
+}
+}
+
+for (int i = 0; i < size; i++)
+{
+printf("%s ",p[i]);
+}
+}
+
+
 
 
