@@ -2,7 +2,7 @@
 
 int main(void)
 {
-char * p = "mustafa; //const char olarak göster
+char * p = "mustafa"; //const char olarak göster
 *p = 'M' //tanımsız davranıştır
 
 }
@@ -271,13 +271,136 @@ int main(void)
 const char  * p[] ={ /*string dizi elemanları var*/}
 
 printf("p dizisinin %zu elemani var \n", asize(p));
+printf("içinde hnagi karakter olanlar yazilsin: ");
+
+int c = getchar();
 
 for (size_t i = 0;i< asize(p); ++i){
 printf("%c", *p[i]); //p[i][0] //aynı anlama gelir- //iismlerin ilk harfini yazar
 printf("%c", *p[i][strlen(p[i] - 1); //dizinin son elemanını verir
 }
 
+
 ////////////////////////////////////////////////////2. Ders////////////////////////////////////////7
+
+!! const char * p[] = {} //look up table için bolca kulllanıcağız, dizinin elemanlaı değişebilir
+
+!! const char * const p[] = {} //p'nin elemanlarına bir atama yapılamaz, p'nin gösterdiği nesneyi değiştiremeyiz
+
+!! char * const p[] = {} //p'nin gösterdiği nesneyi değiştiremeyiz
+-------
+
+int main(void)
+{
+const char * p[] = {};
+
+int ch ;
+
+printf("içinde hangi harf olanlar: ");
+ch = getchar();
+
+for (size_t i = 0; i < asize(p); ++i){
+if (strchr(p[i], ch)) {
+printf("%s ", p[i]);
+}
+}
+}
+
+-----
+
+int main(void)
+{
+const char * p[] = {};
+
+char str[SIZE];
+
+printf("harfleri girin: ");
+scanf("%s", str);
+
+for (int i = 0; i < asize(p); ++i) {
+if (strpbrk(p[i], str)) {
+printf("%s", p[i]);
+}
+}
+}
+
+-------------------------------------
+
+void func(void)
+{
+
+  static const char * const pdays[] = {
+  "", //indeks ile sayma sayısının aynı olması için yapılır
+  "pt",
+  "sali",
+  "carsamva",
+  "persembe",
+  "cuma",
+  "cumartesi",
+  "pazar",
+};
+}
+
+
+===========================================================
+
+pointer to pointer : pointer değişkenlerin kendi adresi ile ilgilidir
+
+int main(void)
+{
+int x = 10;
+int * ptr = &x;
+
+printf("&x = %p\n", &x); //aynı adres yazar
+printf("ptr = %p\n", ptr);
+printf("ptr = %p\n", &ptr); //ptr değişkenin kendi adresi
+
+&ptr türü = int**
+}
+
+int main(void)
+{
+int x = 10;
+int * ptr = &x;
+int ** p = &ptr; 
+//*p  = ptr'ye erişilir, **p = *(*p) = x
+//**p p'nin gösterdiği nesnenin gösterdiği nesnedir
+}
+
+double dereferencing
+double indirection
+
+
+int main(void)
+{
+int a[] = {10, 20, 30, 40, 50};
+int * p = a;
+int** ptr = &p;
+
+++*p; //a dizisinin ilk elemanı 10, 1 artar
+++* ptr; // ++p //dizinin 2. elemanın adresini gösterir
+
+
+}
+
+------------------------
+
+expression      type      value category
+----------      ----      ---------------
+x               int        L
+&x              int*       R
+p               int *      R
+
+
+
+
+
+
+
+
+
+
+
 
 
 
