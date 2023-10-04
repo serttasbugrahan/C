@@ -385,28 +385,83 @@ int** ptr = &p;
 
 ------------------------
 
+int main(void)
+{
+int x = 10;
+int * p = &x;
+int ** ptr = &p;
+}
+
 expression      type      value category
 ----------      ----      ---------------
 x               int        L
 &x              int*       R
-p               int *      R
+p               int*       R
+*p              int        L
+p[0]            int        L
+&p              int**      R
+ptr             int**      L
+*ptr            int*       L
+**ptr           int        L
+&ptr            int***     R
+
+------------------------------------
+
+pointer to pointer ne işe yarar :
+
+int main(void)
+{
+int x = 10;
+int y = 45;
+int * p1 = &x;
+int * p2 = &y;
+
+printf("%d %d\n", *p1, *p2);
+
+pswap(&p1, &p2);
+
+printf("%d %d\n", *p1, *p2);
+
+}
 
 
+void pswap(int ** ptr1, int ** ptr2)
+{
+int *ptemp = *p1;
+*ptr1 = *ptr2;
+*ptr1 = ptemp;
+}
 
+-------------
 
+void func(int ** ptr)
+{
+*ptr = &x;
 
+}
 
+int main(void)
+{
+int x = 10;
+int* p = &x;
 
+printf("x = %d\n", x);
+func(&p);
+printf("x = %d\n",x);
+}
 
+--------------
 
+int ** foo(void);
 
+int main(void)
+{
+int ** ptr = foo();
 
+}
 
+-------------
 
-
-
-
-
-
+//2.16:18
 
 
