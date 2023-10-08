@@ -1,0 +1,299 @@
+//////////////////////////////////////////////////1. Ders/////////////////////////////////////////////////////////
+
+!! const ne'den önce gelirse const olan o dur
+
+!! int * const p = &x; //p'ye atama yapılmaz
+
+!! int const *  p = &x; //*p'ye atama yapılmaz
+
+
+void func(int * p); //aynı anlamdadır
+void func(int p[]); //aynı anlamdadır
+ 
+void func(int ** p); //aynı anlamdadır
+void func(int * p[]); //aynı anlamdadır
+
+
+
+======================================================================
+
+void pointers:
+
+//hem c' de hem c++'da ifadenin türü void olabilir
+
+int main(void)
+{
+void x; //hata
+void a[]; //hata
+
+}
+
+int main(void)
+{
+(void)getchar; //geri dönüş değerini kullanmadığımızı söyler
+
+}
+
+!! void ve void * türleri ayrı türlerdir
+
+int main(){
+int x = 12;
+double dval = 3.4;
+char str[] = "mustafa";
+int a[] = {3,4,8,7,5}
+
+void * vptr = &x;
+
+vptr = &dval;
+vptr = str;
+vptr = a;
+
+vptr = x; //hata, adresi olmayan değişkene void pointer verilemez
+
+}
+
+
+*vptr = 10; //geçersiz
+vptr[2] //geçersiz
+vptr + 2 //geçersiz
+vptr - 2 //geçersiz
+
+-----------------------------
+
+void pointer ile neler yapılır : 
+
+vptr = &vptr 
+void * vptr = 0;
+void * vptr = NULL;
+void * vp = &x;
+
+if (vp != NULL)
+if(vp)
+if (vp == NULL)
+if (!vp)
+
+void * vp1 = &x;
+void * vp2 = &dval;
+if (vp1 = vp2)
+if (vp1 = &x)
+if (vp2 = &dval)
+
+int main(void)
+{
+int x = 12;
+void * vp = &x;
+
+int * iptr = vp; //void* ===> int *, c'de hata olmaz c++ hata olur
+int * iptr = (int *)vp; //c++'da böyle legal olur c'dede böyle yazabilirsin
+
+}
+
+--------
+
+!!aynı tam sayı türünün işaretlisi veya işaretsizi tanımsız davranış olmaz
+
+
+
+------------------ KAYDI YOK BU KISMIN HOCA UNUTTU--------------------------------,
+
+
+void gswap(void * p1, void* vp2, size_t sz)
+{
+char * p1 = (char *)vp1;
+char * p2 = (char *)vp2;
+
+while (sz--){
+char temp = *p1;
+*p1++ = *p2;
+*p2++ = temp;
+}
+}
+
+int main(void){
+int x = 10, y = 45;
+double d1 = 4.587123;
+double d2 = 2.981555;
+
+int a[5] = {1, 2, 3, 4, 5};
+int b[5] = {-1, -2, -3, -4, -5};
+
+printf("x = %d  y = %d\n", x, y);
+printf("d1 = %f  d2 = %f\n", d1, d2);
+print_array(a, 5);
+print_array(b, 5);
+
+
+gswap(&x, &y, sizeof(int));
+gswap(&d1, &d2, sizeof(double));
+gswap(a, b, sizeof(a));
+
+printf("x = %d  y = %d\n",x, y);
+printf("d1 = %f  d2 = %f\n",d1, d2);
+printf_array(a, 5);
+print_array(b, 5);
+}
+
+----------
+
+// türden bağımsız bir diziyi reverse edecek bir fonksiyon yazalım
+
+#define SIZE 100
+
+void g_reverse_array(void * vpa, size_t size, size_t sz){
+char * p =(char*)vpa;
+
+for (size_t i = 0; i < size / 2; ++i){
+// adresi p pointer değişkeninde tutulan dizinin i indisli elemanının adresi, p + i * sz dır
+gsap(p + i * sz, p + (size - 1 - i)  * sz, sz);
+}
+
+}
+
+int main()
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+
+g_reverse_array(a, SIZE, sizeof(*a);
+//g_reverse_array(a, SIZE, sizeof(a[0]); //aynı anlama gelir üçü
+//g_reverse_array(a, SIZE, sizeof(int);
+
+double ar[] = {1.21, 2.31, 3.45, 4.98, 5.12, 6.1, 7.7, 8.5};
+
+g_reverse_array(ar, asize(ar), sizeof(*ar));
+
+}
+
+-------------------------------------
+
+<string.h> 
+
+memset : bir bellek bloğunun tüm bytelarına bir tam sayı değerini yazmak için kullanılır 
+memcpy : br bellek bloğunu bir yerden bir yere kopyalar
+memmove : memcpy'nin yapamadığı bazı işlemleri yapar
+memchr : bir bellek bloğunda byte tam sayı değeri arar
+memcmp : 2 bellek bloğunu karşılaştırır
+
+-------------------
+
+void * memset(void * vp, int val, size_t sz);
+
+int main(void)
+{
+int a[SIZE];
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+
+//Normalde dizinin elemanları böyle sıfırlanır
+for (int i = 0; i < SIZE; ++i)
+a[i] = 0;
+printf_array(a, SIZE);
+
+//memset ile bu şekilde sıfırlanabilinir
+memset(a, 0, sizeof(a));
+printf_array(a, SIZE);
+
+int idx;
+int n;
+printf("hangi indeksten başlayarak kaç tane oge sifirlanacak: ");
+scanf("%d%d", &idx, &n)
+memset(a + idx, 0, n * sizeof(int));
+
+print_array(a, SIZE);
+}
+
+------
+
+int main()
+{
+char str[] = "bugra serttas"; //bugra !!!tas
+char * p = strchr(str, 's');
+if (p != NULL){
+memset(p, '!', 3);
+}
+}
+
+-----
+
+int main(void)
+{
+int x;
+memset(&x, 0, sizeof x);
+printf("x = %d",x); //0
+
+memset(&x, 255, sizeof x); //bütün bytlera 255 yazar 1111 1111
+printf("x = %d",x); //-1
+
+memset(&x, 1, sizeof x); //bütün byte'lara 1 yazar 4 byte var 0000 0001 0000 0001  0000 0001  0000 0001 
+printf("x = %d",x); // 16.843.009
+}
+
+-------------
+
+memset kodunun yazilması :
+
+void * mymemset(void * vp, int val, size_t sz)
+{
+char * p = (char*)vp;
+
+while (sz--)
+*p++ = val;
+return vp;
+
+}
+
+
+-------------------
+
+void * memcpy(void * vpdest, const void* vpsource, size_t sz);
+
+int main(void)
+{
+int a[SIZE];
+int b[SIZE];
+
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+
+//memcpy ile a dizisini b dizisine kopyala
+memcpy(b, a, sizeof(a));
+
+
+int idx_a, idx_b, n;
+printf("a' da index: ");
+scanf("%d", &idx_a);
+printf("b' da index: ");
+scanf("%d", &idx_b);
+printf("kaç tane eleman kopyalnıcak: ");
+scanf("%d", &n);
+
+memcpy(b + idx_b, a + idx_a, n * sizeof(int));
+}
+
+-------
+
+memcpy kodunun yazılması:
+
+void * memcpy(void * vpdest, const void* vpsource, size_t sz);
+{
+char *pdest = (char*)vpdest;
+const char * psource = (const char*)vpsource;
+
+while (n--){
+*dest++ = *psource++;
+}
+return vpdest;
+
+
+}
+
+////////////////////////////////////////////////////2. Ders////////////////////////////////////////
+
+
+
+
