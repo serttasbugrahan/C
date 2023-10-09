@@ -458,7 +458,7 @@ printf("bulunamadi\n");
 }
 }
 
---------------------
+--------------------------------------------------------------------
 
 int main(void)
 {
@@ -484,16 +484,64 @@ func(&ptr);
 }
 
 --------
-
 int main(void)
 {
 int x = 10;
 double dval = 3.4;
-void * vp = &dval;
-void ** vptr = &vp;
-*vptr = &x; //vp = &x
+void * vp = &dval; //hata yok 
+void ** vptr = &vp; //hata yok
+*vptr = &x; //vp = &x //hata yok 
 **vptr = 999; //synatx hatası çünkü  *vptr = vp, vp direferans edemessin (void pointer direfferans edince nesneye erişilemez)
 }
+
+-------
+
+int main(void)
+{
+void * vp;
+foo(vp); //void pointerın değeri olan adresi gönderir
+bar(&vp); //vp'Nin adresini aldığı için yeni bir değer yükleyebilir
+}
+
+-------
+
+int main(void)
+{
+int * ip;
+void * vp;
+void ** vpp;
+
+ip = &ip; //error, çünkü int * türünü int **'a atadık
+vp = ip //legal, void * 'a bütün adresler atanabilinir
+vp = &ip //legal, void pointer atanabşlmesi için tek şart onun adres olması
+vpp = &ip //error, void** ,int ** 'a atanamaz
+vpp = &vp // legal, void** , void**
+vpp = &vpp //error, voidd**, void***
+vp = &vp // legal, void * için tek koşul adres olması
+
+!! kendi adresini tutabilecek tek pointer void pointer, void * vp = &vp;
+}
+
+======================================================
+!! MÜLAKATLARDA %90 ÇIKAR
+
+endianness
+ little endian : düşük anlamlı byte düşük sayısal adresli yüksek anlamlı byte yüksek sayısal adreste, intel kullanır
+ big endian : düşük anlamlı byte yüksek sayısal adresli yüksek anlamlı byte düşük sayısal adreste, inetl kullanır
+
+00000000 00000000 00000000 00001111
+
+big endian
+1A00  00000000
+1A01  00000000
+1A02  00000000
+1A03  00001111
+
+little endian
+1A00  00001111
+1A01  00000000
+1A02  00000000
+1A03  00000000
 
 
 ======================================================
