@@ -543,16 +543,229 @@ little endian
 1A02  00000000
 1A03  00000000
 
+-------------
+
+int main(void)
+{
+int x = 1;
+int * p = &x;
+
+if(*(char*)p){
+printf("little endian");
+}
+else{
+printf("big endian");
+}
+}
 
 ======================================================
 
-pointer 2 ye ayrılır --> obejct - functions
+function pointers :
+
+int foo(int);
+
+!! foo fonksiyonunun türü ---> int(int)
+
+double bar(double) //double(double)
+strrchr //char*(const char *, int)
+
+fonksiyon türü           fonksiyonun adresi türü
+--------------           -----------------------
+int (int)                int (*)(int)
+double (double, double)  double (*)(double, double)
+
+Peki, bir fonksiyon adresi nasıl elde edilir :
+
+int foo(int);
+double bar(double);
+
+int main(void)
+{
+&bar
+&foo
+&strcmp
+}
+
+!! function to pointer convertion: Bir fonksiyonun ismi bir ifade içinde herhnagi bir operatörün operandı olmadan kullanılsada derleyici
+fonksiyonun ismini adresine dönüştürür. (foo, &foo)
+
+!! int (*fp)(int); //sadece parametresi int olanı tutar
 
 
+----------
 
+//strlen adresini bir değişkende tutulması
+size_t strlen(const char *);
 
+int main(void)
+{
+size_t (*fp)(const char *) = &strlen;
+size_t(*fp)(const char*) = strlen; //aynı anlama gelir
 
+}
 
+-------------
+
+//sum adresini bir değişkende tutulması ve atama yaoılması
+int sum(int,int int);
+
+int main(void)
+{
+int (*fptr)(int, int, int) = &sum;
+fptr = &bar; //bar (aynı anlama gelir);
+}
+
+------------
+
+() fuunction call operator
+[] index / subscript
+
+. -> member selection operators
+. dot operator
+-> arrow operator
+
+-------------
+
+int foo(int x)
+{
+printf("int foo(int) called!!!\n");
+return x * x;
+}
+
+int main(void)
+{
+(&foo)(12);
+}
+
+------------
+
+int foo(int x)
+{
+printf("int foo(int) called!!!\n");
+return x * x;
+}
+
+int main(void)
+{
+int (*fp)(int) = foo;
+fp(12); //bu şekildede çağırabiliriz. başka bir isimle
+}
+
+-------------
+
+void f1(void)
+{
+printf("f1 called!");
+}
+
+void f2(void)
+{
+printf("f1 called!");
+}
+
+void f3(void)
+{
+printf("f1 called!");
+}
+
+int main(void)
+{
+void (*fp)(void) = &f1;
+        fp();
+fp = &f2;
+        fp();
+fp = &f3;
+        fp();
+}
+
+---------------
+
+void f1(void)
+{
+printf("func called!");
+}
+
+int main(void)
+{
+void (*fp)(void) = &func;
+fp();
+(*fp)() //bu şekilde de çağırılanabilinir, !!function pointer vurgusu için yapılır
+}
+
+-----------------
+
+void func(int (*x)(int));
+
+int f1(int);
+int f2(int);
+int f3(int);
+
+int main(void)
+{
+func(f1); //&f1 bu şekildede olur
+func(f2);
+func(f3);
+}
+
+----------------
+
+func(foo()) //foo'nun geri dönüş değeri ile func çağrılır
+
+func(foo) //func'a foo'yu çağırmak
+
+---------------
+// aynı anda birçok işlev yaptırmak için kullanılınır
+
+void foo(void)(*fp)(void))
+{
+printf("foo called\n");
+fp();
+printf("----------\n");
+}
+
+void f1(void)
+{
+printf("f1 called!");
+}
+
+void f2(void)
+{
+printf("f1 called!");
+}
+
+void f3(void)
+{
+printf("f1 called!");
+}
+
+int main(void)
+{
+
+foo(f1); //foo çağrılır ve f1 çağırıır
+foo(f2); //foo çağrılır ve f2 çağırıır
+foo(f3); //foo çağrılır ve f3 çağırıır
+}
+
+---------------
+
+void printf_test(int(*fptest)(int))
+{
+for (int i = 0; i < 128; ++i){
+if (fptest(i))
+printf("%c", i);
+}
+printf("\n");
+}
+
+int main(void)
+{
+print_test(isupper);
+print_test(islower);
+print_test(isalpha);
+
+}
+
+-------------- 
 
 
 
