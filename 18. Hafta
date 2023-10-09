@@ -281,7 +281,7 @@ memcpy kodunun yazılması:
 
 void * memcpy(void * vpdest, const void* vpsource, size_t sz);
 {
-char *pdest = (char*)vpdest;
+char *pdest = (char*)vpdest; //tür dönüştürme sorun olmasa da kullan
 const char * psource = (const char*)vpsource;
 
 while (n--){
@@ -293,6 +293,224 @@ return vpdest;
 }
 
 ////////////////////////////////////////////////////2. Ders////////////////////////////////////////
+
+memmove : memcpy ile aynı işlevi yapar
+
+void * memcpy(void* vpdest, const void vpsource, size_t sz);
+
+void * memmove(void* vpdest, const void* vpsource, size_t sz);
+
+!! memcopy overlap blokar üzerinde doğru çalışma garantisi sağlamaz tanımsıs davranış olur memmove bu şartı sağlar
+
+!! overlap : bellek çakışması anlamına gelir
+
+int main(void)
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a ,SIZE);
+print_array(a, SIZE);
+
+memcpy(a + 40, a + 20, 30 * sizeof(int)); //tanımsız davranıştır, a + 40 dmek a indinin 40. elemanı demek
+}
+
+----------
+
+memmove fonskiyonunun yazilmasi :
+
+
+void * my_memmove(void * vpdest, const void * vpsource, size_t n)
+{
+char  * pdest = (char*)vpdest;
+const char * psource = (const char*)vpsource;
+
+if (pdest < psource) {
+while (n--)
+*pdest++ = *psource++;
+}
+else {
+pdest += n;
+psource += n;
+while (n--)
+*--pdest = *--psource;
+}
+return vpdest;
+}
+
+-------------------
+
+memchr : bellek bloğunda byte arar bulursa adresini döndürür bulamassa NULL pointer döndürür
+
+void  * memchr(const void * vp, int val, size_t sz);
+
+------
+
+memchr fonksiyonun yazlması :
+
+void  * mymemchr(const void * vp, int val, size_t sz);
+{
+const char *p = (const char*)vp;
+while (sz--){
+if (*p == val){
+return (void*)p
+}
+++p;
+}
+return NULL;
+}
+
+--------
+
+int main(void)
+{
+char str[SIZE] = "BUGRA SERRTAS";
+char *p = (char *)memchr(str + 10, 'a', 10);
+}
+
+int main(void)
+{
+unsigned char a[] = {1,4,5,7,9,7,2,3,4,0}
+
+unsigned char * p = (unsigned char*)memchr(a, 0, asize(a));
+if (!p) {
+printf("bulunamadi\n");
+}
+else{
+printf("bulundu diiznin %d indisli elemani\n", p - a);
+}
+}
+
+--------------
+
+memcmp : 2 bellek bloğunu karşılaştırır
+
+int memcmp(const void * vp1, const void * vp2, size_t sz);
+
+int main(void){
+int a[SIZE];
+int b[SIZE];
+
+randomize();
+set_array_random(a, SIZE);
+memcpy(b, a ,sizeof(a));
+
+if (!memcpy(a, b, sizeof(a)){
+printf("evet esit\n");
+}
+else{
+printf("hayir esit degil\n");
+}
+}
+}
+
+
+-------
+
+memcmp kodunun yazilmasi :
+
+int mymemcmp(const void * vp1, const void * vp2, size_t n)
+{
+const unsigned char * p1 = vp1;
+const unsigned char * p2 = vp2;
+
+while (n--){
+if (*p1 != *p2){
+return *p1 > *p2 ? 1 : -1;
+}
+++p1;
+++p2;
+}
+return 0;
+}
+
+---------------------
+
+void * search_array(const void * vpa, size_t size, size_t sz, const void* vpkey);
+{
+const char * p = (const char *)vpa; //dönüştürme olmadanda çalışır sen yaz ama
+for (size_t i = 0; i < size; ++i){
+if (!memcmp(p + i * sz, vpkey, sz)
+return (void*)(p + i * sz);
+}
+return NULL;
+}
+
+
+int main(void)
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a ,SIZE);
+print_array(a ,SIZE);
+int ival;
+
+printf("aranan değeri girin: ");
+scanf("%d", &ival);
+
+int *p = (int*)search_array(a, SIZE, sizeof(int), &ival
+if (p){
+printf("bulundu... dizinin %d indisli elemani\n", p - a);
+}
+else{
+printf("bulunamadi\n");
+}
+}
+
+--------------------
+
+int main(void)
+{
+// void * vp;
+// &vp ==> void**
+
+void * vp = &x;
+void ** vptr = &vp;
+
+}
+
+----
+
+void func(void ** p)
+{
+*p = &
+}
+
+int main(void)
+{
+void* ptr;
+func(&ptr);
+}
+
+--------
+
+int main(void)
+{
+int x = 10;
+double dval = 3.4;
+void * vp = &dval;
+void ** vptr = &vp;
+*vptr = &x; //vp = &x
+**vptr = 999; //synatx hatası çünkü  *vptr = vp, vp direferans edemessin (void pointer direfferans edince nesneye erişilemez)
+}
+
+
+======================================================
+
+pointer 2 ye ayrılır --> obejct - functions
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
