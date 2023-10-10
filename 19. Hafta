@@ -1,8 +1,250 @@
 ////////////////////////////////////////////////////1. Ders////////////////////////////////////////////////////
 
+functions pointers devam...
+
+fonksiyon çağırtma 
+
+standart qsort fonskiyonu : functions pointer parametreli fonksiyon
+--------------------------
+
+<stdlib.h>
+
+void qsort(void *vpa, size_t size, size_t sz, int (*fp)(const void *, const void*));
+
+dizinin adresi - sıralanıcak dizinin boyutu - dizinin 1 elemanının boyutu
+
+int mycmp(const void* vp1, const void* vp2)
+{
+  int x = *(const int*)vp1;
+  int y = *(const int*)vp2;
+  
+  int resılt = x % 2 != 0 && y % 2 == 0 || (x % 2 == y % 2) && x > y 
+
+}
+int mycmp(const void*, const void*);
+{
+if (*(const int*)vp1) > (*(const int*)vp2){
+return 1;
+}
+
+if (*(const int*)vp1) <  (*(const int*)vp2){
+return -1;
+}
+return 0;
+}
+
+int main(void)
+{
+int a[SIZE];
+qsort(a, SIZE, sizeof(int),mycmp);
+
+}
+
+!! qsort fonksiyonu sizin adresini gönderdiğiniz fonksiyonu 
+sizin adresini gönderdiğiniz dizinin elemanlarının adresleriyle çağırır
 
 
+--------------------------------------------
+!! p + k * sz: dizinin k indisli elemanının adresi
 
+
+generic bir bubble sort fonksiyonu
+
+qsort ile aynı parametrik yapıda ismi 
+gbsort olan bir fonksiyon tanımlayınız tanımladığınız fonksiyonu farklı türden diziler ile
+ve farklı karşılaştırma kriterleri ile test ediniz
+
+void g_bubble_sort(void * vpa, size_t size, size_t sz, int (*fp)(const void *, const void *))
+{
+char * p = (char *)vpa;
+for (size_t i = 0; i < size - 1; ++i){
+for (size_t k = 0; k < size - 1 - i; ++k){
+if (fp(p + k * sz, p + (k + 1) * sz) > 0){
+gswap(p + k * sz, p + (k + 1) * sz, sz);
+}
+// fp nin gösterdiği fonksiyonu dizinin k ve k + 1 indisli elemanlarının adresleriyle çağır
+// eger fonksiyon pozitif deger döndürürse dizinin k ve k + 1 indisli elemanlarını takas et
+}
+}
+}
+
+int main(void)
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a, SIZE, sizeof(int), mycmp);
+print_array(a, SIZE);
+}
+
+--------------
+
+int dcmp(const void* vp1, const void* vp2)
+{
+double x = *(const double*)vp1;
+double y = *(const double*)vp2;
+
+return x > y ? 1 :
+x < y ? -1 : 0;
+}
+
+int  main(void)
+{
+double ar[] = {34,56,7,8,90,9.8,7656,4,55,678,9,88,77,34,65,7}
+g_bubble_sort(ar, asize(ar), sizeof * ar, dcmp);
+
+for (size_t i = 0; i < asize(ar), sizeof * ar, dcmp);
+printf("%f\n", ar[i]);
+}
+
+--------------------------------
+
+bsearch : sıralanmış bir dizide arama yapar
+--------
+
+void *bsearch(const void *vpkey, const void *vpa, size_t size, size_t sz, int (*)(const void *, const void *))
+
+int main(void)
+{
+int ar[SIZE];
+
+randomize();
+set_array_random(ar, SIZE);
+
+g_bubble_sort(ar, SIZE, sizeof(int), cmp_int);
+print_array(ar, SIZE);
+
+int ival;
+printf("aranacak deger: ");
+(void)scanf("%d", &ival);
+int * p = (int *)bsearch(&ival, ar, SIZE, sizeof, cmp_int)
+
+if (p){
+printf("bulundu dizinin %d indisli elemani\n", p - ar);
+}
+else{
+printf("bulunamadi\n");
+}
+}
+
+
+==================================================
+
+function pointer arrays :
+
+haftanın ayrı günlerinde farklı görevler var ise bunu şu şekilde yaparız (jump table) :
+- anahtarı indekse dönüştür indekste bir fonksiyon adresi elde et. o adresteki fonksiyonu çağır.
+
+haftanın farklı günlerinde yapılacak işleri farklı fonksiyolar olarak tanımlarız. bir pointer dizisinde bunların adreslerini tutarız
+ve bu fonksiyona bir index gönderip o indeksi dizi elemanı olan fonksiyon pointerının gösterdiği fonksiyonu çağırırız
+
+------
+
+int f1(int);
+int f2(int);
+int f3(int);
+int f4(int);
+int f5(int);
+
+int main(void)
+{
+int (*fptr(int)) = &f1;
+
+int (*fa[5])(int); //bu şekilde gösterilir
+int (*fa[5])(int) = {f1, f2, f3,f4,f5}
+int (*fa[])(int) = {&f1, &f2, &f3,&f4,&f5} //anlam farklılığı olmaz
+asize(fa) // 5
+
+int (*fp)(int);
+int (**fptr)(int) = &fp; //dizinin ilk elemanın adresi, fp'nin adresini fonksiyon pointerda tutulması
+*fptr = fp //elde ederiz
+
+int (*fa[](int) = {f1, f2, f3, f4, f5};
+int (**fptr)(int) = fa; //dizinin ilk elemanının adresi
+int (**fptr)(int) = &fa[0] //aynı anlama gelir
+
+}
+
+------
+
+typedef int (*FPTR)(int); //kolay yol
+
+int main(void)
+{
+FPTR fa[] = {f1,f2,f3,f4,f5};
+FPTR * p = fa;
+}
+
+-------------------------------
+
+void f1(int x)
+{
+printf("f1 cagrildi %d\n", x);
+
+}
+
+void f2(int x)
+{
+printf("f2 cagrildi %d\n", x);
+
+}
+
+void f3(int x)
+{
+printf("f3 cagrildi %d\n", x);
+
+}
+
+void f4(int x)
+{
+printf("f4 cagrildi %d\n", x);
+
+}
+
+void f5(int x)
+{
+printf("f5 cagrildi %d\n", x);
+
+}
+
+typedef void (*FUNCPTR)(int);
+
+int main(void)
+{
+FUNCPTR fa[] = {&f1,&f2,&f3,&f4,&f5};
+for (size_t i = 0; i < asize(fa); ++i){
+fa[i](i); //sırayla fonksiyonları yazdırır
+}
+}
+
+
+-----------------
+
+void func(int dayno)
+{
+void (*fpa[7])(void);
+//
+fpa[dayno]();
+}
+
+------------------
+
+standart karakter test fonksiyonlarının isimleriyle (standart giriş akımından alınıcak) 
+çağrılabileceği bir kod yapısı oluşturun
+
+int main(void)
+{
+char fname_input(SIZE];
+int ch;
+
+printf("karakteri girin: ");
+ch = getchar
+printf("hangi test fonksiyonu çağrılsn: ");
+
+
+}
+
+//1.44.18
 
 
 
