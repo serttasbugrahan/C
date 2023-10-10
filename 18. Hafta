@@ -526,8 +526,8 @@ vp = &vp // legal, void * için tek koşul adres olması
 !! MÜLAKATLARDA %90 ÇIKAR
 
 endianness
- little endian : düşük anlamlı byte düşük sayısal adresli yüksek anlamlı byte yüksek sayısal adreste, intel kullanır
- big endian : düşük anlamlı byte yüksek sayısal adresli yüksek anlamlı byte düşük sayısal adreste, inetl kullanır
+ little endian : düşük anlamlı byte düşük sayısal adresli yüksek anlamlı byte yüksek sayısal adreste, intel kullanır (kıymetli byte sağda)
+ big endian : düşük anlamlı byte yüksek sayısal adresli yüksek anlamlı byte düşük sayısal adreste, (kıymetli byte solda)
 
 00000000 00000000 00000000 00001111
 
