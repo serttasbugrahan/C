@@ -97,7 +97,7 @@ int * iptr = (int *)vp; //c++'da böyle legal olur c'dede böyle yazabilirsin
 ------------------ KAYDI YOK BU KISMIN HOCA UNUTTU--------------------------------,
 
 
-void gswap(void * p1, void* vp2, size_t sz)
+void gswap(void * vp1, void* vp2, size_t sz)
 {
 char * p1 = (char *)vp1;
 char * p2 = (char *)vp2;
