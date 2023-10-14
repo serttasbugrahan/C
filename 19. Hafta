@@ -909,13 +909,192 @@ swap_names(names[k], names[k + 1]);
 print_names(names, asize(names));
 }
 
+--------------
+fonksiyon ile yazma:
 
+void sort_names(char(*p)[20], size)
+{
+for (size_t i = 0; i < size - 1; ++i){
+for (size_t k = 0; k < size - 1 - i; ++k){
+if (strcmp(p[k], p[k + 1]) > 0){
+swap_names(p[k], p[k + 1]);
+}
+}
+}
+}
 
+int main(void)
+{
+char names[][20] = {};
+sort_names(names, asize(names));
+}
 
+------------------
+!! aşağıdakiler aynı anlamdadır
 
+void foo(int * p);
+void foo(int p[]);
 
+void bar(int ** p);
+void bar(int * p[]);
 
+void baz(int (*p)[10]);
+void baz(int p[][10]);
 
+void func(int (*p)(int));
+void func(int (int));
+
+========================================================================
+
+string.h fonksiyonlarına devam...
+
+char * strncpy(char *pdest, const char *psource, size_t n); //kaç karakterle işlem yapılacağına göre işlem değişir
+char * strncat(char *pdest, const char * psource,size_t n); //kaç karakterle işlem yapılacağına göre işlem değişir
+int * strnncat(char *pdest, const char * psource,size_t n); //kaç karakterle işlem yapılacağına göre işlem değişir
+
+-------------------
+strncpy:
+
+int main(void)
+{
+char str[SIZE] = "necati";
+char s[SIZE];
+size_t n;
+
+printf("kac karakter: ");
+scanf("%zu", &n);
+
+strncpy(s, str, n);
+s[n] = '\0';
+
+//strncpy(s, str, n)[n] = '\0'; bu şekildede yazılabilinir
+ 
+puts(s);
+}
+
+------------
+strncat:
+
+int main(void)
+{
+char str[SIZE] = "123456789";
+char s[SIZE] = "OSMAN";
+
+size_t n;
+printf("kac karakter: ");
+scanf("%zu",&n);
+
+strncat(s ,str,n);
+pust(s);
+}
+
+------------
+strncmp: 
+
+int main(void)
+{
+char s1[SIZE] = "erhan akpınar";
+char s2[SIZE] = "batuhan demir";
+
+if (!strncmp(s1 + 2, s2 + 4)){
+printf("evet esit\n");
+}
+else{
+printf("hayir esit degil");
+}
+}
+
+---------------
+
+strtok : yazılardaki token'ı bulur onlarla işlem yapmamıza yardımcı olur
+
+char * strtok(char * p, const char * pep)
+
+//bu kodlar çok önemli tekra et
+int main(void)
+{
+char str[SIZE] = "ali bugun eve gec geldi babam ona cok kizdi";
+int cnt = 0;
+
+char * p = strtok(str, "\n\t");
+while(p) {
+printf("%-3d %s\n", ++cnt, p);
+p = strtok(NULL, "\n\t");
+}
+}
+
+-----
+
+int main(void)
+{
+char str[SIZE] = "ali876567ayse568765mustafa598765tayfyn8765678helin87678";
+
+int cnt = 0;
+const char * psep = "0123456789";
+
+char * strtok(str, psep);
+while(p){
+printf("%-3d %s\n", ++cnt, p);
+p = strtok(NULL, psep);}
+}
+
+-----
+
+int main(void)
+{
+char str[SIZE] = "bircan, ilker, omer ve necati... mehmet!!!yasin; buradalar...";
+
+int cnt = 0;
+const char * psep = " ,.!;";
+
+char * strtok(str, psep);
+while(p){
+printf("%-3d %s\n", ++cnt, p);
+p = strtok(NULL, psep);}
+}
+
+-----
+//yazıyı sayıya dönüşürmek
+
+#define SIZE 100
+
+int main(void)
+{
+char str[SIZE];
+
+printf("bir yazi girin: ");
+scanf("%s", str);
+
+printf("[%s]\n,str");
+
+int ival = 0;
+
+for (int i = 0; str[i] != '\0'; ++i){
+ival   = ival * 10 + str[i] - '0';
+}
+
+printf("[%s]\n", str);
+}
+
+----------------------------------------------
+
+<stdlib.h> 
+atoi: //yazıyı sayıya dönüştüren fonksiyon
+
+int atoi(const char * p);
+
+int main(void)
+{
+char str[SIZE];
+
+printf("bir yazi girin: ");
+scanf("%s", str);
+
+printf("[%s]\n,str");
+
+int ival = atoi(str);
+printf("ival = %d\n", ival);
+}
 
 
 
