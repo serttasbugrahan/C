@@ -698,9 +698,10 @@ printf("%d ", *p++);
 }
 
 -------------------
+
 !! çok boyutlu dizi fonksiyona nasıl geçirilir :
 
-void set_ar(int(*p)[5], int size)
+void set_ar(int(*p)[5], int size)  //bu şekildede yazılabilinir
 {
 for (int i = 0; i < size; ++i){
 for(int k = 0; k < size; ++k){
@@ -709,9 +710,9 @@ p[i][k] = rand() % 10;
 }
 
 ---
-void set_ar(int(*p)[5], int size)
+void set_ar(int(*p)[5], int size) //bu şekildede yazılabilinir
 {
-while(size--){ //bu şekildede yazılabilinir
+while(size--){
 for (int i = 0; i < 5; ++i)
 (*p)[i] = rand() % 10;
 ++p;
@@ -719,7 +720,7 @@ for (int i = 0; i < 5; ++i)
 }
 
 ---
-void set_ar(int(*p)[5], int size)
+void set_ar(int(*p)[5], int size) //bu şekildede yazılabilinir
 {
 for (int i = 0; i < size; ++i){
 set_array_random(p[i], 5);
@@ -735,12 +736,178 @@ set_ar(a, 4);
 set_ar(&a[0], 4);
 }
 
------------
+----------------
 
-fonksiyonun kodunun yazılması :
+void set_ar(const int(*p)[5], int size)
+{
+for (int i = 0; i < size; ++i){
+for (int k = 0; k < 5; ++k){
+printf("%d ", p[i][k]);
+}
+printf("\n");
+}
+}
+
+int main(void)
+{
+int a[4][5];
+int a[20][5];
+
+randomize();
+set_ar(a,4);
+}
+
+------------------------
+//çok sayıda aynı fonksiynu yazdırmak yerine bu yöntem kullanılabilinir
+// ön işlemciye bu işleri yaptırmak 
+// senior mülakat sorusu
+
+void f1(int(*p)[5], int size);
+void f2(int(*p)[8], int size);
+void f3(int(*p)[4], int size);
+void f4(int(*p)[6], int size);
+
+#define create_set_matrix_func(n)  void set_matrix_##n(int(*p)[n], int size  )
+                                      { \
+                                          for (int i = 0; i < size; ++i){ \
+                                          for (int k = 0; k < 5; ++k){ \
+                                          p[i][k = rand() % 10; \
+                                      } \
+create_set_matrix_func(5)
+create_set_matrix_func(8) //normalde birden fazla kullanılması hata verir (##n) kullanmak gerekir
+create_set_matrix_func(4)
+create_set_matrix_func(6)
+
+int main(void)
+{
+int a[4][5];
+int b[20][8];
+int c[8][4];
+int d[10][6];
+
+set_matrix_4(a, 4);
+set_matrix_8(b, 20);
+set_matrix_4(c, 8);
+set_matrix_6(d, 10);
+
+}
+
+--------------------------
+
+// tek bir fonksiyon ile bu işlemleri yaptırmak
+
+void set_matrix(int * p, int row, int col);
+{
+for (int i = 0; i < row; ++i){
+for (int k = 0; k < col; ++k){
+p[i * col + k] = rand() % 10;
+}
+}
+}
+
+void printf_matrix(const int * p, int row, int col);
+{
+for (int i = 0; i < row; ++i){
+for (int k = 0; k < col; ++k){
+printf("%d", p[i * col + k]);
+}
+printf("\n");
+}
+printf("\n\n");
+}
 
 
+int main(void)
+{
+int a[4][5];
+int b[20][8];
+int c[8][4];
+int d[10][6];
 
+randomize();
+
+set_matrix(&a[0][0], 4, 5); // 3 şekilde çağrılır
+set_matrix(a[0], 4, 5);
+set_matrix((int *)a, 4, 5);
+printf_matrix(a[0], 10, 20);
+}
+
+---------------------------------------
+!! char * p =   "bugra" //tanımsız davranış
+!! char p[20 = "bugra" //tanımsız davranış değil
+
+int main(void)
+{
+char names[][20] = {
+"bugra", "begum", "ali","veli","deniz","efe","oya",
+"oya", "begum", "merve","veli","deniz","mahmut","oya",
+"bugra", "mert", "ali","veli","ece","mustafa","oya",
+"buse", "begum", "rıza","dila","deniz","suat","oya",
+}
+
+for (size_t i = 0; i < asize(names); ++i){ //bu işlemi fonksiyona yazdırma
+printf("%s ",names[i]);
+}
+
+
+--------------
+
+void print_names(const char(*p)[20], size_t size)
+{
+for (size_t i = 0; i < asize(names); ++i){
+printf("%s ",p[i]);
+}
+
+int main(void)
+{
+char names[][20] = {
+"bugra", "begum", "ali","veli","deniz","efe","oya",
+"oya", "begum", "merve","veli","deniz","mahmut","oya",
+"bugra", "mert", "ali","veli","ece","mustafa","oya",
+"buse", "begum", "rıza","dila","deniz","suat","oya",
+}
+
+printf_names(names, asize(names));
+}
+
+------------------
+//dizinin elemanlarını değiştirme
+
+void swap_names(char * p1, char * p2)
+{
+char temp[20];
+strcpy(temp, p1);
+strcpy(p1, p2);
+strcpy(p2, temp);
+}
+
+int main(void)
+{
+char s1[100] = "alican";
+char s2[100] = "burhanettin";
+
+printf("%s %s\n", s1,s2);
+swap_names(s1,s2);
+printf("%s %s\n", s1,s2);
+}
+
+----------------
+//dizinin elemanlarını alfabatik sıraya göre sıralama
+
+int main(void)
+{
+char names[][20] = {...}
+print_names(names, asize(names));
+
+for (size_t i = 0; i < asize(names) - 1; ++i){
+for (size_t k = 0; k < asize(names) - 1 - i; ++k){
+if (strcmp(names[k], names[k + 1]) > 0){
+swap_names(names[k], names[k + 1]);
+}
+}
+}
+print_names(names, asize(names));
+}
 
 
 
