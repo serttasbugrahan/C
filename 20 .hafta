@@ -1,10 +1,323 @@
 ////////////////////////////////////////////////////////////////////////1. ders/////////////////////////////////////////////////////////////
 
+<stdlib.h>
+
+int atoi(const char * p);
+
+int main(void)
+{
+char str[SIZE];
+
+printf("bir tarih girin: ");
+sgets(str);
+
+printf("[%s]\n",str);
+
+int day = atoi(str);
+int mon = atoi(str + 3);
+int year = atoi(str + 6);
+
+printf("%d/%d/%d\n", day, mon,year);
+}
+
+------------------
+
+atof : float atoi
+atol : 
+atoll : 
+
+int main(void)
+{
+char str[SIZE];
+
+printf("bir yazi girin: "); //234.876bugra
+sgets(str);
+
+int ival = atoi(str);
+double dval = atof(str);
+
+printf("ival = %d\n", ival); //234
+printf("ival = %f\n", dval); //234.876
 
 
+}
+
+--------------
+strtod: 
+
+!! void func(char** p); //bir pointer değişkende değişiklik yapmak için bu yapı kullanılır veya dizi gösteren pointer
+
+int main(void)
+{
+char str[SIZE] = "12.567;23874.873245";
+char * p;
+
+double dval = strtod(str, &p);
+//double dval = strtod(str, NULL); //herhangi bir nesne istemez isek
+
+printf("dval = %f\n",dval);
+printf("index  = %d\n",p - str); //index = 6
+}
+
+--------------
+//yazıyı sayıya çevirme
+
+int main(void)
+{
+int ival;
+
+printf("bir sayi giriniz: ");
+scanf("%d",&ival);
+
+int temp = ival;
+//87345
+//8734
+//873
+//87
+//8
+
+int idx = 0;
+char str[SIZE];
+
+while(temp){
+printf("%d ", temp % 10);
+temp /= 10;
+}
+
+str[idx] = '\0';
+
+_strrev(str);
+
+printf("[%s]\n", str);
+}
+
+-----------------
+
+itoa : int to alfabetik
+
+int main(void)
+{
+int ival;
+printf("bir tam sayi girin");
+scanf("%d",&ival);
+_itoa(ival, str, 10);
+printf("decimal [%s]\n", str); //decimal halini yazar
+_itoa(ival, str, 16);
+printf("hex [%s]\n", str); //hex halini
+_itoa(ival, str, 8);
+printf("octal [%s]\n", str); //octal halini
+_itoa(ival, str, 2);
+printf("binary [%s]\n", str); //binary halini
+}
 
 
+===========================================================
 
+bellek üsütnde yapılan formatlı okuma yazma işlemleri:
+----------------------------------------------------
+<stdio.h>
+
+printf : stnadart outputa yapmak için 
+sprintf : adresteki bir diziye yazdırmak için (belleğe)
+fprintf : dosyaya yazdırmak için
+
+int printf(const char *pfm,...);
+int sprintf(char * pstr, const char  * pfm, ...);
+int fprintf(FILE *,const char *pfm,...);
+
+int main()
+{
+int ival = 278345;
+double dval = 34.742873;
+char str[SIZE];
+
+printf("[%d] [%f]", ival ,dval);
+sprintf(str, "[%d] [%f]", ival, dval);
+puts(str);
+}
+
+---------
+
+!! sprintf ile istediğimizi yazıya dönüştürebiliriz
+
+int main(void)
+{
+char name[SIZE] = "hasan";
+char surname[SIZE] = "semerci";
+int birth_year = 2000;
+
+char file_name[SIZE];
+sprintf(file_name, "%s_%s_%d.txt", name, surname, birth_year);
+
+FILE * f = fopen(file_name, 'w');
+if (!f){
+printf("dosya olusturulamadi\n");
+return 1;
+}
+}
+
+------------
+
+int main(void)
+{
+int x = 3425;
+double dval = 2.33283233;
+unsigned int uval = 345678;
+
+char str[SIZE];
+sprintf(str, "%d;%.3f;%X",x, dval, uval);
+printf("|%s|\n", str);
+}
+
+--------------
+snprintf : sprintf'den farklı olarak taşmayaı kontrol eder
+int snprintf(char * pstr, size_t n)
+
+int main(void)
+{
+char str[10];
+int x;
+
+printf("sayi girin: ");
+scanf("%d",&x);
+
+snprintf(str, 10,"hasan_%d", x);
+printf("[%s]\n", str);
+}
+
+----------------------------------------
+
+int scanf(const char * pfm,...);
+int sscanf(const char * pbuf, const char *pfm, ...);
+int fscanf(FILE * pbuf, const char * pfm,..);
+
+sscanf : bir dizide tutulan yazıya işlem yapar
+
+int main(void)
+{
+int x,y,z;
+char buffer[SIZE] = "7656 565 567656";
+
+printf("3 sayi giriniz: ");
+sscanf(buffer, "%d%d%d",&x, &y, &z);
+
+printf("x = %d y = %d z = %d\n", x, y ,z);
+
+}
+
+=============================================================
+programın sonlandırılması
+
+<stdlib.h>
+
+-exit
+-atexit
+-abort
+
+void exit (int status);
+!! main'deki return statement ile exit fonkisyonunu çağırmak arasında fark yoktur
+
+EXIT_SUCCESS
+EXIT_FAILURE
+
+int main(void)
+{
+exit(EXIT_SUCCESS); //exit(0) derleyici bunu görür, ynı anlama gelir
+}
+
+-----------
+
+void baz(void)
+{
+printf("baz basliyor\n");
+exit(EXIT_FAILURE);
+printf("baz sona eriyor\n");
+}
+
+void bar(void)
+{
+printf("bar basliyor\n");
+baz();
+printf("bar sona eriyor\n");
+}
+
+void foo(void)
+{
+printf("foo basliyor\n");
+baz();
+printf("foo sonra eriyor\n");
+}
+
+int main(void)
+{
+printf("main basliyor\n");
+foo();
+printf("main sona eriyor\n");
+}
+
+------------
+
+!! main.c içine return 0 konulmasa bile c99 standartı ile return 0 eklenir
+
+atexit : programın sonlanması sırasında özel işlevlerin çağrılmasını sağlar.
+
+int atexit(void (*)void);
+
+void baz(void)
+{
+printf("bar basliyor\n");
+}
+
+void bar(void)
+{
+printf("bar basliyor\n");
+}
+
+void foo(void)
+{
+printf("foo basliyor\n");
+}
+
+void func(void)
+{
+printf("func cagrildi\n");
+exit(EXIT_FAILURE);
+}
+
+int main(void)
+{
+atexit(&baz); //exit çağrıldığında bu fonksyonları çağırsın
+//
+atexit(&bar);
+//
+atexit(&foo);
+}
+
+---------------------------
+!! assortion : daha önce yazılmış kodlardaki hataları bulmak için yazılan kodlara denir.
+
+abort : programı direk sonlandırır
+
+void func(const char * ptr)
+{
+if (ptr == NULL){
+abort();
+}
+}
+
+int main(void)
+{
+char str[100] = "bugrahan serttas";
+
+func(strchr(str, 'A'));
+
+}
+
+
+====================================================
+
+dinamik bellek yönetimi :
+--------------------------
 
 
 
