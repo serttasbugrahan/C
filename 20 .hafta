@@ -319,7 +319,7 @@ func(strchr(str, 'A'));
 dinamik bellek yönetimi :
 --------------------------
 
-
+!! dinamik bellek edinimi statik bellek edinimi göre çok daha maaliyetlidir
 
 
 
