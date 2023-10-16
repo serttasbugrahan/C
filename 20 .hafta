@@ -314,18 +314,348 @@ func(strchr(str, 'A'));
 }
 
 
-====================================================
+/////////////////////////////////////////////////2. Ders//////////////////////////////////////////////
 
 dinamik bellek yönetimi :
 --------------------------
 
 !! dinamik bellek edinimi statik bellek edinimi göre çok daha maaliyetlidir
 
+dinamik ömürlü nesne : istenildiği zaman hayatı başlatılan 
+istenildiği zaman hayatı sonlandırılan demektir 
+
+malloc : bellek bloğunu direk bize verir
+calloc : bellek bloğunu sıfırlayarak bize verir 
+realloc: daha önce elde edilen bellek boyutunu arttırmak veya azaltmak için kullanılır
+free : daha önce ayrılan bellek bloğunu sisteme geri veriyor
 
 
+stack/daha segment/heap 
+
+heap : dinamik olarak bellekte yerlerin ayarlanmasından sorumludur
+
+heap in c
+free store in c++
+
+------------------------------
+
+malloc:
+
+void * malloc(size_t n);
+
+int main(void)
+{
+size_t n;
+
+printf("tam sayi girin: ");
+scanf("%zu", &n);
+int * pd = (int *)malloc(n * sizeof(int)); //void türünden int türüne dönüşüm
+if (pd == NULL){
+fprintf(stderr, "cannot allocate memory\n");
+return 1;
+}
+
+set_array_random(pd ,n);
+print_array(pd, n);
+free(pd); //free //deallocate
+
+}
+
+------------
+
+#define BUFFER_SIZE(1024 * 1024)
+
+int main(void)
+{
+int cnt = 0;
+void * vpa[50000];
+
+for(;;){
+void * vptr = malloc(BUFFER_SIZE);
+if (!vptr)
+break;
+vpa[cnt] = vptr;
+printf("%-5d %p\n", ++cnt,vptr);
+}
+}
+
+---------------
+
+void * checked_malloc(size_t)
+{
+void * pd = n;
+if (pd == NULL){
+fprintf(stderr, "cannot allocate memory\n");
+return(EXIT_FAILURE);
+}
+return pd;
+}
+
+int main(void)
+{
+size_t n;
+
+printf("kac tam sayi: ");
+scanf("%zu", &n);
+
+int * pd = (int *)checked_malloc(n * sizeof(int));
+print_array(pd ,n);
+
+free(pd);
+}
+
+-------------
+
+- malloc bize o değeri bir değerle set etmeden olduğu gibi veriyor
+- malloc tek parça veriri
+- o bellek bloğuna heap alanına verene kadar o bellek bloğunu kullanabiliriz
+- bellek alanını geri vermez isek o bellek alanını başka bir amaç için kullanılamıyor (memmory leak(age))
+
+-------------
+
+int main(void)
+{
+size_t n;
+
+printf("kac tam sayi: ");
+scanf("%zu", &n);
+int * pd = (int *)malloc(n * sizeof(int)); //void türünden int türüne dönüşüm
+if (pd == NULL){
+fprintf(stderr, "cannot allocate memory\n");
+return 1;
+}
+
+set_array_random(pd ,n);
+print_array(pd, n);
+
+pd = &ival; //hata, free yapmadık
+}
+
+!! malloc çağrısı ile daha önce edinilmiş 
+dinamik bir bellek bloğunun büyütülmesi söz konusu değildir
+
+=======================================================
+
+wrapper : fonksiyonu başka bir fonksiyona çağırtmak
+to wrap (sarmalamak)
+sarmalayıcı
+
+neden function wrapper yaparız?
+
+sen func ı çağırma
+sen call_func işlevini çağır call_func func_
+
+char * mitoa(int val, char * pbuf)
+{
+return _itoa(val, pbuf, 10); //10 luk sayı sitemi için çağrılıcak bu şekilde istediğimiz 
+şekilde standar kütüphanaleri değiştirebiliriz
+}
 
 
+neden kullanırız :
+
+1. augmentation
+  koda ilave kod ekleme
+
+2. argüman kontroli
+
+3. ortak kodu tek bir yere toplama
+
+4. parametre sayısını azaltma
+
+5. parametlerin sırası  
+
+=========================================================
+
+free : tekrardan bellek bloğunun kullanılmasını sağlar
+void free(void * vp);
+
+free işleviyle ilgili tipik hatalar 
+------------------------------------
+
+1. dinamik olmayan yani malloc calloc realoc ile edinilmemiş
+bellek bloğu adreslerini free işlevine göndermel
+
+int main(void)
+{
+char str[100];
+char * p = str;
+free(p); //hata , p dinamik veri adresi değilse hata olur
+}
+
+---------------
+
+2. free fonksiyonuna çağrı yaptıktan sonra free edilmiş bellek bloğunun
+adresi geçersiz bir adrestir. dangling pointer
+
+int main(void)
+{
+size_t n;
+
+printf("tam sayi girin: ");
+scanf("%zu", &n);
+int * pd = (int *)malloc(n * sizeof(int)); //void türünden int türüne dönüşüm
+if (pd == NULL){
+fprintf(stderr, "cannot allocate memory\n");
+return 1;
+}
+
+set_array_random(pd ,n);
+print_array(pd, n);
+free(pd); 
+pd = NULL; //DİKKAT ÇEKMEK İÇİN YAPILABİLİNİR
+!! pd değerini asla kullanma, yeni bir değer atayarak kullanabilirsin
+}
+
+------------------
+
+3. free işlevi allocate edilmiş bellek bloğunun adresini istiyor
+edinilmiş bir bellek bloğunun bir kısmını geri vermek için işlem yapılamaz
+
+free(pd + n / 2); 
+
+-------------
+
+4. double free
+
+int* px = pd;
+free(px);
+
+-----------
+
+5. memmory leak :allocate edilmiş bellek bloğunun geri verilmemesine denir
+
+//kopyalama ile bu işlemin önün geçeriz
+
+int dcmp(const void * vp1, const void * vp2)
+{
+if (*(const void* vp1, const void * vp2)
+return 1;
+if (*(const double*)vp1 < *(const double*)vp2)
+return -1;
+return 0;
+}
+
+double get_median(const double *p, size_t size)
+{
+double *dp = (double*)malloc(size* sizeof(double));
+if (!dp){
+fprintf(stderr, "cannot allocate memory!\n");
+exit(EXIT_FAILURE);
+}
+memcpy(db, p , size * sizeof(double));
+qsort(dp, size, sizeof(*dp), &dcmp); //sıralama yapıldı
+double retval dp[size / 2];
+free(dp); //kullanmassak memmory leak olur
+return retval;
+}
 
 
+!! return'den önce free yap UNUTMA 
+
+----------------
+
+calloc : sıfır ile başlatılmak isteniyorsa kullanılır
+void * calloc(size_t n, size_t sz);
+
+int main(void)
+{
+size_t n;
+
+printf("tam sayi girin: ");
+scanf("%zu", &n);
+int * pd = (int *)calloc(n, sizeof(int));
+if (pd == NULL){
+fprintf(stderr, "cannot allocate memory\n");
+return 1;
+}
+print_array(pd ,n);
+free(pd);
+}
+
+------------
+
+char * mystrdup(const char * p)
+{
+char * pd = (char*)malloc(strlen(p) + 1);
+if (!pd) return NULL;
+strcpy(pd, p);
+return pd //return strcpy(pd, p) aynı anlama gelir
+}
+
+int main(void)
+{
+char str[1000];
+
+printf("bir yazi girin: ");
+sgets(str);
+//yukarıdaki yazı bana ait değil ancak o yazının tersine ihtiyacım var
+
+char * p = mystrdup(str);
+_strrev(p);
+
+printf("[%s] [%s]\n", str, p);
+free(p);
+}
 
 
+--------
+!! dinamik ömürlü nesne adresi döndürüyor ise free edilmelidir, statik ise free edersek tanımsız davranışş olur
+
+//2 yazının toplamını yazan program
+
+char * concat(const char * p1, const char * p2)
+{
+char * pd = (char*)malloc(strlen(p1) + strlen(p2) + 1);
+if (!pd){
+return NULL;
+}
+strcpy(pd, p1);
+strcpy(pd, p2);
+return pd;
+}
+
+int main(void)
+{
+char s1[SIZE];
+char s1[SIZE];
+
+printf(birinci yazıyı girin: ");
+sgets(s1);
+printf(ikinci yazıyı girin: ");
+sgets(s2);
+
+char * p = concat(s1,s2);
+_strypr(p);
+printf("[%s] [%s] [%s]\n", s1,s2,p);
+free(p);
+}
+
+
+----------
+
+int main(void)
+{
+const char * const p[] = {
+"bugra","ali","musa", "bugra","ali","musa", 
+"bugra","ali","musa", "bugra","ali","musa", 
+}
+
+size_t len = 0;
+for (size_t i = 0; i < asize(p); ++i){
+len += strlen(p[i]);
+}
+
+char * pd = (char*)malloc(len + 1);
+if (!pd){
+return 1;
+}
+*pd = '\0';
+
+for (size_t i = 0; i < asize(p); ++i){
+strcat(pd, p[i]);
+}
+puts(pd);
+free(pd);
+
+}
