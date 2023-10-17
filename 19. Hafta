@@ -11,7 +11,7 @@ standart qsort fonskiyonu : functions pointer parametreli fonksiyon
 
 void qsort(void *vpa, size_t size, size_t sz, int (*fp)(const void *, const void*));
 
-dizinin adresi - sıralanıcak dizinin boyutu - dizinin 1 elemanının boyutu
+dizinin adresi - sıralanıcak dizinin boyutu - dizinin 1 elemanının boyut - fonsksiyon
 
 int mycmp(const void* vp1, const void* vp2)
 {
@@ -21,7 +21,7 @@ int mycmp(const void* vp1, const void* vp2)
   int resılt = x % 2 != 0 && y % 2 == 0 || (x % 2 == y % 2) && x > y 
 
 }
-int mycmp(const void*, const void*);
+int mycmp(const void*vp1, const void*vp2);
 {
 if (*(const int*)vp1) > (*(const int*)vp2){
 return 1;
@@ -159,7 +159,7 @@ int (*fp)(int);
 int (**fptr)(int) = &fp; //dizinin ilk elemanın adresi, fp'nin adresini fonksiyon pointerda tutulması
 *fptr = fp //elde ederiz
 
-int (*fa[](int) = {f1, f2, f3, f4, f5};
+int (*fa[](int) = {f1, f2, f3, f4, f5}; //geri gönüş değeri, fonksiyon ismi, fonksiyon değerlerinin türü
 int (**fptr)(int) = fa; //dizinin ilk elemanının adresi
 int (**fptr)(int) = &fa[0] //aynı anlama gelir
 
