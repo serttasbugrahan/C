@@ -43,7 +43,7 @@ printf("ival = %f\n", dval); //234.876
 }
 
 --------------
-strtod: 
+strtod: diziyi ondaklıklı sayıya dönüştürür
 
 !! void func(char** p); //bir pointer değişkende değişiklik yapmak için bu yapı kullanılır veya dizi gösteren pointer
 
