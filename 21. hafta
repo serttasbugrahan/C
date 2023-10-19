@@ -108,6 +108,7 @@ pd[i]
 }
 
 ----------
+matrisi impremente etmenin 3 yolu:
 
 //satir ve sütun sayısı programın çalışma zamanında belli olan 
 bir matris oluşturun ve bu matrisi rastgele değerler ile doldurup
@@ -155,9 +156,134 @@ free(pd[i]; //int dizileri free etmek için
 free(pd); //pointer diziyi free etmek için
 }
 
+//bu şekilde sözde 2 boyutlu dizi oluşturulur, matrisin biri bir yerde diğeri heap alanında bir yerde olur
 --------------------------
 
-//1.34.59
+int main(void){
+size_t row_size, col_size;
+
+printf("olusutulucak matrisisn satir ve sutun sayisni giriniz: ");
+scanf("%zu%zu", &row_size,&col_size);
+
+int * pd = (int*)malloc(row_size * col_size * sizeof(int));
+if (!pd){
+fprintf(stderr,"bellek yetersiz\n");
+return 1;
+}
+randomize();
+
+for (size_t i = 0; i < row_size; ++i){
+for (size_t k = 0; i < col_size; ++k){
+pd[i * col_size + k] = rand() % 10;
+}
+}
+
+for (size_t i = 0; i < row_size; ++i){
+for (size_t k = 0; i < col_size; ++k){
+printf("%d",pd[i * col_size + k];
+}
+printf("\n");
+}
+
+// bu kod ile daha az bellek alanı kullandık
+// row * col * sizeof(int)
+//satırlar bellekte ardışık
+//kod tarafında double deref. olamıyor
+
+----------------------
+
+int main(void){
+size_t row_size, col_size;
+
+printf("olusutulucak matrisisn satir ve sutun sayisni giriniz: ");
+scanf("%zu%zu", &row_size,&col_size);
+
+int * pd = (int*)malloc(row_size * col_size * sizeof(int));
+if (!pd){
+fprintf(stderr,"bellek yetersiz\n");
+return 1;
+}
+randomize();
+int ** ptr = (int**)mallox(row_size * sizeof(int*));
+
+for (size_t i = 0; i < row_size; ++i){
+ptr[i] = pd + (i * sizeof(int));
+}
+
+for (size_t i = 0; i < row_size; ++i){
+for (size_t k = 0; i < col_size; ++k){
+ptr[i][k] = rand() % 10;
+}
+}
+
+for (size_t i = 0; i < row_size; ++i){
+for (size_t k = 0; i < col_size; ++k){
+printf("%d",ptr[i][k];
+}
+printf("\n");
+}
+free(pd);
+free(ptr);
+
+-----------------------------------------------------
+
+void * realloc(void * vp, new_size,)
+
+1. paramtereye malloc veya calloctan alınmış paramtre alınır
+2. paramtereye yeni boyut geçilir 
+
+!! realloc sadece dinamik olarak ayrılmış alanlar üzerinde büyütme veya küçültme yapabilir
+
+int main(void){
+size_t n;
+
+printf("kac elemanli dizi istiyorsunuz: ");
+scanf("%zu", n);
+int * pd = (int*)malloc(n * sizeof(int));
+if (!pd){
+fprintf(stderr,"bellek yetersiz\n");
+return 1;
+}
+randomize();
+set_array_random();
+printf_array(pd, n);
+
+printf("kac eleman daha ekleyelim: ");
+size_t n_plus;
+scanf("%zu", n);
+pd = (int *)realloc(pd, (n + n_plus * sizeof(int));
+if (!pd){
+fprintf(stderr, "bellek yetersiz\n");
+return 1;
+}
+set_array_random(pd + n, n_plus);
+print_array(pd, n + n_plus);
+}
+
+-----------------------------
+
+!! reallocation takes time, zırt pırt çağırma :)
+!! reallocation invalidates pointer 
+
+realloc(NULL, n) ile malloc(n) arasınd fark yok
+
+int main(void)
+{
+//döngüsel bir yapı içinde bir dinamik diziyi sürekli 1 eleman büyütmek
+
+for (;;){
+printf("tam sayi girecek misiniz: (e) (h)");
+while ((ch = _getch()) != 'e' && ch != 'h')
+;
+printf("%c\n", ch);
+if (ch == 'h')
+break;
+printf("tam sayiyi girin: ");
+}
+}
+
+
+//2.33
 
 
 
