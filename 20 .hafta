@@ -611,7 +611,7 @@ if (!pd){
 return NULL;
 }
 strcpy(pd, p1);
-strcpy(pd, p2);
+strcat(pd, p2);
 return pd;
 }
 
