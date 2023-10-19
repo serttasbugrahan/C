@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////////1. ders//////////////////////////////////////////////////////
 
 //statik ömürlü nesne adresi döndürsün
+//her defasında aynı parola döner çünkü aynı adrese yazar statil ömürlü olduğu için
 
 char * get_random_psw(void);
 {
@@ -28,18 +29,135 @@ printf("%s\n", p[i]);
 }
 }
 
+----------------
+
+//dinamik ömürlü nesne adresi döndürsün
+
+char * get_random_psw(void);
+{
+int len = rand() % 6 % 5;
+char * pd = malloc(len + 1);
+if (!pd) return NULL;
+
+for (int i = 0; i < len; i ++){
+pd[i] = (rand() % 2 ? 'a' : 'a') + (rand() % 26);
+}
+pd[len] = '\0';
+return pd;
+}
+
+int main(void)
+{
+char * p;
+randomize();
+
+for (int i = 0; i < SIZE; ++i){
+p[i] = get_random_psw();
+puts(p[i]);
+free(p);
+}
+}
+return 0;
+}
 
 
+------------------
 
+int main(void){
+int n;
 
+printf("KAC TANE: ");
+scanf("%d", &n); // ==> 0)
 
+int  * pd = (int*)malloc(n * sizeof(int));
+free(pd);
+}
 
+!! free fonksiyonuna gönderilen argümanını NULL pointer olması 
+bir tanımsız davranış değildir. bu durum no-operation(faydasıda yok zararıda)
 
+int main(void){
+int n;
 
+printf("KAC TANE: ");
+scanf("%d", &n); // ==> 0)
 
+//implementation defined
 
+int  * pd = (int*)malloc(n * sizeof(int));
+if (pd == NULL)
+printf("malloc(0) cagrisi NULL ptr dondurdu\n");
+else
+printf("malloc(0) cagrisi % p adresini dondurdu\n",pd);
 
+free(pd);
+}
 
+------------------------------
+
+!! malloc işlevini dinamik bir pointer dizisi oluşturmak amaçlı da kullanabiliriz
+
+int main(void)
+{
+int n;
+
+int ** pd = (int**)malloc(n * sizeof(int*)); 
+for (int i = 0; i < n; ++i){
+pd[i]
+}
+}
+
+----------
+
+//satir ve sütun sayısı programın çalışma zamanında belli olan 
+bir matris oluşturun ve bu matrisi rastgele değerler ile doldurup
+ekrana  yazdırın 
+
+int main(void)
+{
+size_t row_size, col_size;
+
+printf("olusturulacak matrisin satir ve sutun sayisini giriniz: ");
+scanf("%zu%zu", &row_size, &col_size);
+
+int ** pd= (int **)malloc(row_size * sizeof(int*));
+if (!pd){
+fprintf(stderr,"bellek yetersiz\n");
+return 1;
+}
+
+for (size_t i = 0; i < row_size; ++i){
+pd[i] = (int *)malloc(col_size * sizeof(int));
+if (!pd[i]) {
+fprintf(stderr, "bellek yetersiz\n");
+return 1;
+}
+}
+
+randomize();
+
+//fill matrix with values
+for (size_t i = 0; i < row_size; ++i){
+for (size_t k = 0; k < col_size; ++k){
+pd[i][k] = rand() % 10;
+}
+
+for (size_t i = 0; i < row_size; ++i){
+for (size_t k = 0; k < col_size; ++k){
+printf("%d", pd[i][k]);
+}
+printf("\n");
+}
+}
+for (size_t i = 0; i < row_size; ++i){
+free(pd[i]; //int dizileri free etmek için
+}
+free(pd); //pointer diziyi free etmek için
+}
+
+--------------------------
+
+//1.34.59
 
 
 
