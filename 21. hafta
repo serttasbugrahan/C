@@ -361,8 +361,6 @@ register int x = 10; //derleyici sen de uygun görürsen x'i register'da tut
 ---------
 static :
 
-linkage (bağlantı)
-
 void foo(void)
 {
 int x = 10;
@@ -454,9 +452,111 @@ p[i] = ge_psw()
 
 ------
 
-static yerel değişkenler neden kullanılır :
-- 
+void func(void)
+{
+static _Bool first_call_flag = true; //static'i kaldırarak dene
 
-//1.42.09
+if (first_call_flag){
+printf("rastgele sayilar\n===========\n");
+first_call_flag = false;
+}
+printf("%d\n",rand());
+}
+
+int main(void)
+{
+randomize();
+
+for (int i = 0; i < 10; ++i){
+func();
+}
+}
+
+------
+!! otomatik ömürlü değişkenler her çağrıldığında stack'de tekrar oluşturulur
+
+int get_xyx_value(int n)
+{
+static const int primes[] ={ //böyle bir diziyi static yap otomatik olması maaliyetli
+2,3,54,21,2,4,12,4,4,3
+1,4,2,5,21,2,4,12,21,2,
+2,3,54,21,2,4,12,4,4,3
+1,4,2,5,21,2,4,12,21,2,
+};
+
+return primes[n];
+}
+
+-----------
+
+linkage kavramı : farklı dosyalarda fonksiyon veya değişken kullanıldığında onun
+aynı varlığa mı ilişkin yoksa farklı varlığa mı ilişkin olduğunu söyler
+
+external linkage (dış bağlantı) : başka modüller tarafından da kullanılabilinir, linker başka bir varlık olarak görür
+internal linkage (iç bağlantı) : sadece bu modül kullanabilir, linker aynı varlık olarak görür
+no linkage (bağlantısız)
+
+!! dış bağlantıya açılmış aynı isimde 2 varlık açılamaz 
+!! global olarak tanımlamak onları dış bağlantıya sokar
+!! extern anahtar sözcüğünün fonksiyon isminde olması veya olmaması arasında fark yok
+!! değişkenin external yazılması ile yazılmaması arasında fark vardır
+
+!!!! eğer dışarı açılacak ise kaynak dosyada tanımı yapılır, başlık dosyasında extern bildirimi yapılır.
+!!!! static double dval = 2.3 //aynı dosya içinde farklı fonksiyonlarda kullanılabilinir
+!!!! int g = 10 (extern yapılmış başlık dosyasında) farklı dosyalarda kullanılabilinir
+
+global değişkenini dışa açmak istiyor musun ?
+evet
+
+//bugra.c
+int ival = 1
+//bugra.h
+extern int gval;
+
+fonksiyonu dışa açmak istiyor musun ?
+evet
+
+//bugra.c
+int foo(int x)
+{
+return x * x;
+}
+
+//bugra.h
+extern int foo(int x);
+int foo(int x);
+
+global değişkenini dışa açmak istiyor musun ?
+hayır
+//bugra.c
+static int ival = 1
+
+fonksiyonu dışa açmak istiyor musun ?
+hayır
+//bugra.c
+static int bar(int x)
+{
+
+}
+
+!!extern bildiriminde dizi boyutunu yazmaya gerek yok
+
+global namespace pollution problem: 
+
+---------------------
+c kaynak dosyasına verilen adlar:
+source file
+implementation file
+dat si
+.c
+code file
+------------------------
+source file : ön işlemci komutları dahil
+translation unit : ön işlemci programların işini bitirmiş hali
+-----------------------
+
+
+
+
 
 
