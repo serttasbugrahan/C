@@ -265,12 +265,18 @@ print_array(pd, n + n_plus);
 !! reallocation takes time, zırt pırt çağırma :)
 !! reallocation invalidates pointer 
 
-realloc(NULL, n) ile malloc(n) arasınd fark yok
+!! realloc(NULL, n) ile malloc(n) arasınd fark yok
+//döngü dışında malloc çağırılıcak döngü içinde calloc cağırılacak
 
 int main(void)
 {
 //döngüsel bir yapı içinde bir dinamik diziyi sürekli 1 eleman büyütmek
+int ch;
+int ival;
 
+randomize();
+int * pd = NULL;
+int size = 0;
 for (;;){
 printf("tam sayi girecek misiniz: (e) (h)");
 while ((ch = _getch()) != 'e' && ch != 'h')
@@ -279,12 +285,178 @@ printf("%c\n", ch);
 if (ch == 'h')
 break;
 printf("tam sayiyi girin: ");
+ival = rand() % 1000;
+printf("%d\n",ival);
+pd = (int*)realloc(pd, (size + 1) * sizeof(int));
+if (!pd){
+printf("bellek elde edilemeiyor\n");
+return 1;
+}
+pd[SIZE++] = ival;
+print_array(pd, size);
+_getch();
+}
+
+if (size == 0){
+printf("hic giris yapilmadi\n");
+}
+else {
+print_array(pd, size);
+}
+free(pd);
+}
+
+==================================================
+
+dinamik dizi (dynamic array) veri yapısının (data structure) :
+
+!! üretimde en çok kullanılan yapıdır, DİKKATLİ ÇALIŞ
+
+avantajları : 
+1- n tane öğeden birine erişme maaliyeti constant time
+2- sondan eklemeli maaliyeti constant time (baştan veya ortadan constant time olmaz)
+
+The size of a dynamic array
+The capacity of a dynamic array
+
+!! kapasite size'dan büyük tutulur. 
+eğer size değeri sürekli artıyor ve kapasiteye eşit olursa diğer arttırma işleminde realloc devereye girer ve kapasiteyi arttırır 
+bu sayede size kapasiteyi geçmemiş olur. bu karmaşıklığa 'amortised constant time' denir
+
+amortised constant time  : realloc'un maaliyetinnin görmezden gelinmesine denir
+
+///////////////////////////////////////////////2. Ders//////////////////////////////////////////
+
+strorage class specifier:
+
+              auto (çok kullanılmıyor)
+              register (çok kullanılmıyor)
+extern
+static
+
+_Thread_local
+
+type qualifers
+
+const
+volatile
+restrict
+
+-------------
+
+!! function overloading: aynı isimde farklı fonksiyonlara 
+
+auto :
+
+--------
+register : 
+
+int main(void)
+{
+register int x = 10; //derleyici sen de uygun görürsen x'i register'da tut
+}
+
+!! statik anahtarlılar register ile kullanılamaz
+
+---------
+static :
+
+linkage (bağlantı)
+
+void foo(void)
+{
+int x = 10;
+static int y = 10;
+
+printf("x = %d y = %d\n", x, y); //x hep 10 yazar, y'nin değeri sürekli artar
+x += 2;
+y += 2;
+}
+
+int main(void)
+{
+for (int i = 0; i < 10; ++i){
+foo();
 }
 }
 
+----------
 
-//2.33
+void foo(void)
+{
+static char str[1000] = "ziya";
 
+puts(str);
+strcat(str, "can");
+}
 
+int main(void)
+{
+for (int i = 0; i < 10; ++i){
+foo(); //ziya, ziyacan, ziyacancan, ziyacancancan ...
+}
+}
+
+---------------
+
+!! C ve C++' gelişmek için bol bol kod okunmalı ve geliştikçe kodları review yap
+
+static yerel değişkenler neden kullanılır :
+-  adres döndürmek için 
+
+!! asla otomatik ömürlü değişkenin adresinin döndürme
+!! adres döndüren bir fonksiyonun geri dönüş değerinin neyin adresi olduğunu dökümante et (çok önemli)
+
+-----
+bir fonksiyon adres döndürüyorsa:
+-statik ömürlü nesne adresi dönecek
+-dinamik ömürlü nesne adresi dönecek
+-çağırandan aldığı adresi döndürecek
+
+-----
+geri dönüşü anlamak için bunu uygula :
+char * func(void);
+
+int main(void)
+{
+char str[100];
+
+printf("%p\n", str);
+
+for (int i = 0; i < 10; ++i){
+printf("%p\n", func());
+}
+}
+------
+
+char * get_psw(void)
+{
+static char buffer[100]; //static yerel değişken sayesinde tekrar tekrar oluşturulmaz üstüne yazar
+
+int len = rand() % 7 + 5;
+
+for (int i = 0; i < len; ++i){
+buffer[i] = rand() & 26 + 'A';
+}
+buffer[len] = '\0';
+return buffer;
+}
+
+int main(void)
+{
+char * p[10];
+
+randomize();
+for (int i = 0; i < 10; ++i){
+p[i] = ge_psw()
+}
+}
+
+------
+
+static yerel değişkenler neden kullanılır :
+- 
+
+//1.42.09
 
 
