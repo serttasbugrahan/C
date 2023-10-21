@@ -1,0 +1,173 @@
+//////////////////////////////////////////////////////////////1. Ders////////////////////////////////////////////////////
+
+type qualifiers :
+-----------------
+const 
+volatile
+restrict
+
+const :
+const correctness
+
+const tekrarı :
+-------------
+static const int primes[] = { //dizi değişmiycek ve programın sonuna kadar bellekte kalıcak
+2,3,4,2,4,,2,3,3,1,,2,13
+2,3,3,2,,3,3,2,23,2,21,23
+12,,3,34,,6,78,76,6,4,55
+};
+------------
+
+!!const nesneyi değiştirmek tanımsız davranıştır
+
+void func()
+{
+const int x = 10;
+x = 20;
+}
+
+------------
+const T* ==> T //bunu kesinlikle yapma (const nesneyi örtülü dönüşüm yapma)
+-------------
+
+int * foo(int *);
+const int * func(void); //salt erişim amaçlı kullanılır
+
+------------
+ziya.h
+void func(const int x); //const kullanma
+
+ziya.c
+#include "ziya.h"
+void func(const int x) //const kullanma
+{
+
+}
+-----------
+typedef int* IPTR;
+
+int main(void)
+{
+int x = 10;
+const IPTR p = &x;
+//const int * p = &x; //yukarıdaki bildirim bu anlama gelmiyor
+int * const p = &x; //bu anlama geliyor
+}
+------------------------------
+
+volatile : derleyicinin bu değişkene optimizasyon yapmamasını söyler
+derleyici dikkat et x değişkeni program dışı kaynaklar tarafından değiştirilme potansiyelinde
+sen bunu bilmessen ben x değişkenini ifadeler içinde kullandığımda optimizasyon
+
+volatile int x = 10;
+
+int main(void)
+{
+a = x + 5;
+b = x * 7;
+m = x * x;
+}
+
+----------
+
+volatile int flag = 1;
+
+int main(void)
+{
+while (flag){
+///
+}
+}
+
+-----------
+
+int * volatile ptr = adres; //burada volatile const gibi davranır
+
+-------------------------------
+C99
+restrict: derleyici daha iyi opt. yapabilsin diye kullanılır
+
+//p1'in gösterdiği nesneyi p1 dışında gösteren yok
+//bu iki pointer değişkenin aynı nesneyi gösteriyor olma ihtimali yok
+// pointer aliasing  
+//eğer derleyici aşağıdaki pointer'ların aynı nesneyi göstermediğini bilirse belirli opt. yapabiliyor
+
+void func(int * restrict p1, int * restrict p2)
+{
+*p1 = *p2 + 5;
+*p1 = *p2 * 3;
+
+}
+
+!!restirct pointerlara aynı nesnenin adreslerini geçmek tanımsız davranıştır
+
+========================================
+
+user-defined types
+
+user-defined type oluşturmaya yönelik 3 tane araç seti var:
+1-struct (structures) (yapı)
+2-union (unions) (birlikler)
+3-enum (enuma) (numaralandırma) : hem user-defined type hem integer type
+
+===============================
+structures:
+----------
+
+Matrix'e structure tag (yapı etiketi) denir. olmasada legaldir genelde koyarız
+struct Matrix {
+//member (eleman)
+int x;
+int x,y,z; //bu şekilde kullanılabilinir
+
+//bu yapıları alabilir
+int x,y;
+double dval;
+int * p;
+char str[100];
+
+//sınıfların elemanları fonksiyon olamaz c++ da olabilir
+void func();
+
+};
+
+---------
+!! struct data türünün x'i ve y'si vardır, struct Data mydata
+
+struct Data {
+int x;
+};
+
+int main(void)
+{
+struct Data mydata;
+
+printf("sizeof(struct Data) = %zu\n", sizeof(struct Data));
+printf("sizeof(mydata) = %zu\n", sizeof(mydata));
+}
+
+----------
+yapının operatörlerine 'member selection operators' denir. bu operatörler ile erişilir
+
+. dot operator
+-> arrow operator
+
+----------
+
+struct Data{
+double dval;
+int x, y;
+};
+
+int main(void)
+{
+struct Data mydata;
+mydata.dval; 
+}
+
+
+
+
+
+
+
