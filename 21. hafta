@@ -262,7 +262,7 @@ print_array(pd, n + n_plus);
 
 -----------------------------
 
-!! reallocation takes time, zırt pırt çağırma :)
+!! reallocation takes time //zırt pırt çağırma :)
 !! reallocation invalidates pointer 
 
 !! realloc(NULL, n) ile malloc(n) arasınd fark yok
