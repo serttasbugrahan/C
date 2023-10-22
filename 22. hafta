@@ -586,9 +586,144 @@ a[2].z = 5; //aynı anlamda
 
 -----
 
-1.27
+struct Nec{
+int x,y,z;
+};
 
+sturct Nec * foo(void);
+int main(void)
+{
+foo()->x = 10;
 
+}
+
+----------
+
+struct Nec{
+int x,y,z;
+};
+
+void func(struct Nec* p)
+{
+p -> x = 4; //en sık bu şekilde kullanılır
+}
+
+-----------
+
+struct Date {
+int day, mon, year;
+};
+
+int main(void)
+{
+const struct Date mydate = {12, 5, 1987};
+struct Date your_date = {4,6,2020};
+mydate = your_date; //geçersiz
+mydate.mon = 5; //geçersiz 
+}
+
+----------
+
+static struct Date mydate = {2,4,1977}; //sadece bu kaynak dosyada kullanılabilinir static'den dolayı
+
+-----------------------------------
+
+typedef bildirimleri ve yapılar:
+şu adımları uygula:
+1- struct Date x; 
+2- typedef struct Date x;
+3- typedef struct Date Date;
+
+struct Date {
+int day, mon, year;
+};
+
+typedef struct Date Date; //struct Date gelmesi gereken yere Date yazmak yeterli olucaktır
+
+int main(void)
+{
+struct Date x;
+Date y; //aynı anlama gelir
+}
+
+----------
+
+struct Date {
+int day, mon, year;
+};
+
+typedef struct Date* DatePtr;
+
+int main(void)
+{
+struct Date mydate;
+DatePtr p = &mydate;
+}
+
+-----------
+
+struct Date {
+int day,mon,year;
+}g;
+//bu şekilde de kullanılır
+typedef struct Date{
+int day, mon,year;
+}Date;
+
+-----------
+
+typedef struct {
+int day, mon, year;
+}Date;
+
+int main(void)
+{
+Date x = {2,4,1999};
+}
+
+-------
+
+typedef struct {
+int day, mon, year;
+}Date, *DatePtr;
+
+int main(void)
+{
+Date mydate = {2,5,2023};
+DatePtr ptr = &mydate;
+}
+
+--------
+//bir yapı türünden dinamik ömürlü nesne oluşturmak için yapılır
+//öyle bir yapı oluştur ki sadece dinamik ömürlü nesneler oluşturulabilsin 
+typedef struct {
+int a, b ,c;
+}*Sptr;
+
+int main(void)
+{
+Sptr ptr = (Sptr)malloc(sizeof(*ptr));
+}
+
+---------
+
+struct Data {
+int (*fp)(int, int);
+};
+
+int foo(int, int);
+
+int main(void)
+{
+struct Data mydata = {foo};
+mydata.fp(12,45);
+}
+
+---------
+
+yapı türleri ve fonksiyonlar :
+
+//2.35.09
 
 
 
