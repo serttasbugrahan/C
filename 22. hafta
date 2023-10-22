@@ -55,7 +55,7 @@ int * const p = &x; //bu anlama geliyor
 }
 ------------------------------
 
-volatile : derleyicinin bu değişkene optimizasyon yapmamasını söyler
+volatile : derleyicinin bir değişkene optimizasyon yapmamasını söyler
 derleyici dikkat et x değişkeni program dışı kaynaklar tarafından değiştirilme potansiyelinde
 sen bunu bilmessen ben x değişkenini ifadeler içinde kullandığımda optimizasyon
 
@@ -345,8 +345,93 @@ struct Point p = [2.3, 5.6, 9.2};
 //p = 
 }
 
+///////////////////////////////////////////////////2 . ders////////////////////////////////////////
+
+Bir yapı nesnesinin hangi operatörlerinin operandı yapabilirim ?
+
+.
+sizeof
+&
+=
+
+-------
+
+struct Point {
+double x,y,z;
+};
+
+int main(void)
+{
+struct Point p = {0.};
+struct Point * ptr = &p;
+
+sizeof(p);
+p.y = 2.3;
+(*ptr).x = 3.4;
+ptr->x = 3.4; //369. satır ile aynı anlama gelir
+}
+
+------------------
+
+struct Point {
+double x, y, z;
+};
+
+int main(void)
+{
+struct Point p = {0.};
+struct Point * ptr = &p;
+}
 
 
+-------------------------------------
+
+yapı nesneleri atama operatörlerin sol operandı olabilir
+yapı nesnelerine atama yapabiliriz
+
+atama geçerli olması için atama operatörünün sağ operandı olan ifadenin de aynı türden
+bir yapı nesnesi olması gerekir
+
+struct Data{
+int a, b;
+double dx;
+};
+
+struct Kota{
+int a, b;
+double dx;
+};
+
+int main(void)
+{
+struct Data mydata = {6, 8, 4.5};
+struct Kota mykota = {2,6,9.3}
+mydata = mykota //atama yapılamaz (farklı yapı türleri arasında)
+}
+
+//implicit conversion (örtülü dönüşüm)
+
+--------
+
+struct Data{
+int a, b;
+double dx;
+int ar[4];
+};
+
+int main(void)
+{
+struct Data x = {10,20,3.4,{2,2,2,2}};
+struct Data x = {0};
+
+y = x; //geçerli
+printf("%d %d %f\n", x.a, x.b, x.dx);
+printf("%d %d %f\n", y.a, y.b, y.dx);
+
+print_array(x.ar, 4);
+print_array(x.ar, 4);
+
+}
 
 
 
