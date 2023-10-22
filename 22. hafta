@@ -500,9 +500,100 @@ int x,y,z;
 
 -----------------------------------------------
 
-yapı nesnelerinin adresleri
+yapı nesnelerinin adresleri ve kullanımı :
+
+struct Nec {
+int x, y ,z;
+
+};
+
+int main(void)
+{
+struct Nec n1 = {12, 56, 78};
+struct Nec n2 = {121, 156, 708};
+
+&n //türü struct nec *
+
+struct Nec* p = &n1;
+*p = n2; //legal n1 = n2
+}
+
+-----
+
+int main(void)
+{
+struct Nec a[10] = {0};
+struct Nec nec = {45, 9,2};
+
+a[3] = nec; //legal
+nec = a[4]; // legal
+}
+
+-----
+
+ok operatörü : 
+!! nokta operatörünün sol operandı yapı nesnesi olmalı
+!! ok operatörünün sol operandı yapı türünde pointer olmalıdır
+
+ptr->y
+
+(*ptr).y
+ptr-> y
+
+-----
+
+struct Nec{
+int x,y,z;
+};
+
+int main(void)
+{
+struct Nec nx = {23, 78, 90};
+
+(&nx)->y = 5; //legal
+nx.y = 5 //549. satır ile aynı anlamda
+
+}
+
+-----
+
+struct Nec{
+int x,y,z;
+};
+
+int main(void)
+{
+struct Nec a[4];
+
+a->x = 6; //legal array decay
+a[0].x = 6; //aynı anlamda
+}
+
+------
+
+struct Nec{
+int x,y,z;
+};
+
+int main(void)
+{
+struct Nec a[4];
+
+a[2].z = 5; //aynı anlamda
+(a + 2) -> z = 5; 
+(*(a + 2)).z = 5;
+}
+
+-----
+
+1.27
 
 
-1:03
+
+
+
+
+
+
 
 
