@@ -723,9 +723,62 @@ mydata.fp(12,45);
 
 yapı türleri ve fonksiyonlar :
 
-//2.35.09
+-------
 
+typedef struct {
+in id;
+char name[20];
+char surname[32];
+int a[20];
+}Person;
 
+void print_person(const Person * p); //input parameter
+{
+printf("id = %d\n", p->id);
+printf("name = %s\n", p->name);
+printf("surname = %s\n", p->surname);
+}
+
+void set_person(Person* ptr) //out-param
+{
+ptr->id += 10000;
+strcat(ptr->surname, "oglu");
+}
+int main(void)
+{
+Person per = {78767, "Velican", "akkus"};
+set_person(&per);
+print_person(&per); //salt okuma amaçlı
+
+}
+i
+-------
+
+!! kullandığınız bir kütüphanede paramtresi pointer olan bir fonksiyon ile
+karşılaştığınızda fonksiyon hakkında belirli bilgileri edinmeden fonksiyon çağrısı yapmayın
+hangi bilgiler:
+
+a) parametre out parametre mi? parametre in - out parametre mi
+eğer parametre in-out parametre ise fonskiyona adres göndermeden önce adresini göndericeğiniz
+yapı nesnenin bir ya da birden fazla elemanını set etmeniz gerekiyor olabilir
+
+b) fonksiyona NULL pointer gönderme opsiyonum varmı
+yoksa NULL pointer göndermek undefined behavier(ub) mı?
+eğer NULL pointer gönderme opsiyonum varsa ne anlama geliyor?
+
+----------
+
+!! geri dönüş değeri (bir yapı türünden) adres olan fonksiyonlara çağrı yapmadan
+aşağıdaki bilgileri edinmiş olacaksınız
+
+-Nasıl bir nesnenin adresini döndürüyor
+ statik ömürlü bir nesne adresi
+ dinamik ömürlü bir nesne adresi döndürmesi
+ sizden aldığı adresi size geri döndürüyor olabilir
+ NULL pointer döndürme ihtimali var mı?
+
+!! fonksiyondan aldığım adresteki nesne ile işim bittiğinde bir fonksiyonu 
+çağırmam gerekiyor mu?
 
 
 
