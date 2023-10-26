@@ -19,15 +19,270 @@ time.h kütüphanesi:
 
 orjin olarak alınan time pointe epoch nedir.
 
-calender time (ta
+calender time (takvim zamanı)
+
+time_t : derleyiceye bağlı bir (işaretli) tam sayı türü
+
+---------
+
+struct tm
+{
+int tm_sec; //tarihin saniyesini tutar
+int tm_min; // dakika
+int tm_hour; //saat
+int tm_mday; //ayın gününü tutar (18)
+int tm_mon; //ayı tutar,(ocak, 0 subat 1)
+int tm_year; //tarihin yılını tutar, ama 1900'dan farkını tutar
+int tm_wday; //haftanın gününü tutar (0 pazartresi ,1 sali, 2 çarşamba)
+int tm_yday; //yılın gününü tutar, (0 = 1. gün, 1 = 2. gün)
+int tm_isdst; //FLAG, is dayligt saving time (gün ışırı tasarruf modu)
+  tm_isdst < 0
+    bu bilgi yok
+  0 = g.i.t modunda değil
+  > 0 g.i.t modunda
+}
+
+-------
+
+int main(void)
+{
+time_t timer;
+time(&timer);
+
+struct tm * p = localtime(&timer);
+
+printf("%d-%d-%d %d:%d:%d\n",
+p->tm_day,
+p->tm_mon + 1,
+p->tm_year + 1900,
+p->tm_hour,
+p->tm_min,
+p->tm_sec);
+
+printf("yilin %d. gunu\n", p-> tm_yday + 1);
+printf("haftanın %d. gunu\n", p-> tm_wday + 1);
+
+if (p -> tm_isdst < 0){
+printf("gun isigi tasarruf modu bildirisi yok!!!\n");
+}
+else if (p -> tm_isdst){
+printf("gun isigi tasarruf modundayiz\n");
+}
+else {
+printf("gun isigi tasarruf modunda ddegiliz\n");
+}
+}
 
 
+-----------
+
+kütüphanenin fonksiyonları:
+
+time:
+time_t time(time_t * p);
+
+int main(void)
+{
+time_t sec;
+time(&sec);
+printf("saniye %lld\n", sec);
+}
+
+---
+struct tm *localtime(const time_t *p); time_t türünden zamanı, yerel zaman dilimine dönüştürür.
+geri dönüş değeri statik ömürlü bir nesne adresidir
+
+void print_date_time(time_t x)
+{
+static const char * const pmons[] = {
+"ocak",
+"subat",
+"mart",
+"nisan",
+"mayis",
+"haziran",
+"temmuz",
+"agustos",
+"eylul",
+"ekim",
+"kasım",
+"aralik"
+};
+
+struct tm * p = localtime(&x);
+printf("%02d %s\n", p->tm_day, pnmos[p->tm_mon], p->tm_year + 1900);
+}
+}
+
+int main(void)
+{
+print_date_time(150000000LL);
+}
+
+----- 
+
+struct tm* gmtime(const time_t * p);time_t türünden zamanı UTC (Koordineli Evrensel Zaman) olarak dönüştürür
+
+------
+
+timepoint verisinin string'e dönüştürülmesi:
+
+-ctime
+-asctime
+-strftime
+
+char * ctime(const time_t * p); //statik ömürlü yazı adresi, 26 karakterlik yazı adresi döndürür sonunda \n bulunur
+
+int main(void)
+{
+time_t tx = 1245876123LL;
+printf("[%s]",ctime(&tx));
+}
+
+char * asctime(const struct tm * p); //statik ömürlü yazı adresi
+
+!! ctime ve asctime aynı statik ömürlü nesneyi döndğrğr aralarında fark bulunmaz 
+!! elimizde time_t nesnesi var ise ctime, struct tm nesnesi var ise asctime nesnesi kullanılır
+
+int main(void)
+{
+time_t tx = 1245876123LL;
+struct tm * p =localtime(&tx);
+
+printf("%s",ctime(&tx));
+printf("%s", asctime(p));
+}
+
+------
+
+int main(void)
+{
+time_t tx = 1245876123LL;
+struct tm * p =localtime(&tx);
+
+char * p1 = ctime(&tx);
+char * p2 = asctime(p);
+
+printf("%p %p\n", p1, p2,); //aynı adresler çıkar
+}
 
 
+=============================================
 
+programlamada locale kavramı: Locale, programların belirli coğrafi veya kültürel bölgelere özgü ayarlarla çalışmasını sağlar
 
+locale-dependant :locale değişirse davranışı değişir
+locale-independant
 
+locale.h
 
+char * setlocale(int category, const char *localname); // programın çalışma zamanında kullanılacak locale'i ayarlar
+
+int main(void)
+{
+char * p = setlocale(LC_ALL,"turkish",);//hepsini değiştirmek için kullanılır
+if (!p){
+printf("locale degisikligi yapilamadi\n");
+return 1;
+}
+printf("locale degisikligi yapildi: (%s)\n",p);
+
+double dval;
+
+printf("bir gercek sayi girin: ");
+scanf("%lf, &dval);
+print
+}
+
+---------
+
+int main(voşd)
+{
+
+char * p = setlocale(LC_ALL,"turkish",);//hepsini değiştirmek için kullanılır
+if (!p){
+printf("locale degisikligi yapilamadi\n");
+return 1;
+}
+printf("locale degisikligi yapildi: (%s)\n",p);
+
+double dval;
+
+printf("bir gercek sayi girin: ");
+scanf("%lf", &dval);
+
+printf("dval = %f\n",dval);
+}
+
+-------
+
+!! birazdan görüceğimiz std. c fonksiyonu locale-dependant bir fonksiyondur
+
+//string formatted time
+strf:
+
+int main(void)
+{
+char str[SIZE];
+time_t sec;
+
+time(&sec);
+
+char * p = setlocale(LC_ALL,"german",); //almanca yapar
+if (!p){
+printf("locale degisikligi yapilamadi\n");
+return 1;
+}
+printf("locale degisikligi yapildi: (%s)\n",p);
+
+struct tm* tp = localtime(&sec);
+
+strftime(str, SIZE,"%B %Y %A", tp); //standartı okuyorak bak
+printf("%s", str);
+}
+
+-------
+
+int main(void)
+{
+struct lconv * p = localeconv();
+
+printf("decimal point is : %s\n", p->decimal_point);
+}
+
+====================================
+
+time.h kütüphanesine devam
+
+clock: bir eventin kaç saniye sürdüğünü hesaplar
+clock_t clock(void);
+
+//clock tick 
+int main(void)
+{
+size_t n;
+printf("kac eleman: ");
+scanf("%zu", &n);
+
+int * pd = (int*)malloc(n * sizeof(int));
+if (pd == NULL){
+printf("bellek yetersiz\n");
+return 1;
+}
+set_array_random(pd, n);
+printf("siralama basladi\n");
+clock_t start = clock();
+bsort(pd, n); //bubble sort çağırdı
+clock_t end = clock();
+printf("siralama bitti %f saniye\n",(double)(end - start) / CLOCKS_PER_SEC);
+free(pd);
+}
+
+--------------------
+
+!! mülakat sorusu: nedne siralanmis dizide aynı kod kosturulduğunda sayma süresi kısalıyır
+
+işlemci if'in nereye giriceğini tahmin ederek işlem yaptığı için işlem kısalıyor (işlemci opt.)
 
 
 
