@@ -1,9 +1,25 @@
 ///////////////////////////////////////////////////////////////////////////////////1. Ders///////////////////////////////////////////////
 
+C tarzı kütüphaneler:
+void do_something(struct Image *); //in-out
+----
+OOP tarzı kütüphaneler:
+kütüphane diyor ki sen benim elemanlarıma erişmiyceksin
+başlık dosyasında bulunan fonksiyonlara erişiceksin
 
 
+yapının elemanlarını (bilmeden - onları kullanmadan) işimizi görürsek:
+- Öğrenme yükü azalır
+- Yapı nesnelerinin bütünlüğünü - geçerliliğini bozma riski, azalır
+- Elemanlarını gizlemenin ilave maaliyetleri olabilir
 
+========================================================================
 
+time.h kütüphanesi:
+
+orjin olarak alınan time pointe epoch nedir.
+
+calender time (ta
 
 
 
