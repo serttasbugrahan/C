@@ -208,7 +208,7 @@ double d;
 
 int main(void)
 {
-struct Data mydata = {10,20,3.4}; //değer verme, içi boş bırakılamaz
+struct Data mydata = {10,20,3.4}; //değer ver, içi boş bırakılamaz
 struct Data mydata = {0}; //bütün değerler 0 olur.
 
 printf("mydata.x = %d\n", mydata.x);
