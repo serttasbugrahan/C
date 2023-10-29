@@ -285,8 +285,24 @@ free(pd);
 işlemci if'in nereye giriceğini tahmin ederek işlem yaptığı için işlem kısalıyor (işlemci opt.)
 
 
+///////////////////////////////////////////////////////2. Ders//////////////////////////////////////////////
+
+date kütüphanesi örneği
+------------------------
+
+1) OOP tarzı kütüphanelerde tipik olarak
+yapı nesnesine değer yerleştiren ya da onlara atama yapan 
+fonksiyonlar nesnenin adresini alırlar. Ancak geri dönüş değerleri
+set ettikleri nesnenin adresi olur.
+
+2) Set işleminin başarısız olması durumunda (eğer bir başarısızlık riski var ise)
+fonksiyon (dökümasyonda belirtilmek üzere) NULL pointer döndürebilir
 
 
+-------------
+
+kitap önerisi:
+rwfactoring, kent beck ve martin fowler
 
 
 
