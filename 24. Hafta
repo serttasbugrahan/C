@@ -1,17 +1,204 @@
 //////////////////////////////////////////////////////////////////////////1. Ders//////////////////////////////////////////////////////
 
+COMPLETE TYPE & INCOMPLETE TYPED (tamamlanmış türler ve tamamlanmamış türler)
+--------------------------------
+
+incomplete typed:eğer derleyici bir türün varlığından haberdar ise ancak tanımını görmemiş ise
+
+int main(void)
+{
+//the type pf struct data is incomplete
+}
+
+aşağıdaki  durumlarda bir "incomplete type" kullanılabilinir:
+
+1. fonksiyon bildiirmlerinde parametre ve geri dönüş türlerinde
+
+struct Data f1(struct Data);
+struct Data *f2(struct Data*);
+struct Data *f3(const struct Data *);
+
+------
+
+2. tür eş isim bildirimlerinde kullanılabilinir
+
+struct Neco;
+typedef struct Neco * NecPtr;
+
+------
+
+3. Pointer değişken tanımlamalarında 
+  -yapıların pointer elemanları da dahil
+  -Bir yapının bir elemanı kendi türüne ilişkin pointer türünden olabilir
+
+struct Neco * foo(void);
+void bar(struct Neco*);
+
+int main(void)
+{
+struct Neco * p1 = NULL;
+struct Neco * p2 = foo();
+bar(p2);
+}
+
+-----
+
+4. extern değişken bildirimlerinde 
+
+//xyx.h
+struct Neco;
+extern struct Neco gnec;
+
+---------------
+
+Aşağıdaki durumlarda bir "incomplete type" kullanılamaz:
+
+1. İncomoplete type türden bir değişken tanımlanamaz
+  -bir yapı elemanı incomplete türden olamaz
+  -bir yapının bir elemanı kendi türünde olamaz
+struct Neco;
+
+int main(void)
+{
+struct Ali {
+int a,b;
+struct Neco myneco; //incomplete type is not allowed
+}
+}
+
+-------
+
+2- incomplete type sizof operatörünün operatörü olamaz
+
+struct merve;
+struct kemal;
+
+int main(void)
+{
+size_t sz1 = sizof(struct merve);
+
+struct kemal  * p;
+
+size_t sz2 = sizeof(*p);
+}
+
+-----
+
+3- yapıların elemanlarına erişim ifadelerine incpmlite type kullanılamaz
+
+struct Nec;
+
+int main(void)
+{
+struct Nec* p = foo(); //hata yok
+int val = p->x; //hata var
+*p //hata
+}
+
+-------
+
+!! Eğer bir başlık dosyasında (yani bir header'da) bir başka yapı türünün "complete" type
+olmasını gerektiren bir durum söz konusu ise bu durumda başlık dosyasının diğer başlık dosyasını include etmesi gerekir
+
+nuri.h
+struct Sel{
+int a,b,c;
+}
+
+#include "nuri.h"
+selim.h
+struct Sel{
+int a,b,c;
+struct Nur x;
+}
+
+!! bir başlık dosyasının başka bir başlık dosyasını include etmesi durumunda 
+a) compile time uzar
+b) include edilen başlık dosyalarında binary compatibitility'yi bozacak değişiklikler ypaılmış ise onu include eden dosyların yeniden derlenmesi gerek
+
+bir başlık dosyasında başka bir başlık dosyasını include etmemesi durumunda yukarıdaki sorunlar olmaz
+
+!! c ve c++ dilleirnde çok tipik kötü kodlama örneklerinden biri 
+başlık dosyasında bir türü incomplete type olarak kullanmak yerine (ki bu durumda başla bir başlık dosyası include etmek gerekmezdi)
+complete type olarak kullanmalaraı ve bu yüzden başka başlık dosyalarını include ederek
+gereksiz bağımlılıkları oluşturmaları compile time sürelerinin uzaması
 
 
+------------------------------
+
+struct Nec {
+int a,b,c;
+};
+
+struct Data {
+int x,y;
+struct Nec mnec;
+};
+
+struct Foo{
+struct Data mdata;
+};
+
+int main(void)
+{
+struct Foo foo;
+struct Foo* p = &foo;
+
+p-> mdata.mnec.b
+
+struct Data data;
+//code
+data.mnec.b = 10; //böyle bir atama yapılabilinir, elemanımın elamanıma erişmek
+}
+
+-----
+
+struct Nec {
+int a,b,c;
+int (*fp)(int);
+};
+
+struct Data {
+int x,y;
+struct Nec mnec;
+};
+
+struct Foo{
+struct Data mdata;
+};
+
+int main(void)
+{
+struct Foo ar[10];
+
+ar[3].mdata->mnec.fp(12);
+}
+
+------
+
+person.h
+#include "date.h"
+
+struct Person{
+int id;
+char name[16];
+char surname[24];
+Date bdate;
+};
+
+main.c
+
+#include "person.h"
+
+printf("sizof(Date) =%zu\n", sizeof(Date));
+printf("sizeof(Person) = %zu\n", sizeof(Person));
+
+-----------
+
+(&p->m_bdate) ile (&(p->m_bdate)) aynnı anlamdadır operatör önceliği ile ilgili
 
 
-
-
-
-
-
-
-
-
+//1.40
 
 
 
