@@ -198,9 +198,50 @@ printf("sizeof(Person) = %zu\n", sizeof(Person));
 (&p->m_bdate) ile (&(p->m_bdate)) aynnı anlamdadır operatör önceliği ile ilgili
 
 
-//1.40
+=========================================================
 
+!! bir tapının elemanı kendi türünden olamaz
+struct Nec{
+int a,b,c;
+struct Nec mnce;
+}
 
+!! bir yapının elemanı kendi türünden pointer olabilir
+struct Nec{
+int a,b,c;
+struct Nec*mptr;
+}
+
+!! bir yapının bir ya da daha fazla elamanının kendi türünden pointer olması 
+bağlı liste (linked list)
+ikili arama ağacı (ninary search tree)
+graph
+
+gibi veri yapılarının implementasyonunda kullanılır
+
+-----------
+
+data structures
+
+mantıksal ilişki içinde verilerimiz var bu veriler üstünden işlemler yapmamız gerekiyor
+bu işlemlerin yapılabilmesi iiçin bu verilerin(programın çalışma zamanında) bellekte (ram'de) tutulması gerekiyor
+
+bu verileri tutma birçok farklı şekilde yapılabilinir bunlar:
+Array,
+list,
+stack,
+queue,
+linked list
+tree
+graph
+binary tree,
+hashTable,
+Heap
+==========================================================
+
+linked list (bağlı liste)
+
+//2.24
 
 
 
