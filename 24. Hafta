@@ -257,6 +257,49 @@ bir veriye erişmek için 2 ihtimal var:
 !! çoğu zaman dinamik dizi bağlı listeyi out-perform yapar
 !! C dilinde programlamada çok sık kullanılan veri yapıları standart kütüphanenin bir bileşeni değil
 
+/////////////////////////////////////////////////////////2. Ders///////////////////////////////////////////////////////
+
+data1, data2, data3
+f1
+f2
+f3
+f4
+f5
+f6
+
+eğer böyle bir yapıdan sadece bir tane kullanılacak ise(yani tüm kodlar) aynı veri yapısını kullanıcak ise
+
+data1,data2, data3 ==> global yapmak
+bunları client kodlardan gizlemek (static global)
+ve bunlara almaları gereken ilk değerleri vermek bu durumda 
+client kodlar bu değişkenleri bilmeyecek
+
+eğer böyle bir veri yapısından birden fazlası aynı zamanda (farklı kodlar tarafından kullanılabilecek ise)
+handle tekniği ile bu çözülür
+
+//1.40
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
