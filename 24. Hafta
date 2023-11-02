@@ -239,15 +239,23 @@ hashTable,
 Heap
 ==========================================================
 
-linked list (bağlı liste)
+linked list (bağlı liste) : istediğimiz konumda eğer konumu biliyorsam ekleme ve silme yapmak constant time
 
-//2.24
+node (düğüm): veri ile bir ya da birden fazla pointerı beraber tutan yapıya denir.
 
+-her bir düğüm için ayrı malloc çağrısı yapılır
+-memmory allocation'a göre 2 kat veri kullanılır
 
+singly linked list: tek yönde hareket edebiliriz (ileri veya geri)
 
+doubly linked list : hem ileri yönde hemde geri yönde hareket edebiliriz
 
+bir veriye erişmek için 2 ihtimal var:
+-veri ön bellekte olablir erişmek kolay(cashe hit)
+-veri ram'de olabilir erişmek zor (cashe miss)   
 
-
+!! çoğu zaman dinamik dizi bağlı listeyi out-perform yapar
+!! C dilinde programlamada çok sık kullanılan veri yapıları standart kütüphanenin bir bileşeni değil
 
 
 
