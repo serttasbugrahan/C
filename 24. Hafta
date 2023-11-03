@@ -277,13 +277,42 @@ client kodlar bu değişkenleri bilmeyecek
 eğer böyle bir veri yapısından birden fazlası aynı zamanda (farklı kodlar tarafından kullanılabilecek ise)
 handle tekniği ile bu çözülür
 
-//1.40
+-----------------------
 
+bir yapı türünü bir yapı türününn bildirimi içinde yapabiliriz
 
+//nested structure
 
+struct Neco{
+int a,b;
+struct Bircan {
+int x,y,z;
+};
+};
 
+-------
 
+!! aşağıdaki kodda tür eş ismi Neco olan yapının içte birldirilmiş yapı
+türünden bir elemani var
 
+typedef struct{
+int a;
+struct {
+int x,y,z;
+}m;
+}Neco;
+
+=================================================
+
+alignment (hizalama) : nesnelerin uygun işlemcilere yerleştirilmesi gerekiyor
+alignment requirement : her tür içi vardır, kaçın katlarına yerleştirilicek hangi adreslere yerleştirilicek
+
+int main()
+{
+_Alignof(int)
+}
+
+//1.53
 
 
 
