@@ -309,20 +309,167 @@ alignment requirement : her tür içi vardır, kaçın katlarına yerleştirilic
 
 int main()
 {
-_Alignof(int)
+  _Alignof(int)
 }
 
-//1.53
+int main()
+{
+printf("%zu\n",_Alignof(short)); //2, 2'nin tam katlarına yerleştirilir
+}
+
+
+----------
+
+typedef struct {
+int x;
+int y;
+int z;
+double d;
+}Data;
+
+int main(void)
+{
+printf("%zu\n",_Alignof(Data)); //8, double oolur ne büyüğü seçer
+}
+
+-----------
+
+int main(void)
+{
+printf("%zu\n",_Alignof(cahr[16])); //1
+}
+
+----------
+
+typedef struct {
+char c1;
+int x;
+char c2;
+}Nec;
+
+int main(void)
+{
+printf("sizeof %d",sizeof(Nec); // 12
+}
+
+sizeof değeri elemanın sıralamasına değerine vb. faktörlere bağlıdır
+
+----------------------------
+
+1 elemanın adresinden hareketle, char pointer aritmetiği ile yapının 1 sonraki elemanın adreslerini elde etmeye çalışmayın
+pading elemanlarına göre yapı farklı yerlerde olabilir. bunun yerine offsetof makro kullan
+
+offsetof :
+
+offsetof bir functional macro
+offsetof bir object-like macro değil
+
+stddef.h
+
+---------
+
+typedef struct {
+  char c1;
+  int x;
+  char c2;
+}Nec;
+
+//size_t türünden bir tam degeri
+
+int main(void)
+{
+offsetof(Nec, c1)
+
+Nec mynec;
+*(int*)((char *)&mynec + offsetof(Nec, x)) 
+printf("offsetof(Nec, x) = %zu\n", offsetof(Nec, x)); //4 çıkar ÇÜNKÜ ARAYA PADİNG BYTE GİRER
+}
+
+!! c programcıları ile yapılan mülakatlarda sorulan en tipi sorulardan biri offsetof mkarosunun implementasyonudur
+
+offsetof impremente edilmesi:
+
+#define Offsetof(S,M)    ((size_t)(&(S *)0->M)
+
+---------
+
+typedef struct{
+char c1;
+int x;
+char c2;
+}Nec;
+
+int main(void)
+{
+Nec nx = {'Z', 82343
+}
+
+--------
+
+#pragma pack(2) //2'nin katlarına yerleştirmemizi sağlar
+
+// C'de kullanılan birçok kütüphanede tipik olarak
+yapıların eleman sayısı fazladır.
+padding byte'ların azaltılması için yapı bildirimlerinde yapı 
+elemanlarının sıralanmasına özen gösterilir
+
+===============================================================================
+
+unions  
+
+!! struct ile neredeyse aynıdır
+
+union Data {
+
+}
+
+----
+
+typedef union {
+int x;
+}Udata;
+
+------
+
+struct ve union arasndaki fark :
+
+typdef union {
+int x;
+double d;
+}UData;
+
+typedef struct {
+int x;
+double d;
+}SData;
+
+!! bir birlik nesnenin tüm elemanları aynı adrestedir
+yani birlik nesnesinin tüm elemanları aynı bellek alanını paylaşır
+
+Bu durumda bir eleman değiştiğinde (anlamlı ya da anlamsız diğer elemanlar da değişmiş olur)
+
+Birlik türlerinin kullanıldığı durumlarda zaten genel amaç elemanların aynı bellek alanında tutulmasının avantajlarından faydalanmak
+yoksa structure kullanılırdı
+
+!! birlik nesnesine ilk değer verme sentaksında yalnızca tek bir inti kullanılabiliniir
 
 
 
+typedef union {
+int x,y,z;
+double d1,d2;
+char str[12];
+}UData;
 
+int main(void)
+{
+UData mydata = {12,56,32,2.2,3.4,"alican"} //derleyici sentek hatası verir
+UData mydata1 = {.str = "mustafa"}; //bu şekilde verilir
+}
 
+---------------------------------------
 
-
-
-
-
+Union türleri hangi durumlarda kullanılır
 
 
 
