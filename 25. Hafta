@@ -1,3 +1,76 @@
-/////////////////////////////
+/////////////////////////////////////////////////////1. Ders////////////////////////////////////////////////
+
+typedef union {
+int x,y;
+double d;
+char name[16];
+}Data;
+
+int main()
+{
+Data mydata = {.name = "hakan"}; //tek bir değişkene isim verilebilirnir
+}
+
+
+--------------------------------------
+
+Union neden kullanılır 
+
+1- bir verinin farklı 2 biçimde tespit edilmesi
+
+2- kullanılan bellek alanını azaltmak
+
+----------------------------------
+//bir verinin farklı  şekilde temsil edilmesini sağlamak
+
+typedef union {
+uint32_t uval;
+struct{
+uint16_t low_bytes;
+uint16_t high_bytes;
+};
+}Mint;
+
+int main()
+{
+Mint m{.uval = 567654567u};
+
+printf("m.low_bytes = %zu\n", m.low_bytes);
+printf("m.high_bytes = %zu\n", m.high_bytes);
+
+}
+
+
+!! birliklerin en sık kullanıldığı tema bir verinin farklı iki şekilde temsil edilmesidir
+böyle temalarda tipik olarak bitsel işlemler de kullanılır. bitsel işlemlere geldiğimizde böyle örnekler de vereceğiz
+
+öyle durumlar var ki özellikle sınırlı bellek alanına sahip olduğumuz koşullarda
+aynı zamanda birlikte var olmayacağından emin olduğumuz değişkenlerin aynı bellek alanı paylaşmasını sağlayabiliriz
+
+typedef struct{
+char name[32];
+int id;
+int gender;
+
+struct {
+char place[16];
+int status;
+};
+
+char maiden_name[24];
+}Employyee;
+
+//33.24
+
+
+
+
+
+
+
+
+
+
+
 
 
