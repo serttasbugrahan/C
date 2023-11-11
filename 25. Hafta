@@ -48,19 +48,427 @@ böyle temalarda tipik olarak bitsel işlemler de kullanılır. bitsel işlemler
 aynı zamanda birlikte var olmayacağından emin olduğumuz değişkenlerin aynı bellek alanı paylaşmasını sağlayabiliriz
 
 typedef struct{
-char name[32];
-int id;
-int gender;
+char name[32]; //32
+int id; //4
+int gender; //4
 
 struct {
-char place[16];
+char place[16]; 
 int status;
-};
+}; //20
 
-char maiden_name[24];
+char maiden_name[24]; //24
 }Employyee;
 
-//33.24
+int main(void)
+{
+printf("sizeof/Employee) = %zu\n", sizeof(Employee)); //84
+}
+
+!! özellikle gömülü sistemlere ilişkin kodlarda bir veri için mümkün olduğu kadar daha az
+bellek alanı kullanılması isteniyor olabilir.
+
+Bunu sağlmaya yönelik önlemler arasında iki teknik özellikle çok sık kullanılır
+
+1) aynı zamanda birlikte kullanılmaycak öğeler için ayrı bellek alanlları kullanılımasın
+
+2) mantıksal ilişki içindeki tam sayı verileri için ayrı ayrı değişkenler kullanmak yerine
+bunları bir tamsayı değişkenini bitlerinde (bit alanlarında) tutmak
+
+typedef struct{
+char name[32]; //32
+int id; //4
+int gender; //4
+
+union{
+struct {
+char place[16]; 
+int status;
+}; //20
+
+char maiden_name[24]; //24
+};
+}Employyee;
+
+----------
+
+typedef struct {
+int x,y;
+
+union { //aynı bellek alanlarında tutulur, birden fazlası bir arada bulnumayorsa bu yöntemi yaparız
+long long tc_id;
+char name[16];
+long long c_id;
+
+};
+}Employee;
+
+
+-----------------------
+
+tagged union
+discriminated union
+
+öyle bir veri yapısı oluşturmak istiyoruzki
+
+bu veri yapısı türünden bir değişken farklı türden değerler tutabilecek
+
+Nec x;
+x = 4324;
+x = 4324.2
+x = "mustafa";
+
+---------------
+
+typedef struct {
+int mday, mmon, myear;
+}Date;
+
+typedef union{
+int m_id;
+double m_val;
+Date bdate;
+char name[20];
+}Data;
+
+int main()
+{
+Data mydata;
+
+//mydata değişkeninin değerini kullanmak istiyorum
+// bu değeri kullanmak için en son hangi türden değer atandığını bilmem gerekir? tür bilgisiyle beraber paketleyerek bulunur
+}
+
+-----------
+#define ID 0
+#define WAGE 1
+#define DATE 2
+#define NAME 3
+
+typedef struct {
+int mday, mmon, myear;
+}Date;
+
+typedef struct{
+union {
+  int m_id;
+  double m_wage;
+  Date m_bdate;
+  char m_name[20];
+};
+int type;
+
+}Data;
+
+void print_data(const Data* p)
+{
+switch (p->type) {
+case ID: printf("id degeri : %d\n", p->m_id); break;
+case WAGE: printf("wage : %.2f\n", p->m_wage); break;
+case DATE: printf("tarih: %d-%d-%d\n", p->m_bdate.mday, p->m_bdate.mmon, p->m_bdate.year); break;
+case NAME: printf("name: %s\n", p->m_name); break;
+}
+}
+
+int main()
+{
+Data mydata = {.m_id = 345, .type = ID};
+
+print_data(&mydata);
+Date dx = {12, 5, 1292};
+
+mydata.m_bdate = dx; mydata.type = DATE;
+print_data(&mydata);
+}
+
+-------------
+
+#define ID 0
+#define WAGE 1
+#define DATE 2
+#define NAME 3
+
+typedef struct {
+int mday, mmon, myear;
+}Date;
+
+typedef struct{
+union {
+  int m_id;
+  double m_wage;
+  Date m_bdate;
+  char m_name[20];
+};
+int type;
+
+}Data;
+
+void print_data(const Data* p)
+{
+switch (p->type) {
+case ID: printf("id degeri : %d\n", p->m_id); break;
+case WAGE: printf("wage : %.2f\n", p->m_wage); break;
+case DATE: printf("tarih: %d-%d-%d\n", p->m_bdate.mday, p->m_bdate.mmon, p->m_bdate.year); break;
+case NAME: printf("name: %s\n", p->m_name); break;
+}
+}
+
+int main()
+{
+Data a[SIZE];
+
+for (size_t i = 0; i < SIZE; ++i) {
+print_data(a + 1);
+}
+}
+
+=================================================================
+
+unumarations (numaralandırma) :
+------------------------------
+
+program domaninde verinin alabileceği değerlerin sınırlı olduğu zamanlarda
+bu değerleri tam sayılarla eşlemeye denir
+
+//enumaration atge
+//enumaration constanst
+//enumarator
+
+---------------
+
+typedef enum {Arial, TimesNewRoman, Calibri, Verdana, Tahoma}Font;
+enum Font {Arial, TimesNewRoman, Calibri, Verdana, Tahoma};
+
+!! C dilinde enum türleri hem user-defined types kategorisinin
+hem de integer types kategorisinn bir öğesidir.
+
+!! type alias (tür eş ismi): typedef bildirimi ile bir türe verilen eş isimdir
+
+--------
+
+typedef enum {Arial, TimesNewRoman, Calibri, Verdana, Tahoma}Font;
+typedef enum {Black, Red, Gray, Blue, DarkBlue, Pink, Yellow} TextColor;
+
+structText {
+TextColor m_color;
+Font m_font;
+};
+
+---------
+
+typedef enum WeekDay {Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday}WeekDay;
+
+void f1(void)
+{
+WeekDay x = Thursday;
+}
+
+void f2(void)
+{
+WeekDay wd = Friday;
+}
+
+void f3(void)
+{
+WeekDay wx = Sunday;
+}
+
+--------
+!! aslında C ve c++ dillerinde derleyici bir enum türü karşılığında (kod üretme tarafında)
+fiilen bir tam sayı türünü kullanır. Yani herhangi bir enum türü semantik olarak ayrı bir olsa da (derleyici tarafında) bir tam sayı türüdür.
+C dilinde derleyici tarafındaki türün; 
+int (işaret int) türü olması garanti altındadır.
+
+C++ dilinde derleyici tarafındaki türe underlying-type (baz-tür) denir
+
+C++ dilinde progrogramcı underlying type'ı derleyicisinin seçimine bırakmadan özgür seçebilir
+
+----------
+
+!! C dilinde numaralandırma türleri derleyici tarafından işaretli int türü olarak belirlenir. c++'da bu değiştirilebilinir
+
+typedef enum WeekDay {Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday}WeekDay;
+typedef enum WeekDay {Sunday = 43, Monday = 432, Tuesday = 8, Wednesday = 44, Thursday = 12, Friday = 11, Saturday = 12}WeekDay; //bu şekilde olur
+
+int main(void)
+{
+sizeof(int) == sizeof(WeekDay); //eşit olmalıdır
+
+printf("Sunday = %d\n", Sunday); //0
+printf("Monday = %d\n", Monday); //1
+printf("Tuesday = %d\n", Tuesday); //2
+printf("Wednesday = %d\n", Wednesday); //3
+printf("Thursday = %d\n", Thursday); //4
+printf("Friday = %d\n", Friday); //5
+printf("Saturday = %d\n", Saturday); //6
+}
+
+-----------
+
+!! Enum türlerine ilişkin genel kabul edilen ilkesi:
+    -ya hepsine değer ve ya hiç verme
+
+!! ne yazik ki c dilinde enumaration türlerine derleyicinin yapmakla yükümlü olduğu (sıkı, özel) kontroller yok.
+
+-------
+
+enum Color {Blue, Red, Purple, Brown};
+enum WeekDay {Sunday, Monday, Tuesday, Wednasday, Thursday, Friday, Saturday};
+
+int main()
+{
+enum Color mycolor = Purple;
+enum Weekday = wd = Saturday; 
+}
+
+------
+
+aşağıdaki gibi bir enum türü bildirilmiş olsun. Bu durumda bu türn bir ismi olmadığınadn bu türden
+değişken tanımlayamayız ancak bu sabitleri kullanabiliriz:
+
+enum {Sunday, Monday, Tuesday, Wednasday, Thursday, Friday, Saturday};
+
+int x = Friday;
+
+---------
+
+enum {SIZE = 100};
+
+int main()
+{
+// SIZE bir sabit ifadesi mi evet
+// SIZE derleyicinin bildiği bir isim mi? evet
+// önişlmeci makrolarının kapsamı yoktur, cunkü scope kavramı derleyicinin bildiği bir kavram
+
+int a[SIZE] = {a};
+}
+
+//önişlemci programcı hilesi
+void func(void)
+{
+#undef SIZE 
+#define SIZE 100
+#undef SIZE
+}
+
+-----------
+
+typedef enum {Club, Diomand, Heart}Suit;
+
+int main()
+{
+Suit s1 = Heart;
+Suit s2 = Spade;
+
+if (s1 > s2){
+printf("evet buyuk\n");
+}
+}
+
+-----------
+
+//diyelim ki kkart oyunları içn genel amaçlı bir kütüphane oluşturuyoruz
+birden fazla oyun için kullanılabilmesi amaçlı
+
+//card.h
+
+#ifdef POKER
+typedef enum {Club, Diomand,Spade, Heart}Suit;
+#else 
+typedef enum Suit {Club, Diomand, Heart, Spade}Suit; 
+#endif
+
+typedef enum _Face {Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack,  Queen, king, Ace}Face;
+
+typedef struct Card_{
+Suits ms;
+Face mf;
+}Card;
+
+int main()
+{
+Card mmycard = {.ms = Spade, .mf = Ace};
+}
+
+-----------------
+
+C dilinde enum türlerine ilişkin temel problemler
+
+1. Gevşek tür kontrolü (her türden her türe dönüşüm oluyor)
+
+!!
+C ve C++ diilerinde yapılan kodlama hatalarının önemli bir kısmı
+programcıların niyetinin dışında yapılan örtülü tür dönüşümleridir
+
+2. scope porblemi
+Ne yazık kiC dilinde numaralandırma sabitlerinin ayrı kapsamları yoktur
+bir enum sabiti olan ismin kapsamı onun ait olduğu enum türünün kapsamıdır.
+
+//#include "screen.h"
+enum ScreenColor {White, Red, Blue, Green, Purple, Black};
+          //hata olur tekrar eden isimler olduğu için
+//#include "traffic.h"
+enum TrafficLight {Red, Yellow, Green};
+
+3. Numaralandırma türlerinin karşılığı olan tam sayı türü int olmak zorunda 
+- int türünün sınır değerleriyle 
+örneğin int türünün 4 byte olduğu bir sistemde bir enum sabiti
+10 milyar değerinde olamaz
+  
+- underlying type int olmak zorunda olduğu için
+enum türlerinden nesnelerin storage ihtiyacı int türünün storage ihtiyacı kadardır
+
+enum türlerinin kullanıma ilişkin bazı tipik durumlar ve idiyomlar :
+
+void func(Weekday wd)
+{
+switch (wd){
+case Sunday;
+case Monday;
+case Tuesday;
+}
+}
+
+msg = get_message_from_queue();
+
+------------
+
+enum color{
+White,
+Blue,
+Red, 
+yellow,
+NoOfColors(number of colors)
+};
+
+int main()
+{
+for (int i = 0; i < NoOfColors; ++i){
+}
+}
+
+!! bazen de enum sabitleri bitsel işlemler için de kullanılır
+
+////////////////////////////////////////////////////2. Ders/////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
