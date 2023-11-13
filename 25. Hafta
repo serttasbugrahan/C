@@ -451,32 +451,25 @@ for (int i = 0; i < NoOfColors; ++i){
 
 ////////////////////////////////////////////////////2. Ders/////////////////////////////////////////////
 
+Bitwise operations : Bitler üstünde yapılan işlemler
+
+~ (bitwise not)
+>> << (bitwise shift operators)
+& (bitwise and
+^ (bitwise exor) (dışlayan veya)
+| (bitwise or)
+<<= >>= &= ^= |= 
+
+constraint : operandları tam sayı türündendir
+
+!! dha çok unsigned int üzerinde işlem yapılır
+
+0100 1000 1001 0011
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+              
+  
+  
 
 
 
