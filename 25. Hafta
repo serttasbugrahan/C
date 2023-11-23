@@ -462,15 +462,228 @@ Bitwise operations : Bitler üstünde yapılan işlemler
 
 constraint : operandları tam sayı türündendir
 
-!! dha çok unsigned int üzerinde işlem yapılır
+!! daha çok unsigned int üzerinde işlem yapılır
 
 0100 1000 1001 0011
 
+-------
 
-              
-  
-  
+void bprint(int x)
+{
+static char str[40];
 
+_itoa(x, str, 2); //ikilik sayı sistemine dönüştürdü
+}
+
+---------
+
+void bprint(int x)
+{
+while (x) {
+  x % 10;
+  x /= 2;
+}
+putchar('\n');
+}
+  
+int main(void)
+{
+int x = 1024;
+bprint(48);
+}
+
+--------------------------
+
+~ : bitsel değil operatörü
+
+int main()
+{
+int x = 1024
+
+bprint(x);
+bprint(~x);
+
+}
+
+-----
+
+int main()
+{
+printf("bir tam sayi girin: ");
+int x;
+
+scanf("%d", &x);
+
+printf("%d\n", !x);
+printf("%d\n", ~x);
+
+bprint(x);
+bprint(~x);
+
+}
+
+-------------------
+
+bitwise shift operator (bitsel kaydırma operatörleri) :
+
+aritmetik operatörlerden daha düşüğk öncelik seviyesinde 
+karşılaştırma operatörlerinden daha yüksek öncelik seviyesinde
+
+<< bitwise left shift
+>> bitwise right shift
+
+x << y
+yan etkisi yok
+
+operattörün sağ operandının
+
+a) negaitf degerde olması
+b) sol operand olan tamsayı türünün bit sayısına eşit ya da bu degerden fazla olması tanımsız davranış
+
+-------
+
+int main()
+{
+int x = 543453;
+int y = 32;
+
+x << y //ub olur
+}
+
+int main()
+{
+short x = 232;
+
+x << 19
+!! dikkat yukarıdaki kodda (neco'nun derleyesicisinde) ub yok
+çünkü bitsel kaydırma işlemi sol operandı short türden değil integral promotion ile int türden
+}
+
+-----------------------------------
+
+x << 1 //x'i 1 sola kaydır demek
+
+int main()
+{
+int x = -1;
+
+bprint(x);
+bprint(x << 1);
+bprint(x << 3);
+
+printf("x = %d\n", x); 
+}
+
+------
+
+int main()
+{
+int x = -1;
+
+while (x) { //non zero olduğu sürece döner
+bprint(x);
+x = x << 1;
+//x <<= 1; ile aynı anlamdadır
+}
+}
+
+-----
+// bitsel sola kaydırma 2 ile çarpma anlamına gelir
+int main()
+{
+int x;
+printf("bir tam sayi girin: ");
+scanf("%d", &x);
+
+printf("%d %d\n", x, x << 1);
+}
+
+------
+
+#define MASK (1 << 5)
+
+int main()
+{
+printf("%d\n", MASK);
+printf("%d\n", 1 << 5); // 2^5 anlamaına gelir 32 çıkar
+}
+
+bitsel sola kaydırma işlemlerinden sağdan beslenecek bitlerin, 0 olması garanti altındadır
+
+----------------------------
+
+sağ kaydırma operandı
+x >> y
+
+bitsel sağa kaydırma işleminde (bitwise right shift) soldan yapılacak besleme
+bir istisna dışında her zaman 1 biti ile yapılır
+
+eğer sol operand işsaretli bir tam sayı türünden ve negatif değerde ise
+soldan yapılacak beslemenin 1 ya da 0 ile yapılması implementatiton-defined
+
+negatif tam sayıların sağa kaydırılmasında 
+beslemenin 0 ile yapılmasına 
+logical feed
+beslemenin 0 ile yapılmasına 
+aritmetic feed / sign extension
+
+int main(void)
+{
+unsigned int uval = 65535;
+
+bprint(uval);
+bprint(uval >> 4);
+}
+
+-------
+
+int main()
+{
+unsigned int uval = UINT_MAX; //aynı anlamda
+//unsigned int uval = -1; //aynı anlamda
+//unsigned int uval = -0U; //aynı anlamda
+
+while (x) {
+bprint(x);
+x >>= 1;
+}
+}
+
+-----
+
+int main(void)
+{
+unsigned int x = INT_MIN;
+while (x) {
+bprint (x);
+x >>= 1;
+}
+}
+
+------------------
+
+x & y
+a ^ b
+x | y
+
+int main(void)
+{
+int x,y;
+
+printf("iki tam sayi girin: ");
+scanf("%d%d, &x, &y);
+
+bprint(x);
+bprint(y);
+bprint(x & y);
+
+}
+
+-----------
+
+!! bitsel lojik operatörlerin kısa devre davranışı yoktur
+
+//1.30
 
 
 
