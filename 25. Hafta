@@ -682,8 +682,38 @@ bprint(x & y);
 -----------
 
 !! bitsel lojik operatörlerin kısa devre davranışı yoktur
+--------------
 
 //1.30
+ ///bu arayı not alamadım
+//2.20
+
+--------------
+
+!!mülakat sorusu 
+bir sayının 2nin üssü olup olmadığınını kontrolü
+
+#define power_of_two(a)  ((a) && !((a) & ((a) - 1)))
+
+int main(void)
+{
+int x;
+
+printf("bir sayi girin: ");
+scanf("%d", &x);
+if (power_of_two(x)){
+printf("evet 2'nin kuvveti\n");
+}
+else {
+printf("hayir 2'nin kuvveti degil\n");
+}
+}
+
+-----------
+
+//2.30
+
+
 
 
 
