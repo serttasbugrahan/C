@@ -711,7 +711,77 @@ printf("hayir 2'nin kuvveti degil\n");
 
 -----------
 
-//2.30
+bir tam sayının set bitlerinin sayılması
+
+Örneğin 32 bitlik bir tam sayının kaç biti 1
+
+void sbc1(int x)
+{
+unsigned int mask = ~(~0u >> 1);
+
+while (mask) {
+if (x & mask)
+++cnt;
+mask >>= 1;
+}
+return cnt;
+}
+
+int sbc2(int x)
+{
+int cnt = 0;
+
+while (x) {
+x &= (x - 1);
+++cnt;
+}
+return cnt;
+}
+
+int main(void)
+{
+int x;
+
+printf("bir tam sayi girin: ");
+scanf("%d", &x);
+bprint(x);
+
+printf("%d bitti 1\n", sbc1(x));
+printf("%d bitti 1\n", sbc2(x));
+}
+
+-----------------
+//bit dizisinin tersini veren algoritma
+
+void sbc(int x)
+{
+unsigned int mask = ~(~0u >> 1);
+
+while (mask) {
+if (x & mask)
+++cnt;
+mask >>= 1;
+}
+return cnt;
+}
+
+int main(void)
+{
+for (int i = 0; i < 256; ++i){
+if (i && i % 16 == 0)
+printf("\n");
+printf("%d", sbc(i));
+}
+}
+
+//look at table oluşturuldu
+
+int main()
+{
+int x = 387'234'523;
+sbc[x & 255] + (x >> 8)  & 255] + sbc[(x >> 24) & 255]
+printf("%d %d biti 1\n", set_bit_count(x), n);
+}
 
 
 
