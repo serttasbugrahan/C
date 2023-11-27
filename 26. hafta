@@ -1,10 +1,196 @@
 /////////////////////////////////////////////////////////////1. Ders///////////////////////////////////////////////////////////
 
+x << 4 >> 8 //x'i 4 sola kaydır 8 sağa kaydır
+
+-----------
+
+neden bir tam sayının bitlerini boolean olarak kullanayım
+
+daha az storage için
+daha hızlı işlemler için
+fonksiyon parametre değişkeni sayısını azaltmak
+
+yapılarım bit alanı (bitfields) elemanları:
+-------------------------------------------
+
+Dizinin bazı elemanları bit alanı bazı elemanları bit alanı olmayabilir
+
+struct Data {
+int x; //bit alanı değil
+int y : 5; //bit alanı
+};
+
+-------
+
+struct Data {
+int x;
+struct {
+int a : 3;
+int b : 3;
+int c : 2;
+};
+};
+
+------
+
+struct Data {
+long a : 3; //saçma
+//int kullan
+};
+
+------
+
+struct Data {
+int x : 3;
+int y : 5;
+int z : 2;
+int t : 6;
+};
+
+------
+//haftanın günlerini tutmayı aşağıdaki gbi gösterebiliriz
+
+struct Data {
+unsigned int wd : 3;
+};
+
+------
+typedef struct {
+int x : 3;
+int x : 3;
+int x : 3;
+}Data;
+
+int main(void)
+{
+Data mydata;
+
+mydata.x = 3;
+mydata.y = 12;
+mydata.z = 24;
+
+Data* p = &mydata;
+
+p->y = 5;
+}
+
+-----
+
+!! yapıların bit alanı elemanlarının adres operatörünün
+operandı olması sentax hatası oluşturur
+
+typedef struct {
+int x : 3;
+int x : 3;
+int x : 3;
+}Data;
+
+int main()
+{
+Data dt = {2, 6, 23};
+&dt.y;
+}
+
+----------
+!! birçok c programcısı designated init. sentaksını bilmediği için
+kullanmıyor 
+
+typedef struct {
+int x : 3;
+int y : 5;
+int z : 1;
+}Data;
+
+int main(void)
+{
+Data dt = {
+.y = 4,
+.x = 4,
+.z = 4,
+};
+}
+
+------
+
+typedef struct {
+int x1 : 3;
+int x2 : 1;
+int x3 : 8;
+int x4 : 2;
+int x5 : 9;
+}Data;
+
+int main(void)
+{
+printf("sizeof(Data) = %zu\n", sizeof(Data));
+}  
+
+------
+
+dost'ta neden tek saniye yok?
+
+------
+
+// bir datetime verisini
+//iki  ayrı şekilde temsil etmek istiyoruz
+
+//birinci temsil 
+doğrudan insanın anladığı form
+gun ay yıl saat dakika saniye
+işaretsiz bir tam sayı olarak
+tarihsaat ==> tam sayı
+tam sayı ==> tarih saat
+
+-----
+
+typedef struct {
+int mday : 5;
+int mon : 4;
+int year : 7; // + 1980
+int hput : 5; // 0 - 23
+int min : 6; //0 - 23 
+int sec : 5; // * 2
+uint32_t uval;
+}DateTime;
+
+int main(void)
+{
+DateTime dx = {
+.mday = 24,
+.mon = 12,
+.year = 2013 - 1980,
+.hour = 14,
+.min =56,
+.sec = 28 / 2 
+};
+printf("24 12 2013 14 56 28 için tam sai degeri %u\n", dx.uval);
+}
 
 
+---------------------------
+
+union Data {
+int x;
+struct {
+short a;
+short a;
+};
+}
+
+union Data {
+long x;
+int i;
+char str[4];
+};
 
 
+-----------------------------
 
+farklı adres türlerine yönelik güvenli dönüşümler
+
+bir nesne adresinin char dizi adresi olarak kullanılması
+
+Bir yapı nesnesinin kendi adresi ile ilk elemanının adresi arasındaki dönüşümler
 
 
 
