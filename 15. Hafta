@@ -17,8 +17,8 @@ printf("%d ",*p);
 int main(void)
 {
 int a[10] = {0, 1,2,3,4,5,6,7,8,9};
-int * p1 = a + 5; //5. elemanı (değeri değil direk 5)
-int * p2 = a + 8; //8. elemanı (değeri değil direk 8)
+int * p1 = a + 5; //5. elemanı (değeri değil direkt 5)
+int * p2 = a + 8; //8. elemanı (değeri değil direkt 8)
 
 if (p2 > p1){//  DOĞRU 8 > 5
 }
@@ -384,7 +384,7 @@ int main(void)
 !!!!!!
 int * get_value(void)
 {
-int x;
+int x; //static olmalıydı burası
 printf("bir tam sayi girin: ");
 scanf("%d", &x);
 
