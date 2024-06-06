@@ -289,7 +289,7 @@ printf("%c", *p[i][strlen(p[i] - 1); //dizinin son elemanını verir
 
 !! char * const p[] = {} //p'nin gösterdiği nesneyi değiştiremeyiz
 -------
-
+  
 int main(void)
 {
 const char * p[] = {};
@@ -352,8 +352,8 @@ int x = 10;
 int * ptr = &x;
 
 printf("&x = %p\n", &x); //aynı adres yazar
-printf("ptr = %p\n", ptr);
-printf("ptr = %p\n", &ptr); //ptr değişkenin kendi adresi
+printf("ptr = %p\n", ptr); //aynı adres yazar
+printf("&ptr = %p\n", &ptr); //ptr değişkenin kendi adresi
 
 &ptr türü = int**
 }
