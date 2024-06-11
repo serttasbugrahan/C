@@ -233,7 +233,9 @@ struct Data mydata = {
 12
 };
 }
+
 ----
+
 struct Data {
 double dval;
 int ar[4][3];
@@ -259,15 +261,15 @@ struct Data mydata = {
 struct Data {
 double dval;
 int ar[20];
-double dval
+double dval;
 int x,y;
 };
 
 int main(void)
 {
 struct Data mydata = {
-.dval = 2.3;
-.x = 20;
+.dval = 2.3,
+.x = 20,
 .ar = {[3] = 5, [7] = 9}
 };
 }
@@ -278,7 +280,7 @@ struct Nec{
 char c1;
 int x;
 char c2;
-}g; //hem struct nec bildirilde hemde ismi g olan global bir değişken bildirildi
+}g; //hem struct nec bildirildi hemde ismi g olan global bir değişken bildirildi
 
 struct Nec g; //aynı anlama gelir
 
@@ -368,7 +370,7 @@ struct Point * ptr = &p;
 sizeof(p);
 p.y = 2.3;
 (*ptr).x = 3.4;
-ptr->x = 3.4; //369. satır ile aynı anlama gelir
+ptr->x = 3.4; //372. satır ile aynı anlama gelir
 }
 
 ------------------
@@ -726,13 +728,13 @@ yapı türleri ve fonksiyonlar :
 -------
 
 typedef struct {
-in id;
+int id;
 char name[20];
 char surname[32];
 int a[20];
 }Person;
 
-void print_person(const Person * p); //input parameter
+void print_person(const Person * p) //input parameter
 {
 printf("id = %d\n", p->id);
 printf("name = %s\n", p->name);
