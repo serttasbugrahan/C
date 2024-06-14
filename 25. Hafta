@@ -33,7 +33,7 @@ uint16_t high_bytes;
 
 int main()
 {
-Mint m{.uval = 567654567u};
+Mint m = {.uval = 567654567u};
 
 printf("m.low_bytes = %zu\n", m.low_bytes);
 printf("m.high_bytes = %zu\n", m.high_bytes);
