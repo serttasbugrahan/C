@@ -367,7 +367,7 @@ printf("evet buyuk\n");
 
 -----------
 
-//diyelim ki kkart oyunları içn genel amaçlı bir kütüphane oluşturuyoruz
+//diyelim ki kart oyunları içn genel amaçlı bir kütüphane oluşturuyoruz
 birden fazla oyun için kullanılabilmesi amaçlı
 
 //card.h
