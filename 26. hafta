@@ -3,29 +3,166 @@
 x << 4 >> 8 //x'i 4 sola kaydır 8 sağa kaydır
 
 -----------
+//düşük anlam bitlerinden yüksek anlam bitlerine geçiş olacak
+
+//DE AB
+//FC 12
+//12 FC
+//AB DE
+
+int main(void)
+{
+//1 byte 8 bit
+//2 byte 16 bit
+//4 byte 32 bit
+
+unsigned int x = 0xAB12FCDE;
+
+printf("%x\n" ,x);
+printf("%x\n" ,(x << 24) || (x >> 24) | (x >> 8 & 0x0000FF00) | (x << 8 & 0x00FF0000));
+
+}
+
+--------------
+
+int main(void)
+{
+int x = 10;
+
+x = -~x
+printf("x = %d", x);
+}
+
+-----------------------------------------------
+
+----------------
+#define HIDDEN 1 //sayının 1. biti
+#define SYSTEM 2 //sayının 2. biti
+#define READONLY 4 //sayının 3. biti
+#define ARCHIVE 8 //sayının 4. biti
+#define WRİTE 16 //sayının 5. biti
+
+struct FileProp {
+char name[20];
+unsigned int size;
+//...
+unsigned int fileflags;
+};
+
+struct FileProp* get_file_prop(void);
+
+int main(void)
+{
+struct FileProp* p = get_file_prop();
+
+if (p->fileflags & READONLY) { //2. biti 1 mi
+
+}
+
+p->fileflags &= ~(HIDDEN | ARCHIVE);
+
+(
+
+}
+---------------
 
 neden bir tam sayının bitlerini boolean olarak kullanayım
 
-daha az storage için
-daha hızlı işlemler için
-fonksiyon parametre değişkeni sayısını azaltmak
+bit vector kavramı
 
+-daha az storage için
+-daha hızlı işlemler için
+-fonksiyon parametre değişkeni sayısını azaltmak
+
+bit vector kullanımına tipik bir örnek: 
+
+ctype kütüphanesi
+
+-------------
+
+myctype.h
+
+#define UPPER 1
+#define LOWER 2
+#define DIGIT 4
+#define XDIGIT 8
+#define PUNCT 16
+#define SPACE 32
+#define PRINT 64
+
+extern const int ct_[];
+
+#define ISUPPER(c) (ct_[c] & UPPER)
+#define ISLOWER(c) (ct_[c] & LOWER)
+#define ISALPHA(c) (ct_[c] & (LOWER | UPPER))
+#define ISDIGIT(c) (ct_[c] & DIGIT)
+#define ISALNUM(c) (ct_[c] & (LOWER | UPPER | DIGIT))
+#define ISPUNCT(c) (ct_[c] & (PUNCT)
+#define ISSPACE(c) (ct_[c] & (SPACE)
+#define ISXDIGIT(c) (ct_[c] & (XDIGIT)
+#define ISPRINT(c) (ct_[c] & (PRINT)
+
+int main()
+{
+int ch;
+
+printf("bir karakter girin: ");
+ch = getchar();
+
+if(ISUPPER(ch)) {
+printf("ever buyuk harf degil");
+}else {
+printf("hayir buyuk harf degil");
+}
+}
+
+// main.c
+
+int main(void)
+{
+for (int i = 0; i < 128; ++) {
+int flags = 0;
+if (isupper(i)) flags |= UPPER;
+if (islower(i)) flags |= LOWER;
+if (isdigit(i)) flags |= DIGIT;
+if (isxdigit(i)) flags |= XDIGIT;
+if (ispunct(i)) flags |= PUNCT;
+if (isspace(i)) flags |= SPACE;
+if (isprint(i)) flags |= PRINT;
+if (i && % 16 == 0)
+printf("\n");
+printf("%2d ", flags);
+}
+}
+
+--------------------------------------
+
+Bir tam sayının belirli bit alanlarını ayrı değişkenler olarak kullanmak
+
+// 00000000 00000000 00000000 00000000
+
+-------------------------------------------
 yapılarım bit alanı (bitfields) elemanları:
 -------------------------------------------
 
 Dizinin bazı elemanları bit alanı bazı elemanları bit alanı olmayabilir
 
+int n = 3;
+
 struct Data {
 int x; //bit alanı değil
-int y : 5; //bit alanı
+int y : 5; //bit alanı 5 bitlik alanda tutulacak
+int y : n ; //hata
 };
 
 -------
+!! hepsi bit alanı olmak zorunda değil
 
 struct Data {
 int x;
+int y : 10;
 struct {
-int a : 3;
+int a : 3; //3 bitlik alanda tutulur
 int b : 3;
 int c : 2;
 };
@@ -69,7 +206,7 @@ mydata.x = 3;
 mydata.y = 12;
 mydata.z = 24;
 
-Data* p = &mydata;
+Data* p = &mydata; //elimizde pointer var ise
 
 p->y = 5;
 }
@@ -88,12 +225,11 @@ int x : 3;
 int main()
 {
 Data dt = {2, 6, 23};
-&dt.y;
+&dt.y; //hata 2
 }
 
 ----------
-!! birçok c programcısı designated init. sentaksını bilmediği için
-kullanmıyor 
+!! birçok c programcısı designated init. sentaksını bilmediği için kullanmıyor 
 
 typedef struct {
 int x : 3;
@@ -111,6 +247,7 @@ Data dt = {
 }
 
 ------
+//kapasitesi
 
 typedef struct {
 int x1 : 3;
@@ -125,17 +262,29 @@ int main(void)
 printf("sizeof(Data) = %zu\n", sizeof(Data));
 }  
 
-------
+------------
+//8 bitte başka bir şey kullanmamak için padding bit kullanılabilir
 
-dost'ta neden tek saniye yok?
+struct Nec {
+int x : 5;
+int : 3;
+int y : 4;
+};
 
-------
+-----------------------------
+
+unionların 2 kullanım fikri var
+
+1- bellek alanı, tek bellekte kullanılır
+
+2- bir verii farklı 2 şekilde temsil etmek
+
+--------
 
 // bir datetime verisini
 //iki  ayrı şekilde temsil etmek istiyoruz
 
-//birinci temsil 
-doğrudan insanın anladığı form
+//birinci temsil : doğrudan insanın anladığı form
 gun ay yıl saat dakika saniye
 işaretsiz bir tam sayı olarak
 tarihsaat ==> tam sayı
@@ -143,13 +292,15 @@ tam sayı ==> tarih saat
 
 -----
 
-typedef struct {
+typedef union{
+struct {
 int mday : 5;
 int mon : 4;
 int year : 7; // + 1980
 int hput : 5; // 0 - 23
 int min : 6; //0 - 23 
 int sec : 5; // * 2
+};
 uint32_t uval;
 }DateTime;
 
@@ -165,17 +316,54 @@ DateTime dx = {
 };
 printf("24 12 2013 14 56 28 için tam sai degeri %u\n", dx.uval);
 }
+S
+--------------------------
 
+!!!! güzel bir yapı bitler için
 
----------------------------
+typedef union {
+struct {
+unsigned int bit0 : 1;
+unsigned int bit1 : 1;
+unsigned int bit2 : 1;
+unsigned int bit3 : 1;
+unsigned int bit4 : 1;
+unsigned int bit5 : 1;
+unsigned int bit6 : 1;
+unsigned int bit7 : 1;
+unsigned int bit8 : 1;
+};
+uint32_t uval;
+}Bits;
+
+int main()
+{
+printf("sizeof(Bits) = %zu\n", sizeof(Bits));
+
+Bits x  = { .uval = 0};
+
+x.bit5 = 1;
+printf("uval %u\n", x.uval);
+}
+
+-------------------------
+
+struct Data {
+int a : 4;
+int b : 3;
+int c : 6;
+int not_used : 2; //burayı şimdilik kullanmak demek
+};
+
+-----------------------
 
 union Data {
 int x;
 struct {
 short a;
-short a;
+short b;
 };
-}
+};
 
 union Data {
 long x;
@@ -186,16 +374,25 @@ char str[4];
 
 -----------------------------
 
-farklı adres türlerine yönelik güvenli dönüşümler
+farklı adres türlerine yönelik güvenli dönüşümler :
 
-bir nesne adresinin char dizi adresi olarak kullanılması
+1- bir nesne adresinin char dizi adresi olarak kullanılması
 
-Bir yapı nesnesinin kendi adresi ile ilk elemanının adresi arasındaki dönüşümler
-
-
+2- Bir yapı nesnesinin kendi adresi ile ilk elemanının adresi arasındaki dönüşümler
 
 
+int main(void)
+{
+double dval = 36.893455;
 
+unsigned char* p = (unsigned char*)&dval;
+
+for (size_t i = 0; i < sizeof(dval); ++i) {
+printf("%u\n", p[i]);
+}
+}
+
+---------------------
 
 
 
