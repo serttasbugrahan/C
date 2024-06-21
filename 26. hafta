@@ -474,14 +474,31 @@ int main(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-printf("%d =", argc);
+printf("argc = %d", argc);
 }
 
 //komut satırında 
-C:\bugra>a
-yazarsak
+//C:\bugra>a
+//yazarsak
+//argc = 1 çıkar
 
-argc = 1 çıkar
+//komut satırında 
+//C:\bugra>ali veli hasam
+//yazarsak
+//argc = 3 çıkar
+
+----------------
+
+int main(int argc, char **argv)
+{
+printf("argc = %d", argc);
+
+for (int i = 0; i < argc; ++i) {
+printf("argv[%d] = %s\n", i , argv[i]);
+}
+}
+
+//25.32
 
 
 
