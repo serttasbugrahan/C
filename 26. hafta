@@ -392,7 +392,99 @@ printf("%u\n", p[i]);
 }
 }
 
----------------------
+/////////////////////////////////////////// 2. Ders ///////////////////////////////
+
+bu derste görülen konular :
+
+- komut satırı argümanları
+
+- dosya işlemleri
+
+
+bit alanı aşağıdaki türleri alabilir
+
+struct Nec {
+_Bool x : 1;
+int y : 4;
+signed int : 4;
+usigned int : 3;
+};
+
+-------------
+
+struct Nec {
+_Bool x : 5;
+int : 3; //2 byte yayılmaması için bu şekilde padding bit kullanılabilir
+};
+
+==============================================================
+
+komut satırı argümanları (command line arguments) 
+-------------------------------------------------
+
+komut satırı : işletim sisteminin kullanıcısı ile oluşturduğu arayüz
+
+dir *.txt 
+    ------
+    burası komut satırı kısmıdıır
+
+bir yazı C'de bir fonksiyona nasıl iletilir ?
+
+char *
+const char *
+
+birden fazla yazı olsa ?
+
+yazıların adresleri bir pointer dizisinde tutulsun
+fonksiyona pointer dizisinin adresi gönderilsin
+
+
+--------
+//       char * [] //aynı anlamda
+void foo(char** ptr, int size)
+{
+for (int i = 0; i < size; ++i) {
+printf("%s", ptr[i]);
+}
+}
+
+int main(void)
+{
+char* p[] = {"ali", "mehmet", "hasan", "deniz"};
+
+foo(p, 4);
+}
+
+---------------
+
+komut satırından argümanları alarak bu argümanlara erişecek bir programın
+main fonksiyonu
+tipik olarak 
+2 tane parametre değişkenine sahip olur
+
+int main(int argc, char **argv)
+{
+
+}
+
+// argc : komut satırındaki argüman sayısı
+// argv : komut saatırındaki yazıları tutan pointerın adresi
+
+--------------
+
+int main(int argc, char **argv)
+{
+printf("%d =", argc);
+}
+
+//komut satırında 
+C:\bugra>a
+yazarsak
+
+argc = 1 çıkar
+
+
+
 
 
 
