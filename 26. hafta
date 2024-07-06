@@ -498,7 +498,373 @@ printf("argv[%d] = %s\n", i , argv[i]);
 }
 }
 
-//25.32
+----------------
+
+int main()
+{
+if (argc != 3){
+printf("kullanim: <kopyala> <kaynak dosya ismi> <hedef dosya ismi>\n");
+return 1;
+}
+
+printf("%s dosyasinin %s isimli koyasi olusturuldu\n", argv[1], argv[2]);
+}
+
+-----------------
+
+komut satırından çalışan basit bir hesap makinesi yapıyoruz
+
+hes 12 * 45
+540
+
+hes 45 + 35
+75
+
+int main(int arg, char**argv)
+{
+if (arg != 4) {
+printf("usage: <calc> <op1> <operator+-*/> <op2>\n");
+return 1;
+}
+
+int op1 = atoi(argv[1]);
+int op2 = atoi(argv[3]);
+
+switch (*argv[2]) {
+case '+' : printf("%d\n", op1 + op2); break;
+case '-' : printf("%d\n", op1 - op2); break;
+case '*' : printf("%d\n", op1 * op2); break;
+case '/':
+if (op2 == 0)
+printf("sifira bolme hatasi\n");
+else
+printf("%f\n", (double)op1 / op2);
+}
+}
+
+-----------------
+
+yazıyı ters çeviren algoritma
+
+char* Strrev(char* p)
+{
+size_t len = strlen(p);
+
+for (int i = 0; i < len / 2; ++i)
+{
+char temp = p[i];
+p[i] = p[len - 1 - i];
+p[len - 1 - i} = tem
+}
+return p;
+}
+
+int main(int argc, char**argv)
+{
+for (int i = argc - 1; i >= 1; --i) {
+printf("%s", Strrev(argv[i]));
+}
+}
+
+------------------
+
+int main(int argc, char**argv)
+{
+if( argv[argc] == NULL) {
+printf("argv[%d] Null pointer\n", argc);
+}
+
+int i = 0;
+while (argv[i]) {
+puts(argv[i++]);
+}
+}
+
+----------------
+
+int main(int argc, char**argv)
+{
+char source_file_name[80];
+char dest_file_name[80];
+
+if (arg != 3) {
+printf("kaynak dosya ismi: ");
+scanf("%s", source_file_name);
+printf("hedef dosya ismi: ");
+scanf("%s", dest_file_name);
+} else {
+strcpy(source_file_name, argv[1]);
+strcpy(dest_file_name, argv[2]);
+}
+
+printf("%s doysasının %s isimli kopyası olusturuldu", source_file_name, dest_file_name)
+}
+
+
+===============================================
+
+Dosya işlemleri
+
+#include <stdio.h>
+
+printf
+scanf
+sprintf
+snprintf
+sscanf
+putchar
+getchar
+
+handle yapısı / tekniği kullanılır
+
+FILE* fopen
+foo(FILE*)
+bar(FILE*)
+fclose(FILE*)
+
+--------------------------------------------------
+
+fopen : dosya açan fonksiyon
+ dosya açmak demek o dosya üzerinde işle yapabilmeye denir
+
+dosyları belli modlar ile açabailiriz
+
+dosya açış modları
+-----------------
+
+açış modu,
+
+açılmak istene (üstünde işlem yapılacak dosya) varsa ne olacak yoksa ne olacak
+dosya üzeirnde hangi işlemleri yapabilirim
+    dosyadan okuma yapmak
+    dosyaya yazma işlemi yapmak (write)
+    dosyanın byte'larını değiştirmek (bu da yazmadır)
+
+
+--------------
+!! standart kütüphane kullanarak dosyayı açmadan hangi işlemleri yapabiliriz
+- dosyayı silmek (remove)
+- dosyanın ismini değiştirmek (rename)
+
+!! yazma modunda dosya yazmak dosya oluşturmak anlamında hgelir
+
+
+dosya okuma modunda açma (read) : dosya var ise açılır yoksa açılmaz
+                                  dosyandan okumaya izin verilir, yazma işlemi yapılamaz
+
+dosya okuma modunda açma (read +) : dosya var ise açılır yoksa açılmaz
+                                  dosyandan okumaya izin verilir, yazma işlemi yapılır
+
+
+dosya yazma modunda açma (write): dosya var ise dosya kaybedilir, 
+
+dosya yazma modunda açma (write +): dosya var ise dosya kaybedilir, okuma işlemi de yapılabilir
+
+dosya sona ekleme modunda açılabilir (yazma) (append) : dosya varsa açılır dosya yoksa oluşturulur
+                                                        var olan bytlar değişmez
+
+dosya sona ekleme+ modunda açılabilir (sona yazma) (append) : dosya varsa açılır dosya yoksa oluşturulur
+                                                             var olan bytlar değişmez, dosyadan okuma yapılabilir
+
+dosya ya text modunda açılır, ya da binary modda açılır
+
+
+----------------------
+
+FILE* fopen(const char* pfilename, const char* pmode); //dosya ismi , dosya açış bilgisi
+
+"r" => okuma
+"w" => yazma
+"a" => sona ekleme
+
+"r+" => okuma+
+"w+" => yazma+
+"a+" => sona ekleme+
+
+!! yukarıdakikerin hepsi text modundadır
+!! aşağısı binary modda açar
+
+"rb" => okuma
+"wb" => yazma
+"ab" => sona ekleme
+
+"rb+" => okuma+ //r + b geçerli
+"wb+" => yazma+ //w + b geçerli
+"ab+" => sona ekleme+ //a + b geçerli
+
+malloc gibi null pointer mı kontrol edilmelidir
+
+--------------------
+
+//kemal.txt dosyasını okuma (text) modunda açınız
+//dosya acılmaz ise standart hata akımına bir bilgilendirme yazısı vererek programı sonlandır
+
+int main(void)
+{
+FILE* f = fopen("kemal.txt", "r")
+
+if (!f) {
+fprintf(stderr, "kemal.txt dosyasi acilamadi\n");
+return 1;
+}
+}
+
+---------------------
+
+//kemal.txt dosyasını yazma (text) modunda açınız
+//dosya acılmaz ise standart hata akımına bir bilgilendirme yazısı vererek programı sonlandır
+
+int main(void)
+{
+FILE* f = fopen("kemal.txt", "w")
+
+if (!f) {
+fprintf(stderr, "kemal.txt dosyasi acilamadi\n");
+return 1;
+}
+
+printf("kemal.txt dosyasi olusturuldu\n");
+}
+
+
+--------------------
+
+flose : dosyayı kapatan fonksyion
+
+!! dosya ile işin bitine dosyayı kapat
+
+int fclose(FILE*);
+
+int fcloseall(void); //bütün dosyaları kapatır, standart değildir.
+
+---------------------
+
+dosyada yapılan işlemler
+
+dosyadan okuma
+dosyadan yazma
+
+formatlı yazma : yazılan  veya okunana karakter kodları demektir
+formatsız yazma : yazılan veya okunan bytlearın kendi değeridr
+
+----------------------
+
+dosyadan formatsız okuma işlemi yapan 
+
+fgetc fonksiyonu
+
+getchar ile çok benzer, fgetc dosyadan okuma yapar
+
+int fgetc(FILE *);
+
+!! fgetc en tipik başarısızlık nedeni okunacak byte kalmamasıdır, -1 döndürürse başarısız
+
+--------
+
+#include <stdio.h>
+
+int main(void)
+{
+FILE* f = fopen("murat.txt", "r");
+if (!f) {
+fprintf(stderr,"dosya acilamadi\n");
+return 1;
+}
+
+int ch;
+
+while (ch = fgetc(f)) != EOF) {
+putchar(ch);
+}
+flose(f);
+}
+
+----------------
+
+int main(int argc, char **argv)
+{
+if (argc != 2) {
+fprintf(stderr, "usage: <prfile> <file name>\n");
+return 1;
+}
+FILE* f = fopen(argv[1], "r");
+if (!f) {
+fprintf(stderr, "file %s cannot be opened!\n", argv[1]);
+return 2;
+}
+
+int c;
+
+while ((c = fgetc(f)) != EOF) {
+putchar(c);
+}
+fclose(f);
+}
+
+-------------------
+
+dosyada kaç tane m karaketeri var onu bulan kod
+
+int main(int argc, char **argv)
+{
+if (argc != 3) {
+fprintf(stderr, "usage: <ksay> <file name> <character>\n");
+return 1;
+}
+FILE* f = fopen(argv[1], "r");
+if (!f) {
+fprintf(stderr, "file %s cannot be opened!\n", argv[1]);
+return 2;
+}
+
+int c;
+int count = 0;
+
+while ((c = fgetc(f)) != EOF) {
+putchar(c == *argv[2])
+++count;
+}
+fclose(f);
+printf("%d\n", count);
+}
+
+----------------
+
+int main(int argc, char **argv)
+{
+if (argc != 2) {
+fprintf(stderr, "kullanim <asal> <dosya ismi>");
+return 1;
+}
+
+FILE* f = fopen(argv[1], "r");
+if (!f) {
+fprintf(stderr, "%s dosyasi acilamadi\n", argv[1]);
+return 2;
+}
+
+int counts[26] = {0};
+int c;
+
+while ((c = fgect(f)) != EOF) {
+if (isalpha(c)) {
+toupper(c)) {
+++counts[toupper(c) - 'A'];
+}
+}
+
+fclcose(f);
+
+for (int i = 0; i < 26; ++i) {
+if (counts[i]) {
+printf("%c %d\n", 'A' + i, counts[i]);
+}
+}
+}
+
+
+
+
 
 
 
