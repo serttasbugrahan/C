@@ -303,12 +303,198 @@ printf("%d byte'lik %s dosyasi %d byte'lik %d parcaya bolundu\n", byte_count, ar
 
 -------------------------------------
 //dosya silme
+int remove(const char* p);
 
-int remove(const char *p); 
+int main(void)
+{
+int result = remove("ziya.txt");
+
+if (result) {
+printf("dosya silinemedi\n");
+}
+}
+
+------------------------
+//dosya ismini değiştirme)
+
+int rename(const char *pold_name, const char* p_new_name);
+
+int main(void)
+{
+int result = rename("stdfunc.txt",functions.txt);
+
+if (result) {
+printf("dosya ismi değiştirilemedi\n");
+}
+}
+
+------------------------
+
+standart tmpnam fonksiyonu, temporary name'den uydurulmuş
+
+öyle bşr dosya olsun ki o dosyayı oluşturuyor olmama karşın 
+hiç bir dosyayı ezmiş olmayayım.
+
+char* tmpnam(char *p);
+
+int main(void)
+{
+char filename[L_tmpnam];
+
+tmpnam(filename);
+
+puts(filename);
+}
+
+---------------
+
+int main(void)
+{
+printf("unique file name = %sa\n", tmpnam(NULL);
+}
+
+---------------
+
+Bir dosyayı encrypt etmek
+
+enc necati.jpeg 34785342 
+
+int main(int arg, char **argv)
+{
+if (argc != 3) {
+fprintf(stderr, "uasge: <enc> <filename> <key uint64>\n");
+return 1;
+}
+
+unsigned long long key = strtoull(argv[2], NULL, 10);
+srand((unsigned int)key);
+
+char temp_name[L_tmpnam];
+tmpnam(temp_name);
+
+FILE* fs = fopen(argv[1], "rb");
+if (!fs) {
+fprintf(stderr, "file %s cannot be opened\n", argv[1]);
+return 2;
+}
+
+FILE* fd = fopen(temp_name, "wrb");
+if (!fd) {
+fprintf(stderr, "cannot creaye temporary file\n");
+return 3;
+}
+
+int c;
+
+while ((c = fgetc(fs)) != EOF) {
+fputc(c ^ rand(), fd);
+}
+
+fclose(fs);
+fclose(fd);
+
+if (remove(argv[1])) {
+printf("file %s cannot be removed\n", argv[1]);
+return 4;
+}
+
+if (rename(temp_name, argv[1])) {
+printf("file cannot be renamed\n");
+return 5;
+}
+}
+
+-----------------------
+
+fopen
+fclose
+  fcloseall
+fgetc
+fputc
+remove
+rename
+tmpnam
+
+printf/const char *pfm, ...)
+fprintf(FILE *f, const har *fpm);
+sprintf
+snprintf
+snprintf
+fprintf
+
+----------------
+
+int main(void)
+{
+FILE*f = fopen("kareler.txt", "w");
+
+for (int i = 0; i < 1000; ++i) {
+fprintf(f, "%d *%d = %d\n", i,i,i * i);
+}
+}
+
+---------------------
 
 
+ilk 1 milyon asal sayisi
+ismi asal.txt olan dosyaya
+formatli olarak yazınız
 
+#include "nutility.h"
 
+int main(void)
+{
+FILE* f = fopen("asal.txt", "w");
+if (f == NULL) {
+fprintf(stderr, "dosya olusturulamadi\n");
+return 1;
+}
+
+int prime_count = 0;
+int x = 2;
+
+while (prime_count < NPRIMES) {
+if (isprime(x)) {
+if (prime_count && prime_count % 10 == 0)
+fprintf(f, "\n");
+fprintf(f, "%d ", x);
+++prime_count;
+}
+++x;
+}
+fclose(f);
+}
+
+---------------------
+
+int scanf(const char *pfm, ...)
+int sscanf(const char *pbuf, const char *pfm, ...);
+int fscanf(FILE *, const char *pfm, ...);
+
+---------------------
+
+int main(void)
+{
+FILE* fs = fopen("kayit.txt", "r");
+if (fs == NULL) {
+fprintf(stderr, "dosya acilamadi\n");
+return 1;
+}
+
+int no;
+char name[40];
+char surname[40];
+char town[40];
+int grade;
+
+printf("notu ve sehri girin: ");
+scanf("%d%s", &grade_entry, town_entry);
+
+while (fscanf(fs, "%d%s%s%s%d", &no, name, surname, town, &grade= != EOF) {
+if (ival == grade)
+printf("%-8d%-16s%-20s%-16s%d\n", no,name, surname, town, grade);
+}
+}
 
 
 
