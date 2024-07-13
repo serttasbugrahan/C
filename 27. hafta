@@ -1,3 +1,318 @@
 ////////////////////////////////////////////////////////////////////// 1. Ders //////////////////////////////////////////////////
 
+Dosya işlemleri devam
+
+//asay neco.txt
+
+int fgetc(FILE*);
+
+typedef struct {
+int ch; //character code
+int cnt;
+}Data;
+
+int mp_data(const void* vp1, const void* vp2)
+{
+if (((const Data *)vp2)->cnt > ((const Data*)vp1)->cnt
+return -1;
+}
+
+int main(int argc, char **argv)
+{
+if (argc != 2) {
+fprintf(stderr, "kullanim: <asay> <dosya ismi>\n");
+return 1;
+}
+
+FILE* fs = fopen(argv[1], "r");
+if (!fs) {
+fprintf(stderr, "%s dosyasi acilamadi\n", argv[1]);
+return 2;
+}
+
+
+Data ar[] = {
+{'A', 0}, 
+{'B', 0}, 
+{'C', 0}, 
+{'D', 0}, 
+{'E', 0}, 
+{'F', 0}, 
+{'G', 0}, 
+{'H', 0}, 
+{'I', 0}, 
+{'J', 0}, 
+{'K', 0}, 
+{'L', 0},
+{'M', 0},
+{'N', 0},
+{'O', 0},
+{'P', 0},
+{'Q', 0},
+{'R', 0},
+{'S', 0},
+{'T', 0},
+{'U', 0},
+{'V', 0},
+{'W', 0},
+{'X', 0},
+{'Y', 0},
+{'Z', 0},
+};
+
+int ch;
+
+while ((ch = fgetc(fs)) != EOF) {
+if (isalpha(ch)) {
+ar[toupper(ch) - 'A'].cnt;
+}
+}
+
+qsort(ar, 26, sizeof(Data), &cmp_data);
+
+for (int i = 0; i < 26; ++i) {
+printf("%c %d\n", ar[i].ch, ar[i].ch);
+}
+}
+
+-----------------------------------------------
+#include <stdio>
+
+int fputc(int c, FILE*) //dosyaya yazma işlemi yapar
+
+int main(void)
+{
+FILE* f = fopen("ziya.txt", "w"); //TEXT MODE
+if (f == NULL) {
+fprintf(stderr, "dosya olusturulamadi\n");
+return 1;
+}
+
+for (int i = 0; i < 26; ++i) {
+fputc(i, f);
+}
+
+fclose(f);
+}
+
+-----------------------
+
+crtf murat.txt 14500 40 80
+
+int get_random_char(void)
+{
+int ch;
+
+while (!isalnum(ch = rand() % 128))
+;
+return ch;
+}
+
+int main(int argc, char **argv)
+{
+if (argc != 5) {
+fprintf(stderr, "usage: <crtf> <file name> <No of lines> <min line len> <max line len>\n");
+return 1;
+}
+FILE* f = fopen(argv[1], "w");
+if (!f) {
+fprintf(stderr, "cannot create file %s\n", argv[1]);
+return 2;
+}
+
+int no_of_lines = atoi(argv[2]);
+int min_len = atoi(argv[3]);
+int max_len = atoi(argv[4]);
+
+randomize();
+
+for (int i = 0; i < no_of_lines; ++i) {
+int len = get_random
+}
+}
+
+-------------------------------------------------------------
+
+Dosyaların text ya da binary modda açılması
+
+"r" "rb" 
+"r+" "rb+" "r+b"
+"w" "wb" 
+"w+" "wb+" "w+b"
+
+Bir dosyayı tetx modundan okuyacaksak tetx modunda açıyoruz 
+binary modda ise her zaman binary modda açıyoruz
+
+!! Windows işleitm sisteminde
+dosyanın text modunda açılması ile
+dosyannı binary modda açılması arasında çok önemli 2 fark var
+
+1. fark
+
+dosyayı text modunda açarsak
+newline karakteri
+  2 ayrı byte olarak ele alınıyor
+  13 10
+
+dosyayı binary modda açarsak
+newline karakteri
+1 byte olarak ele alınıyor
+10
+
+int main(void)
+{
+FILE* f = fopen("necati", "w"); //text modunda açtık
+
+if (!f) {
+printf("dosya olusturulmadi\n");
+return 1;
+}
+
+for (int i = 0; i < 100; ++i) {
+fputc('\n', f); //100 byte beklerken 200 byte olur
+}
+
+fclose(f);
+}
+
+------------
+
+int main(void)
+{
+FILE* f = fopen("necati", "wb"); //binary modunda açtık
+
+if (!f) {
+printf("dosya olusturulmadi\n");
+return 1;
+}
+
+for (int i = 0; i < 100; ++i) {
+fputc('\n', f); // 100 byte olur
+}
+
+fclose(f);
+}
+
+-----------------------------
+
+Windows'ta bir dosyayı text modunda açarsak
+dosyadan okunan 26 tam sayı değerini EOF olarak açacak
+
+------------------------
+
+C'de komut satırından çalıştırılan 
+dosya kopyalanan bir programın yazılması
+
+//kopyala ali.exe veli.exe
+
+int main(int argc, char **argv)
+{
+if (argc != 3) {
+fprintf(stderr,"kullanim:  <kpy> <kaynak dosya ismi> <hedef dosya ismi>\n");
+return 1;
+}
+
+FILE *fs = fopen(argv[1], "rb");
+if (!fs) {
+fprintf(stderr,"%s dosyasi acilmiyor\n", argv[1]);
+return 2;
+}
+
+FILE *fd = fopen(argv[2], "wb");
+if (!fs) {
+fprintf(stderr,"%s dosyasi olusturulamiyor\n", argv[2]);
+return 3;
+}
+
+int c;
+int byte_count = 0;
+
+while ((c = fgetc(fs)) != EOF) {
+fputc(c, fd);
+++byte_count
+}
+
+fclose(fs);
+fclose(fd);
+}
+
+---------------------------
+
+bir dosyayı parçalara bölmek
+
+ali.txt 11345 byte
+
+bol ali.exe 500
+
+parca001.par 500
+parca002.par 500
+...
+parca0023.par 333
+
+bir veli.txt //birleştirsin
+
+-------
+
+#define MAX_FILE_NAME_LEN     80
+
+int main(int argc, char **argv)
+{
+if (argc != 3) {
+fprintf(stderr, "kullanim: <bol> <doysa ismi> <byte sayisi>\n");
+return 1;
+}
+
+char dest_file_name[MAX_FILE_NAME_LEN];
+int byte_count = 0;
+int chunk = atoi(argv[2]);
+int file_count = 0;
+int c;
+
+FILE *fs = fopen(argv[1], "rb");
+if (!fs) {
+fprintf(stderr, %s dosyasi acilamadi\n" argv[0]);
+return 2;
+}
+
+FILE* fd = NULL;
+
+while ((c = fgetc(fs)) != EOF) {
+if (fd == NULL) { //yeni dosya olusturucagiz
+sprintf(dest_file_name, "parca%03d.par", file_count + 1);
+fd = fopen(dest_file_name, "wb");
+if (!fd) {
+fprintf(stderr, "%s dosyasi olusuturulamadi\n", dest_file_name);
+fclose(fs);
+return 2;
+}
+++file_count;
+}
+fpuct(c, fd);
+++byte_count;
+if (byte_count % chunk == 0) {
+flose(fd);
+fd = NULL;
+}
+}
+
+fclose(fs);
+if (fd) 
+fclose(fd);
+printf("%d byte'lik %s dosyasi %d byte'lik %d parcaya bolundu\n", byte_count, argv[1], chunk, file_count);
+}
+
+-------------------------------------
+//dosya silme
+
+int remove(const char *p); 
+
+
+
+
+
+
+
+
+
+
 
