@@ -532,8 +532,194 @@ scanf(str, &x, &y, &z);
 printf("x =%d\n", x);
 printf("y =%d\n", y);
 printf("z =%d\n", z);
-
 }
+
+---------------------
+
+#include <stdio.h>
+
+int main(void)
+{
+FILE* f = fopen("input.txt", "r");
+if (!f) {
+fprintf(stderr, "dosya acilamadi\n");
+return 1;
+}
+
+int x;
+int retval;
+while ((retval = fscanf(f, "%d", &x) != EOF) {
+if (retval == 1)
+{
+printf("%d\n", x);
+_getch();
+}
+else {
+fscanf(f, "%s", buffer);
+printf("%s gecerli bir tam sayi degil\n", buffer);
+}
+}
+}
+
+---------------------------------
+
+fgets //bir dosaydan satır satır okuma işlemi yapabiliriz
+
+int main(void)
+{
+char* fgets(char* ,int max_count, FILE *f);
+}
+
+----------------
+
+#define SIZE 1000
+
+int main(void)
+{
+char file_name[100];
+
+printf("dosya ismi giriniz: ");
+scanf("%s", file_name);
+FILE* fs = fopen(file_name, "r");
+if (!fs) {
+fprintf(stderr, "dosya acilamadi\n");
+return 1;
+}
+
+char buffer[BUFFER_SIZE];
+char* p;
+
+while (fgets(buffer, BUFFER_SIZE, fs)) {
+printf("%s", buffer);
+if ((p = strchr(buffer, '\n')) != NULL) {
+*p = '\n';
+_strrev(buffer); //bufferdaki yazıyı ters çevirir, standart değildir  
+fprintf(fd, "%s\n", buffer);
+}
+}
+fclose(fs);
+fclose(fd);
+}
+
+
+-------------------------
+
+#define BUFFER_SIZE 200
+
+int main(void)
+{
+FILE* f = fopen("deneme.txt",  "w");
+//kontrol
+
+for(int i = 0; i < 100; ++i) {
+//fprintf(f, "%s %s %s\n", rname(), rsurname(), rtown(); //bu şekilde de yapışabilirdi
+
+fputs(rname(), f);
+fputc(' ', f);
+fputs(rsurname(), f);
+fputc('\n', f);
+}
+}
+
+
+---------------------------------------
+
+standart fread ve fwrite işlemleri
+
+bellekten dosyaya, dosyadan belleğe istediğimiz kadar byte transferi yapabiliyourz
+
+size_t fwrite(const void *vp, size_t sz, size_t n, FILE *);
+size_t fwread(void *vp, size_t sz, size_t n, FILE *);
+
+
+--------------------------
+
+//ismi primeslarge.dat olan
+//bir dosyaya ilk 1.000.000 asal sayiyi formatsız olarak yaziniz.
+//olusan dosyanın buyuklugunun sizeof(int) * 100000 oldugunu gorunuz
+
+#define BUFFER_SIZE 200
+
+int main(void)
+{
+FILE *f = fopen("necati.dat", "wb");
+if (!f) {
+fprintf(stderr, "primes_large.dat dosyasi olusturulmadi");
+return 1;
+}
+
+int x = 2;
+int prime_count = 0;
+
+while (prime_count < 1'000'000) {
+if (isprime(x)) {
+fwrite(&x, sizeof(int), 1, f);
+++prime_count;
+}
+++x;
+}
+
+fclose(f);
+}
+----------------------
+
+Formatlı Okuma-Yazma
+Formatlı okuma-yazma işlemleri, veri türlerini belirli bir biçimde işleyen fonksiyonlar aracılığıyla gerçekleştirilir. Bu fonksiyonlar, okunan veya yazılan verilerin formatını kontrol eder ve düzenler.
+
+Formatlı Okuma: scanf fonksiyonu kullanılır. Bu fonksiyon, belirli bir format belirterek kullanıcıdan veri okur. Örneğin:
+
+int age;
+printf("Enter your age: ");
+scanf("%d", &age);
+
+Burada %d, bir tamsayıyı temsil eden format belirleyicisidir.
+
+Formatlı Yazma: printf fonksiyonu kullanılır. Bu fonksiyon, belirli bir format kullanarak ekrana veri yazar. Örneğin:
+
+int age = 25;
+printf("Your age is %d\n", age);
+
+Burada %d, age değişkeninin değerini tamsayı formatında ekrana yazdırır.
+
+Formatsız Okuma-Yazma
+Formatsız okuma-yazma işlemleri ise, verilerin formatını dikkate almadan doğrudan okuma ve yazma işlemleri yapar.
+
+Formatsız Okuma: getchar ve gets gibi fonksiyonlar kullanılır. Bu fonksiyonlar, veriyi olduğu gibi okur. Örneğin:
+
+char c;
+printf("Enter a character: ");
+c = getchar();
+
+Bu örnekte getchar, kullanıcının girdiği karakteri okur.
+
+Formatsız Yazma: putchar ve puts gibi fonksiyonlar kullanılır. Bu fonksiyonlar, veriyi olduğu gibi yazar. Örneğin:
+
+char c = 'A';
+putchar(c);
+
+Bu örnekte putchar, c karakterini ekrana yazar.
+
+Özetle, formatlı okuma-yazma işlemleri veri türlerini ve formatlarını dikkate alarak işlerken, formatsız okuma-yazma işlemleri veriyi olduğu gibi doğrudan işler.
+
+-----------------------
+
+//ismi employees.dat olan bir dosya oluşturun 
+//bu dosyaya 100'000 tane rasgele oluşturduğumuz employee nesnesini
+//formatsiz olarak (fwrite işlevi ile
+
+int main(void)
+{
+randomize();
+Employee emp;
+
+for (int i = 0; i < 10; ++i) {
+set_employee_random(&emp);
+print_employee(&emp);
+}
+}
+
+
+
 
 
 
