@@ -497,6 +497,49 @@ printf("%-8d%-16s%-20s%-16s%d\n", no,name, surname, town, grade);
 }
 
 
+//////////////////////////////////////////////////////////////////
+
+fprintf // bir dosyaya formatlı olarak yazma işlemi yapan fonksiyon
+
+fscanf // dosyadan formatlı okuma işlemi yapan fonksiyon
+
+printf //standart outputa yazar
+
+sprintf //beleğe yazar
+
+fprintf // dosyaya yazar
+
+scanf // standart inputtan aldığı değişkenleri set eder, 
+
+sscanf // bellekten aldığı değişkenleri set eder
+
+fscanf // dosyadan aldığı değişkenleri set eder
+
+------------------------
+
+!! bütün sccanf değişkenlerinşn geri dönüş değeri int
+
+int fscanf(FILE*, const char*p, ...);
+
+int main()
+{
+char str[] = "%d%d%d";
+int x,y,z;
+
+printf("3 sayi giriniz: ");
+scanf(str, &x, &y, &z);
+
+printf("x =%d\n", x);
+printf("y =%d\n", y);
+printf("z =%d\n", z);
+
+}
+
+
+
+
+
+
 
 
 
