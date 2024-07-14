@@ -705,29 +705,167 @@ Bu örnekte putchar, c karakterini ekrana yazar.
 
 //ismi employees.dat olan bir dosya oluşturun 
 //bu dosyaya 100'000 tane rasgele oluşturduğumuz employee nesnesini
-//formatsiz olarak (fwrite işlevi ile
+//formatsiz olarak (fwrite işlevi ile) yazınız
 
 int main(void)
 {
 randomize();
 Employee emp;
 
+printf("sizeof(Employee) = %zu\n", sizeof(Employee));
+
+FILE* f = fopen(emoloyees.dat", "wb");
+if (f == NULL) {
+fprintf(stderr, "dosya olusturulamadi\n");
+return 1;
+}
+
 for (int i = 0; i < 10; ++i) {
 set_employee_random(&emp);
-print_employee(&emp);
+fwrite(&emp, sizeof(emp), 1, 
 }
 }
 
 
+---------------------
+
+int main(void)
+{
+FILE *fs = fopen("primes_small.dat", "rb");
+if (!f) {
+fprintf(stderr, "dosya acilamadi\n");
+return 1;
+}
+
+int x;
+
+FILE *fd = fopen("primes_small.txt", "w");
+if (!f) {
+fprintf(stderr, "dosya olusturulamadi\n");
+return 1;
+}
+
+while (fread(&x, sizeof(int), 1, f)) {
+printf("%d\n", x);
+}
+
+fclose(fs);
+fclose(fd);
+}
+
+-------------------------
+
+//bu sayıları bir diziye okuyabilir miyiz ? evet
+
+#define SIZE 1200
+
+int main(void)
+{
+FILE* fs = fopen("primes_small.dat", "rb");
+if (!fs) {
+fprintf(stderr, "dosya acilamadi\n");
+return 1;
+}
+
+int a[SIZE];
+size_t n;
+
+while ((n = fread(a, sizeof(int), SIZE, fs)) != 0 {
+print_array(a, n)
+}
+
+fclose(fs);
+}
+
+-------------------
+
+#define SIZE 1200
+
+int main(void)
+{
+FILE* fs = fopen("employees.dat", "rb");
+if (!fs) {
+fprintf(stderr, "dosya acilamadi\n");
+return 1;
+}
+
+Employee emp;
+
+printf("sehri girin: ");
+char town_entr[100];
+scanf("%s", town_entry);
+
+while ((n = fread(emp, sizeof(emp), 1, fs)){
+if (!strcmp(town_entry, emp.town)) //sadece girilen şehrin employeelerini yazar
+print_array(&emp);
+}
+
+fclose(fs);
+}
+
+-----------------------
+
+komut satırından calıştırılan daha once yazdığımız 
+dosya kopyalama programını
+bu kez
+fread ve fwrite işlevlerini kullanarak gerçekleştirin
+
+fread ile okuyup fwrite ile yazacağız
 
 
+#define BUFFER_SIZE 512
+
+int main(int argc, char **argv)
+{
+if (argc != 3) {
+fprintf(stderr, "kullanim: <kopyala> <kaynak dosya ismi> <hedef dosya ismi>\n");
+return 1;
+}
+
+FILE* fs = fopen(argv[1], "rb");
+if (!fs) {
+fprintf(stderr, "%s dosyasi acilamadi\n", argv[1]);
+return 2;
+}
+
+FILE* fd = fopen(argv[2], "wb");
+if (!fd) {
+fprintf(stderr, "%s dosyasi olusturulamadi\n", argv[2]);
+return 3;
+}
+
+char buf[BUFFER_SIZE]
+size_t read_bytes;
+int file_size = 0;
+
+while ((read_bytes = fread(buf, 1, BUFFER_SIZE, fs)) != 0) {
+file_size += read_bytes;
+fwrite(buf, 1, read_bytes);
+}
+
+fclose(fs);
+fclose(fd);
+
+printf("%d byte'lik %s dosyasinin %s isimli kopyasi olusturuldu
+}
 
 
+---------------------------------------
+
+dosya konum göstericisi (file pointer) ile ilgili fonksiyonlar
+
+fseek //dosya konum
+rewind
+ftell
+fsetpos
+fgetpos
 
 
+file pointer dosyanın istediğimiz yerine yazma işlemi yapabilmemizi sağlar
+
+----------------------
+
+int fseek(FILE *f, long n, int origin);
 
 
-
-
-
-
+1.55.34
