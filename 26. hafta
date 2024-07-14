@@ -267,7 +267,7 @@ printf("sizeof(Data) = %zu\n", sizeof(Data));
 
 struct Nec {
 int x : 5;
-int : 3;
+int : 3; //padding bit
 int y : 4;
 };
 
@@ -352,7 +352,7 @@ struct Data {
 int a : 4;
 int b : 3;
 int c : 6;
-int not_used : 2; //burayı şimdilik kullanmak demek
+int not_used : 2; //burayı şimdilik kullanma demek
 };
 
 -----------------------
