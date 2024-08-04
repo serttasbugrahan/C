@@ -867,5 +867,153 @@ file pointer dosyanın istediğimiz yerine yazma işlemi yapabilmemizi sağlar
 
 int fseek(FILE *f, long n, int origin);
 
+1. parametre
+------------
 
-1.55.34
+3. çeşit konumlandırma imkanı verir
+dosya başı mı (0)
+dosya başı mı (1)
+dosya en son değerinden mi (2)
+
+0,1,2 yerine makro kullanılır
+
+SEEK_SET 0
+SEEK_CUR 1
+SEEK_END 2
+
+int main(int argc, char **argv)
+{
+SEEK_CUR
+
+}
+
+2. paramete
+-----------
+Pozitif mi negatif mi bir konumlandırma yapılacağını seçeriz
+
+
+
+fseek(f, 0L, SEEK_SET) //dosya konum göstericisini dosyasnın başına alır
+
+yukarıdaki işi yapan fonksiyon vardır
+
+void rewind(FILE *);
+
+
+fseek(f, 400L, SEEK_SET) //dosya konum göstericisini dosyasnın başından itibaren 400. byte'a al
+
+fseek(f, 0L, SEEK_END) //dosya konum gösterici dosyanın sonuna al demek
+
+fseek(f, -40, SEEK_CUR)
+
+En son yapılan işlem okuma ise ondan sonra yazma işlemi yapacaksak
+en son yapılan işlem yazma işlemi ise ondan sonra okuma işlemi yapacak isek
+
+mutlaka file pointer konumlandırılmali
+
+
+int main(void)
+{
+FILE*f = fopen("primes.dat", "rb");
+if (f == NULL) {
+fprintf(stderr,  "dosya acilamadi\n");
+return 1;
+}
+printf("kacinci asal sayi: ");
+int n;
+scanf("%d", &n);
+fseek(f, (n - 1) * (long)sizeof(int), SEEK_SET);
+int ival;
+
+fread(&ival, sizeof(int), 1, f);
+printf("d. asal sayi %d\n", n, ival);
+
+fclose(f);
+}
+
+-----------------
+
+
+int myrand() //0 ile 1 milyon arasında rastgele sayi üretir
+{
+char str[20];
+for (int i = 0; i < 6; ++i) {
+str[i] = '0' + rand() % 10;
+}
+str[6] = '\n';
+return atoi(str);
+}
+
+int main(void)
+{
+randomize();
+
+FILE*f = fopen("primes.dat", "rb");
+if (f == NULL) {
+fprintf(stderr,  "dosya acilamadi\n");
+return 1;
+}
+
+for (int i = 0; i < 100; ++i) {
+int n = myrand();
+fseek(f, (n - 1)*(long)sizeof(int), SEEK_SET);
+fread(&x, sizeof(x), 1, f);
+printf("%d. asal sayi %d\n", n, x); 
+}
+}
+
+-------------------
+
+primes_large.dat dosyasinda ilk 1 milyon asal sayi bulunmaktadir
+bu dosyadaki asl sayilardan palindrom olanlari formatli olarak palindrom_priimes.txt 
+isimli dosyaya yaziniz
+
+
+---------------------
+
+int main()
+{
+FILE* f = fopen("employees.dat", "rb");
+if (f == NULL) {
+fprintf(stderr,  "dosya acilamadi\n");
+return 1;
+}
+
+Employee emp;
+int n;
+
+printf("kacinci employee: ");
+sccanf("%d", &n);
+
+fseek(f, (n- 1) * (long)sizeof(Employee), SEEK_SET);
+frad(&emp, sizeof(emp), 1, f);
+print_employee(&emp);
+
+fclose(f);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
