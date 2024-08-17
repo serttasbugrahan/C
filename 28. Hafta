@@ -18,13 +18,6 @@ printf("%ld\n", ftell(f) / (long)sizeof(Employee));
 
 -------------------
 
-
-int main(void)
-{
-print_list("employees.dat");
-}
-
----------------
 //mülakatta sorulmuş
 
 //             C                       C++
@@ -37,7 +30,195 @@ p[0] = 'a';
 
 -----------------
 
+//geçen dersteki örneklere devam ediyoruz
 
+void sort_records(const char* pfilename, int (*fp)(const void*, const void*))
+{
+FILE* f = fopen(pfilename, "rb+");
+if (!f) {
+fprintf(stderr, "dosya acilamadi\n");
+exit("EXIT_FAILURE);
+}
+
+fseek(f, 0L, SEEK_END);
+long file_lenght = ftell(f);
+size_t nrec = (size_t)file_lenght / sizeof(Employee);
+
+printf("file_lenght = %ld\n", file_lenght);
+
+Employee*p = (Employee*)malloc((size_t)file_lenght);
+
+if (!pd) {
+fprintfstderr, "bellek yetersiz");
+exit(EXIT_FAILURE);
+}
+rewind(f);
+//fseek(f, 0L, SEEK_SET)
+fread(pd, sizeof(*pd), nrec, f);
+
+qsort(pd, nrec, sizeof(Employee), fp);
+rewind(f); 
+fwrite(pf, sizeof(Employee), nrec, f);
+
+free(pd);
+fclose(f);
+}
+
+int main()
+{
+sort_records("employees.dat", &cmp_employee_by_date); //tarihe göre sıralar
+sort_records("employees.dat", &cmp_employee_by_name); //şimdi sıralama isme göre olur
+print_records(employees.dat");
+}
+
+
+-------------------------
+
+int fseek(FILE* f, long, int origin);
+
+void rewind(FILE *);
+
+long ftell(FILE *);
+
+fsetpos
+
+fgetpos
+
+------------------------
+
+int main(void)
+{
+// fsetpos sets the file pointer (file set position)
+// fgetpos gets the file pointer (file get position)
+//fpos_t
+
+int fsetpos(FILE*, const fpos_t *);
+int fgetpos(FILE* ,fpos_t *);
+
+
+}
+
+-------------------------
+
+int main(void)
+{
+FILE*f = fopen("primes_large.dat", "rb");
+if (!f) { printf("dosya acilamadi"); return 1; }
+//code
+fpos_t pos;
+fgetpos(f, &pos);
+
+printf("File pointer value is : %lld\n", pos);
+fseek(f, 0L, SEEK_END);
+fgetpos(f, &pos);
+printf("File pointer value is : %lld\n", pos);
+//...
+fclose(f);
+
+}
+
+-----------------------------
+
+int main(void)
+{
+FILE*f = fopen("primes_large.dat", "rb");
+if (!f) { printf("dosya acilamadi"); return 1; }
+//code
+fpos_t pos = (fpos_t)(sizeof(int)) * 500'000;
+fsetpos(f, &pos);
+
+printf("File pointer value is : %lld\n", pos);
+fseek(f, 0L, SEEK_END);
+fgetpos(f, &pos);
+printf("File pointer value is : %lld\n", pos);
+//...
+fclose(f);
+
+}
+
+-----------------------------
+
+int feof(FILE *); //non zero return value indicates eof flag is set!, zero return value indicates eof flag is set!  
+// eğer eof bayrağı set edilmiş ise yani feof işlevi değer döndürüyor ise tekrar okuma girişiminde bulunulabilmesi için
+aşağıdaki işlemleriden birinin yapılması gerekir
+file pointer set edilecek
+ fseek
+ rewind
+ fsetpos
+
+ferror
+clearerr
+
+Bir dosyadan okuma işlemi yapıldığı zaman;
+
+eğer daha önceden dosyadan okuma yapılıp aşağıdaki nedenlerden bir başarısızlık oluşmuş ise
+ - dosyadan okunacak byte kalmamış
+ - bizim kontrolümüz dışında oluşan bir nedenden okuma başarısız oldu (işletim sistemi seviyesinde)
+
+arka planda (biz doğrudan görmesek de) tutulan boolen değişkenler var. (bitsel seviyede)
+
+eof flag/bit
+
+-----------------------------
+
+int main(void)
+{
+FILE*f = fopen("primes_large.dat", "rb");
+if (!f) { printf("dosya acilamadi"); return 1; }
+
+fseek(f, 0L, SEEK_END);
+
+if (feof(f))
+printf("evet dogru\n");
+else 
+printf("hayir yanlis\n");
+
+
+int x = fgetc(f); //bu okuma basarisiz oldu
+printf("x = %d\n, x); //x = -1
+if (feof(f))
+printf("evet dogru\n");
+else 
+printf("hayir yanlis\n");
+
+fclose(f);
+}
+
+
+------------------------------
+
+int feof(FILE *);
+int ferror(FILE *);
+
+standart input (standart giriş akımı)
+standart pıtput (standart çıkış akımı)
+standart error (standart hata akımı)
+
+----------------------------
+
+int main()
+{
+FILE* f = fopen("deneme.txt", "w");
+
+fprintf(f, "necati ergin\n");
+fprintf(stdout, "bugrahan serttas\n"); //standart outputa çıktı yapar
+fputc('A', f);
+fputs("\nAli Osman Gulcemal\n", stdout);
+fclose(f);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 
