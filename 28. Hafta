@@ -1,11 +1,41 @@
 //////////////////////////////////////////////////// 1. Ders ////////////////////////////////////////////////
 
 
+long ftell(FILE *);  //DOSYA KONUM GÖSTERİCİSİNN DEĞERİNİ GÖSTERİRİ
+
+int main(void)
+{
+FILE* f = fopen("employees.dat", "rb");
+
+if (!f) {
+printf("hata\n"); return 1; }
+
+printf("%ld\n", ftell(f));
+fseek(f, 0L, SEEK_END);
+printf("%ld\n", ftell(f) / (long)sizeof(Employee));
+}
+}
+
+-------------------
 
 
+int main(void)
+{
+print_list("employees.dat");
+}
 
+---------------
+//mülakatta sorulmuş
 
+//             C                       C++
 
+char *p = "mert"; //char[5]        const char[5]
+
+p[0] = 'a';
+
+//c de herhangi atamamub c++'da sentax hatası
+
+-----------------
 
 
 
