@@ -341,6 +341,146 @@ fclose(f);
 printf("yazi = |%s|", str);
 }
 
+--------------
+
+int main(void)
+{
+char name[100];
+
+printf("isim girin: ");
+fgets(name, 100, stdin);
+
+if (!strcmp("bugrahan serttas", name)) {
+printf("hos geldinşz bugrahan serttas, sizi vip'e alalım\n");
+else {
+printf("hos geldinşz bugrahan serttas);
+}
+}
+}
+
+
+!! doğru çalışmadı /n'dan dolayı
+
+-------------------
+
+
+int main(void)
+{
+char name[100];
+
+printf("isim girin: ");
+fgets(name, 100, stdin);
+
+char* p;
+
+if ((p = strchr(name, '\n')) != NULL) {
+*p = '\0';
+}
+
+if (!strcmp("bugrahan serttas", name)) {
+printf("hos geldinşz bugrahan serttas, sizi vip'e alalım\n");
+else {
+printf("hos geldinşz bugrahan serttas);
+}
+}
+
+-----------------------------------
+
+FILE* tmpfile(void); //dosya oluşturur, açtığı dosyayı yazma amaçlı açar, hiçbr dosyayı ezme imkanı yok dosyayı kapattığmızı zaman dosya silinecek
+
+//aşağıdaki işlevi yapar aslında
+
+int main(void)
+{
+char filename[L_tmpnam];
+
+tmpnam(filename);
+
+FILE* f = fopen(filename, "wb+");
+
+fclose(f);
+remove(filename);
+}
+
+----------------
+
+int main(void)
+{
+// bu noktadda prgramın hem yazma hem de okuma amacli 
+// kullanacagi bir dosyaya ihtiyacım var
+
+FILE* f = tmpfile();
+
+randomize();
+
+for (int i = 0; i < 100; ++i) {
+int x = rand();
+fwrite(&x, sizeof x, 1, f);
+}
+
+rewind(f);
+
+int ival;
+
+while (fread(&ival ,sizeof(int), 1, f)) {
+printf("%d\n", ival);
+}
+
+fclose(f);
+}
+
+
+--------------------------------
+
+fflush : dosyayı flush eder, yazma amaçlı doyalar için kullanılmalı
+
+kullanıldığı durumlar:
+
+bufferin kapasitesinin  dolması durumunda
+dosyanını kapatılması   - fclose
+programın (normal terminate)
+exit işlevine yapılan çağrı
+tie (bağlama / bağlanma)
+
+başka bir dosyada yapılan okuma yazma işlemi, farklı bir dosyanın buffer'ının flush edilmesini sağlayabiliyor
+
+std. kütüphanenin fflush isimli fonksiyonun çağrılması ile 
+
+
+-------------------------------
+
+int main(void)
+{
+fflush(stdout); 
+}
+
+-----------------------------
+fflush işlevine argüman olarak NULL pointer geçilmesi özel bir anlama gelir
+bu durumda açık olan tüm dosyalar flush edilir
+
+int main(void)
+{
+//
+
+fflush(NULL);
+}
+
+========================================================================================
+
+C99 ile dile eklenen değişiklikler
+----------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
