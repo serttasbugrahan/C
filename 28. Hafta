@@ -471,8 +471,39 @@ C99 ile dile eklenen değişiklikler
 ----------------------------------
 
 
+C89'da olmayan C99 ile eklenen araçlar
 
+designed initializer
 
+// command lines
+
+flexible array number
+
+restric anahtar sözcüğü restrict pointer
+
+yeni standart C fonksiyonları
+
+Yeni anahtar sözcükler
+
+İnline
+
+Hata işleme
+ assert makrosu
+ _Static_assert
+
+----------------------
+
+C99 standartı ile C diline eklenen ve c++ dilinde olmayan araçlar söz konusu
+
+c++ ile c arasındaki uyumsuzluk örnekleri
+
+int main(void)
+{
+for (int i = 0; i < 10; ++i) {
+int i = 45;
+printf("%d ", i);
+}
+}
 
 
 
