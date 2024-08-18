@@ -209,6 +209,145 @@ fclose(f);
 }
 
 
+--------------------------------
+
+
+int main(void)
+{
+FILE* f = fopen("deneme.txt", "w");
+
+randomize();
+
+Employee emp;
+for (int i = 0; i < 10; ++i) {
+set_employee_random(&emp);
+print_employee(f, &emp);
+print_employee(stdout, &emp); //standart çıkışa yazar
+}
+
+fclose(f);
+}
+
+
+--------------------------------
+
+int main(void)
+{
+FILE* f = fopen("deneme.txt", "w");
+
+for (int i = 0; i < 10; ++i) {
+fprintf(f, "%d\n", i);
+fprintf(stdout, "%d\n", i); //ikiside ekrana yazar
+fprintf(stderr, "%d\n", i); //ikiside ekrana yazar
+}
+
+fclose(f);
+}
+
+--------------------------------
+
+neden stderr var?
+kullanıcıyı bilgilendirme amaçlı kullanılabilir
+
+--------------
+
+int main(void)
+{
+int cnt = 0;
+
+randomize();
+while (cnt < 20) {
+int x = rand();
+if (isprime(x)) {
+printf("%d ", x);
+++cnt;
+}
+}
+
+//normal olarak aşağıadli yazıını standart çıkış akımına degil standart hata akımına verilmesi gerekirdi
+
+printf("bellek yetersiz... program sonlandiriliyor. devam etmek için tusa basin");
+}
+
+
+---------------------
+
+
+int main(void)
+{
+int cnt = 0;
+
+randomize();
+while (cnt < 20) {
+int x = rand();
+if (isprime(x)) {
+printf("%d ", x);
+++cnt;
+}
+}
+
+fprintf(stderr, "\nbellek yetersiz... program sonlandiriliyor. devam etmek için tusa basin");
+}
+
+------------------------------------------------
+
+stdin : standart giriş akımının indisi
+
+--------------
+
+int main(void)
+{
+int x, y;
+
+printf("iki sayi giriniz: ");
+fscanf(stdin, "%d%d", &x, &y);
+
+printf("x = %d\n", x);
+printf("y = %d\n", y);
+}
+
+
+------------
+
+!! std. fgets işlevinin stdin idetifier argümanı ile çağrılması
+
+ 
+--------------
+
+int main(void)
+{
+FILE* f = fopen("deneme.txt","r");
+
+char str[1000];
+
+fgets(str, 1000, f); 
+
+fclose(f);
+
+printf("yazi = |%s|", str);
+}
+
+---------------
+
+int main(void)
+{
+printf("bir yazi girin: ");
+char str[1000];
+
+fgets(str, 1000, stdin); 
+
+fclose(f);
+
+printf("yazi = |%s|", str);
+}
+
+
+
+
+
+
+
+
 
 
 
