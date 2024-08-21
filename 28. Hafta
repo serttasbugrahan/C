@@ -491,7 +491,75 @@ Hata işleme
  assert makrosu
  _Static_assert
 
+
+!! Programı kullananı ilgilendiren hata mesajlarını asla stdout'a yazdırmayın 
+
+int main()
+{
+for (int i = 0; i < 10; ++i) {
+set_employee_random(&emp);
+print_employee(&emp);
+}
+// printf("bellek yetersiz onu bunu yaz\n"); //bunu da dosyaya yazar, bunu istemey,z
+fprintf(stderr, "bellek yetersiz sunu bunu yapin... hata mesaji\n"); //bu şekilde yapmak lazım
+}
 ----------------------
+
+içinde  boşlukları olan bir diziyi güvenli bir şekilde almak için aşağıdaki yapılabilir
+
+int main()
+{
+char str[10];
+
+printf("bir yazi girin: ");
+fgets(str, 10, stdin);
+
+printf("%s", str);
+}
+
+----------------------
+
+int main()
+{
+char str[10];
+
+printf("isminizi girin: ");
+fgets(str, 10, stdin);
+
+if (!strcmp(str, "ali can")) { //buraada hata olmasının nedeni new line karakteri
+printf("hos geldin ali can!\n");
+}
+else {
+printf("sen ali can degilsin mekana gelme");
+}
+}
+
+//aşağıdaki şekilde düzeltilir bu hata
+
+---------------------
+
+int main()
+{
+char str[10];
+
+printf("isminizi girin: ");
+fgets(str, 10, stdin);
+
+char* p;
+
+if ((p = strchr(str, '\n')) != NULL) {
+*P = '\0';
+}
+
+if (!strcmp(str, "ali can")) { //buraada hata olmasının nedeni new line karakteri
+printf("hos geldin ali can!\n");
+}
+else {
+printf("sen ali can degilsin mekana gelme");
+}
+}
+
+---------------------
 
 C99 standartı ile C diline eklenen ve c++ dilinde olmayan araçlar söz konusu
 
@@ -506,8 +574,34 @@ printf("%d ", i);
 }
 
 
+/////////////////////////////////////////////////// 2. Ders /////////////////////////////////////////////
 
 
+int main()
+{
+FILE* f = tmpfile(); //dosyayı wb+ modunda açar ve dosyanını işi bitiiği zaman siler 
+
+fprintf(f, "ahmet mehmet hakan");
+rewind(f);
+
+fclose(f);
+
+}
+
+
+-----------------------
+
+int main()
+{
+int setvbuf(FILE* f, char *p, int, size_t);
+
+//bufferlama stratejisi
+
+//_IOFBF : full bufferlama istiyorum demek
+//_IONBF : bufferlama hiç yapılmaz (no buffer)
+//_IOLBF : new line geldiği zaman yapar bufferlama yapar
+
+}
 
 
 
