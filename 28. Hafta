@@ -603,6 +603,152 @@ int setvbuf(FILE* f, char *p, int, size_t);
 
 }
 
+----------------------
+
+#define BUFFER_SIZE 1024
+
+int main(void)
+{
+FILE* f = fopen("ali.txt", "w");
+
+setbuf(f, NULL);
+setvbuf(f, NULL, _IONBF);
+}
+
+============================================================
+
+
+variadic functions : çağıran tarafın dilediği kadar argümanla çağrılabileceği fonksiyondur
+------------------
+
+
+!! çok dikkatili çağrılması gerekir
+
+void func(int, ...) //elipsis atomu ile anlaşılır
+
+c'de elipsis son parametrew olmak zorundadır, tek başına olmaaz
+
+void func(int x, int y, ...)
+
+void func(int, int, ...); //int türdne olması geretiğini göstermiş
+
+
+!! type-safe değildir yani istek dışında argüman yollandığı zaman derleyici farketmez
+
+
+int main(void)
+{
+double dval = 4.5;
+
+printf("%d", dval); //burada hata verir normalde hata vermeyebilirdir derleyiciler
+}
+
+--------------------
+
+void func(int, ...);
+
+int main(void)
+{
+char c = 'A';
+
+func(12,20,4.5f,c); //derleyici yaptığı dönüşümlerle aşağıdaki hale getirir
+func(12,20, (double)f, c);
+}
+
+-----------------
+
+!! gönderilen argüma sayısının kaç tane tane olduğunun bilinmesi gerekmektedir
+
+!! bunu göstermenin 3 yolu vardır 
+1)
+
+void func(int, ...);
+
+int main(void)
+{
+//func(3, a, b, c); //bu şekilde ilk parametreuye değer verilerek yapılabilir, 3 argüman yollanır
+
+
+}
+
+-----------------
+2)
+
+!! printf ve scanf yollanan string literalinden o bilgiyi çeker
+
+int sum(const char *, ...);
+
+int main(void)
+{
+printf("axabaa");
+}
+
+
+------------------
+3)
+
+
+int sum(int x, ...);
+
+int main(void)
+{
+sum(a, b, c, -1); //-1 değerinin gönderilmesi artık başka bir argüman yok anlamında kullanılır
+
+}
+
+--------------------
+
+
+variadic fonksiyonların kullanılmasında bazı makrolar kullanılır 
+bu makrolar <stdarg.h> header içinde bulunur
+            ----------
+
+variadic fonksiyon oluşturma yöntemi
+
+1) va_list türünden bir değişken tanımlanıcak
+
+2) va_start ile init edilecek, varidic parametreden öncekli son parametreyi argüman olarak geçiyoruz
+
+3) işimiz bittiğinde va_end(args) kullanıyoruz
+
+4) her argümanı elde etmek için va_arg() Kullanılır, 1. param: args, 2. param: türü
+
+int sum(int a, int b, ...)
+{
+va_list args;
+va_start(args, b;);
+
+int x = va_arg(args, int);
+
+va_end(args);
+
+
+}
+
+--------------------
+
+int sum(int n, ...)
+{
+va_list args;
+va_start(args, n);
+int sum = 0;
+
+while (n--) {
+sum += va_arg(args, int)
+
+}
+
+va_end(args);
+
+return sum;
+}
+
+int main(void)
+{
+int x = 3, y = 5, z = 23;
+
+printf("%d\n", sum(4,x,y,z,50));
+}
 
 
 
