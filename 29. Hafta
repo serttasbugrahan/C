@@ -1,1 +1,73 @@
 //////////////////////////////////////////////////////// 1 . Ders ///////////////////////////////////////////////////////////////////
+
+int get_max(int n, ...)
+{
+va_list args;
+va_start(args, n);
+int max;
+
+for (int i = 0; i < n; ++i) {
+int ival = va_args(args, int);
+if (i == 0)
+max = ival;
+else if (ival > max)
+max = ival
+}
+
+va_end(args);
+return max;
+}
+
+int main(void)
+{
+int x = 10;
+int y = 20;
+int z = 15;
+
+printf("max = %d\n", get_max(3, x, y,z));
+}
+
+
+------------------------------
+
+
+void myprintf(const char* p, ...)
+{
+va_list args;
+va_start(args, p);
+
+while (*p) {
+int c = toupper(*p);
+
+if (c == 'I') {
+printf("%d\n", va_args(args, int));
+}
+else if (c == 'U') {
+printf("%u\n", va_args(args,unsigned int));
+}
+else if (c == 'L') {
+printf("%ld\n", va_args(args, long));
+}
+if (c == 'S') {
+printf("%d\n", va_args(args, const char *));
+}
+else if (c == 'F') {
+printf("%f\n", va_args(args, double));
+}
+++p;
+}
+
+va_edn(args);
+}
+
+
+int main(void)
+{
+int x = 10;
+unsigned int y = 3u;
+long lval = 5;
+char str[] = "murat";
+double dval = 4.45;
+
+myprintf("iULsF", x, y, lval, str, dval);
+}
