@@ -375,10 +375,13 @@ abort();
 }
 
 ---------------
-//mesela aşağıda null pointer gelmemesi gerekiyor
-
 //static assertions : programın çalışma zamanından bağımsız, derleme zamanında yaplan doğrulamalar
 //dynamic assertions : programın çalışma zamanına yönelik doğrulamalar
+--------------
+
+
+//mesela aşağıda null pointer gelmemesi gerekiyor
+
 
 void func(int *ptr)(
 {
@@ -387,6 +390,15 @@ if (ptr == NULL) {
 abort
 }
 }
+
+-------------------
+
+
+
+
+
+
+
 
 
 
