@@ -392,6 +392,36 @@ abort
 }
 
 -------------------
+// bu kodlar compile time'da derleyiceye hata mesajı verir
+
+static assert yokken başka yönemler kullanılırdı
+
+int main(void)
+{
+int a[sizeof(int) == 2]; //bu şekilde bir hile kullanılabilir
+
+}
+
+--------------
+
+typedef int a[sizeof(int) > 4];
+
+int main(void)
+{
+{typedef int a[sizeof(int) > 4];}
+}
+
+
+----------------
+
+union Data {
+int x : constant expression;
+
+};
+
+--------------------
+
+
 
 
 
