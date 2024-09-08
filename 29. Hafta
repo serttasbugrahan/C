@@ -421,7 +421,57 @@ int x : constant expression;
 
 --------------------
 
+artık böyle hilelere gerek yok c11 ile static assert fonksiyonu sayesinde
 
+_Static_assert(sizeof(long) > sizeof(int), "int turunun sizeof degeri yetersiz");
+
+!! static assert bir keyworddür
+
+----------------------
+
+kontroller run time ve compile time kontrolü olarak 2'ye ayrılıur,
+
+----------------------
+
+int main(void)
+{
+int a[100];
+
+}
+
+-------------------
+
+run time 'da bunları yapmanın birçok dezaantajı vardır
+ - kullanıcıyı yanıltabilir
+ - yeni relase'ler geldiğinde karışıklık çaıkabilir
+
+bunların yerine bu karışıklıkları ortadan kaldıran aşağıdaki yapı kullanılabilir
+
+--------------------------------------------------
+
+assert makrosu
+
+#incude <assert.h>
+
+void  func(int *p)
+{
+//parantexz içine sadece doğru olan kod yazılır
+assert(p != NULL) //assert sözcüğünden bunun hatayı bulmaya yarayan kod olduğunu anlayacak
+}
+
+------------------
+
+void  func(int *p)
+{
+assert(p != NULL);
+}
+
+int main(void)
+{
+int* p = NULL;
+
+func(p);
+}
 
 
 
