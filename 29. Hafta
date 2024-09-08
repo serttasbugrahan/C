@@ -71,3 +71,83 @@ double dval = 4.45;
 
 myprintf("iULsF", x, y, lval, str, dval);
 }
+
+
+--------------------------------
+
+char * strapp(const char* p, ...)
+{
+va_list arglist;
+va_list args;
+
+va_start(arglist, p);
+va_copy(args, arglist);
+
+size_t len = strlen(p) + 1;
+
+const char *pstr;
+while ((pstr = va_args(arglist, const char*)) != NULL) {
+len += strlen(pstr);
+}
+
+va_end(arglist);
+char *pd = (char *) malloc(len + 1);
+if (!pd) 
+return NULL;
+
+strcpy(pd , p);
+while ((pstr = va_args(arglist, const char*)) != NULL) {
+strcat(pd ,pstr);
+}
+va_end(args);
+
+return pd;
+
+
+int main(void)
+{
+char s1[] = "cinar";
+char s2[] = " gursay";
+
+char *pd = strapp(s1, s2, " volkan ", " gundogdu", NULL);
+printf(" (%s)\n", pd);
+
+free(pd);
+}
+
+--------------------------
+
+void func(const char* p, ...)
+{
+char buffer[1000];
+
+va_list args;
+va_start(args, p);
+vsprintf(buffer, p, args);
+}
+
+int main()
+{
+int x = 10;
+int y = 20;
+double dval = 4.5;
+
+func("%d %d %f\n", x, y, dval);
+}
+
+========================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
