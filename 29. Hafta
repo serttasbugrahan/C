@@ -244,6 +244,118 @@ VLA (variable lenght array)
 
 c99 ile dile eklendi ancak c11 ile de kulancıc tercihine bırakıldı kullanılması
 
+#idfed __STDC_NO_VLA__
+
+#endif
+
+
+dinamik bellek olayına girmeden bellekte yer ayırabiliriz
+
+------------------------
+
+void func(int x)
+{
+int a[x];
+
+for (int i = 0; i < x; ++i)
+a[i] = rand() % 10;
+//code
+for (int i = 0; i < x; ++i)
+printf("%d", a[i]);
+printf("\n");
+}
+
+int main()
+{
+srand((unsigned)(time(NULL)));
+
+for (int i = 5; i < 20; ++i) {
+func(i);
+}
+}
+
+--------------------------
+
+bir dizinin medyanını bulmaya çalışmak
+
+int icmp(const void* vp1, const void* vp2)
+{
+return if *(*const int*)vp1 > *(const int*)vp1 ? 1:
+*(const int*)vp1 < *(const int*)vp1 ? -1 : 0
+}
+
+double get_median(const int* p, size_t size)
+{
+int a[size];
+memcpy(a, p, size * sizeof(int));
+qsort(a, size, sizeof(*a), &icmp);
+return p[size / 2];
+}
+
+int main()
+{
+int a[10] = {2,6,-4,3,7,9,1,4,81,-45};
+
+
+}
+
+
+-------------------------------
+
+int main(void)
+{
+int row, col;
+
+printf("matrisin satir ve sutun sayisini girin: ");
+scanf("%d%d", &row, &col);
+
+int* pd = malloc(row * col * sizeof(int)) //bu şeklilde yaparsak köşeli parantez operatörünün operaqndı yapamam
+int (*pd)[row][col] = malloc(sizeof(*pd)) // bu şekilde yapılabilir
+
+}
+
+-----------------------------
+
+int main(void)
+{
+int row, col;
+
+printf("matrisin satir ve sutun sayisini girin: ");
+scanf("%d%d", &row, &col);
+
+int a[5][10];
+int(*p)[5][10] = &a;
+
+//*p == a DEMEK
+}
+
+-------------------------
+
+//yukarıdakini boyutu compile time'da değilde run time'da belli olan dizi içn yapıyoruz
+
+int main(void)
+{
+int row, col;
+
+printf("matrisin satir ve sutun sayisini girin: ");
+scanf("%d%d", &row, &col);
+
+int (*p)[row][col] = malloc(sizeof(*p));
+
+for (int i = 0; i < row; ++i) {
+for (int k = 0İ k < col; ++k) {
+(*p)[i][k] = rand() % 10;
+}
+}
+
+for (int i = 0; i < row; ++i) {
+for (int k = 0; k < col; ++k) {
+printf("%d", (*p);
+}
+putchat('\n');
+}
+free(p);
+}
 
 
 
