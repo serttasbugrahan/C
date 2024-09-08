@@ -357,12 +357,36 @@ putchat('\n');
 free(p);
 }
 
+===================================================
 
+static assert ve assert makrosu
+-------------------------------
 
+programlama hataları nasıl bulunru?
 
+- koda ekk kodlar yaılabilir kodlama hatalarını tespit etmek için
 
+void func(int x)
+{
+if (x < 0 || x > 9) {
+printf(......);
+abort();
+}
+}
 
+---------------
+//mesela aşağıda null pointer gelmemesi gerekiyor
 
+//static assertions : programın çalışma zamanından bağımsız, derleme zamanında yaplan doğrulamalar
+//dynamic assertions : programın çalışma zamanına yönelik doğrulamalar
+
+void func(int *ptr)(
+{
+if (ptr == NULL) {
+//..... hatayı anlatan  bir kod
+abort
+}
+}
 
 
 
