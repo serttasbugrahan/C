@@ -22,3 +22,32 @@ fonskiyonlar (functions):
 a) fonksiyonu tanımlamak (to define a function) (function defibition)
 b) fonksiyonu çağırmak (to call a function) (function call)
 c) fonksiyonu bildirmek (to declare a function) (function declaration)
+
+--------------------------------------------
+
+while(expr){
+; // hiçbir şey yapılmaması istendiği zaman  ';' koyulur
+}
+
+---------------------------------------
+
+return;
+sadece void function'da kullanılır
+kodun belli bölümleri kullanılmak istendiği zaman kullanılmalı
+
+void func(int x){
+//statemnet
+//statemnet
+if ( x > 10){  //x >10 doluğu zaman diğer statement çalışmasın fonksiyonu sonlandır
+return;
+}
+//statement;
+}
+
+-----------------------------------------
+
+!! fonskiyon 0 dışında hangi değeri döndürürse döndürsün true değerini döndürür
+
+3. başarı bilgisi
+
+standart c kütüphanesi 0 = başarılı diğer değerler başarısız olarak döndürür
