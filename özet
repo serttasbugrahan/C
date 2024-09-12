@@ -98,6 +98,89 @@ statement
 
 ----------------------------------------
 
+long double --> double --> float //bu kısım var ise burası ile yapılır
+
+long long --> long --> int
+
+short --> char --> _Bool
+
+
+!! integral promotion : int türünden düşük operandları (short, char, _Boll) int türüne yükseltmeye denir
+
+- eğer rank'ler farklı ise fakat büyük olan rank işaretsiz ama küçük olan işaretli ise rank'i büyük unsigned ile yapılır
+
+- eğer rank'ler aynı ise işaretler farklı ise rank'i küçük olan unsigned yapılır
+
+dikkat edilmesi gerekenler :
+- işaretli ile işaretsizi işleme sokma
+- int altı türlerin int türüne yükseltileceğini unutma
+- rankler aynı ise tür dönüşümü olmaz
+
+!! işaretsiz türlerde taşma diye bir şey yoktur
+
+!! c dilinde lojik ifade beklenen yerlerde void kullanılamaz
+ 
+--------------------------------------
+
+
+(void)isprime(x) //bir fonksiyonun geri dönüş değerini kullanmak istemediğimiz zaman bunu yaparız
+
+---------------------------------------
+
+int main(void)
+{
+for (int i = 0; i < 100; i++){
+printf("%d ", rand()); //2. çalıştırlmasında aynı tohum değerinde dolayı aynı sayılar rastgele üretilir
+}
+}
+
+-----
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define randomize() (srand((unsigned)time(0))) 
+
+int main(void)
+{
+randomize();
+
+for (int i = 0; i < 10; i++)
+{
+	printf("%d\n",rand()); //her çalıştığında farklı sayı üretir
+}
+
+}
+
+
+--------------------------------------
+
+big O notation : algoritmanın karmaşıklığını anlatmak için söylenir
+Big O(1) : constant(sabit) time
+Big O(n) : linear complexity
+Big O(n log n) : linearitmic 
+Big O(n2) : quadretic complexity
+Big O(n3) : cubic complexity
+
+
+-----------------------------------------
+
+int main(void)
+{
+int a[10];
+int b[10];
+a = b; //böyle yazılamaz, array decay kuralı ile igilidir
+}
+
+array decay : bir dizinin ismin bir ifade (expression) içinde kullandığızda derleyici
+dizi ismini dizinn ilk elemanının adresine dönüştürme işlemine denir
+
+------------------------------------------
+
+
+
+
 
 
 
