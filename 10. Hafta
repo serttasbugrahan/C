@@ -74,7 +74,7 @@ printf("compilation time %s\n", __TIME__)
 
 #ifndef _cplusplus
 #error THIS FİLE SHOULD BE ...
-#ENDİF
+#endif
 
 
 ============================================
