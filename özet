@@ -51,3 +51,61 @@ return;
 3. başarı bilgisi
 
 standart c kütüphanesi 0 = başarılı diğer değerler başarısız olarak döndürür
+
+
+
+--------------------------------------------
+
+while (expr) : expr true olduğu sürece devam eder
+
+-while parantezi içinde void tür olamaz 
+-parantex içi boş olamaz
+-parantex içinde statement olamaz
+
+
+--------------------------------------------
+
+!!işaretli türlerde taşma tanımısz davranıştır
+
+-------------------------------------------
+
+while (expr){
+while( (expr2){
+if (c_exp)
+goto out
+}
+}
+out:
+
+//bütün döngülerden çıkılmak istenirse goto statemnet kullan
+
+-------------------------------------------
+
+continue; 
+-sadece döngülerde kullanılır
+-döngüden çıkarmaz
+-kendinden sonrakileri yapma
+
+while (exp)
+{
+statement
+statement
+statement
+continue; //continue altında kalan statement'lar kullanılmaz döngünğn başına döner
+statement
+statement
+}
+
+----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
