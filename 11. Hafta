@@ -87,14 +87,24 @@ printf("%d ", rand()); //2. çalıştırlmasında aynı tohum değerinde dolayı
 
 -srand'e program her çalıştığındaki zamanı verebiliriz
 
-#deifne randomize() (srand((unsigned)time(0)))
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define randomize() (srand((unsigned)time(0)))
 
 int main(void)
 {
 randomize();
+
+for (int i = 0; i < 10; i++)
+{
+	printf("%d\n",rand());
 }
 
-----
+}
+
+-----------------
  
 void put_randım_letter(void) //rastgele harf üretir
 {
