@@ -178,7 +178,22 @@ dizi ismini dizinn ilk elemanının adresine dönüştürme işlemine denir
 
 ------------------------------------------
 
+!! fonksiyonların parametre değişkenleri dizi türlerinden olamaz
+void func (int a[10])
 
+!! fonksiyonların geri dönüş değeri türü dizi türü olamaz
+
+!! arraylerde eğer ilk değer verilmez ise static ömürlü ise zero ile hayata başlar
+
+--------------------------------------------
+
+int main(void)
+{
+int a[10] = {2, 5, 7, 23, 90, 6, 4, 13, 22, 80}; //ilk değer verme
+int a[10] = {2, 5, 7}; //geri kalan değerler 0 ile hayata başlar
+int a[10] = {0}; //0 değerleri hepsine atanır
+int a[] = {0,1,2,3,4}; //dizinin boyutunu ilk değer verince kendisi anlar
+}
 
 
 
