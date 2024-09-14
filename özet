@@ -196,11 +196,37 @@ int a[] = {0,1,2,3,4}; //dizinin boyutunu ilk değer verince kendisi anlar
 }
 
 
+------------------------------------------
 
+global tanımlı değişkenler 0 değeri ile başlar (int a;)
 
+otomatik tanımlı değişkenler ub olur
 
+-----------------------------------------
 
+C dilinde (tipik olarak) bir yazı elemanlarının türü 'char' olan bir dizide tutulur
 
+!! yazının uzunluğu dizideki null karekterinin bulunması ile bulunur
+ 
+
+char str[5] = {'b', 'u', 'g', 'r', 'a'}; //burada tanımsız davranış var
+char str[5] = "bugra; //tanımısz davranış var, sonunda '\0' vardır yani 6 karakterleri
+
+------------
+
+int main(void)
+{
+char str[40] = "muharrem; //tanımısz davranış yok
+for (int i = 0; i < str[i] != '\0'; ++i){
+printf("%c", str[i]);
+}
+}
+
+------------
+
+puts(str); //bu fonksiyon bugrahan serttas yazısını ekrana yazdırır
+sgets(str); //bu fonksiyonu ekrandan yazıyı alır
+  
 
 
 
