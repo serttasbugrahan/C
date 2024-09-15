@@ -391,9 +391,9 @@ adress of operator (&) :
 
 
 !! adres operatörünün operandı olan ifade L value olmak zorunda, 
-!! adres operatörü ile oluşturulan bir ifadenin value category R value olmalı
+!! adres operatörü ile oluşturulan bir ifadenin value category R value olmalı (&x)
 
----------------------------
+--------------------------- 
 
 int main(void)
 {
@@ -435,7 +435,8 @@ p = ptr;
 
 3)
 int a[100] = {};
-ptr = a; - ptr = &a[0]; aynı anlamda
+ptr = a;   
+ptr = &a[0]; aynı anlamda
 
 -------------------------------------
 
@@ -480,9 +481,12 @@ printf("ptr   = %p\n", ptr);
 
 --------------------------------
 
-derefencing (*) / indirection :
 
-!! operandı adres olmak zorunda
+derefencing (*) / indirection :
+-------------------------------
+
+
+!! içreik operatörünün operandı olan ifade  adres olmak zorunda
 
 //*324 geçersiz
 //int x = 3547; *x; geçersiz
@@ -492,7 +496,7 @@ derefencing (*) / indirection :
 
 *ptr
 *&x
-*a
+*a //*&a[0] ile aynı anlama gelir    
 bu ifadeler geçerlidir
 
 !! içerik operatörünün operandını hangi nesnenin adresi yaparsak o nesneye erişmiş oluruz
@@ -540,9 +544,27 @@ ptr = &z;
 }
 
 
+---------------------
 
+void func(int* ptr)
+{
+*ptr = -1
+}
 
+int main(void)
+{
+int x = 3535;
+int y = 46;
+printf("x = %d\n", x);
 
+func(&x);
+
+printf("x = %d\n", x);
+printf("y = %d\n", y);
+
+func(&y);
+printf("y = %d", y);
+}
 
 
 
