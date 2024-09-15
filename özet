@@ -225,11 +225,74 @@ printf("%c", str[i]);
 ------------
 
 puts(str); //bu fonksiyon bugrahan serttas yazısını ekrana yazdırır
-sgets(str); //bu fonksiyonu ekrandan yazıyı alır
-  
+gets(str); //bu fonksiyonu ekrandan yazıyı alır
+
+int ch;
+ch = getchar(); // char karakteri alır
+
+-----------
+
+!! adres operatörünün operandı L value expression olmak zorunda
+
+----------
+
+int main(void)
+{
+int a[5] = {1,2,3,4,5};
+int b[20] = {0};
+
+int * p = &a[0];
+int* p = a; //aynı anlama gelir(array decay)
+p = a;
+}
+
+!! asla pointer değişkene adres olmayan atama yapma
+
+--------------
 
 
+int main(void)
+{
+int x = 346;
+double * p;
+p = &x;
+!! asla bu şekildede kod yazma, tür dönüştürme kullan
+}
 
+---------------
+
+int * ptr = &x;
+
+ptr //ptr'nin değeri hangi adres
+&ptr //ptr bellekte nerede
+
+--------------
+
+int main(void)
+{
+int x = 4547;
+*&x = 987; //x = 987 aynı anlamda
+}
+
+int main(void)
+{
+int a[4] = {20 ,56 , 90 ,12};
+*a = 777; //dizinin ilk elemanının değeri 777 olur
+
+}
+
+int main(void)
+{
+int x = 5;
+int y = 10;
+int z = 40;
+int* ptr = &x; 
+    *ptr = 65; // x = 65
+ptr = &y;
+    *ptr = 90; // y = 90;
+ptr = &z;
+    *ptr = 777; //z = 777;
+}
 
 
 
