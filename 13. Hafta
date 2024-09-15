@@ -8,8 +8,8 @@ char str[SIZE];
 int ch;
 
 printf("bir yazi girin: ");
-sgets(str);
-printf("sayilacak karekter
+gets(str);
+printf("sayilacak karekter");
 ch = getchar();
 int cnt = 0;
 
