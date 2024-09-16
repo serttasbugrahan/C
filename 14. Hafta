@@ -59,16 +59,58 @@ maaliyet :
 birden fazla geri dönüş değeri istenebilir :
 return ile sadece 1 değer alabilirken pointer ile birden fazla değerin geri dönüşünü yapabiliriz.
 
+ void get_circle_vals(double radiius, double* p_circ, double* p_area);
+
+int main()
+{
+double r = 345.78435;
+DOUBLE PERİMETER, AREA;
+GET_CİRCLE_VALS(r, &permeter, &area);
+}
+
+
 out param : 
 in param :
 
+-------------
+
+void get_circle_area(double raidius, double* p_area)
+{
+*p_area = 3.1415928 * raqdious * raidosu
+}
+
+int  main()
+{
+double r;
+
+printf("yaricap degerini giriniz: ");
+scanf("%lf", &r);
+
+double area;
+get_circle_area( r, &area);
+
+printf("area = %f\n", area);
+}
+
+
 arraylar :
-!! c dilinde diziler bir fonksiyondan bir fonksiyona sadece call by referance olarak gönderilebilinir
+!! c dilinde diziler bir fonksiyondan bir fonksiyona sadece call by referance olarak gönderilebilinir, call by value çalışmaz
+
+int main(void)
+{
+int a[100] = {0};
+
+func(a);
+}
 
 ===================================================
 
 const(ant) : değeri değişmiycek değişken
- 
+
+void func(T* ptr);
+void foo(const T *ptr);
+
+
 !! const variable oluşturursak değeri değişmiycek bir değişken oluştururuz
 
 int main(void)
@@ -90,6 +132,24 @@ neden bir değişken const yapılır ?
 
 !! const değeri değiştirme işlemi undefined behavier'dır
 
+----------------
+
+const int x = 10;
+
+int const x = 10 
+
+//ikisi arasında fark yoktur
+
+----------------
+salt okuma amaçlı olacaksa const yap
+  -> look up table'ları özellikle const yap 
+
+------------------
+
+
+
+----------------
+
 int main(void)
 {
 const int x = 10;
@@ -98,7 +158,14 @@ int * ptr = (int*)&x;
 
 !! const bir değişkene sabit bir değer verilse bile sabit ifadesi kullılan yerde kullanılamıyor
 
+----------------
+
+const int x = 10, y = 45; //x ve y consttur
+
+----------------
+
 int main(void) {
+
 const int x = 5;
 const int y = 7;
 const int z = 10;
@@ -122,6 +189,9 @@ int x = 10;
 //const pointer to int (bu terim daha çok kullanılır)
 // top-level const (cpp'de bu terim kullanılır)
 //right-cost (bu terim pek sevilmez)
+
+int *const ptr = &x;
+*ptr = 5678;
 
 -const int* p2 = &x; 
 //*ptr sadece okuma amaçlı erişilir değiştirilemez
