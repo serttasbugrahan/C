@@ -295,4 +295,23 @@ ptr = &z;
 }
 
 
+--------------------
+
+!! c dilinde diziler bir fonksiyondan bir fonksiyona sadece call by referance olarak gönderilebilinir, call by value çalışmaz
+
+------------------
+
+
+const int x = 10;
+
+int const x = 10 
+
+//ikisi arasında fark yoktur
+
+
+
+
+
+
+
 
