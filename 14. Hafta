@@ -1,5 +1,36 @@
 ////////////////////////////////////////////////////1. Ders/////////////////////////////////////////////
 
+
+r value l value tekrarı
+----------------------
+!! başına & operatörü koduğumuzda hata olmuyorsa l value oluyorsa r value
+
+
+r value
+------
+
+a * b
+a + b
+a &&b
+x > 10
++x
+-x
+x >> 8
+a = b
+++x
+y==
+ 
+
+l value : bir nesneey karşı
+---------
+değişken isimlerinin oluşturduğu isimler
+ival
+dval
+a
+*ptr
+a[5]
+
+
 !! C dilinde call by referance yapmanın tek yolu pointerlardır
 
 void swap(int *p1, int *p2)
