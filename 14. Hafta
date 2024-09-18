@@ -188,12 +188,17 @@ int x = 10;
 //hep x'i gösterir başka bir adres atanamaz
 //const pointer to int (bu terim daha çok kullanılır)
 // top-level const (cpp'de bu terim kullanılır)
-//right-cost (bu terim pek sevilmez)
+//right-con st (bu terim pek sevilmez)
 
 int *const ptr = &x;
-*ptr = 5678;
+*ptr = 5678; //legal
+ptr = &x; //illegal
 
--const int* p2 = &x; 
+-------------
+ 
+-c
+  zonst int* p2 = &x; 
+
 //*ptr sadece okuma amaçlı erişilir değiştirilemez
 //*ptr = 29 (error)
 //ptr = &y(geçerli)
@@ -202,6 +207,13 @@ int *const ptr = &x;
 //low-level const
 //left const
 
+const int* ptr = &x;
+
+*ptr = 78; //error
+ptr = &y //geçerli
+x = 4566; //gecerli ub degıl
+   
+
 -const int* const p = &x;
 //*p = 56;
 //p = 56;
@@ -209,11 +221,11 @@ int *const ptr = &x;
 //p2 ile p3 aynı anlamdadır
 }
 
-void func(T *ptr); //out-param 
+void func(T *ptr); //out-param, adresini aldığı fonskyonu set eder, set function mutator setter
 void foo(const T *ptr); //sadece değerinde faydalınılır get function, accessor, getter
 
 =================================================
-
+ 
 pointer aritmetiği :
 
 +
@@ -244,6 +256,8 @@ for (int i = 0; i < 10; ++i){
 printf("%d %d %d\n", *(a + i), *(i + a), a[i], i[a]); //hepsi aynı anlamdadır diziyi yazıdırı
 }
 }
+
+a[i] //derleyici bu kodu şu şekilde yazıyor : *(a +i)
 
 /////////////////////////////////////////////////2. Ders//////////////////////////
 
