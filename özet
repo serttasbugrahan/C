@@ -308,7 +308,15 @@ int const x = 10
 
 //ikisi arasında fark yoktur
 
+--------------------
 
+!! &a[i] = a // aynı anlama gelir
+ 
+!! &a[i] = a + i //aynı anlama gelir -
+
+!! a[i] = *(a + i) //aynı anlama gelir 
+
+!! *p = p[0]; //aynı anlama gelir
 
 
 
