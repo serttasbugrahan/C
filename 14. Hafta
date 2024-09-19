@@ -259,17 +259,19 @@ printf("%d %d %d\n", *(a + i), *(i + a), a[i], i[a]); //hepsi aynı anlamdadır 
 
 a[i] //derleyici bu kodu şu şekilde yazıyor : *(a +i)
 
-/////////////////////////////////////////////////2. Ders//////////////////////////
+/////////////////////////////////////////////////2.Ders//////////////////////////
+
+
 
 int main(void)
 {
-char a[10] = {0 ,1,2,3,4,5,6,7,8,9};
+int a[10] = {0 ,1,2,3,4,5,6,7,8,9};
 int n = 10;
-short * p = a;
+int * p = a; //dizinin ilk adresine erişir
 
 while (n--){
 printf("%d\n", *p);
-++p;
+++p;                                           
 }
 }
 
@@ -284,8 +286,20 @@ printf("%d\n",3[p]); // 8
 
 }
 
+-------------------------
+
 int main(void)
 {
+int a[10] = {0,1,2,3,4,5,6,7,8,9};
+
+&a[10] //ub yok
+}
+-------------------------
+//diziyi dolaşma yöntemleri
+
+int main(void)
+{
+int a[10] = {0,1,2,3,4,5,6,7,8,9};
 int * p = a;
 int size = 10;
 
@@ -298,6 +312,8 @@ printf("\n");
 -------------------------------
 
 !! bir dizi ile ile igili fonksiyon yazarken parametresi pointer olmalı, call by value olarak aktarılamaz
+
+!! diznin adresini bilemediği için birde boyut bilgisi vermememiz gerekir, bu bilgiyi vermez isek bunu fonksyion içinde öğrenemey  iz
 
 void display_array_1(const int* p, int size)
 {
@@ -324,6 +340,19 @@ display_array(a, 10);
 display_array(a, 10);
 }
 
+----------------------------
+
+int main(void)
+{
+int a[SIZE];
+
+set_array_random(a, SIZE); //tüm elemanları yazıdır
+set_array_random(a, SIZE); //ilk 5 elemanı yazdırı
+set_array_random(a, SIZE); //5. elemandan itibaren 4 tane eleman yazıdır
+set_array_random(a - SIZE -6, 6); // son 6 elemanı yazıdırı
+
+}
+
 ---------------------------------
 !! &a[i] = a // aynı anlama gelir
  
@@ -339,6 +368,46 @@ display_array(a, 10);
 !! yazma amaçlı ise kullanılmaz
 
 -------------------------------------
+DİZİ TOPLAMINI VEREN FONKSİYONLAR
+
+int sum_array(const int* p, int size)
+{
+int sum = 0;
+
+for (int i = 0; i < size; ++i)
+{
+sum += p[i];
+}
+return sum;
+}
+
+int sum_array_2(const int* p, int size)
+{
+int sum = 0;
+
+while(size--)
+{
+sum += *p;
+++p;
+}
+
+return sum;
+}
+
+int main(void)
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+
+printf("%d ", sum_array(a, SIZE);
+}
+
+-----------------------
+ 
+
 min ve max değerlerini veren algoritma:
 
 void get_minmax(const int * pa, int size, int * pmin, int *pmax)
@@ -362,6 +431,35 @@ get_minmax(a, SIZE, &min, &max);
 
 -------------------------------------
 
+void swap(int* p1, int*p2)
+{
+for (int i = 0; i < size / 2; ++i) {
+int temp = p[i];
+p[i] = p[size - 1 - i];
+p[size - 1 - i] = temp;
+}
+}
+
+int main(void)
+{
+int x = 4356, y = 87652;
+
+printf("x = %d y = %d\n", x, y);
+swap(&x, &y);
+printf("x = %d y = %d\n", x, y);
+}
+
+-------------------
+
+void reverse_array(int* p, int size)
+{
+for (int i = 0; i < size / 2; ++i) {
+swap(&p[i], &p[size - 1 - i]);
+}
+}
+
+-------------------------------------
+
 !! 
 
 void func(int p[]) //dizi gibi gözüksede bu bir pointerdır *p ile aynı anlama gelir
@@ -369,6 +467,63 @@ void func(int p[]) //dizi gibi gözüksede bu bir pointerdır *p ile aynı anlam
 //bunu kullanma int * p kullan, böyle  kullanıldığı zaman dizi olucağı belli olur
 }
 
+-------------------
+
+dizinin max elamnını yazılması
+
+int get_array_max(const int* p,  int size)
+{
+int max = *p;
+
+for (int i = 1; i < size; ++i) {
+ if (p[i] > max)
+max = p[i];
+} 
+return max
+}
+
+int main(void)
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+
+printf("max = %d\n", get_array_max(a, SIZE));
+}
+
+---------------------
+
+birden fazla değer döndürmek isteniyor
+
+void get_minmax(const int *pa, int size, int *pmin, int* pmax)
+{
+*pmin = *pmax = *pa;
+
+for (int i = 1; i < size; ++i) {
+if (pa[i] > *pmax)
+*pmax = pa[i];
+else if(pa[i] < *pmin)
+*pmin = pa[i]; 
+}
+}
+
+int main(void)
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+int min, max;
+
+get_minmax(a, SIZE, &min, &max);
+
+printf("min = %d\n", min);
+printf("max = %d\n", max);
+
+}
 
 =========================================================
 
@@ -454,6 +609,8 @@ int a[] = {1, 2, 3, 4};
 if (a == b) //always false, dizi adresleri farklı
 
 }
+
+--------------------
 
 ============================================
 
