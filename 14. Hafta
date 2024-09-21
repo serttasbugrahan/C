@@ -525,9 +525,53 @@ printf("max = %d\n", max);
 
 }
 
+-------------
+// bubble sort
+
+void bsort(int*pa, int size)
+{
+for (int i = 0; i < size -1; ++i) {
+for (int k = 0; k < size -1 -i; ++k) {
+if (pa[k] > pa[k + 1]) {
+swap(pa + k, pa + k + 1);
+}
+}
+}
+}
+
+-----------------
+
+diziyi bir yerden bir yere kopyalayan 
+!! yazma parametresi ilk parametre olur okuma parametresi ikinci parametre olur
+
+void copy_array(int* pdest, const int* psoruce, int n)
+{
+for (int i = 0; i < n; ++i) {
+pdest[i] = psoruce[i];
+}
+}
+
+void copy_array_2(int* pdest, const int* psoruce, int n)
+{
+while (n--) {
+*pdest++ = *psource++ ;
+}
+}
+
+------------------
+
+void foo(int *p) //dizi ile çağrı yapılabilr
+
+void func(int p[]) //dizi ile çağrı yapılabilr
+
+// ikisi de kullanılabilir, ancak 2. de dizi ile işlem yapılacağını vurgular
+
+
 =========================================================
 
 adresler ve karşılaştırma işlemleri
+------------------------------------
+
 pointer değişkenin değerinin kullanılması bu yollarala olur :
 
 a ) hayataı devam eden bir nesneyi göstermesi
@@ -539,10 +583,27 @@ int * p = &x;
 
 }
 
-b) bir dizinin bittiği yerin adresini tutmasu
+b) pointerın bir dizinin bittiği yerin adresini tutmasu
+
+--------------------
+
+
+!! dizinin son elemanın adresi a + 4
+!! diiznin bittiği yyerin adresi a + 5
+
+int main(void)
+{
+int a[5] = {1, 2, 3, 4, 5};
+
+int* p = a + 5; // geçerli
+*p //ub
+}
+
+bu ifade
  karşılaştırma işlemleri
  çıkartma işlemleri
 
+işlemlerinde kullanıur
 --------------------------
 
 adres + n geçerli adres
@@ -553,14 +614,48 @@ adres - adres geçerli tam sayı
 adres + adres geçersiz
 
 ---------------------------
+ptr, a iismli dizinin bir elemanını gösteren bir pointer değişkendir,
+ptr'nin gösterdiği dizi elemanının indeksi nedir?
+
+ptr - a
 
 !! dizinin bittiği yerden dizinin başlangıcını çıkarırsam dizinin boyutunu bulurum
 
 int main(void)
 {
 int a[SIZE] = {0};
-int * ptr = a + 13;
+int * ptr = a + 13; //13 indisinin gösteri,r
 printf("%d\n", ptr - a)
+} 
+
+-----------------------------
+
+c ve c cillerinde 
+bir dinzinin
+bir elemanının adresini bilmemiz ile indeksini bilmemeiz arasında hiçbir fark yok
+indeksten adrese adresten indekse geçebiliriz
+
+n, a isimli dizinin bir elemanın inkdesi olan ta sayıdıır. Dziinin bu elemanın adresi nedir
+
+idx ==> adresine 
+a + idx
+
+adres ==> index
+adres - a
+
+-----------------------------
+
+int main(void)
+{
+int x = 13;
+int y = 45;
+
+int *p1 = &x;
+int* p2 = &y;
+int* p1 = &x;
+int* p2 = &y;
+
+int n = p1 - p2; //asla böyle bir şey yapma, ne değer çıkağaını bilemeyiz
 }
 
 -----------------------------
@@ -584,8 +679,9 @@ int *ps = NULL; //*ps tanımsız
 
 ---------------------------------
 
-pointer karşılaştırma :
-
+pointer karşılaştırma işlemleri :
+---------------------------------
+ 
 p1 == p2
 p1 != p2
 
@@ -602,15 +698,39 @@ int * p2 = &y;
 
 if (*p1 == *p2) //if (x == y)
 
+---------------------
+
+iki pointer == karşılaştırılmasına sokulduğunda ancak şunlar agranti alındadır
+
+a) her iki pointer'da aynı nesnesin adresi ise kesin eşit olur
+
+!! dizi isimleri adresler içerisinde klullanıldığı zmana adreslere dönüştürülür
+
 int main(void)
 {
 int a[] = {1, 2, 3, 4};
 int a[] = {1, 2, 3, 4};
 if (a == b) //always false, dizi adresleri farklı
+printf("dogru\n");
+else
+printf("yanlis\n");
 
+printf("%p %p\n", &a[0], &b[0]);
 }
 
 --------------------
+
+int main(void)
+{
+char name1[] = "bilgin";
+char name2[] = "bilgin";
+
+if (name1 == name2) //always false
+printf("dogru\");
+else
+printf("yanlis\n");
+}
+ 
 
 ============================================
 
