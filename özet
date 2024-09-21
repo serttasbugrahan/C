@@ -318,7 +318,7 @@ int const x = 10
 
 !! *p = p[0]; //aynı anlama gelir
 
-
+!! int p[] = int *ptr
 
 
 
