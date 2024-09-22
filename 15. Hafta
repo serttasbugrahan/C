@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////1. Ders///////////////////////////////////////////
+ ///////////////////////////////////////////////////1. Ders///////////////////////////////////////////
 
 int main(void)
 {
@@ -115,6 +115,11 @@ int * p = a;
 *p++ //p'nin gösterdiği nesneye eriş p'yi 1 arttır
 }
 
+*p++ = 10;
+//ikiside aynı anlamda (yukarıdaki tercih edlir)
+*p = 10 
+p = p + 1;
+---------------
 
 int main(void)
 {
@@ -122,12 +127,14 @@ while(size--){
 *p++ = rand() % 1000;
 }
 }
-
+//ikiside aynı anlamda (yukarıdaki tercih edlir)
 while(size--){
 *p = rand() % 1000;
 p = p + 1; //aynı anlama gelir yukarıdaki ile
 }
 }
+
+-------------
 
 int main(void)
 {
@@ -136,6 +143,7 @@ int * p = a;
 *++p = 99; //dizinin 2. elemanına atama olur
 }
 
+--------------
 
 int main(void)
 {
@@ -145,6 +153,7 @@ int * p = a + 4
 
 }
 
+-------------- 
 
 int main(void)
 {
