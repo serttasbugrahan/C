@@ -704,7 +704,7 @@ iki pointer == karşılaştırılmasına sokulduğunda ancak şunlar agranti al�
 
 a) her iki pointer'da aynı nesnesin adresi ise kesin eşit olur
 
-!! dizi isimleri adresler içerisinde klullanıldığı zmana adreslere dönüştürülür
+!! dizi isimleri koşullu ifadeler içerisinde klullanıldığı zmana adreslere dönüştürülür
 
 int main(void)
 {
