@@ -320,6 +320,24 @@ int const x = 10
 
 !! int p[] = int *ptr
 
+--------------------
+
+- L value olduğunu tespit etmek için başına '&' koyulduğu zaman hata vermiyor ise L value'dur
+
+l value ifadeler :
+
+a
+(expr)
+*ptr
+a[b]
+ptr->x
+x.y
+
+!! gereiş kalanlar r value
+
+
+
+
 
 
 
