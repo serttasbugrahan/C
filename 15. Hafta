@@ -3,11 +3,11 @@
 int main(void)
 {
 int a[10] = {0, 1,2,3,4,5,6,7,8,9};
-int * pe = a + 10;
+int * pe = a + 10; //diref edemem ama pointer değişkenin bu adres olmasının herhangi bir sakıncası yoktur
 int * p = a;
 
 while (p != pe){
-printf("%d ",*p);
+printf("%d ",*p); //bir diziyi bu şekilde de dolaşabiliriz
 ++p;
 }
 } 
@@ -27,16 +27,9 @@ if (p2 > p1){//  DOĞRU 8 > 5
 
 -----
 
-void reverseArray(int * p, int size)
-{
-int * pe = p + size
-while (p < pe)
-swap(p++, --p);
-}
-
 void printArray(const int* pfirst, const int* plast)
 {
-while (pfirst < plast){
+while (pfirst != plast){
 printf("%d ", *pfirst++);
 }
 printf("\n---------------------\n");
@@ -44,29 +37,50 @@ printf("\n---------------------\n");
 
 int main(void)
 {
-int a[SIZE];
-randomize();
-set_array_randım(a ,SIZE);
-printf_array(a, SIZE);
-reverseArray(a, SIZE);
-printf_array(a, SIZE);
+printf_array(a, a + 10);
 }
 
--------------------------------------
+------
+//artesitik bir şekilde yazılması :)
+
+void reverseArray(int * p, int size)
+{
+int * pe = p + size
+while (p < pe)
+swap(p++, --p);
+}
+
+int main(void)
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+reverse_array(a, SIZE);
+print_array(a, SIZE); 
+
+}
+
+
+=================================================
 
 pointer idioms :
+----------------
 
-patter (dilden bağımsız)
+pattern (dilden bağımsız, c de de c++'da da java da da yapılabilir)
 idiom (dile bağımlı)
 technic (alışılmış konuyu ele alma biçimi)
+
+// önce ufask bir tekrar
 
 - içerik operatörü ile oluşturulan ifade L value expressiondur
 
 - L value olduğunu tespit etmek için başına '&' koyulduğu zaman hata vermiyor ise L value
 
-&x++   illegal
-&++x   illegal
-++&x   illegal
+&x++   illegal   çünkü adres operaörünün operandı olan ifade L value değil
+&++x   illegal   çünkü adres operaörünün operandı olan ifade L value değil
+++&x   illegal   çünkü ++ operando olan ifade L value değil
 
 ---------------------------------
 
