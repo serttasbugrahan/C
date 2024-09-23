@@ -457,6 +457,8 @@ printf("isminiz %s\n", p);
 
 -------
 
+// 3 pointerda 90 değerini gösterir çünkü x değeri tekrar hayat gelmez
+
 int* get_value(void)
 {
 static int x;
