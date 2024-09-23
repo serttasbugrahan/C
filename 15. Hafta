@@ -172,19 +172,30 @@ void reverse_copy(int * pdest, const int * psource, int n);
 {
 const int * pe = psource + n;
 while (n--)
-*pdest++ = *--psource;
+*pdest++ = *--pe;
 }
 
 int main(void)
 {
 int a[SIZE];
-int a[SIZE];
+int b[SIZE];
 
 randomize();
 set_array_random(a ,SIZE);
 print_array(a, SIZE);
-reverse_copy(b, a, SIZE);
+reverse_copy(b, a, SIZE); //dizinin tersini bir yere kopyalar
 }
+
+----------------------
+
+/*
+void func(int* p, int size)
+{
+while (size--)
+++*p++;
+}
+*/
+
 
 ======================================================
 
@@ -309,7 +320,7 @@ fpos_t
 int32_t
 int64_t
 
-------------------------
+------------------------ 
 
 size_t : sizeof operatörünün ürettiği değerin türü, türe verilen eş isim (int unsigned int vb. //derleyiciye bağlı)
 
@@ -327,7 +338,7 @@ standart kütüphane size_t eş ismini hangi durumlarda kullanır :
 
 int main(void)
 {
-  size_t x = 10; //isim değildir identifier'dır yer aldığı başlık dosyasını include etmemiz gerekir
+  size_t x = 10; //isim değildir identifier'dır yer aldığı başlık dosyasını <stddef.h> include etmemiz gerekir
 }
 
 int main(void)
@@ -341,9 +352,13 @@ printf("%zu", sizeof(int)); //sizeof kullanıldığı zaman %zu kullanılabilini
 // size_t hangi türün eş ismi ise %zu sayesinde ona uyum sağlar
 }
 
-!! bir byte her zmaan 8 bit değildir
+!! bir byte her zmaan 8 bit değildir, değişeilir bu değer limits başlık dosyasındakiş CHAR_BIT'ten öğrenilir
+
+bu yüzden aşağıdaki kullanılır garanti sapğlamak için (16 bit kullanıcaksak uint16_t kullan)
 
 #include <stdint.h> //c99 ile gelen bu kütüphaneyi include ederek kullanılır
+
+
 
 int16_t, int32_t ve int64_t standart typdef isimleridir c99 ile eklenmiştir. opsiyoneldir (derleyici vermeyebilir)
 
@@ -359,6 +374,7 @@ int_fast16_t x; 16 bitlik tam sayılarla işlemin en hızlı yapıldığı tür�
 ================================================
 
 adres döndüren fonksiyonlar (functions returning pointers) :
+------------------------------------------------------------- 
 
 int * foo(void) //foo öyle bir fonksiyonki türü  int nesnenin adresini döndürüyor
 
@@ -378,12 +394,12 @@ int * foo(void)
 {
 return &g;
 }
-
+   
 
 int main(void)
 {
 int * p = foo() //*p g'nin değerini tutar
-++*foo(); // g'nin değeri 1 artar
+++*foo(); // g'nin d eğeri 1 artar
 int * p1 = foo(); //g'nin değeri gözükür
 int * p2 = foo(); //g'nin değeri gözükür
 int * p3 = foo(); //g'nin değeri gözükür
@@ -405,13 +421,14 @@ int main(void)
 -----------
 
 !!!!!!
+
 int * get_value(void)
 {
 int x; //static olmalıydı burası
 printf("bir tam sayi girin: ");
 scanf("%d", &x);
 
-return &x;
+return &x; //otomaitk ömürlü değişken geri dönüş değeri olarak kullanılamaz, DANGLİNG POİNTER
 }
 
 int main(void)
@@ -421,13 +438,12 @@ printf("%d ", *ptr); //tanımsız davranış dangling pointer olur x değişkeni
 }
 
 !! ÇOK DİKKAT ET !!
-adres döndüren bir fonksiyon otomatik ömürlü bir yerel değişkenin
-adresini döndürmemeli.
+adres döndüren bir fonksiyon otomatik ömürlü bir yerel değişkenin adresini döndürmemeli.
 
 ----------
 
 char * get_name(void){
-char str[100]; //otomatik ömürlüdür tanımsız davranıştır
+char str[100]; //otomatik ömürlüdür tanımsız davranıştır 
 
 printf("isminizi giriniz: ");
 scanf("%s", str);
@@ -440,6 +456,35 @@ printf("isminiz %s\n", p);
 }
 
 -------
+
+int* get_value(void)
+{
+static int x;
+printf("bir tam sayi girin: ");
+scanf("%d", &x);
+
+return &x;
+}
+
+int main()
+{
+int* p1 = get_value();
+int* p2 = get_value();
+int* p3 = get_value();
+
+printf("%d\n", *p1);
+printf("%d\n", *p2);
+printf("%d\n", *p3);
+
+}
+
+
+
+
+
+
+
+------------
 
 int * foo(int * p)
 {
