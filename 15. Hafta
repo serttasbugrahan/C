@@ -481,12 +481,26 @@ printf("%d\n", *p3);
 }
 
 
-
-
-
-
-
 ------------
+
+
+char * get_name(void)
+{
+char str[100];
+
+printf("isminizi girin");
+scanf("%s", str);
+
+return str;
+}
+
+int main(void)
+{
+char* p = get_name();
+printf("isminiiz girin"); //ub olur
+}
+
+-------------
 
 int * foo(int * p)
 {
