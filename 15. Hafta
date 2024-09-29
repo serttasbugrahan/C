@@ -647,16 +647,18 @@ printf_array(a, pmax - a + 1); //dizinin max elemanına kadar(max ile beraber) e
 }
 
 --------------
+selection sort algoritmasının yazılması
 
 void selection_sort(int * p,int size)
 {
 for (int i = 0; i < size - 1; ++i){
-swap(p + 1, get_array_min(p + i, size - i)); //selection sort algoritmasını yapar
+swap(p + 1, get_array_min(p + i, size - i)); //selection sort algoritmasını yapar  
 }
 }
 
+
   
--------------------------------------------------------
+====================================================
 
 NULL pointer :
 
@@ -678,7 +680,9 @@ yani önişlemci programa tanıtılan bir isimdir yani bir sebolik sabittir.
 2) Büyük harf ile yazılan NULL bir addrestir bu adres sadece pointer değişkenkere atanmalıdır /
 ilk değer olarak asla (legal olsa da) pointer olmayan değişkene  NULL ataması yapma
 
-ancak BULL pointer herhangi türden bir pointer değişkene atanabilir:
+int x = NULL; //Böyle bir şey yapma
+
+ancak NULL pointer herhangi türden bir pointer değişkene atanabilir:
 
 int * ip = NULL;
 
@@ -703,6 +707,7 @@ Benzer şekilde NULL poiner adresinin toplama, çıkarma gibi işlemlerde kullan
 static ömürlü pointer değişkene hayata NULL pointer değeri ile hayata başlar
 
 int * ptr //ptr has NULL value
+static int * ptr //ptr has NULL value
 
 6) iki adres eşitlik kaşılaştırılmasına sokulduğunda eğer iki adres de NULL pointer
 değerine sahipse doğru sonuç verir
@@ -719,15 +724,15 @@ if (ptr == NULL)
 if(!ptr) //üstteki ile aynı anlamda
 
 8) Normal olarak bir pointer değişkene bir adres atanmalıdır
+
 bir pointer değişkene adres olmayan bir verinin atanması örneğin bir tam sayı değerinin atanması yanlıştır
 Böyle bir atama c++ dilinde (zaten) sentaks hatasıdır. C derleyicileri uyarı verir
-
 ancak bu durumun bir istisnası vardır eğer bir pointer değişkene tam sayı sabiti olarak 0 atanır ise bu durumda
 derleyici 0 tam sayı sabitini NULL pointer'a dönüştürür
 bu dönüşüme NULL pointer conversion denir
 
-inr * p = 0; //hata vermez derleyici NULL olarak algılar
-int * p = NULL;
+int * p = 0; //hata vermez derleyici NULL olarak algılar
+int * p = NULL; // bu şekilde görür
 
 9) bir dizinin boş indisleri NULL karakter ile başlar
 
