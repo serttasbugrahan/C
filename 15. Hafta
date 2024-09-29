@@ -486,7 +486,7 @@ printf("%d\n", *p3);
 
 char * get_name(void)
 {
-char str[100];
+char str[100]; //otomatik ömürlü
 
 printf("isminizi girin");
 scanf("%s", str);
@@ -497,7 +497,7 @@ return str;
 int main(void)
 {
 char* p = get_name();
-printf("isminiiz girin"); //ub olur
+printf("isminiz %s\n", p); //ub olur
 }
 
 -------------
@@ -532,6 +532,26 @@ int * p = foo(a);
 print_array(a,5); //dizinin 3. elemanının değeri 999 olur
 }
 
+------------
+
+int* foo(void)
+{
+int x = 10;
+int* p = &x;
+
+return p; //hatalı x'in adresini döndürür ancak x otomatik ömürlü
+}
+
+------------
+
+int* foo(int *ptr)
+{
+int* p = ptr;
+
+return p; //bu şekilde hata olmaz
+}
+
+------------
 
 adres döndüren bir fonksiyon :
 
@@ -546,30 +566,51 @@ c) fonksiyon çağıran koddan aldığı adresi çağıran koda geri döndürebi
 
 -----
 
-int * get_array_max(const int * p, int size);
+int main(void)
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+int max = get_array_max(a, SIZE);
+
+printf("max = %d\n", max);
+
+max = -1;
+
+printf_array(a, SIZE); //DEĞERİ DEĞİŞMEZ ADRES DÖNDÜRMEDİĞ İÇİN
+}
+
+
+-----
+
+int * get_array_max(const int * p,int size)
+{
+int * pmax = p; //dizinin ilk elemanın adresini pmax'ta sakladık, c++'da bu hata const'tan const olmayana hata olur c de uyarı mesajı verir
+//int* pmax = (int *)p; //bu şekilde yazabiliriz
+for (int i  = 1;i <size; ++i){
+if (p[i] > *pmax){
+pmax = p + i; //&p[i] bu şekilde de olabilirdi
+//pmax = (int *)p + i; //aynı şek,ilde burada da bunu yapmalıyız
+}
+}
+return pmax;
+}
 
 int main(void)
 {
 int a[SIZE];
 
-randomiize();
+randomize();
+
 int * pmax = get_array_max(a, SIZE);
 
 printf("max = %d ve dizinin % indisli elemani\n", *pmax, pmax - a);
 
+*pmax = -1; //dizinin max elemanını şimdi -1 yaptık
 }
 
-int * get_array_max(const int * p,int size)
-{
-int * pmax = (int *)p; //
-
-for (int i  = 1;i <size; ++i){
-if (p[i] > *pmax){
-pmax = &(int *)p[i];
-}
-}
-return pmax;
-}
 
 --------
 
