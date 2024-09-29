@@ -333,9 +333,107 @@ a[b]
 ptr->x
 x.y
 
-!! gereiş kalanlar r value
+!! geri kalanlar r value
+
+------------------------------------------
 
 
+!! adres döndüren bir fonksiyon otomatik ömürlü bir yerel değişkenin adresini döndürmemeli.
+
+int * get_value(void)
+{
+int x; //static olmalıydı burası, char'da olsa olmaz
+printf("bir tam sayi girin: ");
+scanf("%d", &x);
+
+return &x; //otomaitk ömürlü değişken geri dönüş değeri olarak kullanılamaz, DANGLİNG POİNTER
+}
+
+
+----------
+
+// 3 pointerda 90 değerini gösterir çünkü x değeri tekrar hayat gelmez
+
+int* get_value(void)
+{
+static int x;
+printf("bir tam sayi girin: ");
+scanf("%d", &x);
+
+return &x;
+}
+
+int main()
+{
+int* p1 = get_value();
+int* p2 = get_value();
+int* p3 = get_value();
+
+printf("%d\n", *p1);
+printf("%d\n", *p2);
+printf("%d\n", *p3);
+
+}
+
+----------
+
+int * foo(int * p)
+{
+++* p;
+return p;
+}
+//main içinde tanımalndığı için, x1tanımsız davranış yoktur
+int main(void)
+{
+int x = 99;
+int * ptr = foo(&x);
+printf("*ptr = %d\n", *ptr); //cevap = 100
+}
+
+-----------
+
+int* foo(void)
+{
+int x = 10;
+int* p = &x;
+
+return p; //hatalı x'in adresini döndürür ancak x otomatik ömürlü
+}
+
+-----------
+
+int* foo(int *ptr)
+{
+int* p = ptr;
+
+return p; //bu şekilde hata olmaz, ptr döndürür çünkü
+}
+
+------------
+
+adres döndüren bir fonksiyon :
+
+a) statik bir ömürlü nesnenin adresini döndürebilir
+  -global bir değişkenin adresi
+  -static yerel bir değişkenin adresi
+  -string literalleri
+
+b) dinamik ömürlü bir nesne adresi 
+
+c) fonksiyon çağıran koddan aldığı adresi çağıran koda geri döndürebilir
+
+-------------
+
+!! const nesne  adresi türünden örneğin T bir tür olmak üzere
+const T * türünden const olmayan nesne türüne yani örneğin T* türüne 
+
+a) c++ dilinde örtülü dönüşüm yoktur
+b) c dilinde böyle bir dönüşüm örtülü olarak yapılır ancak bir önlem alınmaz ise kodun okuyucusu bu dönüşüm yanlışıkla yapıldığını dönüşür
+C derleyicilerinde böyle bir örtülü dönüşüm yapılması durumunu şüpheyle karşılayarak uyarı mesajı verirler
+
+C dilinde böyle dönüşümleri bilerek istiyerek yapıyor isek mutlaka ve mutlaka tür dönüştürme operatörünü (type - cast) kullanmalıyız
+
+---------------
 
 
 
