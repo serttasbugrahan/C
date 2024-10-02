@@ -2,25 +2,42 @@
 
 NULL pointer ne işe yarıyor ?
 
+
 adres döndüren fonksiyonlar
 ---------------------------
 
 başarılı veya başarıs olma durumuna göre NULL pointer döndüren fonksiyonlar :
--FILE * fopen(...)
--void * malloc
--char * setlocal
+
+-FILE * fopen(...) //başarısız olursa NULL pointer döndürücem
+-void * malloc //başarısız olurs NULL pointer
+-char * setlocal //başarısız olurs NULL pointer
 
 int main(void) //NULL pointer en çok kullanıldığı yer
 {
+FILE* f;
 FILE * fopen("bilgin.txt", "r");
 if (f == NULL) //!f yazılabilinir{ 
 fprintf(stderr, "cannot open file!\n");
 return 1;
 }
 printf("file opened!\n");
+
+fclose(f);
 }
 
 ------
+
+int main(void)
+{
+size_t n;
+
+int* iptr = (int*)malloc(n * sizeof(int));
+if (!iptr) {
+fprintf(stderr, "cannot allocate memory'\n");
+return 1;
+}
+}
+--------
 
 arama fonksiyonları :
 
@@ -43,7 +60,7 @@ printf("BİR YAZİ GİRİN : ");
 sgets(str);
 
 char * p = strchr(str, 'a');
-if (!p) {
+if (!p) { //NULL ise
 printf("yazida a karakteri yok\n");
 }
 else {
@@ -61,7 +78,7 @@ eğer aranan değer dizide yok ise NULL pointer döndürücek
 int * search_in_array(const int * p, int size, int key){
 for (int i = 0; i < size; ++i){
 if (p[i] == key)
-return (int*)p + i//&p[i]
+return (int*)p + i// (int*)&p[i]
 }
 return NULL;
 }
@@ -90,9 +107,14 @@ printf("aranan deger bulunamadi\n");
 }
 }
 
+--------------------------------------- 
+
+void bir türdür
+
 !! bir değişkenin tipi void olamaz void x
 !! bir diznin elemanlarının türü void türü olamaz
 !! bir ifadenin türü void olabilir
+
 türü void olan ifadeler :
 
 void baz(int);
@@ -107,7 +129,7 @@ if (baz(12)) //geri dönüş türü void olan ifade kontrolde kullanılamaz
 
 int main(void)
 {
-(void)foo(12); //bilerek discard edilirse kullanılır
+(void)foo(12); //fonksiyonun geri dönüş değerini kullanmak istemessem, bilerek discard edilirse kullanılır
 }
 
 
@@ -127,10 +149,9 @@ bana NULL pointer geçersen şu işi yaparım
 
 !! pointer paramtereye gelen NULL pointerı belgele 
 
-
 a) bir fonksiyonun geri dönüş değeri adres ise NULL pointer döndürme ihtimali var mı diye bak
 
-b) eğer NULL pointer geçersem hata verir mi diye konrol et
+b)parametresi pointer olanlar için  eğer NULL pointer geçersem hata verir mi diye konrol et
 
 
 ------------------------------
@@ -141,6 +162,32 @@ Pointer dangling hale geldiğinde NULL pointer yapılır
 
 -------------------------------
 
+
+
+int main(void)
+{
+int* ptr;
+
+if (1) {
+int x = 12;
+
+ptr = &x;
+*ptr = 2453; 
+} //burada ömrü biter
+
+int ival = *ptr; //dangling pointer olur, 
+}
+
+--------------
+
+defensive programming
+
+//bir pointer dangling hale geldiğinde
+//dikkat çeksin diye
+ptr = NULL //yaparız
+
+--------------
+
 int main(void)
 {
 int * ptr = NULL;
@@ -150,6 +197,8 @@ ptr = nesne adresi
 }
 if (ptr)
 }
+
+--------------
 
 ======================================================
 
