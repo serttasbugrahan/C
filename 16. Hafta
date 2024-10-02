@@ -201,6 +201,8 @@ if (ptr)
 --------------
 
 ======================================================
+size_t : 
+-------- 
 
 sum_array(const int * p, size_t size); //int yerine size_t kullan
  
@@ -230,7 +232,7 @@ putchar('\n');
 
 void sputs(const char * p)
 {
-while (*p)
+while (*p) //*p != '\n'
 putchar(*p++);
 putchar('\n');
 }
@@ -260,6 +262,21 @@ int main(void)
 {
 char str[SIZE] = "deneme bugra dene";
 printf("%d\n", str_count(str, 'u'));
+}
+
+
+------------------
+
+bir yazıyı bir yerden bir yere kopyalacayack 
+
+void copy_str(char* pdest, const char* psource);
+
+int maim()
+{
+char soruce[1000];
+char dest[20];
+
+copy_str(dest,source);  
 }
 
 ----------------------------------------
