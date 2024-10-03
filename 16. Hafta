@@ -961,13 +961,104 @@ bir string literali göndermeyin
 
 !! ancak paramteresi const char *  olan bir fonksiyona string literai göndermenizde sakınca yoktur
 
+-------------
+
 int main(void)
 {
+
+char name[SIZE];
+
+printf("isminizi giriniz: ");
+scanf("%s", name);
+
+if (!strcmp(name, "alican")) {
+printf("hos geldiniz alican\n");
+}
+else {
+printf("sen alican degilsin, mekana giremessin\n");
+}
+
+-------------
+
+int main(void)
+{
+
+char name[SIZE];
+
+printf("isminizi giriniz: ");
+scanf("%s", name);
+
+strcat(name, "can");
+printf("artik isminiz %s oldu\n", name); //ub yok
+}
+
+---------------
+
+int main(void)
+{
+const char* p = "murat";
+
+*p = 'S'; //c'de sentax hatası değil ancak ub olur o yüzden const kullan
+
+}
+
+--------------
+
+!! tüm zamanların en çkok sorulan mülakat sorularından
+
+int main()
+{
+char str[] = "bilgin";
+
+str[0] = 'y';  // burada ub yok burası çok önemli
+}
+
+--------------
+!! 
+
+int main()
+{
+char* p = "bircan";
+char str[] = "necati";
+
+p[3] = 's'; // UB
+str[2] 'm'; // LEGAL
+
+}
+
+---------------
+!! unspecified behavier (ne olacağı belli değil)
+
+int main()
+{
+char* p1 = "furkan"; //1ac4
+char* p2 = "furkan"; //1ac4 
+
+if (p1 == p2)
+printf("evet esit!!!\n");
+else
+printf("hayir esit degil!!!\n");
+
+}
+
+---------------
+
+int main()
+{
+char* psw = "purple rain";
+
+if (psw == "purple rain") {
+
+}
+}
+
+--------------
+
 char str[] = "bugra"; //1 tane değişken oluşturuldu
 str[0] = 'y'; hata olmaz
 char * p = "bugra"; //2 tane değişken oluşturuldu
 p[0] = 's'; //hata olur
-}
+
 
 
 
