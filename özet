@@ -435,6 +435,62 @@ C dilinde böyle dönüşümleri bilerek istiyerek yapıyor isek mutlaka ve mutl
 
 ---------------
 
+int main()
+{
+char str[] = "bilgin";
+
+str[0] = 'y';  // burada ub yok burası çok önemli
+}
+
+
+int main(void)
+{
+const char* p = "murat";
+
+*p = 'S'; //c'de sentax hatası değil ancak ub olur o yüzden const kullan, C++ 'da hata olur
+
+}
+
+
+-----------------
+
+int main(void)
+{
+char * p = "murat";
+printf("[1] %zu\n", sizeof(p)); //4 cevabı çıkar, derleyiceye bağlı
+printf("[2] %zu\n", sizeof(*p)); //1
+printf("[3] %zu\n", sizeof("murat")); //6 (murat\0)
+printf("[3] %zu\n", sizeof(p++)); //4, sizeof işlem üretmez
+printf("[3] %zu\n", strlen(p)); //5 
+}
+
+------------------
+
+char str[100] = "seyfullah";
+printf("%zu %zu\n", sizeof(str), strlen(str)); //100 9
+printf("%zu %zu\n", sizeof str, strlen(str)); //100 9(aynı anlama gelir)
+printf("%zu %zu\n", sizeof "mert", strlen("mert")); //5(dizinin boyutu) 4(yazının uzunluğu)
+
+------------------
+
+int main(void)
+{
+char str[100] = "murat";
+str = '\0'; //boş yazı yapar
+str[0] = '\0'; //boş yazı yapar
+}
+
+---------------
+
+
+
+
+
+
+
+
+
+
 
 
 
