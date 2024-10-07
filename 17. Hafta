@@ -20,12 +20,12 @@ printf("dosya ismini girin: ");
 scanf("%s", old_file_name);
 
 strcpy(new_file_name, old_file_name);
-//printf("[%s] ==> [%s]\n", old_file_name, new_file_name);
+printf("[%s] ==> [%s]\n", old_file_name, new_file_name);
 
 //eger dosya isminin uzantısı yok ise uzantısını txt yapan kodu yazınız
 //ali ==> ali.txt
 char * p = strrchr(new_file_name, '.');
-if (p == NULL){
+if (p == NULL){ //!p
 strcat(new_file_name, ".txt");
 printf("[%s] ==> [%s]\n", old_file_name, new_file_name);
 
@@ -35,6 +35,7 @@ else if(!strcmp(p, "gif")){
 strcpy(p, ".jpg");
 printf("[%s] ==> [%s]\n", old_file_name, new_file_name);
 }
+
 //eger dosyanın uzantısı .dat ise dosyaın uzantısını kaldırın
 else if(!strcmp(p, ".dat")){
 *p = '\0';
@@ -44,16 +45,19 @@ printf("[%s] ==> [%s]\n", old_file_name, new_file_name);
 
 ----------------------------------------
 
+
+
 int main(void)
 {
 char * p = "murat";
-printf("[1] %zu\n", sizeof(p)); //4 cevabı çıkar
+printf("[1] %zu\n", sizeof(p)); //4 cevabı çıkar, derleyiceye bağlı
 printf("[2] %zu\n", sizeof(*p)); //1
 printf("[3] %zu\n", sizeof("murat")); //6 (murat\0)
-printf("[3] %zu\n", sizeof(p++)); //4
+printf("[3] %zu\n", sizeof(p++)); //4, sizeof işlem üretmez
 printf("[3] %zu\n", strlen(p)); //5 
-
 }
+
+------------------
 
 int main(void)
 {
@@ -89,20 +93,38 @@ str = '\0'; //boş yazı yapar
 str[0] = '\0'; //boş yazı yapar
 }
 
+
+
 int main(void)
 {
 printf("\10123\06223"); //A23223
 }
 
----------
+--------------------------------
+
 string literallerini birden fazla satıra yayma :
+------------------------------------------------
+
+\ : alt satıra geçmemizi sağlar 
 
 int main(void)
 {
 const char * p = "su an icin istediginizi yerine getiremiyoruz lutfen devam etmek\
 icin bir tusa basin";
 puts(p);
-\ : alt satıra geçmemizi sağlar 
+}
+
+----------------
+//bu şekilde de yapılırdı 
+
+int main(void)
+{
+printf("[1] Kayit ekle\n"
+"[2] Kayit sil\n"
+"[3] Kayit ara\n"
+"[4] Kayit yenile\n"
+"[5] Kayit cik\n"
+);
 }
 
 
