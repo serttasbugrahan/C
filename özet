@@ -482,11 +482,45 @@ str[0] = '\0'; //boş yazı yapar
 
 ---------------
 
+- *p[1] pointer dizisinin 1 indisli elemanının gösterdiği nesne
+- p[1][2] pointer dizisinin 1 indisli elemanının gösterdiği dizinin 2 indisli elemanı
+
+-------------
+
+pointer söz konusu olmadığı sürece const önce veya sonra gelmesi arasında fark yoktur
+
+int main()
+{
+const int a[5] = {12, 54,23,254,76};
+int const a[5] = {12, 54,23,254,76};
+}
+
+
+-----------
+
+int a = 1, b = 2, c = 4;
+
+int main(void)
+{
+int * const p[3] = {&a, &b, &c}; //bu şekilde olunca dizinin elemanlarının değiştimek hata
+p[2] = &ival; //syntax hatası
+*p[2] = 456; //adrese atamama yapmak hata değil
+}
+
+-----------
+
+int a = 1, b = 2, c = 4;
+
+int main(void)
+{
+const int * const p[3] = {&a, &b, &c}; 
+p[2] = &ival; //değer değiştirmek hata
+*p[2] = 333; //adrese atamama yapmak hata}
 
 
 
 
-
+--------------
 
 
 
