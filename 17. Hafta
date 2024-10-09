@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////1. Ders///////////////////////////////////////////////
+F///////////////////////////////////////////////////////1. Ders///////////////////////////////////////////////
 
 int main(void)
 {
@@ -138,8 +138,8 @@ char *
 
 int main(void)
 {
-int a1[50] 
-int * a2[50]; 
+int a1[50]; //elemanları şnt olan
+int * a2[50];  //elemanları pointer int olan
 }
 
 -----
@@ -169,10 +169,14 @@ int d = 78;
 
 int main(void)
 {
-int * p[] = {&a, &b, &c, &d};
+int * p[] = {&a, &b, &c, &d}; //bu kod doğru şekilde çalışır herhangi bir sıkıntı yok
 }
 
 -----
+int a = 10;
+int b = 20;
+int b = 40;
+int d = 78;
 
 int main(void)
 {
@@ -180,12 +184,13 @@ int * p[] = {&a, &b, &c, &d};
 
 *p[1] = 99; //b 99 olur
 ++*p[2]; //c'nin değeri 1 artar
-++**p //a'nın değeri 1 artar
+++**p //a'nın değeri 1 artar, ++(*(*p)) aynı anladma
 
 
 }
 
 ---------
+//mülakatlarda sık sorulan bir soru
 
 int a[] = {1,2, 3}
 int b[] = {10 ,20, 30}
@@ -222,9 +227,9 @@ p[1][2]++; //b dizisnin 2 indisli değerini 1 arttırır
 
 int main(void)
 {
-char * p[] = {"ahmet", "hakki", "deniz", "erdem", "tan"};
+char * p[] = {"ahmet", "hakki", "deniz", "erdem", "tan"}; //dizinin elemanları string literallerini gösterir
 for (int i = 0; i < 5; ++i){
-printf("%s\n", p[i]);
+printf("%s\n", p[i]); //puts(p[i])
 }
 }
 
@@ -232,12 +237,7 @@ printf("%s\n", p[i]);
 
 int main(void)
 {
-const char * pmnos[] = {
-"ocak",
-"subat",
-"mart",
-"nisan"
-};
+const char * pmnos[] = {"", "ocak", "subat", "mart", "nisan", "mayis", "haziran", "temmuz", "agustos", "eylul", "ekim", "kasim", "aralik"};
 
 for (size_t i = 0; i < asize(pmons); ++i){
 printf("%s\n", pmons[i]);
@@ -254,7 +254,7 @@ printf("yilin %d. ayi %s\n", n, pmons[n - 1]);
 
 int main(void)
 {
-const char * pmnos[] = {"ocak","subat","mart","nisan"};
+const char * pmnos[] = {"", "ocak", "subat", "mart", "nisan", "mayis", "haziran", "temmuz", "agustos", "eylul", "ekim", "kasim", "aralik"};
 
 char entry[4];
 
@@ -277,16 +277,36 @@ printf("%s gecerli bir ay  degıl\n", entry);
 
 -----------
 
+pointer söz konusu olmadığı sürece const önce veya sonra gelmesi arasında fark yoktur
+
+int main()
+{
+const int a[5] = {12, 54,23,254,76};
+int const a[5] = {12, 54,23,254,76};
+}
+
+-----------
+
 int a = 1, b = 2, c = 4;
 
 int main(void)
 {
-int * const p[3] = {&a, &b, &c};
+int * const p[3] = {&a, &b, &c}; //bu şekilde olunca dizinin elemanlarının değiştimek hata
 p[2] = &ival; //syntax hatası
-*p[2] = 456; //
+*p[2] = 456; //adrese atamama yapmak hata değil
 }
 
 -----------
+
+int a = 1, b = 2, c = 4;
+
+int main(void)
+{
+const int * const p[3] = {&a, &b, &c}; 
+p[2] = &ival; //değer değiştirmek hata
+*p[2] = 333; //adrese atamama yapmak hata}
+
+----------------
 
 int main(void)
 {
@@ -297,7 +317,15 @@ printf("içinde hnagi karakter olanlar yazilsin: ");
 
 int c = getchar();
 
+for (size_t i = 0; i <asize(p)İ ++i) {
+if (strchr(p[i], c) != NULL) {
+printf("%s ", p[i]);
+}
+}
+
+
 for (size_t i = 0;i< asize(p); ++i){
+printf("%c", p[i]); //dizinin elemanlarını yazar
 printf("%c", *p[i]); //p[i][0] //aynı anlama gelir- //iismlerin ilk harfini yazar
 printf("%c", *p[i][strlen(p[i] - 1); //dizinin son elemanını verir
 }
