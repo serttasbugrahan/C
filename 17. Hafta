@@ -342,7 +342,7 @@ printf("%c", *p[i][strlen(p[i] - 1); //dizinin son elemanını verir
   
 int main(void)
 {
-const char * p[] = {};
+const char * p[] = {"bugra", "ali", "veli"};
 
 int ch ;
 
@@ -350,7 +350,7 @@ printf("içinde hangi harf olanlar: ");
 ch = getchar();
 
 for (size_t i = 0; i < asize(p); ++i){
-if (strchr(p[i], ch)) {
+if (strchr(p[i], ch)) { //strchr null döndürmüyorsa o yazıda var
 printf("%s ", p[i]);
 }
 }
@@ -360,7 +360,7 @@ printf("%s ", p[i]);
 
 int main(void)
 {
-const char * p[] = {};
+const char * p[] = {"bugra", "ali", "veli"};
 
 char str[SIZE];
 
@@ -375,6 +375,42 @@ printf("%s", p[i]);
 }
 
 -------------------------------------
+
+bağımısz verileri fonksiyon olarak yazamk her zamana daha iyidir
+
+uniqe olanların yazılması
+
+int is_unique(const char* p);
+
+int main(void)
+{
+const char * p[] = {"bugra", "ali", "veli"};
+
+for (size_t i = 0; i < asize(p); ++i) {
+if (is_uniquek(p[i])) {
+
+}
+}
+
+--------------------
+
+int main(void)
+{
+const char * p[] = {"bugra", "ali", "veli"};
+
+char str[SIZE];
+
+printf("yazi girin: ");
+scanf("%s", str);
+
+for (int i = 0; i < asize(p); ++i) {
+if (strstr(p[i], str)) {
+printf("%s\n", p[i]);
+}
+}
+}
+
+-------------------------
 
 void func(void)
 {
