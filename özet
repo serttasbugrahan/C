@@ -519,8 +519,29 @@ p[2] = &ival; //değer değiştirmek hata
 
 
 
-
 --------------
+
+!! const char * p[] = {} //look up table için bolca kulllanıcağız, dizinin elemanlaı değişebilir
+
+!! const char * const p[] = {} //p'nin elemanlarına bir atama yapılamaz, p'nin gösterdiği nesneyi değiştiremeyiz
+
+!! char * const p[] = {} //p'nin gösterdiği nesneyi değiştiremeyiz
+
+---------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
