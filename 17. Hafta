@@ -331,7 +331,7 @@ printf("%c", *p[i][strlen(p[i] - 1); //dizinin son elemanını verir
 }
 
 
-////////////////////////////////////////////////////2. Ders////////////////////////////////////////7
+////////////////////////////////////////////////////2.Ders////////////////////////////////////////7
 
 !! const char * p[] = {} //look up table için bolca kulllanıcağız, dizinin elemanlaı değişebilir
 
@@ -411,15 +411,17 @@ printf("%s\n", p[i]);
 }
 
 -------------------------
+// aşağıdaki şekilde implemente etmek gerekir
+
+eğer statik yapmaz isek dizi tekrar oluştuğundan tekrar tekrar oluşturulacak o yüzden static yapmak gerekir
 
 void func(void)
 {
-
   static const char * const pdays[] = {
   "", //indeks ile sayma sayısının aynı olması için yapılır
   "pt",
   "sali",
-  "carsamva",
+  "carsamva", 
   "persembe",
   "cuma",
   "cumartesi",
@@ -431,6 +433,8 @@ void func(void)
 ===========================================================
 
 pointer to pointer : pointer değişkenlerin kendi adresi ile ilgilidir
+--------------------
+
 
 int main(void)
 {
