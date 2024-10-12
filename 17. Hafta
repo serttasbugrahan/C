@@ -443,10 +443,26 @@ int * ptr = &x;
 
 printf("&x = %p\n", &x); //aynı adres yazar
 printf("ptr = %p\n", ptr); //aynı adres yazar
-printf("&ptr = %p\n", &ptr); //ptr değişkenin kendi adresi
+printf("&ptr = %p\n", &ptr); //ptr değişkenin kendi adresi (pointer değişkeninin kendi adresi)
 
-&ptr türü = int**
+&ptr türü = int** //pointer to pointer to int
 }
+
+---------------
+
+int main(void)
+{
+int x = 10;
+int x = 90;
+int* ptr = &x;
+int** p = &ptr;
+
+printf("*ptr = %d\n", *ptr);
+*p = &y;
+printf("*ptr = %d\n", *ptr);
+}
+
+----------------
 
 int main(void)
 {
@@ -457,8 +473,9 @@ int ** p = &ptr;
 //**p p'nin gösterdiği nesnenin gösterdiği nesnedir
 }
 
-double dereferencing
-double indirection
+bu şekilde yapılan işlemlere double dereferencing/double indirection
+
+----------------
 
 
 int main(void)
@@ -470,10 +487,24 @@ int** ptr = &p;
 ++*p; //a dizisinin ilk elemanı 10, 1 artar
 ++* ptr; // ++p //dizinin 2. elemanın adresini gösterir
 
-
+printf("%d\n", *p); //20 yazar artık
 }
 
 ------------------------
+
+int main(void)
+{
+int a[] = {10, 20, 30, 40, 50};
+int * p = a;
+int** ptr = &p;
+
+print_array(a, 5);
+++* ptr;
+++** ptr;
+print_array(a, 5);
+}
+
+---------------------
 
 int main(void)
 {
@@ -481,6 +512,8 @@ int x = 10;
 int * p = &x;
 int ** ptr = &p;
 }
+
+//yukarıdaki ifadeye göre type ve value category yaz
 
 expression      type      value category
 ----------      ----      ---------------
@@ -499,19 +532,18 @@ ptr             int**      L
 
 pointer to pointer ne işe yarar :
 
-void foo(int**p); //beni çağıracak kod bana int* türünden bir nesnenin adresini göndermelisin
+----------
+void foo(int** p);  //burada derki beni çağıracak kod int * türünden olmalı
 
 int main(void)
 {
 int* ptr;
-//code
 
 func(ptr);
 foo(&ptr);
 }
 
-
----------------
+---------
 
 int main(void)
 {
@@ -520,18 +552,20 @@ int y = 45;
 int * p1 = &x;
 int * p2 = &y;
 
-printf("%d %d\n", *p1, *p2);
-pswap(&p1, &p2);
-printf("%d %d\n", *p1, *p2);
+printf("%d %d\n", *p1, *p2); //10 45 çıkar
 
+pswap(&p1, &p2);
+
+printf("%d %d\n", *p1, *p2);
 }
 
 void pswap(int ** ptr1, int ** ptr2)
 {
 int *ptemp = *p1;
 *ptr1 = *ptr2;
-*ptr1 = ptemp;
+*ptr2 = ptemp;
 }
+
 
 -------------
 
@@ -690,7 +724,3 @@ for (int i = 0; i < size; i++)
 printf("%s ",p[i]);
 }
 }
-
-
-
-
