@@ -529,6 +529,26 @@ p[2] = &ival; //değer değiştirmek hata
 
 ---------------
 
+// aşağıdaki şekilde implemente etmek gerekir
+
+eğer statik yapmaz isek dizi tekrar oluştuğundan tekrar tekrar oluşturulacak o yüzden static yapmak gerekir
+
+void func(void)
+{
+  static const char * const pdays[] = {
+  "", //indeks ile sayma sayısının aynı olması için yapılır
+  "pt",
+  "sali",
+  "carsamva", 
+  "persembe",
+  "cuma",
+  "cumartesi",
+  "pazar",
+};
+}
+
+----------------
+
 
 
 
