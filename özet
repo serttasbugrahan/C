@@ -547,14 +547,55 @@ void func(void)
 };
 }
 
+--------------------------------
+
+pointer to pointer
+------------------
+
+int main(void)
+{
+int x = 10;
+int * ptr = &x;
+int ** p = &ptr; 
+//*p  = ptr'ye erişilir, **p = *(*p) = x
+//**p p'nin gösterdiği nesnenin gösterdiği nesnedir
+}
+
 ----------------
 
+int main(void)
+{
+int a[] = {10, 20, 30, 40, 50};
+int * p = a;
+int** ptr = &p;
 
+++*p; //a dizisinin ilk elemanı 10, 1 artar
+++* ptr; // ++p //dizinin 2. elemanın adresini gösterir
 
+}
 
+----------------
 
+int main(void)
+{
+int x = 10;
+int y = 45;
+int * p1 = &x;
+int * p2 = &y;
 
+printf("%d %d\n", *p1, *p2); //10 45 çıkar
 
+pswap(&p1, &p2);
+
+printf("%d %d\n", *p1, *p2);
+}
+
+void pswap(int ** ptr1, int ** ptr2)
+{
+int *ptemp = *p1;
+*ptr1 = *ptr2;
+*ptr1 = ptemp;
+}
 
 
 
