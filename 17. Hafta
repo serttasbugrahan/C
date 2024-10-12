@@ -499,6 +499,20 @@ ptr             int**      L
 
 pointer to pointer ne işe yarar :
 
+void foo(int**p); //beni çağıracak kod bana int* türünden bir nesnenin adresini göndermelisin
+
+int main(void)
+{
+int* ptr;
+//code
+
+func(ptr);
+foo(&ptr);
+}
+
+
+---------------
+
 int main(void)
 {
 int x = 10;
@@ -507,13 +521,10 @@ int * p1 = &x;
 int * p2 = &y;
 
 printf("%d %d\n", *p1, *p2);
-
 pswap(&p1, &p2);
-
 printf("%d %d\n", *p1, *p2);
 
 }
-
 
 void pswap(int ** ptr1, int ** ptr2)
 {
