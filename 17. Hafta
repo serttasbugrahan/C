@@ -585,13 +585,32 @@ func(&p);
 printf("x = %d\n",x);
 }
 
+-------------
+
+int g = 10;
+
+void func(int ** ptr)
+{
+*ptr = &g;
+}
+
+int main(void)
+{
+int x = 10;
+int* p = &x;
+
+func(&p);
+printf("x = %d\n",x); //x değeri değişir
+}
+
+
 --------------
 
 int ** foo(void);
 
 int main(void)
 {
-int ** ptr = foo();
+int ** ptr = foo(); //bu şekilde geri dönüş değeri kullanılır
 
 }
 
@@ -599,20 +618,20 @@ int ** ptr = foo();
 
 en kafa karıştıran örnek :
 
-//bir int dizinin en büyük elemanının adresini döndürücek bir fonksiyon bildirin
+//bir int dizinin hem en büyük hem en küçük elemanının adreslerin döndürücek bir fonksiyon bildirin
 
 int * get_array_min_max(const int * pa, size_t size, int ** pmin, int **pmax);
 {
 *pmin = *pmax =(int*)pa;
 for (size_t i = 1; i < size; ++i){
 if (pa[i] > **pmax){
-*pmax = (int *)&pa[i]
+*pmax = (int *)&pa[i]; //(int*)pa +i (bu şekilde de olur)
 }else if (pa[i] < **pmin){
 *pmin = (int *)&pa[i];
 }
 }
-
 }
+
 int main(void)
 {
 int a[SIZE];
@@ -623,7 +642,7 @@ print_array(a, SIZE);
 int * ptr_min;
 int * ptr_max;
 
-get_array_min_max(a, SIZE, &ptr_min, &ptr_max);
+get_array_min_max(a, SIZE, &ptr_min, &ptr_max); //değişken *ptr_min ile tanımlandığı için, int** pmin ile çağrılır
 
 printf("min = %d ve min index = \n", *ptr_min, ptr_min - a);
 printf("max = %d ve max index = \n", *ptr_max, ptr_max - a);
@@ -633,6 +652,35 @@ print_array(a, SIZE);
 }
 
 ---------------
+
+öyle bir fonksiyon olsun ki dizi üstünde çalışsın
+
+void foo(int** ptr, int size)
+{
+for (int i = 0; i < size; ++i) {
+ptr[i]
+}
+}
+//2 şekilde de olur
+void foo2(int** ptr, int size)
+{
+while (size--) {
+*ptr 
+
+}
+}
+
+int main(void)
+{
+int* p[10];
+//code
+
+foo(p, 10);
+foo(&p[0], 10);
+}
+
+
+--------------------
 
 void printf_names(char ** ptr, size_t size)
 {
@@ -645,7 +693,7 @@ printf("\n\n");
 
 int main(void)
 {
-const char* p[] = {}
+const char* p[] = {"ali", "veli", "mehmet", "can", "deniz"}
 
 print_names(p, asize(p));
 
@@ -655,27 +703,26 @@ print_names(p, asize(p));
 
 int main(void)
 {
-char * p[] = {}
+const char* p[] = {"ali", "veli", "mehmet", "can", "deniz"}
 
-//alfabetik sıraya göre sıralaayan algoritma
-for(size_t i = 0; i < size - 1; ++i){
-for (size_t k = 0; k < size(p) - 1 - i; ++k){
+//alfabetik sıraya göre sıralaayan algoritma (bubble sort)
+for(size_t i = 0; i < asize - 1; ++i){
+for (size_t k = 0; k < asize(p) - 1 - i; ++k){
 if (strcmp(p[i], p[i + 1]) > 0){
 char * ptemp = p[k];
 p[k] = p[k + 1];
 p[k + 1] = ptemp;
 }
 }
-
-for (int i = 0; i < size; i++)
-{
-printf("%s ",p[i]);
 }
+
+for (size_t i = 0; i < asize(p); ++i) {
+printf("%s ", p[i]);
 }
 
 ------------------
 
-// yazıları yazının uzunluğuna göre eğer aynı uzunlukta ise alfabeye göre sırala
+// yazıları yazının uzunluğuna göre eğer aynı uzunlukta ise alfabeye göre sırala (kısa olanlar başta)
 
 int main(void)
 {
