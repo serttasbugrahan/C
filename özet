@@ -598,10 +598,62 @@ int *ptemp = *p1;
 }
 
 
+----------------------------------
+
+// pointer to pointer için güzel bir örnek
+
+int * get_array_min_max(const int * pa, size_t size, int ** pmin, int **pmax);
+{
+*pmin = *pmax =(int*)pa;
+for (size_t i = 1; i < size; ++i){
+if (pa[i] > **pmax){
+*pmax = (int *)&pa[i]; //(int*)pa +i (bu şekilde de olur)
+}else if (pa[i] < **pmin){
+*pmin = (int *)&pa[i];
+}
+}
+}
+
+int main(void)
+{
+int a[SIZE];
+
+randomize();
+set_array_random(a, SIZE);
+print_array(a, SIZE);
+int * ptr_min;
+int * ptr_max;
+
+get_array_min_max(a, SIZE, &ptr_min, &ptr_max); //değişken *ptr_min ile tanımlandığı için, int** pmin ile çağrılır
+
+printf("min = %d ve min index = \n", *ptr_min, ptr_min - a);
+printf("max = %d ve max index = \n", *ptr_max, ptr_max - a);
+
+swap(ptr_min, ptr_max); //swap hazır fonk. dizinin en büyük elemanı ile en küçük elemanının swap edilmesi
+print_array(a, SIZE);
+}
 
 
+---------------------
 
+pointer to pointer için güzel örnek
 
+void printf_names(char ** ptr, size_t size)
+{
+for (size_t i = 0; i < size; ++i){
+printf("%s ", ptr[i]);
+}
+printf("\n\n");
+
+}
+
+int main(void)
+{
+const char* p[] = {"ali", "veli", "mehmet", "can", "deniz"}
+
+print_names(p, asize(p));
+
+}
 
 
 
