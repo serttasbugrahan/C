@@ -655,6 +655,120 @@ print_names(p, asize(p));
 
 }
 
+---------------------
+
+
+!! const ne'den önce gelirse const olan o dur
+
+!! int * const p = &x; //p'ye atama yapılmaz
+
+!! int const *  p = &x; //*p'ye atama yapılmaz
+
+----------------------
+
+void func(int * p); //aynı anlamdadır
+void func(int p[]); //aynı anlamdadır
+
+void func(int p[10]) //aynı anlamda derleyici içini boş görür
+void func(int p[]) // aynı anlamda derleyici içini boş görür
+
+void func(int ** p); //aynı anlamdadır
+void func(int * p[]); //aynı anlamdadır
+
+
+======================================================================
+
+void pointer
+------------
+
+int main(void)
+{
+int x = 12;
+void * vp = &x;
+
+int * iptr = vp; //void* ===> int *, c'de hata olmaz c++ hata olur
+int * iptr = (int *)vp; //c++'da böyle legal olur c'dede böyle yazabilirsin
+}
+
+
+------------
+
+aşağıdaki durumlar legaldir
+
+!!aynı tam sayı türünün işaretlisi veya işaretsizi tanımsız davranış olmaz
+
+
+int main()
+{
+unsigned int x = 10u;
+int* ptr = (int*)&x;
+}
+
+
+char* türlerine olan dönüşüm, herhangi bir nesne char'lardan oluşan b,r tür gibi kullanılabilir
+
+int main()
+{
+double dval = 12873425;
+char* p = (char*)&dval;
+}
+
+---------------
+
+//türden bağımısız generic bir koddur, 
+
+
+!! aşağıdaki şekilde void kullanmka ve char'a dönüştürme generic bir kod yazmamızı sağlar
+
+
+void gswap(void * vp1, void* vp2, size_t sz)
+{
+char * p1 = (char *)vp1;
+char * p2 = (char *)vp2;
+
+while (sz--){
+char temp = *p1;
+*p1++ = *p2;
+*p2++ = temp;
+}
+}
+
+int main(void){
+int x = 10, y = 45;
+double d1 = 4.587123;
+double d2 = 2.981555;
+
+int a[5] = {1, 2, 3, 4, 5};
+int b[5] = {-1, -2, -3, -4, -5};
+
+printf("x = %d  y = %d\n", x, y);
+printf("d1 = %f  d2 = %f\n", d1, d2);
+print_array(a, 5);
+print_array(b, 5);
+
+
+gswap(&x, &y, sizeof(int));
+gswap(&d1, &d2, sizeof(double));
+gswap(a, b, sizeof(a));
+
+printf("x = %d  y = %d\n",x, y);
+printf("d1 = %f  d2 = %f\n",d1, d2);
+printf_array(a, 5);
+print_array(b, 5);
+}
+
+-------------------
+
+
+
+
+
+
+
+
+
+
+
 
 
 
