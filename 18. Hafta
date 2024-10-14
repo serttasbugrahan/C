@@ -6,10 +6,34 @@
 
 !! int const *  p = &x; //*p'ye atama yapılmaz
 
+int main(()
+{
+int x = 10;
+int y = 20;
+int* p1 = &x;
+
+}
+
+---------------------
+
+int main(()
+{
+int x = 10;
+int y = 20;
+int* p1 = &x;
+int* p2 = &y;
+
+int* const * ptr = &p1;
+}
+
+-----------------
 
 void func(int * p); //aynı anlamdadır
 void func(int p[]); //aynı anlamdadır
- 
+
+void func(int p[10]) //aynı anlamda derleyici içini boş görür
+void func(int p[]) // aynı anlamda derleyici içini boş görür
+
 void func(int ** p); //aynı anlamdadır
 void func(int * p[]); //aynı anlamdadır
 
@@ -18,14 +42,40 @@ void func(int * p[]); //aynı anlamdadır
 ======================================================================
 
 void pointers:
+---------------
+
+void incomplite type'dır,
+
+void struct //olaamz hata
+
+--------------
 
 //hem c' de hem c++'da ifadenin türü void olabilir
+
+----------------
+
+void func();
+void foo(void); //cpp'de fark yoktur, 
+
+--------------
+
+(void)foo(4); //GERİ DÖNÜŞ DEĞERİNİ DİSCARD ETTİM DEMEKTİR
+
+-----------------------------------
+
+int main()
+{
+void* vptr; //ben herhangi bir türden değerin adresini tutabiliriz
+
+}
+
+
+--------------
 
 int main(void)
 {
 void x; //hata
 void a[]; //hata
-
 }
 
 int main(void)
@@ -60,15 +110,28 @@ vptr - 2 //geçersiz
 
 -----------------------------
 
+int main()
+{
+int a[] = {3,4,8,7,5};
+
+void* vp1 = a;
+void* vp2 = a + 3;
+
+vp2 - vp1; //geçersiz
+}
+
+-------------------
+
 void pointer ile neler yapılır : 
 
+int x = 12;
 vptr = &vptr 
 void * vptr = 0;
 void * vptr = NULL;
 void * vp = &x;
 
 if (vp != NULL)
-if(vp)
+if(vp) 
 if (vp == NULL)
 if (!vp)
 
@@ -77,6 +140,8 @@ void * vp2 = &dval;
 if (vp1 = vp2)
 if (vp1 = &x)
 if (vp2 = &dval)
+
+-------------------
 
 int main(void)
 {
@@ -90,12 +155,33 @@ int * iptr = (int *)vp; //c++'da böyle legal olur c'dede böyle yazabilirsin
 
 --------
 
+aşağıdaki durumlar legaldir
+
 !!aynı tam sayı türünün işaretlisi veya işaretsizi tanımsız davranış olmaz
 
 
+int main()
+{
+unsigned int x = 10u;
+int* ptr = (int*)&x;
+}
 
------------------- KAYDI YOK BU KISMIN HOCA UNUTTU--------------------------------,
+-----------
 
+char* türlerine olan dönüşüm, herhangi bir nesne char'lardan oluşan b,r tür gibi kullanılabilir
+
+int main()
+{
+double dval = 12873425;
+char* p = (char*)&dval;
+}
+
+----------
+
+
+------------------ KAYDI YOK BU KISMIN, HOCA UNUTTU--------------------------------,
+
+//türden bağımısız generic bir koddur, 
 
 void gswap(void * vp1, void* vp2, size_t sz)
 {
@@ -109,7 +195,8 @@ char temp = *p1;
 }
 }
 
-int main(void){
+int main(void) 
+{
 int x = 10, y = 45;
 double d1 = 4.587123;
 double d2 = 2.981555;
@@ -139,7 +226,8 @@ print_array(b, 5);
 
 #define SIZE 100
 
-void g_reverse_array(void * vpa, size_t size, size_t sz){
+void g_reverse_array(void * vpa, size_t size, size_t sz)
+{
 char * p =(char*)vpa;
 
 for (size_t i = 0; i < size / 2; ++i){
@@ -162,6 +250,9 @@ g_reverse_array(a, SIZE, sizeof(*a);
 //g_reverse_array(a, SIZE, sizeof(int);
 
 double ar[] = {1.21, 2.31, 3.45, 4.98, 5.12, 6.1, 7.7, 8.5};
+
+for (size_t i = 0; i < asize(ar); ++i)
+printf("%f ", ar[i]);
 
 g_reverse_array(ar, asize(ar), sizeof(*ar));
 
@@ -215,6 +306,8 @@ char * p = strchr(str, 's');
 if (p != NULL){
 memset(p, '!', 3);
 }
+
+puts(str);
 }
 
 -----
