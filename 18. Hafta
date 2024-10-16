@@ -519,6 +519,9 @@ return 0;
 
 ---------------------
 
+generic bir arama fonksiyonu :
+------------------------------
+
 void * search_array(const void * vpa, size_t size, size_t sz, const void* vpkey);
 {
 const char * p = (const char *)vpa; //dönüştürme olmadanda çalışır sen yaz ama
@@ -542,7 +545,7 @@ int ival;
 printf("aranan değeri girin: ");
 scanf("%d", &ival);
 
-int *p = (int*)search_array(a, SIZE, sizeof(int), &ival
+int *p = (int*)search_array(a, SIZE, sizeof(int), &ival); //tür değiştirme opsiyonel
 if (p){
 printf("bulundu... dizinin %d indisli elemani\n", p - a);
 }
@@ -553,10 +556,14 @@ printf("bulunamadi\n");
 
 --------------------------------------------------------------------
 
+bir fonksiyondan bir fonksiyona fonksiyon geçiçez, programlamada çok kullanılır, call back yapısı
+aslında bir fonksiyonun adresini göndereceğiz
+
+
 int main(void)
 {
-// void * vp;
-// &vp ==> void**
+// void * vp; //adres olsunda ne olursa olsun, o adresteki nesneni türünü bilmesine gerek yok
+// &vp ==> void** //generic değildir, void * türünden bir nesnenin adresidir
 
 void * vp = &x;
 void ** vptr = &vp;
@@ -565,9 +572,9 @@ void ** vptr = &vp;
 
 ----
 
-void func(void ** p)
+void func(void ** p) //bu şekilde olması gerekir, void **
 {
-*p = &
+*p = & //*p ptr demektiri, herhangi bir atama yapabilriz çünkü generictir
 }
 
 int main(void)
