@@ -690,6 +690,8 @@ int * iptr = vp; //void* ===> int *, c'de hata olmaz c++ hata olur
 int * iptr = (int *)vp; //c++'da böyle legal olur c'dede böyle yazabilirsin
 }
 
+!! voişd * : türsüz pointer diyebiliriz, generic kodlar yazmak istediğimizde kullanabiliriz, dönüştürmek gerekir ama
+
 
 ------------
 
@@ -757,7 +759,29 @@ printf_array(a, 5);
 print_array(b, 5);
 }
 
--------------------
+=================================
+
+function pointers
+-----------------
+
+int main(void)
+{
+void * vp; //adres olsunda ne olursa olsun, o adresteki nesneni türünü bilmesine gerek yok
+&vp ==> void** //generic değildir, void * türünden bir nesnenin adresidir
+}
+
+----------
+
+void func(void ** p) //bu şekilde olması gerekir, void **
+{
+*p = & //*p ptr demektiri, herhangi bir atama yapabilriz çünkü generictir
+}
+
+int main(void)
+{
+void* ptr;
+func(&ptr);
+}
 
 
 
