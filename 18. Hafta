@@ -632,12 +632,12 @@ endianness
 00000000 00000000 00000000 00001111
 
 big endian
-1A00  00000000
+1A00  00000000 ( dusuk anlamlı byte yuksek sayısal adreste yuksek anlamlı byte dusuk sayısal adreste)
 1A01  00000000
 1A02  00000000
 1A03  00001111
 
-little endian
+little endian ( dusuk anlamlı byte dusuk sayısal adreste yuksek anlamlı byte yuksek sayısal adreste)
 1A00  00001111
 1A01  00000000
 1A02  00000000
@@ -661,10 +661,15 @@ printf("big endian");
 ======================================================
 
 function pointers :
+------------------
+
+bir fonksiyonun adresi olan tür fonksiyonun parametrik yapısı ve geri dönüş değerinden elde edilen bir tür
 
 int foo(int);
 
 !! foo fonksiyonunun türü ---> int(int)
+
+!! char* strchr(const char*, int c) ---> char*(const char *, int)
 
 double bar(double) //double(double)
 strrchr //char*(const char *, int)
@@ -674,17 +679,21 @@ fonksiyon türü           fonksiyonun adresi türü
 int (int)                int (*)(int)
 double (double, double)  double (*)(double, double)
 
-Peki, bir fonksiyon adresi nasıl elde edilir :
+Peki, bir fonksiyon adresi nasıl elde edilir? 
 
 int foo(int);
 double bar(double);
 
-int main(void)
+int main(void) 
 {
-&bar
+&bar 
+bar // bu şekilde de kullanılabilir
 &foo
 &strcmp
 }
+
+
+----------------
 
 !! function to pointer convertion: Bir fonksiyonun ismi bir ifade içinde herhnagi bir operatörün operandı olmadan kullanılsada derleyici
 fonksiyonun ismini adresine dönüştürür. (foo, &foo)
@@ -699,7 +708,7 @@ size_t strlen(const char *);
 
 int main(void)
 {
-size_t (*fp)(const char *) = &strlen;
+size_t(*fp)(const char *) = &strlen;
 size_t(*fp)(const char*) = strlen; //aynı anlama gelir
 
 }
@@ -712,7 +721,8 @@ int sum(int,int int);
 int main(void)
 {
 int (*fptr)(int, int, int) = &sum;
-fptr = &bar; //bar (aynı anlama gelir);
+fptr = &bar; 
+fptr = bar (aynı anlama gelir);
 }
 
 ------------
@@ -780,7 +790,7 @@ fp = &f3;
 
 ---------------
 
-void f1(void)
+void func(void)
 {
 printf("func called!");
 }
@@ -791,7 +801,7 @@ void (*fp)(void) = &func;
 fp();
 (*fp)() //bu şekilde de çağırılanabilinir, !!function pointer vurgusu için yapılır
 }
-
+ 
 -----------------
 
 void func(int (*x)(int));
@@ -809,11 +819,14 @@ func(f3);
 
 ----------------
 
+!! ikisi arasında fark vardır
+
 func(foo()) //foo'nun geri dönüş değeri ile func çağrılır
 
-func(foo) //func'a foo'yu çağırmak
+func(foo) //func'a foo'yu çağırtmak
 
 ---------------
+
 // aynı anda birçok işlev yaptırmak için kullanılınır
 
 void foo(void)(*fp)(void))
@@ -829,6 +842,7 @@ printf("f1 called!");
 }
 
 void f2(void)
+ 
 {
 printf("f1 called!");
 }
@@ -859,8 +873,8 @@ printf("\n");
 
 int main(void)
 {
-print_test(isupper);
-print_test(islower);
+print_test(isupper); //uzun uzadıya yapmak yerine bu şekilde fonksiyona yaptırırız
+print_test(islower); //&isloer //arasında fark yoktur
 print_test(isalpha);
 
 }
