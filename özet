@@ -817,11 +817,11 @@ int foo(int);
 
 !! char* strchr(const char*, int c) ---> char*(const char *, int)
 
+
 fonksiyon türü           fonksiyonun adresi türü
 --------------           -----------------------
 int (int)                int (*)(int)
 double (double, double)  double (*)(double, double)
-
 
 
 !! int (*fp)(int); //sadece parametresi int olanı tutar
@@ -880,6 +880,10 @@ fp();
 }
 
 -----------------------
+void func(int (*x)(int))
+{
+x();
+}
 
 int f1(int);
 int f2(int);
