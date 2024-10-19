@@ -5,22 +5,25 @@ functions pointers devam...
 fonksiyon çağırtma 
 
 standart qsort fonskiyonu : functions pointer parametreli fonksiyon
+
 --------------------------
 
 <stdlib.h>
 
 void qsort(void *vpa, size_t size, size_t sz, int (*fp)(const void *, const void*));
 
-dizinin adresi - sıralanıcak dizinin boyutu - dizinin 1 elemanının boyut - fonsksiyon
+dizinin adresi - sıralanıcak dizinin boyutu - dizinin 1 elemanının sizeof - fonksiyon
 
 int mycmp(const void* vp1, const void* vp2)
 {
-  int x = *(const int*)vp1;
+  int x = *(const int*)vp1; //const int * 'a dönüşütürülüp o adrese erişilir burada
   int y = *(const int*)vp2;
   
-  int resılt = x % 2 != 0 && y % 2 == 0 || (x % 2 == y % 2) && x > y 
+  int result = x % 2 != 0 && y % 2 == 0 || (x % 2 == y % 2) && x > y 
 
+  //return *(const int*)vp1 - *(const int*)vp2; // bu şekilde taşma olabilirdi
 }
+
 int mycmp(const void*vp1, const void*vp2);
 {
 if (*(const int*)vp1) > (*(const int*)vp2){
@@ -45,10 +48,11 @@ sizin adresini gönderdiğiniz dizinin elemanlarının adresleriyle çağırır
 
 
 --------------------------------------------
+
 !! p + k * sz: dizinin k indisli elemanının adresi
 
-
-generic bir bubble sort fonksiyonu
+generic bir bubble sort fonksiyonu : 
+------------------------------------
 
 qsort ile aynı parametrik yapıda ismi 
 gbsort olan bir fonksiyon tanımlayınız tanımladığınız fonksiyonu farklı türden diziler ile
@@ -125,6 +129,52 @@ printf("bulundu dizinin %d indisli elemani\n", p - ar);
 else{
 printf("bulunamadi\n");
 }
+}
+
+--------------------
+
+bir fonksiyonun geri dönüş değeride adres olabilir
+
+int bar(int x)
+{
+return x * x + 1;
+}
+
+int(*foo())(int)
+{
+return &bar;
+}
+2
+int main(void)
+{
+int x = foo()(10);
+}
+
+//yukarıdaki anlaşılması zor bir kod, typedef kullanılabilr
+
+typedef int (*FUNC)(int)
+int bar(int x)
+{
+return x * x + 1;
+}
+
+FUNC foo()
+{
+return &bar;
+}
+
+int main(void)
+{
+int x = foo()(10);
+printf("x = %d\n", x);
+
+/*
+// bu şekide de olabilirdi
+FUNC fptr = foo()
+int x = fptr(20);
+
+printf("x = %d\n", x);
+*/
 }
 
 
