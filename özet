@@ -905,6 +905,53 @@ func(foo()) //foo'nun geri dönüş değeri ile func çağrılır
 func(foo) //func'a foo'yu çağırmak
 
 
+-------------------
 
+typedef int (*FUNC)(int);
 
+int bar(int x)
+{
+    return x * x + 1;
+}
+
+FUNC foo()
+{
+    return &bar;
+}
+
+int main()
+{
+    printf("%d\n", foo()(11));
+}
+
+---------------------
+
+!! fonksiyon geri dönüş değeri fonksiyon olabilir
+
+typedef int (*FUNC)(int);
+
+int bar(int x)
+{
+    return x * x + 1;
+}
+
+FUNC foo()
+{
+    return &bar;
+}
+
+int main()
+{
+    printf("%d\n", foo()(11));
+
+/*
+// bu şekide de olabilirdi
+FUNC fptr = foo()
+int x = fptr(20);
+
+printf("x = %d\n", x);
+*/
+}
+
+-----------------------------
 
