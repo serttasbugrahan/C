@@ -475,8 +475,10 @@ g_fa[g_idx] = f;
 
 multi-dimesional arrays (çok boyutlu diziler) :
 
+idizinin boyutu ilk elemanıdır a[10][29] //boyutu 10
+
 !! çok boyutlu diziler elemanları dizi olan dizilerdir
-!! dizinin elemanı bir dizidir
+!! dizinin elemanı bir dizilerdir
 
 typedef int ar20[20];
 
@@ -485,6 +487,19 @@ int main(void)
 //int a[10][20];
 ar20 a[10];
 }
+
+----------------
+
+int main()
+{
+int a[10][20];
+
+int* p = a; //hata pointer türü ile dizi boyutları türü aynı olmalıdır, bu şekilde yapıınca a + 1 diiznin 4 byte sonraki elemanı gösterirr
+
+int(*tr)[4] = a; //bu şekilde olur
+}
+
+----------------
 
 int main(void)
 {
