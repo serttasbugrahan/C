@@ -170,7 +170,8 @@ printf("x = %d\n", x);
 
 /*
 // bu şekide de olabilirdi
-FUNC fptr = foo()
+
+= foo()
 int x = fptr(20);
 
 printf("x = %d\n", x);
@@ -198,16 +199,16 @@ int f5(int);
 
 int main(void)
 {
-int (*fptr(int)) = &f1;
+int (*fptr)(int)) = &f1;
 
 int (*fa[5])(int); //bu şekilde gösterilir
-int (*fa[5])(int) = {f1, f2, f3,f4,f5}
+int (*fa[5])(int) = {f1, f2, f3,f4,f5}; //diziye bu şekilde ilk değer verilebilir
 int (*fa[])(int) = {&f1, &f2, &f3,&f4,&f5} //anlam farklılığı olmaz
 asize(fa) // 5
 
 int (*fp)(int);
 int (**fptr)(int) = &fp; //dizinin ilk elemanın adresi, fp'nin adresini fonksiyon pointerda tutulması
-*fptr = fp //elde ederiz
+*fptr = fp //fptr diref edersel fp'yi elde ederiz
 
 int (*fa[](int) = {f1, f2, f3, f4, f5}; //geri gönüş değeri, fonksiyon ismi, fonksiyon değerlerinin türü
 int (**fptr)(int) = fa; //dizinin ilk elemanının adresi
@@ -216,6 +217,7 @@ int (**fptr)(int) = &fa[0] //aynı anlama gelir
 }
 
 ------
+// bunun yerine typedef kullanabiliriz
 
 typedef int (*FPTR)(int); //kolay yol
 
@@ -257,7 +259,7 @@ printf("f5 cagrildi %d\n", x);
 
 }
 
-typedef void (*FUNCPTR)(int);
+typedef void (*FUNCPTR)(int); //geri dönüş değeri olmayan int değişken alan parametre
 
 int main(void)
 {
@@ -321,8 +323,10 @@ içindeki fonksiyonları adreslerini function array'de tutulmalı
 
 
 --------------------------------------
+kütüphanelerde kullanılan bir örüntü 
 
 //func'ın default davranışı foo çağırmak
+1. tema:
 
 --
 bugra.h
@@ -341,6 +345,7 @@ void bar(void)
 int main(void)
 {
 func(); //foo işlevi çağrılıcak
+FPTR f = set_func(&bar);
 set_func(&bar);
 func(); //func default olarak foo çağırırırdı artık bar fonksiyonunu çağırıcak
 set_func(f);
@@ -353,52 +358,57 @@ func(); //foo işlevi cagirilicak
 --
 bugra.c
 
-void foo(void);
-
-FPTR *gfptr = &foo;
+FPTR gfptr = &foo;
 
 void func(void)
 {
-gfptr();
-}
-
-FPTR set_func(FPTR f)
-{
-FPTR fptemp = gfptr
-gfptr = f;
-return fptemp;
+    gfptr();
 }
 
 void foo(void)
 {
-printf("foo cagrildi\n");
+    printf("foo cagrildi\n");
 }
+
+void bar(void)
+{
+    printf("bar cagrildi\n");
+}
+
+FPTR set_func(FPTR f)
+{
+    FPTR fptemp = gfptr;
+    gfptr = f;
+    return fptemp;
+}
+
 --
 
 --
 bugra.h
 
+typedef void (*FPTR)(void);
+
 void func(void);
+void foo(void);
+void bar(void);
+
 FPTR set_func(FPTR);
+
 --
 main.c
 
-void bar(void)
-{
-printf("bar cagrildi\n");
-}
-
 int main(void)
 {
-func();
-FPTR f = set_func(&bar);
-func();
-set_func(f);
-func();
+    func();
+    FPTR f = set_func(&bar);
+    func();
+    set_func(f);
+    func();
 }
-
 -------------------------------------
-
+2. tema:
+ 
 bugra.h
 
 typedef void (*FPTR)(void);
