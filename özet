@@ -953,5 +953,109 @@ printf("x = %d\n", x);
 */
 }
 
------------------------------
+====================================
+
+function pointer arrays :
+
+haftanın ayrı günlerinde farklı görevler var ise bunu şu şekilde yaparız (jump table) :
+- anahtarı indekse dönüştür indekste bir fonksiyon adresi elde et. o adresteki fonksiyonu çağır.
+
+haftanın farklı günlerinde yapılacak işleri farklı fonksiyolar olarak tanımlarız. bir pointer dizisinde bunların adreslerini tutarız
+ve bu fonksiyona bir index gönderip o indeksi dizi elemanı olan fonksiyon pointerının gösterdiği fonksiyonu çağırırız
+
+------
+
+int f1(int);
+int f2(int);
+int f3(int);
+int f4(int);
+int f5(int);
+
+int main(void)
+{
+int (*fptr)(int)) = &f1;
+
+int (*fa[5])(int); //bu şekilde gösterilir
+int (*fa[5])(int) = {f1, f2, f3,f4,f5}; //diziye bu şekilde ilk değer verilebilir
+int (*fa[])(int) = {&f1, &f2, &f3,&f4,&f5} //anlam farklılığı olmaz
+asize(fa) // 5
+
+int (*fp)(int);
+int (**fptr)(int) = &fp; //dizinin ilk elemanın adresi, fp'nin adresini fonksiyon pointerda tutulması
+*fptr = fp //fptr diref edersel fp'yi elde ederiz
+
+int (*fa[](int) = {f1, f2, f3, f4, f5}; //geri gönüş değeri, fonksiyon ismi, fonksiyon değerlerinin türü
+int (**fptr)(int) = fa; //dizinin ilk elemanının adresi
+int (**fptr)(int) = &fa[0] //aynı anlama gelir
+
+}
+
+
+---------------------------
+
+// bunun yerine typedef kullanabiliriz
+
+typedef int (*FPTR)(int); //kolay yol
+
+int main(void)
+{
+FPTR fa[] = {f1,f2,f3,f4,f5};
+FPTR * p = fa;
+}
+
+---------------------
+
+typedef void (*FUNCPTR)(int); //geri dönüş değeri olmayan int değişken alan parametre
+
+int main(void)
+{
+FUNCPTR fa[] = {&f1,&f2,&f3,&f4,&f5};
+for (size_t i = 0; i < asize(fa); ++i){
+fa[i](i); //sırayla fonksiyonları yazdırır, 2. parametre fonksiyon parametresi
+}
+}
+
+
+=================================================================
+
+multi-dimesional arrays (çok boyutlu diziler) :
+
+int main()
+{
+int a[10][20];
+
+int* p = a; //hata pointer türü ile dizi boyutları türü aynı olmalıdır, bu şekilde yapıınca a + 1 diiznin 4 byte sonraki elemanı gösterirr
+
+int(*tr)[4] = a; //bu şekilde olur
+}
+
+
+------------
+
+int main(void)
+{
+int a[10][20];
+//matrisin 200 tane tam sayısından her biri
+a dizisinin elemanlarının elemanları 
+}
+
+-----------
+
+tür uyuşmazlığı kontorlü
+
+int main(void)
+{
+int a[10][20];
+int *p = a //error
+int * p1 = &a[0][0] //legal
+int * p2 = a[0]; //legal, array decay a[10] a ile gösterilebilinir
+
+//p a dizisinin ilk elemanının ilk elemanını göstermesinin yolları
+int * p;
+p = &a[0][0];
+p = a[0]; //array decay
+p = (int *)a;
+}
+
+
 
