@@ -620,7 +620,7 @@ printf("%p %p %p\n", &a[0], a + i, p++); //hepsi aynı adresi verir
 
 int main()
 {
-double ar[10][32];
+double a[10][32];
 
 for (int i = 0; i < 10; ++i) {
 printf("%p %p\n, a + 1,  &a[0]); //aynı anlamda
@@ -631,7 +631,7 @@ printf("%p %p\n, a + 1,  &a[0]); //aynı anlamda
 
 int main()
 {
-double ar[10][32];
+double a[10][32];
 
 double(*p)[32] = a;
 
@@ -640,7 +640,7 @@ printf("%p %p %p\n",  &a[0] ,a + 1,  p++); //aynı adresler yaz
 }
 }
 
---------------- -------------------------
+----------------------------------------
 
 int main(void)
 {
@@ -758,7 +758,7 @@ int a[10] = { 0 };
 int* p = a; //bu şekilde ilk adrese erişiriz
 
 //&a ile ilk değer vermek istiyorsak aşağıdaki şekilde olur
-int * ptr = &a;; //bu şekilde olmaz
+int * ptr = &a; //bu şekilde olmaz
 int (*ptr)[10] = &a;
 }
 
@@ -808,7 +808,6 @@ printf("%d ", *p++);
 }
 
 -------------------
----------- 
 
 //eğer dizi tek elemanlı olsaydı  aşağıdaki şekilde olurdu
 
@@ -858,6 +857,7 @@ for (int i = 0; i < 5; ++i)
 }
 
 ---
+
 void set_ar(int(*p)[5], int size) //bu şekildede yazılabilir
 {
 for (int i = 0; i < size; ++i){
