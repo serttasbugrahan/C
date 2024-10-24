@@ -965,6 +965,12 @@ ve bu fonksiyona bir index gönderip o indeksi dizi elemanı olan fonksiyon poin
 
 ------
 
+2 boyutlu dizi olunca elemanın adresi : ar  + 1 / &ar[0] / a
+tek boyutlı dizi olunca elemanın adresi : a / &ar[0]
+
+
+-------
+
 int f1(int);
 int f2(int);
 int f3(int);
