@@ -1225,6 +1225,7 @@ for (int i = 0; i < 5; ++i)
 }
 
 ---
+
 void set_ar(int(*p)[5], int size) //bu şekildede yazılabilir
 {
 for (int i = 0; i < size; ++i){
@@ -1232,8 +1233,43 @@ set_array_random(p[i], 5);
 }
 }
 
+------
 
+void print_names(const char(*p)[20], size_t size)
+{
+for (size_t i = 0; i < asize(names); ++i){
+printf("%s ",p[i]);
+}
 
+int main(void)
+{
+char names[][20] = {
+"bugra", "begum", "ali","veli","deniz","efe","oya",
+"oya", "begum", "merve","veli","deniz","mahmut","oya",
+"bugra", "mert", "ali","veli","ece","mustafa","oya",
+"buse", "begum", "rıza","dila","deniz","suat","oya",
+}
+
+printf_names(names, asize(names));
+}
+
+---------
+
+!! aşağıdakiler aynı anlamdadır
+
+void foo(int * p);
+void foo(int p[]);
+
+void bar(int ** p);
+void bar(int * p[]);
+
+void baz(int (*p)[10]);
+void baz(int p[][10]);
+
+void func(int (*p)(int));
+void func(int (int));
+
+--------
 
 
 
