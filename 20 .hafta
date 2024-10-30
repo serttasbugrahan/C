@@ -115,6 +115,9 @@ printf("binary [%s]\n", str); //binary halini
 
 bellek üsütnde yapılan formatlı okuma yazma işlemleri:
 ----------------------------------------------------
+
+(in-memmory)
+   
 <stdio.h>
 
 printf : stnadart outputa yapmak için 
@@ -147,13 +150,15 @@ char surname[SIZE] = "semerci";
 int birth_year = 2000;
 
 char file_name[SIZE];
-sprintf(file_name, "%s_%s_%d.txt", name, surname, birth_year);
+sprintf(file_name, "%s_%s_%d.txt", name, surname, birth_year); //file_name dizisne basar yazıyı
 
 FILE * f = fopen(file_name, 'w');
 if (!f){
 printf("dosya olusturulamadi\n");
 return 1;
 }
+
+fclose(f);
 }
 
 ------------
@@ -165,12 +170,13 @@ double dval = 2.33283233;
 unsigned int uval = 345678;
 
 char str[SIZE];
-sprintf(str, "%d;%.3f;%X",x, dval, uval);
+sprintf(str, "%d;%.3f;%X",x, dval, uval); //hepsi yazıya dönüşütürüldü
 printf("|%s|\n", str);
 }
 
 --------------
-snprintf : sprintf'den farklı olarak taşmayaı kontrol eder
+
+snprintf : sprintf'den farklı olarak taşmayı kontrol eder
 int snprintf(char * pstr, size_t n)
 
 int main(void)
@@ -206,7 +212,8 @@ printf("x = %d y = %d z = %d\n", x, y ,z);
 }
 
 =============================================================
-programın sonlandırılması
+
+programın sonlandırılması / process sonlandırılması
 
 <stdlib.h>
 
@@ -214,11 +221,23 @@ programın sonlandırılması
 -atexit
 -abort
 
+-----------------
+
+normal termination : exit fonksiyonu çağrılır
+
+abnormal termination : abort fonksiyonu çağrılır, direkt sonlandırır
+
+----------------
+
 void exit (int status);
-!! main'deki return statement ile exit fonkisyonunu çağırmak arasında fark yoktur
+!! main'deki return statement ile exit fonkisyonunu çağırmak arasında fark yoktur. derleyici return statementi exit fonksiyonuna dönüştürür
 
 EXIT_SUCCESS
 EXIT_FAILURE
+
+!! return 0 başarılı olarak kabul ederiz, exitte aşağıdaki şekilde uygulanır
+
+
 
 int main(void)
 {
@@ -226,6 +245,8 @@ exit(EXIT_SUCCESS); //exit(0) derleyici bunu görür, ynı anlama gelir
 }
 
 -----------
+
+!! fonskyionların içini boş bırakmak yerine void kullanmak gerekir.
 
 void baz(void)
 {
@@ -261,7 +282,7 @@ printf("main sona eriyor\n");
 
 atexit : programın sonlanması sırasında özel işlevlerin çağrılmasını sağlar.
 
-int atexit(void (*)void);
+int atexit(void (*)void); //geri dönüş değeri olmayan adresi olmayan bir fonksiyon istiyor
 
 void baz(void)
 {
@@ -291,17 +312,69 @@ atexit(&baz); //exit çağrıldığında bu fonksyonları çağırsın
 atexit(&bar);
 //
 atexit(&foo);
+
+func(); //bunu silsek bile implict olarak derleyici buraya return 0 koyar return 0' da exit fonksyionunu çağırır
 }
+
+!! son kayıt edilen ilk çağrılacak, atexit kayıt ettiği için bu şekilde çalışır
+
+--------------
+
+neden atexit var ?
+
+program exit ile sonlansa bile bazı yapılar çalışmalı bunları atexit ile kayıt edebilir ve o işlemleri yapabilriiz
 
 ---------------------------
 !! assortion : daha önce yazılmış kodlardaki hataları bulmak için yazılan kodlara denir.
 
-abort : programı direk sonlandırır
+abort : programı direkt sonlandırır
+
+----------
+
+void baz(void)
+{
+printf("baz basliyor\n");
+abort();
+printf("baz bitti\n");
+}
+
+void bar(void)
+{
+printf("bar basliyor\n");
+}
+
+void foo(void)
+{
+printf("foo basliyor\n");
+}
+
+void func(void)
+{
+printf("func cagrildi\n");
+exit(EXIT_FAILURE);
+}
+
+int main(void)
+{
+atexit(&baz); 
+//
+atexit(&bar);
+//
+atexit(&foo);
+
+func(); 
+}
+
+
+---------
+
+// yazılımda sadece çalışacak kodlar kullanılmaz, bazı seneryoları test edicek fonksiyonlarda yazılması gerekir
+// bunun için abort() kullanabiliriz, aşağıdaki gibi
 
 void func(const char * ptr)
 {
 if (ptr == NULL){
-abort();
+abort(); //fonksiyonu direkt sonlandırmamız gerekir
 }
 }
 
@@ -310,7 +383,24 @@ int main(void)
 char str[100] = "bugrahan serttas";
 
 func(strchr(str, 'A'));
+}
 
+-------------------
+
+!! assert'de kullanılabilir, her yerde kullanılabilir
+
+void func(const char * ptr)
+{
+if (ptr == NULL){
+assert(ptr != NULL); // programı yine abort sonlandırırı
+}
+}
+
+int main(void)
+{
+char str[100] = "bugrahan serttas";
+
+func(strchr(str, 'y'));
 }
 
 
