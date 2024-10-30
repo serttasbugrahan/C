@@ -1269,11 +1269,166 @@ void baz(int p[][10]);
 void func(int (*p)(int));
 void func(int (int));
 
---------
+==================================================
+
+bellek üsütnde (in-memmory) yapılan formatlı okuma yazma işlemleri:
+------------------------------------------------------
+<stdio.h>
+
+printf : stnadart outputa yapmak için 
+sprintf : adresteki bir diziye yazdırmak için (belleğe)
+fprintf : dosyaya yazdırmak için
+
+----------
+
+int main()
+{
+int ival = 278345;
+double dval = 34.742873;
+char str[SIZE];
+
+printf("[%d] [%f]", ival ,dval); //ival ve dval'i ekrana yazar
+sprintf(str, "[%d] [%f]", ival, dval); // ival ve dval' diziye yazar
+puts(str); //diziyi ekrana basar
+}
 
 
+--------------
+
+snprintf : sprintf'den farklı olarak taşmayı kontrol eder
+int snprintf(char * pstr, size_t n)
+
+int main(void)
+{
+char str[10];
+int x;
+
+printf("sayi girin: ");
+scanf("%d",&x);
+
+snprintf(str, 10,"hasan_%d", x);
+printf("[%s]\n", str);
+}
 
 
+----------------------------------------
+
+int scanf(const char * pfm,...);
+int sscanf(const char * pbuf, const char *pfm, ...);
+int fscanf(FILE * pbuf, const char * pfm,..);
+
+sscanf : bir dizide tutulan yazıya işlem yapar
+
+int main(void)
+{
+int x,y,z;
+char buffer[SIZE] = "7656 565 567656";
+
+printf("3 sayi giriniz: ");
+sscanf(buffer, "%d%d%d",&x, &y, &z);
+
+printf("x = %d y = %d z = %d\n", x, y ,z);
+
+}
+
+=============================================================
+
+programın sonlandırılması
+
+<stdlib.h>
+
+-exit
+-atexit
+-abort
+
+!! main'deki return statement ile exit fonkisyonunu çağırmak arasında fark yoktur. derleyici return statementi exit fonksiyonuna dönüştürür
+
+---------------
+
+!! fonskyionların içini boş bırakmak yerine void kullanmak gerekir.
+
+------------
+
+!! main.c içine return 0 konulmasa bile c99 standartı ile return 0 eklenir
+
+atexit : programın sonlanması sırasında özel işlevlerin çağrılmasını sağlar.
+
+int atexit(void (*)void); //geri dönüş değeri olmayan adresi olmayan bir fonksiyon istiyor
+
+void baz(void)
+{
+printf("bar basliyor\n");
+}
+
+void bar(void)
+{
+printf("bar basliyor\n");
+}
+
+void foo(void)
+{
+printf("foo basliyor\n");
+}
+
+void func(void)
+{
+printf("func cagrildi\n");
+exit(EXIT_FAILURE);
+}
+
+int main(void)
+{
+atexit(&baz); //exit çağrıldığında bu fonksyonları çağırsın
+//
+atexit(&bar);
+//
+atexit(&foo);
+
+func(); //bunu silsek bile implict olarak derleyici buraya return 0 koyar return 0' da exit fonksyionunu çağırır
+}
+
+!! son kayıt edilen ilk çağrılacak, atexit kayıt ettiği için bu şekilde çalışır
+
+-----------------
+
+abort : programı direk sonlandırır
+
+---------
+
+// yazılımda sadece çalışacak kodlar kullanılmaz, bazı seneryoları test edicek fonksiyonlarda yazılması gerekir
+// bunun için abort() kullanabiliriz, aşağıdaki gibi
+
+void func(const char * ptr)
+{
+if (ptr == NULL){
+abort(); //fonksiyonu direkt sonlandırmamız gerekir
+}
+}
+
+int main(void)
+{
+char str[100] = "bugrahan serttas";
+
+func(strchr(str, 'A'));
+}
+
+-------------------
+
+!! assert'de kullanılabilir, her yerde kullanılabilir
+
+void func(const char * ptr)
+{
+if (ptr == NULL){
+assert(ptr != NULL); // programı yine abort sonlandırırı
+}
+}
+
+int main(void)
+{
+char str[100] = "bugrahan serttas";
+
+func(strchr(str, 'y'));
+}
 
 
 
