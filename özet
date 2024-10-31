@@ -1436,4 +1436,30 @@ func(strchr(str, 'y'));
 dinamik bellek yönetimi :
 --------------------------
 
+dinamik bellek bloğu ne zaman kullanılır : 
+
+- kaç byte bellek alanına ihtiyaç olduğu programın çallışma zamanında belli olur
+- bir nesnenin hayatı programın çalışma zamanında t1'de başlayıp t2'ye kadar devam edecek ise ve bu aynı fonk. içinde olmka zorunda değil ise 
+- canımız ne zmana isterse bellekten yer edinililmeli
+
+malloc : bellek bloğunu direkt bize verir
+calloc : bellek bloğunu sıfırlayarak bize verir 
+realloc: daha önce elde edilen bellek boyutunu arttırmak veya azaltmak için kullanılır
+free : daha önce ayrılan bellek bloğunu sisteme geri veriyor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
