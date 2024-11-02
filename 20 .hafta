@@ -677,12 +677,12 @@ free(pd);
 
 ------------
 
-char * mystrdup(const char * p)
+char * mystrdup(const char * p) //malloc çağırdığını dökümante et, free edilmesi gerektiğini yaz
 {
 char * pd = (char*)malloc(strlen(p) + 1);
 if (!pd) return NULL;
 strcpy(pd, p);
-return pd //return strcpy(pd, p) aynı anlama gelir
+return pd //return strcpy(pd, p) aynı anlama gelir //burada free etsek çağıran kullanamaz
 }
 
 int main(void)
@@ -761,3 +761,12 @@ puts(pd);
 free(pd);
 
 }
+
+---------------
+
+
+
+
+
+
+
