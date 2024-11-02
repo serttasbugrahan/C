@@ -113,7 +113,7 @@ printf("binary [%s]\n", str); //binary halini
 
 ===========================================================
 
-bellek üsütnde yapılan formatlı okuma yazma işlemleri:
+bellek üstünde yapılan formatlı okuma yazma işlemleri:
 ----------------------------------------------------
 
 (in-memmory)
@@ -430,12 +430,14 @@ stack/daha segment/heap
 
 heap : dinamik olarak bellekte yerlerin ayarlanmasından sorumludur
 
-heap in c
-free store in c++
+   -------------------
+  |      heap in c    |
+  | free store in c++ |
+   -------------------
 
 ------------------------------
 
-malloc:
+malloc: bellek havuzunda yer varsa verir yer yoksa veremez, başarısız olursa null pointer verir[
 
 void * malloc(size_t n);
 
@@ -503,7 +505,7 @@ free(pd);
 -------------
 
 - malloc bize o değeri bir değerle set etmeden olduğu gibi veriyor
-- malloc tek parça veriri
+- malloc tek parça verir, dizi konumlanıdırılabilir
 - o bellek bloğuna heap alanına verene kadar o bellek bloğunu kullanabiliriz
 - bellek alanını geri vermez isek o bellek alanını başka bir amaç için kullanılamıyor (memmory leak(age))
 
@@ -528,8 +530,7 @@ pd = &ival; //hata, free yapmadık
 }
 
 !! malloc çağrısı ile daha önce edinilmiş 
-dinamik bir bellek bloğunun büyütülmesi söz konusu değildir
-
+ 
 =======================================================
 
 wrapper : fonksiyonu başka bir fonksiyona çağırtmak
@@ -583,6 +584,7 @@ free(p); //hata , p dinamik veri adresi değilse hata olur
 
 2. free fonksiyonuna çağrı yaptıktan sonra free edilmiş bellek bloğunun
 adresi geçersiz bir adrestir. dangling pointer
+!! dangling pointe hiçbir şekilde kullanılmamalı
 
 int main(void)
 {
@@ -608,8 +610,10 @@ pd = NULL; //DİKKAT ÇEKMEK İÇİN YAPILABİLİNİR
 3. free işlevi allocate edilmiş bellek bloğunun adresini istiyor
 edinilmiş bir bellek bloğunun bir kısmını geri vermek için işlem yapılamaz
 
-free(pd + n / 2); 
+free(pd + n / 2); //sadece malloc, calloc, realloc ile edinilmiş bellek bloğu verilir
 
+
+!! bir bellek bloğunu birden fazla veri tutabilir, bellek bloğu free edilince dangling pointer olur veriler
 -------------
 
 4. double free
@@ -648,6 +652,8 @@ return retval;
 
 
 !! return'den önce free yap UNUTMA 
+
+!! main içinde free etmeye gerek yoktur aslında ama yine de et
 
 ----------------
 
