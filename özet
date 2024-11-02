@@ -1447,19 +1447,130 @@ calloc : bellek bloğunu sıfırlayarak bize verir
 realloc: daha önce elde edilen bellek boyutunu arttırmak veya azaltmak için kullanılır
 free : daha önce ayrılan bellek bloğunu sisteme geri veriyor
 
+--------------------
+
+malloc: bellek havuzunda yer varsa verir yer yoksa veremez, başarısız olursa null pointer verir[
+
+void * malloc(size_t n);
+
+int main(void)
+{
+size_t n;
+
+printf("tam sayi girin: ");
+scanf("%zu", &n);
+int * pd = (int *)malloc(n * sizeof(int)); //void türünden int türüne dönüşüm
+if (pd == NULL){
+fprintf(stderr, "cannot allocate memory\n");
+return 1;
+}
+
+set_array_random(pd ,n);
+print_array(pd, n);
+free(pd); //free //deallocate
+
+}
 
 
+-------------
+
+- malloc bize o değeri bir değerle set etmeden olduğu gibi veriyor
+- malloc tek parça verir, dizi konumlanıdırılabilir
+- o bellek bloğuna heap alanına verene kadar o bellek bloğunu kullanabiliriz
+- bellek alanını geri vermez isek o bellek alanını başka bir amaç için kullanılamıyor (memmory leak(age))
+
+-------------
 
 
+!! malloc çağrısı ile daha önce edinilmiş 
+dinamik bir bellek bloğunun büyütülmesi söz konusu değildir. bunu realloc le ancak yapabilriiz
+
+==================
+
+wrapper : fonksiyonu başka bir fonksiyona çağırtmak
+
+neden kullanırız :
+
+1. augmentation : koda ilave kod ekleme
+
+2. argüman kontroli : orn, pointer parametre null pointer mı
+
+3. ortak kodu tek bir yere toplama 
+
+4. parametre sayısını azaltma : fonksiyonlarda fazla parametre yapısı iyi bir şey değildir
+
+5. parametlerin sırası  
+
+6. customize etme
+
+==================
 
 
+---------------
 
+free : tekrardan bellek bloğunun kullanılmasını sağlar, tekrar o bellek bloğu kullanılabilinir
+void free(void * vp);
 
+free işleviyle ilgili tipik hatalar 
+------------------------------------
 
+1. dinamik olmayan yani malloc calloc realoc ile edinilmemiş
+bellek bloğu adreslerini free işlevine göndermel
 
+int main(void)
+{
+char str[100];
+char * p = str;
+free(p); //hata , p dinamik veri adresi değilse hata olur
+}
 
+---------------
 
+2. free fonksiyonuna çağrı yaptıktan sonra free edilmiş bellek bloğunun
+adresi geçersiz bir adrestir. dangling pointer
+!! dangling pointer hiçbir şekilde kullanılmamalı
 
+int main(void)
+{
+size_t n;
 
+printf("tam sayi girin: ");
+scanf("%zu", &n);
+int * pd = (int *)malloc(n * sizeof(int)); //void türünden int türüne dönüşüm
+if (pd == NULL){
+fprintf(stderr, "cannot allocate memory\n");
+return 1;
+}
+
+set_array_random(pd ,n);
+print_array(pd, n);
+free(pd); 
+pd = NULL; //DİKKAT ÇEKMEK İÇİN YAPILABİLİNİR
+
+!! pd değerini asla kullanma, yeni bir değer atayarak, geçerli bir adres vererek kullanabilirsin
+!! eski adresi ile kulanmak dangling pointer
+}
+
+------------------
+
+3. free işlevi allocate edilmiş bellek bloğunun adresini istiyor
+edinilmiş bir bellek bloğunun bir kısmını geri vermek için işlem yapılamaz
+
+free(pd + n / 2); //sadece malloc, calloc, realloc ile edinilmiş bellek bloğu verilir
+
+!! bir bellek bloğunu birden fazla veri tutabilir, bellek bloğu free edilince dangling pointer olur veriler
+
+4. double free
+
+int* px = pd;
+free(px);
+
+-----------
+
+5. memmory leak :allocate edilmiş bellek bloğunun geri verilmemesine denir
+
+-----------
+
+!! return'den önce free yap UNUTMA 
 
 
