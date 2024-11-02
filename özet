@@ -1573,4 +1573,37 @@ free(px);
 
 !! return'den önce free yap UNUTMA 
 
+---------
+
+char * mystrdup(const char * p) //malloc çağırdığını dökümante et, free edilmesi gerektiğini yaz
+{
+char * pd = (char*)malloc(strlen(p) + 1);
+if (!pd) return NULL;
+strcpy(pd, p);
+return pd //return strcpy(pd, p) aynı anlama gelir
+}
+
+int main(void)
+{
+char str[1000];
+
+printf("bir yazi girin: ");
+sgets(str);
+//yukarıdaki yazı bana ait değil ancak o yazının tersine ihtiyacım var
+
+char * p = mystrdup(str);
+_strrev(p);
+
+printf("[%s] [%s]\n", str, p);
+free(p);
+}
+
+
+------------
+
+!! c'de yapılan en büyük hata adres döndüren fonksiyonun dökümantasyonuna bak free edilmesi gerekiyor olabilir
+
+-----------
+
+
 
