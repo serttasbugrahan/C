@@ -21,9 +21,9 @@ char * p[SIZE];
 randomize();
 
 for (int i = 0; i < SIZE; ++i){
-p[i] = get_random_psw();
+p[i] = get_random_psw(); //buradan sonra puts(p) ile ekrana bassaydık bu problem çzülürdü (farklı passwordler yazardı)
 }
-
+ 
 for (int i = 0; i < SIZE; ++i){
 printf("%s\n", p[i]);
 }
@@ -108,7 +108,8 @@ pd[i]
 }
 
 ----------
-matrisi impremente etmenin 3 yolu:
+
+matrisi implemente etmenin 3 yolu:
 
 //satir ve sütun sayısı programın çalışma zamanında belli olan 
 bir matris oluşturun ve bu matrisi rastgele değerler ile doldurup
