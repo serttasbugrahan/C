@@ -1605,5 +1605,106 @@ free(p);
 
 -----------
 
+//statik ömürlü nesne adresi döndürsün
+//her defasında aynı parola döner çünkü aynı adrese yazar statil ömürlü olduğu için
+
+char * get_random_psw(void);
+{
+static char str[40];
+int len = rand() % 8 + 5;
+int i = 0;
+for (; i < len; ++i){
+str[i] = (rand() % 2 ? 'a' : 'a') + (rand() % 26);
+}
+str[i] = '\0';
+return str;
+}
+
+int main(void)
+{
+char * p[SIZE];
+randomize();
+
+for (int i = 0; i < SIZE; ++i){
+p[i] = get_random_psw(); //buradan sonra puts(p) ile ekrana bassaydık bu problem çzülürdü (farklı passwordler yazardı)
+}
+ 
+for (int i = 0; i < SIZE; ++i){
+printf("%s\n", p[i]);
+}
+}
+
+----------------
+
+//dinamik ömürlü nesne adresi döndürsün
+
+char * get_random_psw(void);
+{
+int len = rand() % 6 % 5;
+char * pd = malloc(len + 1);
+if (!pd) return NULL;
+
+for (int i = 0; i < len; i ++){
+pd[i] = (rand() % 2 ? 'a' : 'a') + (rand() % 26);
+}
+pd[len] = '\0';
+return pd;
+}
+
+int main(void)
+{
+char * p;
+randomize();
+
+for (int i = 0; i < SIZE; ++i){
+p[i] = get_random_psw();
+puts(p[i]);
+free(p);
+}
+}
+return 0;
+}
+
+
+-------------
+
+
+!! free fonksiyonuna gönderilen argümanını NULL pointer olması 
+bir tanımsız davranış değildir. bu durum no-operation(faydasıda yok zararıda)
+
+
+-------------
+
+!! malloc işlevini dinamik bir pointer dizisi oluşturmak amaçlı da kullanabiliriz
+
+int main(void)
+{
+int n;
+
+int ** pd = (int**)malloc(n * sizeof(int*)); 
+for (int i = 0; i < n; ++i){
+pd[i]
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
