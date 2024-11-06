@@ -1688,12 +1688,70 @@ pd[i]
 }
 
 
+-------------------------------
+
+void * realloc(void * vp, size_t new_size)
+
+1. paramtereye malloc veya calloctan alınmış paramtre alınır
+2. paramtereye yeni boyut geçilir 
+
+!! realloc sadece dinamik olarak ayrılmış alanlar üzerinde büyütme veya küçültme yapabilir
+
+int main(void){
+size_t n;
+
+printf("kac elemanli dizi istiyorsunuz: ");
+scanf("%zu", n);
+int * pd = (int*)malloc(n * sizeof(int));
+if (!pd){
+fprintf(stderr,"bellek yetersiz\n");
+return 1;
+}
+randomize();
+set_array_random(pd,n);
+printf_array(pd, n);
+
+printf("kac eleman daha ekleyelim: ");
+size_t n_plus;
+scanf("%zu", n);
+pd = (int *)realloc(pd, (n + n_plus * sizeof(int));
+if (!pd){
+fprintf(stderr, "bellek yetersiz\n");
+return 1;
+}
+set_array_random(pd + n, n_plus);
+print_array(pd, n + n_plus);
+}
 
 
+----------------
 
+!! reallocation takes time //zırt pırt çağırma :)
+!! reallocation invalidates pointer (eski bellek bloğunu kullanan pointerlar rellacation eski bellek bloğunu free ettiği için dangling pointera sebep olur)
 
+===========================================================
 
+dinamik dizi (dynamic array) veri yapısının (data structure) :
 
+!! cpp'da karşılığı vektörlerdir.
+
+!! üretimde en çok kullanılan yapıdır, DİKKATLİ ÇALIŞ
+
+- continious'dur.
+- dinamik olarak veri miktarı değişebilir.
+
+avantajları : 
+1- n tane öğeden birine erişme maaliyeti constant time (dizilerde olduğu gibi)
+2- sondan eklemeli maaliyeti constant time  (baştan veya ortadan constant time olmaz)
+
+The size of a dynamic array
+The capacity of a dynamic array
+
+!! kapasite size'dan büyük tutulur. 
+eğer size değeri sürekli artıyor ve kapasiteye eşit olursa diğer arttırma işleminde realloc devereye girer ve kapasiteyi arttırır 
+bu sayede size kapasiteyi geçmemiş olur. bu karmaşıklığa 'amortised constant time' denir
+
+amortised constant time  : realloc'un maaliyetinnin görmezden gelinmesine denir
 
 
 
