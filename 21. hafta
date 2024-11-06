@@ -158,7 +158,10 @@ free(pd); //pointer diziyi free etmek için
 }
 
 //bu şekilde sözde 2 boyutlu dizi oluşturulur, matrisin biri bir yerde diğeri heap alanında bir yerde olur
+
 --------------------------
+// alternatşf bir implementasyon
+
 
 int main(void){
 size_t row_size, col_size;
@@ -186,10 +189,9 @@ printf("%d",pd[i * col_size + k];
 printf("\n");
 }
 
-// bu kod ile daha az bellek alanı kullandık
-// row * col * sizeof(int)
-//satırlar bellekte ardışık
-//kod tarafında double deref. olamıyor
+// bu kod ile daha az bellek alanı kullandık (avanataj)
+// row * col * sizeof(int) //contigious (sıralı) bir bellek alanına ihtiyaç vardır (dezavanataj)
+//kod tarafında double deref. olamıyor (dezavanataj)
 
 ----------------------
 
@@ -228,7 +230,7 @@ free(ptr);
 
 -----------------------------------------------------
 
-void * realloc(void * vp, new_size,)
+void * realloc(void * vp, size_t new_size)
 
 1. paramtereye malloc veya calloctan alınmış paramtre alınır
 2. paramtereye yeni boyut geçilir 
@@ -245,20 +247,26 @@ if (!pd){
 fprintf(stderr,"bellek yetersiz\n");
 return 1;
 }
+
+printf("malloc ile elde edinilen bellek blogu adresi : %p\n", pd);
+
 randomize();
-set_array_random();
+set_array_random(pd,n);
 printf_array(pd, n);
 
 printf("kac eleman daha ekleyelim: ");
 size_t n_plus;
-scanf("%zu", n);
+scanf("%zu", &n_plus);
 pd = (int *)realloc(pd, (n + n_plus * sizeof(int));
 if (!pd){
 fprintf(stderr, "bellek yetersiz\n");
 return 1;
 }
+printf("realloc ile elde edinilen bellek blogu adresi : %p\n", pd);
 set_array_random(pd + n, n_plus);
 print_array(pd, n + n_plus);
+
+free(pd);
 }
 
 -----------------------------
@@ -293,7 +301,7 @@ if (!pd){
 printf("bellek elde edilemeiyor\n");
 return 1;
 }
-pd[SIZE++] = ival;
+pd[size++] = ival;
 print_array(pd, size);
 _getch();
 }
@@ -311,11 +319,16 @@ free(pd);
 
 dinamik dizi (dynamic array) veri yapısının (data structure) :
 
+!! cpp'da karşılığı vektörlerdir.
+
 !! üretimde en çok kullanılan yapıdır, DİKKATLİ ÇALIŞ
 
+- continious'dur.
+- dinamik olarak veri miktarı değişebilir.
+
 avantajları : 
-1- n tane öğeden birine erişme maaliyeti constant time
-2- sondan eklemeli maaliyeti constant time (baştan veya ortadan constant time olmaz)
+1- n tane öğeden birine erişme maaliyeti constant time (dizilerde olduğu gibi)
+2- sondan eklemeli maaliyeti constant time  (baştan veya ortadan constant time olmaz)
 
 The size of a dynamic array
 The capacity of a dynamic array
@@ -325,6 +338,8 @@ eğer size değeri sürekli artıyor ve kapasiteye eşit olursa diğer arttırma
 bu sayede size kapasiteyi geçmemiş olur. bu karmaşıklığa 'amortised constant time' denir
 
 amortised constant time  : realloc'un maaliyetinnin görmezden gelinmesine denir
+
+
 
 ///////////////////////////////////////////////2. Ders//////////////////////////////////////////
 
