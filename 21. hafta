@@ -360,21 +360,21 @@ restrict
 
 -------------
 
-!! function overloading: aynı isimde farklı fonksiyonlara 
-
-auto :
+auto : 
 
 --------
 register : 
 
 int main(void)
 {
-register int x = 10; //derleyici sen de uygun görürsen x'i register'da tut
+register int x = 10; //derleyici sen de uygun görürsen x'i register'da tut. derleyici bunu yapmak zorunda değil
 }
 
 !! statik anahtarlılar register ile kullanılamaz
 
----------
+---------------------
+
+ 
 static :
 
 void foo(void)
@@ -416,7 +416,7 @@ foo(); //ziya, ziyacan, ziyacancan, ziyacancancan ...
 !! C ve C++' gelişmek için bol bol kod okunmalı ve geliştikçe kodları review yap
 
 static yerel değişkenler neden kullanılır :
--  adres döndürmek için 
+-  adres döndürmek için  
 
 !! asla otomatik ömürlü değişkenin adresinin döndürme
 !! adres döndüren bir fonksiyonun geri dönüş değerinin neyin adresi olduğunu dökümante et (çok önemli)
@@ -428,7 +428,8 @@ bir fonksiyon adres döndürüyorsa:
 -çağırandan aldığı adresi döndürecek
 
 -----
-geri dönüşü anlamak için bunu uygula :
+geri dönüşü anlamak için bunu uygula : //aynı adres çıkıyor ise static ömürlü farklı adres çıkıyor ise dinamik ömürlü
+
 char * func(void);
 
 int main(void)
@@ -441,7 +442,27 @@ for (int i = 0; i < 10; ++i){
 printf("%p\n", func());
 }
 }
+
 ------
+
+int main(void)
+{
+time_t timer = time(NULL);
+
+const char* p1 = ctime(&timer);
+(void)(gets);
+const char* p2 = ctime(&timer);
+(void)(gets);
+const char* p3 = ctime(&timer);
+(void)(gets);
+
+puts(p1); //hep aynı adres yazar static adres döndürmediği için, tekrar tekrar bellekte oluşşturulacak
+puts(p2);
+puts(p3);
+}
+
+--------------
+
 
 char * get_psw(void)
 {
