@@ -1801,13 +1801,123 @@ p[i] = ge_psw()
 
 
 
+void func(void)
+{
+int call_count = 0; //burası static olmalı
+
+printf("beni %d. kex cagirdilar\n", ++call_count);
+}
+
+int main(void)
+{
+for (int i = 0; i < 10; ++i)
+{
+func(); //sürekli aynı sayı yazar çünkü her seferinde tekrar hayat gelecektir 
+}
+}
+
+
+--------------
+
+!! otomatik ömürlü değişkenler her çağrıldığında stack'de tekrar oluşturulur
+
+int get_xyx_value(int n)
+{
+static const int primes[] ={ //böyle bir diziyi static yap otomatik olması maaliyetli
+2,3,54,21,2,4,12,4,4,3
+1,4,2,5,21,2,4,12,21,2,
+2,3,54,21,2,4,12,4,4,3
+1,4,2,5,21,2,4,12,21,2,
+};
+
+return primes[n];
+}
+
+================================
+
+linkage kavramı : farklı dosyalarda fonksiyon veya değişken kullanıldığında onun
+aynı varlığa mı ilişkin yoksa farklı varlığa mı ilişkin olduğunu söyler
+
+- external linkage (dış bağlantı) : başka modüller tarafından da kullanılabilinir, linker aynı varlık olarak görür
+- internal linkage (iç bağlantı) : sadece bu modül kullanabilir, linker farklı varlık olarak görür
+- no linkage (bağlantısız) 
 
 
 
 
 
+         hasan.c                    omer.c    
+      |          |               |         |
+      |     x    |               |    x    |
+      |          |               |         |
+      |          |               |         | 
+      |          |               |         |         
+                                    
 
+external linkage olursa hasan.c dosyası içindeki x değişkenini omer.c kullanabilir
+internal linkage olursa hasan.c dosyası içindekli x değişkenini omer.c kullanamz
 
+!! fonksiyonlar için ve global değişkenler varsa default external olur
 
+!! dış bağlantıya açılmış aynı isimde 2 varlık açılamaz 
+!! global olarak tanımlamak onları dış bağlantıya sokar
+!! extern anahtar sözcüğünün fonksiyon isminde olması veya olmaması arasında fark yok
+!! değişkenin external yazılması ile yazılmaması arasında fark vardır
 
+!!!! eğer dışarı açılacak ise kaynak dosyada tanımı yapılır, başlık dosyasında extern bildirimi yapılır.
+!!!! static double dval = 2.3 //aynı dosya içinde farklı fonksiyonlarda kullanılabilinir
+!!!! int g = 10 (extern yapılmış başlık dosyasında) farklı dosyalarda kullanılabilinir
+
+global değişkenini dışa açmak istiyor musun ?
+- evet
+
+//bugra.c
+int ival = 1
+//bugra.h
+extern int gval;
+
+fonksiyonu dışa açmak istiyor musun ?
+- evet
+
+//bugra.c
+int foo(int x)
+{
+return x * x;
+}
+
+//bugra.h
+extern int foo(int x);
+int foo(int x); //default extern gelir
+
+global değişkenini dışa açmak istiyor musun ?
+hayır
+//bugra.c
+static int ival = 1
+
+fonksiyonu dışa açmak istiyor musun ?
+hayır
+//bugra.c
+static int bar(int x)
+{
+
+}
+
+--------------
+
+!! fonskyinu dışarı açmak iste
+
+----------------
+
+omer.c
+
+int g = 10;
+static double dvaL = 2.3;
+
+void ofunc(void)
+{
+
+}
+
+!! g değişkeni dışarı açılabilir
+!! dval sadece o kaynak dosyayı ilgilendirir, dışarı açılamaz
 
