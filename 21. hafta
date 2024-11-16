@@ -487,11 +487,46 @@ p[i] = ge_psw()
 }
 }
 
-------
+-------
 
 void func(void)
 {
-static _Bool first_call_flag = true; //static'i kaldırarak dene
+int call_count = 0; //burası static olmalı
+
+printf("beni %d. kex cagirdilar\n", ++call_count);
+}
+
+int main(void)
+{
+for (int i = 0; i < 10; ++i)
+{
+func(); //sürekli aynı sayı yazar çünkü her seferinde tekrar hayat gelecektir 
+}
+}
+
+
+-------
+
+void func(void)
+{
+static int call_count = 0;
+
+printf("beni %d. kex cagirdilar\n", ++call_count);
+}
+
+int main(void)
+{
+for (int i = 0; i < 10; ++i)
+{
+func(); // static yapılınca düzelir
+}
+}
+
+-------
+
+void func(void)
+{
+static bool first_call_flag = true; //static'i kaldırarak dene
 
 if (first_call_flag){
 printf("rastgele sayilar\n===========\n");
@@ -529,9 +564,23 @@ return primes[n];
 linkage kavramı : farklı dosyalarda fonksiyon veya değişken kullanıldığında onun
 aynı varlığa mı ilişkin yoksa farklı varlığa mı ilişkin olduğunu söyler
 
-external linkage (dış bağlantı) : başka modüller tarafından da kullanılabilinir, linker başka bir varlık olarak görür
-internal linkage (iç bağlantı) : sadece bu modül kullanabilir, linker aynı varlık olarak görür
-no linkage (bağlantısız)
+- external linkage (dış bağlantı) : başka modüller tarafından da kullanılabilinir, linker aynı varlık olarak görür
+- internal linkage (iç bağlantı) : sadece bu modül kullanabilir, linker farklı varlık olarak görür
+- no linkage (bağlantısız)
+
+
+         hasan.c                    omer.c    
+      |          |               |         |
+      |     x    |               |    x    |
+      |          |               |         |
+      |          |               |         | 
+      |          |               |         |         
+                                    
+
+external linkage olursa hasan.c dosyası içindeki x değişkenini omer.c kullanabilir
+internal linkage olursa hasan.c dosyası içindekli x değişkenini omer.c kullanamz
+
+!! fonksiyonlar için ve global değişkenler varsa default external olur
 
 !! dış bağlantıya açılmış aynı isimde 2 varlık açılamaz 
 !! global olarak tanımlamak onları dış bağlantıya sokar
@@ -561,7 +610,7 @@ return x * x;
 
 //bugra.h
 extern int foo(int x);
-int foo(int x);
+int foo(int x); //default extern gelir
 
 global değişkenini dışa açmak istiyor musun ?
 hayır
@@ -578,7 +627,22 @@ static int bar(int x)
 
 !!extern bildiriminde dizi boyutunu yazmaya gerek yok
 
-global namespace pollution problem: 
+global namespace pollution problem : isimlerin çakışmasıdır c++ da namespace ile bu çözülür
+
+-------------------------
+
+omer.c
+
+int g = 10;
+static double dvaL = 2.3;
+
+void ofunc(void)
+{
+
+}
+
+!! g değişkeni dışarı açılabilir
+!! dval sadece o kaynak dosyayı ilgilendirir, dışarı açılamaz
 
 ---------------------
 c kaynak dosyasına verilen adlar:
