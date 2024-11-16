@@ -1449,9 +1449,52 @@ free : daha önce ayrılan bellek bloğunu sisteme geri veriyor
 
 --------------------
 
-malloc: bellek havuzunda yer varsa verir yer yoksa veremez, başarısız olursa null pointer verir[
+malloc: bellek havuzunda yer varsa verir yer yoksa veremez, başarısız olursa null pointer verir
+
+---------------
+
+--------------
+
+malloc kullanımına bir senaryo :
+
+mesela dianamik bir dizi return etmek gereiyor bununiçin önce malloc ile 8 byte yer allocate ettik (int* foo = malloc(2* sizeof(int)))
+sonrasında foo[0] == *(foo + 0) anlamına geldiği için foo[0]'a değer atayabiliriz sanki vektörde ilk elemana değer atıyoruz gibi, bu durumda foo[1[ bellekte bir diğer adresi gösterir bu da ör: 0x1000	(foo[0]) - 0x1004 (foo[1]
+en sonda da bu diziyi return ile döndürebilriiz ==> return foo
+
+------------
+
+neden malloc kullanırızı açıklayan güzel bir yazı :
+
+One example should clear this. Say you know there will be maximum 20 students. So you can create an array with static 20 elements. 
+Your array will be able to hold maximum 20 students. But what if you don't know the number of students? 
+Say the first input is the number of students. It could be 10, 20, 50 or whatever else. 
+Now you will take input n = the number of students at run time and allocate that much memory dynamically using malloc.
+
+#include <stdio.h>
+
+int main(int argc, const char *argv[]) {
+
+    typedef struct {
+        char *name;
+        char *sex;
+        char *insurance;
+        int age;
+        int yearInSchool;
+        float tuitionDue;
+    } student;
+
+    // Now I can do two things
+    student p;
+
+    // Or
+    student *p = malloc(sizeof *p);
+}
+
+--------------
 
 void * malloc(size_t n);
+
+
 
 int main(void)
 {
