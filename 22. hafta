@@ -20,6 +20,24 @@ static const int primes[] = { //dizi değişmiycek ve programın sonuna kadar be
 
 !!const nesneyi değiştirmek tanımsız davranıştır
 
+------------
+
+global alanda static kullanılmasının bambaşka bir anlamı vardır, dış bağlantıya açılamaz demektir,
+
+static int g = 10; //bu değişken sadece bu dosyada aktif olacak
+
+-----------
+
+!! const opt. arttırabilir
+
+-----------
+
+global const değişkenler c++ dilinde internal linkage
+
+-----------
+
+
+
 void func()
 {
 const int x = 10;
