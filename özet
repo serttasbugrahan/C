@@ -1947,7 +1947,7 @@ static int bar(int x)
 
 --------------
 
-!! fonskyinu dışarı açmak iste
+!! fonskyinu dışarı açmak istersek
 
 ----------------
 
@@ -1963,4 +1963,19 @@ void ofunc(void)
 
 !! g değişkeni dışarı açılabilir
 !! dval sadece o kaynak dosyayı ilgilendirir, dışarı açılamaz
+
+-----------------
+
+global alanda static kullanılmasının bambaşka bir anlamı vardır, dış bağlantıya açılamaz demektir,
+
+static int g = 10; //bu değişken sadece bu dosyada aktif olacak
+
+
+
+
+
+
+
+
+
 
