@@ -45,13 +45,15 @@ x = 20;
 }
 
 ------------
-const T* ==> T //bunu kesinlikle yapma (const nesneyi örtülü dönüşüm yapma)
+const T* ==> T* //bunu kesinlikle yapma (const nesneyi örtülü dönüşüm yapma)
 -------------
 
 int * foo(int *);
-const int * func(void); //salt erişim amaçlı kullanılır
+const int * func(void); //salt erişim amaçlı kullanılır o nesneyi değiştiremeyiz
 
 ------------
+!! bildirimlerde .h dosyasında const kullananmanın bence mantığı yok diyor necati hoca, pointer için aynı kural geöereli değil tabi ki
+
 ziya.h
 void func(const int x); //const kullanma
 
@@ -74,10 +76,10 @@ int * const p = &x; //bu anlama geliyor
 ------------------------------
 
 volatile : derleyicinin bir değişkene optimizasyon yapmamasını söyler
-derleyici dikkat et x değişkeni program dışı kaynaklar tarafından değiştirilme potansiyelinde
-sen bunu bilmessen ben x değişkenini ifadeler içinde kullandığımda optimizasyon
 
-volatile int x = 10;
+mesela aşağıdaki kodda  derleyici x değişkeninin değerinin değişmediği için bellekten tekrar okumak yerine değişmemiş değerini kullanabilir
+
+int x = 10;
 
 int main(void)
 {
@@ -85,6 +87,11 @@ a = x + 5;
 b = x * 7;
 m = x * x;
 }
+
+
+volatile kullanınca derleyiciye aşağıdakini demiş oluyoruz :
+derleyici dikkat et x değişkeni program dışı kaynaklar tarafından değiştirilme potansiyelinde
+sen bunu bilmessen ben x değişkenini ifadeler içinde kullandığımda optimizasyon yapabilirsin ama böyle bir opt. yapma
 
 ----------
 
@@ -121,7 +128,7 @@ void func(int * restrict p1, int * restrict p2)
 
 ========================================
 
-user-defined types
+user-defined types 
 
 user-defined type oluşturmaya yönelik 3 tane araç seti var:
 1-struct (structures) (yapı)
