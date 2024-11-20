@@ -1971,10 +1971,51 @@ global alanda static kullanılmasının bambaşka bir anlamı vardır, dış ba�
 static int g = 10; //bu değişken sadece bu dosyada aktif olacak
 
 
+-----------------
+
+const int * func(void); //salt erişim amaçlı kullanılır o nesneyi değiştiremeyiz
+
+-----------------
+
+typedef int* IPTR;
+
+int main(void)
+{
+int x = 10;
+const IPTR p = &x;
+//const int * p = &x; //yukarıdaki bildirim bu anlama gelmiyor
+int * const p = &x; //bu anlama geliyor
+}
+
+===========================================================
+
+user-defined types 
+
+user-defined type oluşturmaya yönelik 3 tane araç seti var:
+1-struct (structures) (yapı)
+2-union (unions) (birlikler)
+3-enum (enuma) (numaralandırma) : hem user-defined type hem integer type
 
 
+struct
+=========
 
+Matrix'e structure tag (yapı etiketi) denir. olmasada legaldir genelde koyarız
+struct Matrix {
+//member (eleman)
+int x;
+int x,y,z; //bu şekilde kullanılabilinir
 
+//bu yapıları alabilir
+int x,y;
+double dval;
+int * p;
+char str[100];
+
+//sınıfların elemanları fonksiyon olamaz c++ da olabilir
+void func();
+
+};
 
 
 
