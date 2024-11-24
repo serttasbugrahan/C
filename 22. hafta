@@ -180,6 +180,11 @@ yapının operatörlerine 'member selection operators' denir. bu operatörler il
 
 ----------
 
+yapı nesnesine erişmek için "."
+adrese erişmek için -> kullanıır
+
+-----------
+
 struct Data{
 double dval;
 int x, y;
@@ -224,6 +229,7 @@ data.data = 10; //legal ama karmaşık
 }
 
 ------
+struct nasıl intialize edilir?
 
 struct Data {
 int x,y;
@@ -343,6 +349,7 @@ int x,y,z;
 };
 
 ------
+aynı türden değerler ile ilk değer verilebilir
 
 struct Point {
 double x,y,z;
@@ -358,6 +365,11 @@ struct Point p2 = p1;
 ------
 
 !! bir yapı nesnesini hangi operatörlerin operandı yapabilirim
+
+- .
+- sizeof
+- &
+- =
 
 struct Point {
 double x,y,z;
