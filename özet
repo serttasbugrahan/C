@@ -2017,6 +2017,115 @@ void func();
 
 };
 
+-------------------
+
+struct nasıl intialize edilir?
+
+struct Data {
+int x,y;
+int a
+double d;
+};
+
+int main(void)
+{
+struct Data mydata = {10,20,3.4}; //değer ver, içi boş bırakılamaz
+struct Data mydata = {0}; //bütün değerler 0 olur.
+
+printf("mydata.x = %d\n", mydata.x);
+printf("mydata.y = %d\n", mydata.y);
+printf("mydata.d = %d\n", mydata.d);
+
+}
+
+----------------
+
+
+struct Data {
+double dval;
+int ar[20];
+double dval;
+int x,y;
+};
+
+int main(void)
+{
+struct Data mydata = {
+.dval = 2.3,
+.x = 20,
+.ar = {[3] = 5, [7] = 9}
+};
+}
+
+------------------
+
+struct ve struct'un elemanları aynı adreste bulunur
+
+-----------------
+
+
+struct Nec{
+char c1;
+int x;
+char c2;
+}g; //hem struct nec bildirildi hemde ismi g olan global bir değişken bildirildi
+
+struct Nec g; //aynı anlama gelir
+
+--
+
+struct Nec{
+char c1;
+int x;
+char c2;
+}g1,g2,g3;
+
+//struct Nec g1,g2,g3; aynı anlama gelir
+
+----------
+
+point.h
+//struct header dosyasında tanımlanır
+struct Point {
+int x,y,z;
+};
+
+-----------
+
+aynı türden değerler ile ilk değer verilebilir
+
+struct Point {
+double x,y,z;
+};
+
+int main(void)
+{
+struct Point p1 = {2.3, 5.6, 9.2};
+struct Point p2 = p1;
+
+}
+
+-------------
+
+!! bir yapı nesnesini hangi operatörlerin operandı yapabilirim
+
+- .
+- sizeof
+- &
+- =
+
+struct Point {
+double x,y,z;
+};
+
+int main(void)
+{
+struct Point p = [2.3, 5.6, 9.2};
+//p.x
+//sizeof(p);
+//&p;
+//p = 
+}
 
 
 
