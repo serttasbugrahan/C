@@ -2127,5 +2127,143 @@ struct Point p = [2.3, 5.6, 9.2};
 //p = 
 }
 
+-----------
+
+struct Point {
+double x,y,z;
+};
+
+int main(void)
+{
+struct Point p = {0.};
+struct Point * ptr = &p;
+
+sizeof(p);
+p.y = 2.3;
+(*ptr).x = 3.4;
+ptr->x = 3.4; //372. satır ile aynı anlama gelir
+}
+
+----------
+
+!! her ne kadar aynı türden yapı nesneleri birbirine
+atanabilir olsa da özellikle büyük (storage ihtiyaı büyük) yapı nesnelerinin
+birbirine atanması ciddi bİr işlem maaliyeti oluşturur. Verim kritik uygulamalarda böyle atamalardan 
+mümkün olduğu kadar kaçınmak gerekir.
+
+-----------
+
+struct Student{
+int id;
+char name[24];
+char surname[30];
+char address[60];
+int grades[20];
+};
+
+
+int main(void)
+{
+struct Student s = {
+.id = 76234,
+.name = "ilker",
+.surname = "kuzu",
+.address = "akman sokak 17 besiktas istanbul",
+.grades = {10,10,10,9,9,10};
+};
+}
+
+--------------
+
+struct { //legal
+int a,b, c;
+}x = {10,20,30}, y = {5,8,9};
+
+---------------
+
+struct { 
+int a,b, c;
+}x = {10,20,30}
+
+struct { 
+int a,b, c;
+}y = {1,2,3};
+//x ve y farklı türdendir
+
+int main(void)
+{
+x = y; //x ve y farklı türlerdir birbirine atanamazlar
+}
+
+-----------------------------------------------
+
+yapı nesnelerinin adresleri ve kullanımı :
+
+struct Nec {
+int x, y, z;
+
+};
+
+int main(void) {
+struct Nec nec = {2, 5, 76};
+
+struct Nec* ptr = &nec;
+
+*ptr.x //operator önceliğinden dolayı hata verecektir
+//bu nedenden dolayı ok operatörü vardır
+
+}
+
+-----
+
+ok operatörü : 
+!! nokta operatörünün sol operandı yapı nesnesi olmalı
+!! ok operatörünün sol operandı yapı türünde pointer olmalıdır
+
+-------
+
+struct Nec{
+int x,y,z;
+};
+
+int main(void)
+{
+struct Nec a[4];
+
+a->x = 6; //legal array decay
+a[0].x = 6; //aynı anlamda
+}
+
+//adresini aldığımız nesneye -> ile erişebiliriz
+
+----------
+
+
+struct Nec{
+int x,y,z;
+};
+
+int main(void)
+{
+struct Nec a[4];
+
+a[2].z = 5; //aynı anlamda
+(a + 2) -> z = 5; 
+(*(a + 2)).z = 5;
+}
+
+-----------
+
+struct Nec{
+int x,y,z;
+};
+
+sturct Nec * foo(void);
+int main(void)
+{
+foo()->x = 10;
+
+}
+
 
 
