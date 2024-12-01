@@ -2265,5 +2265,182 @@ foo()->x = 10;
 
 }
 
+------------
+
+struct Date {
+int day, mon, year;
+};
+
+int main(void)
+{
+const struct Date mydate = {12, 5, 1987};
+struct Date your_date = {4,6,2020};
+mydate = your_date; //geçersiz
+mydate.mon = 5; //geçersiz 
+}
+
+---------------
+
+struct Nec{
+int x,y,z;
+};
+
+void func(struct Nec* p)
+{
+p -> x = 4; //en sık bu şekilde kullanılır
+}
+
+-------------
+
+birden fazla typedef bildirimleri vardır
+
+typedef struct {
+int day, mon, year;
+}Date, *DatePtr;
+
+int main(void)
+{
+Date mydate = {2,5,2023};
+DatePtr ptr = &mydate;
+}
+
+-----------
+
+typedef struct _Date {
+int day, mon, year;
+}Date;
+
+int main(void)
+{
+struct _Date x;
+Date y;
+}
+
+-----------
+
+typedef struct _Date {
+    int x,y,z;
+    double d;
+}Date;
 
 
+int main() {
+    
+}
+
+//yukarıdaki yapı sayesinde aşağıdakilerini yapabiliriz
+
+Date v1; // bu şekilde kullanılabilir
+
+//ya da
+
+struct _Date v2; //yukarıda yazmak bu işe yarar
+
+!! typedef olmayacaksa Date "}Date" kısmı mantıksız
+
+-----------
+
+//bu şekilde de kullanılabilinir çoğu kişi bilmiyor 
+
+typedef struct {
+int day, mon, year;
+}Date, *DatePtr;
+
+int main(void)
+{
+Date mydate = {2,5,2023};
+DatePtr ptr = &mydate;
+}
+
+----------
+
+//bir yapı türünden dinamik ömürlü nesne oluşturmak için yapılır
+//öyle bir yapı oluştur ki sadece dinamik ömürlü nesneler oluşturulabilsin 
+
+typedef struct {
+int a, b ,c;
+}*Sptr;
+
+int main(void)
+{
+Sptr ptr = (Sptr)malloc(sizeof(*ptr));
+}
+
+---------
+//function poinmte rile kullanılabilir
+
+struct Data {
+int (*fp)(int, int);
+};
+
+int foo(int, int);
+
+int main(void)
+{
+struct Data mydata = {foo};
+mydata.fp(12,45);
+}
+
+-----------------------------
+
+
+yapı türleri ve fonksiyonlar :
+-----------------------------
+
+
+typedef struct {
+int id;
+char name[20];
+char surname[32];
+int a[20];
+}Person;
+
+void print_person(const Person * p) //input parameter
+{
+printf("id = %d\n", p->id);
+printf("name = %s\n", p->name);
+printf("surname = %s\n", p->surname);
+}
+
+void set_person(Person* ptr) //out-param
+{
+ptr->id += 10000;
+strcat(ptr->surname, "oglu");
+}
+int main(void)
+{
+Person per = {78767, "Velican", "akkus"};
+set_person(&per);
+print_person(&per); //salt okuma amaçlı
+
+}
+
+-----------------
+
+-------
+
+!! kullandığınız bir kütüphanede paramtresi pointer olan bir fonksiyon ile
+karşılaştığınızda fonksiyon hakkında belirli bilgileri edinmeden fonksiyon çağrısı yapmayın
+hangi bilgiler:
+
+a) parametre out parametre mi? parametre in - out parametre mi
+eğer parametre in-out parametre ise fonskiyona adres göndermeden önce adresini göndericeğiniz
+yapı nesnenin bir ya da birden fazla elemanını set etmeniz gerekiyor olabilir
+
+b) fonksiyona NULL pointer gönderme opsiyonum varmı
+yoksa NULL pointer göndermek undefined behavier(ub) mı?
+eğer NULL pointer gönderme opsiyonum varsa ne anlama geliyor?
+
+----------
+
+!! geri dönüş değeri (bir yapı türünden) adres olan fonksiyonlara çağrı yapmadan
+aşağıdaki bilgileri edinmiş olmalısınız.
+
+-Nasıl bir nesnenin adresini döndürüyor
+ statik ömürlü bir nesne adresi
+ dinamik ömürlü bir nesne adresi döndürmesi
+ sizden aldığı adresi size geri döndürüyor olabilir
+ NULL pointer döndürme ihtimali var mı?
+
+!! fonksiyondan aldığım adresteki nesne ile işim bittiğinde bir fonksiyonu 
+çağırmam gerekiyor mu?
