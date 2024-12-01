@@ -721,7 +721,9 @@ struct Date mydate;
 DatePtr p = &mydate;
 }
 
------------
+
+----------
+//birden fazla gösterim vardır
 
 struct Date {
 int day,mon,year;
@@ -743,6 +745,7 @@ Date x = {2,4,1999};
 }
 
 -------
+//bu şekilde de kullanılabilinir çoğu kişi bilmiyor 
 
 typedef struct {
 int day, mon, year;
@@ -754,9 +757,36 @@ Date mydate = {2,5,2023};
 DatePtr ptr = &mydate;
 }
 
+----------
+
+//burada da artık struct ile kullanım yapamayız
+
+typedef struct {
+int day, mon, year;
+}Date;
+
+int main(void)
+{
+Date x = {2,4,1999};
+}
+
+-----------
+
+
+typedef struct _Date {
+int day, mon, year;
+}Date;
+
+int main(void)
+{
+struct _Date x;
+Date y;
+}
+
 --------
 //bir yapı türünden dinamik ömürlü nesne oluşturmak için yapılır
 //öyle bir yapı oluştur ki sadece dinamik ömürlü nesneler oluşturulabilsin 
+
 typedef struct {
 int a, b ,c;
 }*Sptr;
@@ -767,6 +797,7 @@ Sptr ptr = (Sptr)malloc(sizeof(*ptr));
 }
 
 ---------
+//function poinmte rile kullanılabilir
 
 struct Data {
 int (*fp)(int, int);
@@ -782,9 +813,21 @@ mydata.fp(12,45);
 
 ---------
 
-yapı türleri ve fonksiyonlar :
+!! c de yapılar default olarak public gelir private yapılamaz
 
--------
+---------
+
+//içerde bu şekilde ilk değer verilemez
+
+struct Data {
+int x = 10;
+};
+
+--------------------------------------
+
+yapı türleri ve fonksiyonlar :
+-----------------------------
+
 
 typedef struct {
 int id;
@@ -793,7 +836,7 @@ char surname[32];
 int a[20];
 }Person;
 
-void print_person(const Person * p) //input parameter
+void print_person(const Person * p) //İN-OUT parameter
 {
 printf("id = %d\n", p->id);
 printf("name = %s\n", p->name);
@@ -812,7 +855,7 @@ set_person(&per);
 print_person(&per); //salt okuma amaçlı
 
 }
-i
+
 -------
 
 !! kullandığınız bir kütüphanede paramtresi pointer olan bir fonksiyon ile
@@ -830,7 +873,7 @@ eğer NULL pointer gönderme opsiyonum varsa ne anlama geliyor?
 ----------
 
 !! geri dönüş değeri (bir yapı türünden) adres olan fonksiyonlara çağrı yapmadan
-aşağıdaki bilgileri edinmiş olacaksınız
+aşağıdaki bilgileri edinmiş olmalısınız.
 
 -Nasıl bir nesnenin adresini döndürüyor
  statik ömürlü bir nesne adresi
@@ -841,6 +884,12 @@ aşağıdaki bilgileri edinmiş olacaksınız
 !! fonksiyondan aldığım adresteki nesne ile işim bittiğinde bir fonksiyonu 
 çağırmam gerekiyor mu?
 
+
+Data f1(???);
+
+Data* f2(???);
+
+const Data* f3(???);
 
 
 
